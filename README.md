@@ -20,6 +20,7 @@ files/
                    monster-stats.csv           Πλήρη stat blocks
   04_spells/       spells.md/html              Οδηγός Ξορκιών
                    spell-cards.md/html         Κάρτες Ξορκιών
+                   spell-stats.csv             Πλήρη στοιχεία ξορκιών
   05_handouts/     handouts.md/html            Handouts & Props
   06_dm_notes/     dm-notes.md/html            Οδηγός Game Master
   07_characters/   characters.md/html          Έτοιμοι Χαρακτήρες
