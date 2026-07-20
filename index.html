@@ -6,8 +6,8 @@
 <title>Dungeons & Dragons — Για Μικρούς Ήρωες</title>
 <style>
   :root {
-    --red: #7a1f1f;
-    --red-dark: #5c1717;
+    --primary: #5a3e85;
+    --primary-dark: #402a63;
     --gold: #f2c14e;
     --brown: #6b4a2b;
     --parchment: #f2e2b8;
@@ -25,7 +25,7 @@
   header {
     text-align: center;
     padding: 48px 20px 32px;
-    background: linear-gradient(180deg, var(--red) 0%, var(--red-dark) 100%);
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
     color: white;
     box-shadow: 0 4px 14px rgba(0,0,0,0.25);
   }
@@ -55,9 +55,9 @@
     line-height: 1.7;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
-  .intro b { color: var(--red); }
+  .intro b { color: var(--primary); }
   h2.section-title {
-    color: var(--red);
+    color: var(--primary);
     border-bottom: 3px solid var(--gold);
     padding-bottom: 6px;
     margin: 40px 0 16px;
@@ -80,7 +80,7 @@
   }
   .card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
   .card .icon { font-size: 30px; margin-bottom: 4px; }
-  .card h3 { margin: 0 0 4px; color: var(--red); font-size: 16px; }
+  .card h3 { margin: 0 0 4px; color: var(--primary); font-size: 16px; }
   .card p.desc { margin: 0 0 12px; font-size: 13px; color: var(--brown); flex-grow: 1; line-height: 1.5; }
   .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
   .links a {
@@ -89,13 +89,13 @@
     font-weight: bold;
     padding: 5px 10px;
     border-radius: 20px;
-    border: 1.5px solid var(--red);
-    color: var(--red);
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
     background: white;
   }
-  .links a:hover { background: var(--red); color: white; }
-  .links a.primary { background: var(--red); color: white; }
-  .links a.primary:hover { background: var(--red-dark); }
+  .links a:hover { background: var(--primary); color: white; }
+  .links a.primary { background: var(--primary); color: white; }
+  .links a.primary:hover { background: var(--primary-dark); }
   .card.placeholder {
     border-style: dashed;
     opacity: 0.75;
@@ -120,13 +120,13 @@
   @media (prefers-color-scheme: dark) {
     body { background: radial-gradient(ellipse at top, #2a2118 0%, #1c150f 60%, #120d09 100%); background-attachment: fixed; color: #f0e6d2; }
     .intro, .card { background: #2b2118; border-color: #8a6a3a; color: #f0e6d2; }
-    .intro b { color: #ff9b7a; }
-    h2.section-title { color: #ffb98a; border-bottom-color: #b8863a; }
-    .card h3 { color: #ffb98a; }
+    .intro b { color: #b79cec; }
+    h2.section-title { color: #c3aef0; border-bottom-color: #b8863a; }
+    .card h3 { color: #c3aef0; }
     .card p.desc { color: #d9c49a; }
-    .links a { background: #1c150f; border-color: #ffb98a; color: #ffb98a; }
-    .links a:hover, .links a.primary { background: #ffb98a; color: #1c150f; }
-    .links a.primary:hover { background: #ff9b5a; }
+    .links a { background: #1c150f; border-color: #c3aef0; color: #c3aef0; }
+    .links a:hover, .links a.primary { background: #c3aef0; color: #1c150f; }
+    .links a.primary:hover { background: #a688e0; }
     footer { color: #d9c49a; }
   }
 </style>
@@ -145,7 +145,7 @@
     Καλώς ήρθατε! Αυτό το πακέτο περιέχει <b>όλα όσα χρειάζεστε</b> για να τρέξετε μια πρώτη περιπέτεια D&D
     με παιδιά γύρω από το τραπέζι: έναν απλό οδηγό κανόνων, οδηγό για τον Game Master, μια πλήρη πρώτη
     εκστρατεία 5 κεφαλαίων, κάρτες τεράτων &amp; ξορκιών, και τυπώσιμα handouts. Κάθε ενότητα υπάρχει σε
-    μορφή <b>.md</b> (πηγή), <b>.html</b> (μορφοποιημένο, έτοιμο για εκτύπωση) και <b>.pdf</b> (τελικό αρχείο).
+    μορφή <b>.md</b> (πηγή, εύκολη για επεξεργασία) και <b>.html</b> (μορφοποιημένο, έτοιμο για εκτύπωση).
   </div>
 
   <h2 class="section-title">📘 Ξεκινήστε Εδώ</h2>

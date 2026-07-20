@@ -12,23 +12,29 @@
 index.html              ← κεντρική σελίδα, συνδέει όλο το υλικό
 CLAUDE.md               ← οδηγίες παραγωγής περιεχομένου για το project
 files/
-  01_tutorial/   tutorial.md/html/pdf            Οι Βασικοί Κανόνες
-  02_campaign/   campaign.md/html/pdf, map.svg   Η Κοιλάδα του Δράκου
-  03_monsters/   monsters.md/html/pdf            Οδηγός Τεράτων
-                 monster-cards.md/html/pdf       Κάρτες Τεράτων
-                 monster-stats.csv               Πλήρη stat blocks
-  04_spells/     spells.md/html/pdf              Οδηγός Ξορκιών
-                 spell-cards.md/html/pdf         Κάρτες Ξορκιών
-  05_handouts/   handouts.md/html/pdf            Handouts & Props
-  06_dm_notes/   dm-notes.md/html/pdf            Οδηγός Game Master
+  01_tutorial/   tutorial.md/html            Οι Βασικοί Κανόνες
+  02_campaign/   campaign.md/html, map.svg   Η Κοιλάδα του Δράκου
+  03_monsters/   monsters.md/html            Οδηγός Τεράτων
+                 monster-cards.md/html       Κάρτες Τεράτων
+                 monster-stats.csv           Πλήρη stat blocks
+  04_spells/     spells.md/html              Οδηγός Ξορκιών
+                 spell-cards.md/html         Κάρτες Ξορκιών
+  05_handouts/   handouts.md/html            Handouts & Props
+  06_dm_notes/   dm-notes.md/html            Οδηγός Game Master
 ```
 
-Κάθε deliverable υπάρχει σε τρεις μορφές:
+Κάθε deliverable υπάρχει σε δύο μορφές:
 - **`.md`** — η πηγή, εύκολη για επεξεργασία
-- **`.html`** — μορφοποιημένη έκδοση, έτοιμη για εκτύπωση (A4)
-- **`.pdf`** — τελικό εξαγόμενο αρχείο (δεν παρακολουθείται στο git — βλ. `.gitignore`, αναπαράγεται από το html)
+- **`.html`** — μορφοποιημένη έκδοση, έτοιμη για εκτύπωση (A4). Αν χρειαστείς PDF, εξήγαγέ το από το `.html` κατά ζήτηση (δεν παρακολουθούνται `.pdf` στο repo — βλ. `.gitignore`).
 
 Τα `.md` και `.html` κάθε deliverable κρατιούνται σε sync σκόπιμα — αν αλλάξεις το ένα, ενημέρωσε και το άλλο.
+
+## Χρωματικό Θέμα
+
+Όλα τα `.html` deliverables μοιράζονται ένα ενιαίο, παιχνιδιάρικο fantasy θέμα: μαγικό μοβ (`#5a3e85`) ως
+κύριο χρώμα branding αντί για το πιο "επίσημο"/σκούρο κόκκινο, ζεστό χρυσό (`#f2c14e`) για τονισμό, και
+parchment-style φόντο. Τα tiers δυσκολίας τεράτων και οι σχολές ξορκιών κρατούν ξεχωριστά, διαχωρίσιμα
+χρώματα (πράσινο/πορτοκαλί/κόκκινο/μοβ κ.ά.) για γρήγορη αναγνώριση.
 
 ## Γνωστό Κενό
 
