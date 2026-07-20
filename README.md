@@ -22,6 +22,7 @@ files/
                    spell-cards.md/html         Κάρτες Ξορκιών
                    spell-stats.csv             Πλήρη στοιχεία ξορκιών
   05_handouts/     handouts.md/html            Handouts & Props
+                   items-stats.csv             Πλήρη στοιχεία αντικειμένων
   06_dm_notes/     dm-notes.md/html            Οδηγός Game Master
   07_characters/   characters.md/html          Έτοιμοι Χαρακτήρες
   images/          goblins.png                 Εικονογράφηση (χρησιμοποιείται στο campaign, Κεφάλαιο 2)
