@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Γεννήτρια Καρτών (Τέρατα / Ξόρκια / Αντικείμενα)</title>
+<style>
+  :root{
+    --parchment:#f3e6cc;
+    --parchment-dark:#e8d6ae;
+    --ink:#2a1c12;
+    --accent:#7a1e1e;
+    --accent-dark:#5a1414;
+    --gold:#a97c2f;
+    --bg:#1c130d;
+    --panel:#2a1c12;
+    --panel-light:#3a2a1c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:Georgia,'Times New Roman',serif;background:var(--bg);color:#eee2c8;}
+  .app{max-width:1500px;margin:0 auto;padding:16px 20px 60px;}
+  h1{font-size:1.5rem;margin:0 0 4px;color:var(--gold);}
+  .subtitle-line{margin:0 0 18px;font-size:.9rem;color:#c9b48c;}
+
+  .toolbar{background:var(--panel);border:1px solid var(--gold);border-radius:10px;padding:14px 16px;
+    display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin-bottom:12px;}
+  .toolbar .group{display:flex;align-items:center;gap:6px;}
+  .toolbar label.upload-btn{background:var(--accent);color:#fff;padding:8px 14px;border-radius:6px;cursor:pointer;font-size:.9rem;border:1px solid var(--accent-dark);}
+  .toolbar label.upload-btn:hover{background:var(--accent-dark);}
+  input[type=text], select{background:#fffaf0;color:var(--ink);border:1px solid var(--gold);border-radius:6px;padding:6px 10px;font-family:inherit;font-size:.85rem;}
+  button.btn{background:var(--panel-light);color:#eee2c8;border:1px solid var(--gold);border-radius:6px;padding:7px 12px;cursor:pointer;font-size:.85rem;font-family:inherit;}
+  button.btn:hover{background:var(--gold);color:#2a1c12;}
+  .count-badge{margin-left:auto;font-size:.85rem;color:#c9b48c;}
+
+  .sources-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .chip{background:var(--panel-light);border:1px solid var(--gold);border-radius:20px;padding:4px 10px;font-size:.8rem;display:inline-flex;align-items:center;gap:6px;}
+  .chip button{background:none;border:none;color:#e88;cursor:pointer;font-size:.9rem;line-height:1;padding:0;}
+  .chip .cat-tag{opacity:.7;font-size:.72rem;}
+
+  .empty-state{text-align:center;padding:50px 20px;color:#c9b48c;border:2px dashed var(--gold);border-radius:10px;margin-bottom:20px;}
+
+  .category-section{margin-bottom:34px;}
+  .category-section h2{font-size:1.15rem;color:var(--gold);margin:0 0 4px;border-bottom:1px solid var(--panel-light);padding-bottom:6px;}
+  .section-toolbar{display:flex;align-items:center;gap:10px;margin:8px 0 12px;font-size:.82rem;color:#c9b48c;}
+
+  .cards-grid{display:grid;gap:6mm;}
+  .grid-postcard{grid-template-columns:repeat(auto-fill,148mm);}
+  .grid-trading{grid-template-columns:repeat(auto-fill,63mm);}
+
+  .card-postcard{width:148mm;height:105mm;font-size:12.5px;}
+  .card-trading{width:63mm;height:88mm;font-size:10px;}
+
+  .card-flip-wrap{position:relative;cursor:pointer;}
+  .card-face{position:absolute;inset:0;overflow:hidden;opacity:0;pointer-events:none;
+    background:var(--parchment);border:1px solid var(--gold);border-radius:3mm;
+    box-shadow:0 2px 6px rgba(0,0,0,.35);}
+  .card-face.active{opacity:1;pointer-events:auto;z-index:2;}
+  .card-face-print{position:relative;overflow:hidden;background:var(--parchment);border:1px solid var(--gold);border-radius:3mm;}
+
+  .flip-btn{position:absolute;bottom:1.5mm;right:2mm;font-size:.62em;background:var(--accent);color:#fff;
+    border:none;border-radius:3mm;padding:.7mm 2.2mm;cursor:pointer;z-index:3;font-family:inherit;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+  .flip-btn:hover{background:var(--accent-dark);}
+
+  .card-face, .card-face-print{color:var(--ink);}
+
+  /* ---- Monster front (classic two-column stat-block style) ---- */
+  .m-outer{background:var(--accent-dark);height:100%;box-sizing:border-box;padding:2.2mm;display:flex;flex-direction:column;
+    font-family:'Segoe UI',Verdana,Arial,sans-serif;color:var(--ink);}
+  .m-topbar{height:1.3mm;background:#8f2626;border-radius:.4mm;margin-bottom:2.2mm;flex:0 0 auto;}
+  .m-header{background:var(--parchment);box-sizing:border-box;padding:2mm 3mm;margin-bottom:2mm;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:2mm;min-height:13mm;flex:0 0 auto;}
+  .m-columns{display:flex;gap:2mm;flex:1;min-height:0;}
+  .m-col{background:var(--parchment);padding:2.5mm 3mm;box-sizing:border-box;}
+  .m-col-left{flex:1 1 0;min-width:0;}
+  .m-col-right{flex:1 1 0;min-width:0;}
+
+  .m-name-wrap{flex:1 1 auto;min-width:0;}
+  .m-name{margin:0;font-size:5.2mm;font-weight:700;color:var(--accent-dark);line-height:1.05;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .m-name-en{font-size:5.2mm;font-weight:700;color:var(--accent-dark);line-height:1.05;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .m-name-gr{font-size:3.9mm;font-weight:700;color:var(--accent-dark);line-height:1.05;opacity:.82;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.3mm;}
+  .m-crbox{flex:0 0 16mm;width:16mm;text-align:right;white-space:nowrap;}
+  .m-cr{font-size:1.3em;font-weight:700;color:var(--accent-dark);line-height:1;}
+  .m-xp{font-size:.6em;font-style:italic;color:#5a4a34;}
+  .m-sub{font-style:italic;font-size:.75em;color:#4a3a28;margin-top:.3mm;}
+  .m-rule{border-top:1.4px solid var(--accent-dark);margin:1.3mm 0;}
+
+  .m-statrow{display:flex;justify-content:space-around;text-align:center;}
+  .m-stat-label{font-size:.6em;font-weight:600;color:var(--accent-dark);}
+  .m-stat-value{font-size:1.35em;font-weight:700;color:var(--accent-dark);line-height:1.1;}
+  .m-stat-value-sm{font-size:.85em;font-style:italic;color:var(--accent-dark);}
+  .m-stat-sub{font-size:.58em;font-style:italic;color:#5a4a34;}
+
+  .m-abilgrid{display:grid;grid-template-columns:repeat(6,1fr);text-align:center;}
+  .m-abil-label{font-size:.62em;font-weight:700;color:var(--accent-dark);}
+  .m-abil-value{font-size:.75em;}
+
+  .m-meta .meta-row{font-size:.68em;margin-bottom:.8mm;line-height:1.3;}
+  .m-meta .meta-row strong{color:var(--accent-dark);}
+
+  .m-flavor{font-size:.48em;font-style:italic;margin:0 0 1mm;line-height:1.15;}
+
+  .m-secheader{font-size:.92em;font-weight:700;color:var(--accent-dark);border-bottom:1.4px solid var(--accent-dark);padding-bottom:.6mm;margin:0 0 1.2mm;}
+  .m-col-right p{font-size:.5em;margin:0 0 .9em;line-height:1.15;}
+  .m-col-right p strong{color:var(--accent-dark);}
+  .m-col-left p{font-size:.68em;margin:0 0 .8em;line-height:1.3;}
+  .m-col-left p strong{color:var(--accent-dark);}
+
+  /* ---- Monster back (same header as front, rest is an uploadable image area) ---- */
+  .m-back-imagearea{flex:1;min-height:0;background:linear-gradient(135deg,var(--parchment),var(--parchment-dark));
+    display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;}
+  .m-back-icon{width:30mm;height:30mm;color:var(--accent-dark);opacity:.55;}
+  .m-back-hint{margin-top:2.5mm;font-size:.8em;color:var(--accent-dark);opacity:.65;font-style:italic;text-align:center;padding:0 4mm;}
+  .m-back-img{width:100%;height:100%;object-fit:contain;display:block;}
+  .m-back-imgremove{position:absolute;top:1.5mm;right:2mm;background:var(--accent);color:#fff;border:none;
+    border-radius:3mm;padding:.7mm 2.2mm;font-size:.62em;cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.4);}
+  .m-back-imgremove:hover{background:var(--accent-dark);}
+
+  /* ---- Trading card front (spell/item) ---- */
+  .t-front{height:100%;padding:2.5mm;display:flex;flex-direction:column;text-align:center;}
+  .t-top{display:flex;justify-content:space-between;align-items:center;}
+  .t-badge{background:var(--accent);color:#fff;font-size:.65em;padding:.5mm 1.5mm;border-radius:2mm;}
+  .t-icon{width:6mm;height:6mm;color:var(--accent-dark);}
+  .t-name{margin:1mm 0 0;font-size:1.05em;color:var(--accent-dark);}
+  .t-sub{font-style:italic;font-size:.7em;color:#4a3a28;margin-bottom:1mm;}
+  .t-info{font-size:.68em;text-align:left;margin-bottom:1mm;}
+  .t-info strong{color:var(--accent-dark);}
+  .t-desc{font-size:.68em;text-align:left;flex:1;overflow:hidden;margin:1mm 0;}
+  .t-tag{font-size:.55em;letter-spacing:.12em;color:var(--gold);border-top:1px solid var(--gold);padding-top:1mm;}
+
+  /* ---- Trading card back (shared logo) ---- */
+  .t-back{height:100%;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle,var(--panel-light),var(--panel));}
+  .t-back-border{border:2px solid var(--gold);border-radius:3mm;width:85%;height:85%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+  .t-back-emblem{width:18mm;height:18mm;color:var(--gold);}
+  .t-back-title{margin-top:2mm;font-size:.85em;letter-spacing:.15em;color:var(--gold);text-align:center;}
+  .t-back-title span{font-size:.7em;opacity:.8;display:block;}
+
+  #printRoot{display:none;}
+
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;z-index:100;padding:20px;}
+  .modal-overlay.hidden{display:none;}
+  .modal-box{background:var(--parchment);color:var(--ink);border-radius:10px;max-width:900px;width:100%;max-height:85vh;overflow:auto;padding:20px;}
+  .modal-box h2{margin-top:0;font-size:1.1rem;color:var(--accent-dark);}
+  .modal-box label.cat-choice{display:flex;align-items:center;gap:8px;padding:8px 10px;border:1px solid var(--gold);border-radius:6px;margin-bottom:8px;cursor:pointer;font-size:.9rem;}
+  .headerRowToggle{display:block;margin:10px 0;font-size:.85rem;}
+  .mapping-table-wrap{overflow-x:auto;}
+  table.mapping-table{border-collapse:collapse;width:100%;font-size:.75rem;}
+  table.mapping-table th, table.mapping-table td{border:1px solid var(--gold);padding:4px 6px;text-align:left;vertical-align:top;min-width:110px;}
+  table.mapping-table select{width:100%;font-size:.7rem;padding:2px;}
+  .modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:16px;}
+
+  footer.note{margin-top:30px;font-size:.75rem;color:#8a7a5c;text-align:center;}
+
+  @media print{
+    body{background:#fff;color:#000;}
+    .toolbar,.sources-bar,.empty-state,footer.note,.section-toolbar,#mappingModal,#categoryModal{display:none !important;}
+    .screen-only{display:none !important;}
+    #printRoot{display:block;}
+    .app{max-width:none;padding:0;margin:0;}
+    .category-section h2{display:none;}
+    .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
+    .page-break{break-after:page;}
+  }
+</style>
+</head>
+<body>
+
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-dragon" viewBox="0 0 100 100">
+    <path d="M10 70 Q30 20 50 40 Q70 20 90 70 Q70 55 50 65 Q30 55 10 70 Z" fill="currentColor"/>
+    <circle cx="50" cy="45" r="6" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-skull" viewBox="0 0 100 100">
+    <circle cx="50" cy="42" r="28" fill="currentColor"/>
+    <rect x="30" y="58" width="40" height="20" rx="5" fill="currentColor"/>
+    <circle cx="40" cy="40" r="7" fill="#f3e6cc"/>
+    <circle cx="60" cy="40" r="7" fill="#f3e6cc"/>
+    <rect x="45" y="53" width="10" height="9" fill="#f3e6cc"/>
+  </symbol>
+  <symbol id="icon-humanoid" viewBox="0 0 100 100">
+    <circle cx="50" cy="25" r="14" fill="currentColor"/>
+    <path d="M25 90 Q25 55 50 55 Q75 55 75 90 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-paw" viewBox="0 0 100 100">
+    <circle cx="50" cy="62" r="20" fill="currentColor"/>
+    <circle cx="28" cy="35" r="9" fill="currentColor"/>
+    <circle cx="50" cy="25" r="9" fill="currentColor"/>
+    <circle cx="72" cy="35" r="9" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-claw" viewBox="0 0 100 100">
+    <path d="M20 20 Q35 50 15 85" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M50 15 Q60 50 45 90" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M80 20 Q85 50 75 85" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="icon-sword" viewBox="0 0 100 100">
+    <rect x="46" y="10" width="8" height="55" fill="currentColor"/>
+    <polygon points="50,5 58,15 42,15" fill="currentColor"/>
+    <rect x="30" y="62" width="40" height="8" fill="currentColor"/>
+    <rect x="46" y="70" width="8" height="22" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-shield" viewBox="0 0 100 100">
+    <path d="M50 10 L85 25 L85 55 Q85 85 50 95 Q15 85 15 55 L15 25 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-flask" viewBox="0 0 100 100">
+    <rect x="42" y="10" width="16" height="18" fill="currentColor"/>
+    <path d="M40 28 L30 55 Q25 90 50 90 Q75 90 70 55 L60 28 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-gem" viewBox="0 0 100 100">
+    <polygon points="50,10 75,35 60,90 40,90 25,35" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-flame" viewBox="0 0 100 100">
+    <path d="M50 10 Q65 35 55 50 Q75 45 70 70 Q65 95 50 95 Q30 95 30 72 Q28 55 40 45 Q38 60 45 55 Q40 30 50 10 Z" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-book" viewBox="0 0 100 100">
+    <rect x="20" y="20" width="60" height="60" rx="4" fill="currentColor"/>
+    <rect x="47" y="20" width="6" height="60" fill="#f3e6cc"/>
+  </symbol>
+  <symbol id="icon-box" viewBox="0 0 100 100">
+    <rect x="15" y="35" width="70" height="50" fill="currentColor"/>
+    <polygon points="15,35 50,15 85,35" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-emblem" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="4"/>
+    <polygon points="50,20 61,42 85,42 66,57 73,80 50,66 27,80 34,57 15,42 39,42" fill="currentColor"/>
+  </symbol>
+</svg>
+
+<div class="app">
+  <h1>Γεννήτρια Καρτών</h1>
+  <p class="subtitle-line screen-only">Ανέβασε CSV με τέρατα, ξόρκια ή αντικείμενα/όπλα — φτιάχνει κάρτες σε πραγματικό μέγεθος εκτύπωσης (τέρατα = καρτ-ποστάλ, ξόρκια/αντικείμενα = μέγεθος trading card), με μπροστά/πίσω όψη. Κλικ σε κάρτα για να δεις την πίσω όψη. Δουλεύει τοπικά στον browser σου.</p>
+
+  <div class="toolbar screen-only">
+    <div class="group">
+      <label class="upload-btn" for="fileInput">📄 Ανέβασμα CSV</label>
+      <input type="file" id="fileInput" accept=".csv,text/csv" multiple hidden>
+    </div>
+    <input type="file" id="cardImageInput" accept="image/*" hidden>
+    <div class="group"><input type="text" id="searchInput" placeholder="Αναζήτηση ονόματος..."></div>
+    <div class="group">
+      <span style="font-size:.8rem;color:#c9b48c;">Παραδείγματα CSV:</span>
+      <button class="btn" id="sampleMonsterBtn" type="button">🐉 Τέρατα</button>
+      <button class="btn" id="sampleSpellBtn" type="button">📜 Ξόρκια</button>
+      <button class="btn" id="sampleItemBtn" type="button">⚔️ Αντικείμενα</button>
+    </div>
+    <div class="group">
+      <button class="btn" id="flipAllBtn" type="button" data-state="front">🔄 Όλες πίσω</button>
+      <button class="btn" id="printBtn" type="button">🖨️ Εκτύπωση / PDF</button>
+      <button class="btn" id="clearBtn" type="button">Καθαρισμός βιβλιοθήκης</button>
+    </div>
+    <div class="count-badge" id="countBadge">0 κάρτες</div>
+  </div>
+
+  <div class="sources-bar screen-only" id="sourcesBar"></div>
+  <div class="empty-state screen-only" id="emptyState">Ανέβασε ένα CSV για να ξεκινήσεις — τέρατα, ξόρκια ή αντικείμενα/όπλα, όσα αρχεία θέλεις.</div>
+
+  <main class="screen-only">
+    <section class="category-section" id="section-monster" style="display:none">
+      <h2>🐉 Τέρατα — καρτ-ποστάλ (148×105mm)</h2>
+      <div class="section-toolbar">
+        <span id="count-monster"></span>
+        <select id="sort-monster">
+          <option value="name">Όνομα (Α-Ω)</option>
+          <option value="cr-asc">CR (αύξουσα)</option>
+          <option value="cr-desc">CR (φθίνουσα)</option>
+        </select>
+      </div>
+      <div class="cards-grid grid-postcard" id="grid-monster"></div>
+    </section>
+
+    <section class="category-section" id="section-spell" style="display:none">
+      <h2>📜 Ξόρκια — trading card (63×88mm)</h2>
+      <div class="section-toolbar">
+        <span id="count-spell"></span>
+        <select id="sort-spell">
+          <option value="name">Όνομα (Α-Ω)</option>
+          <option value="level-asc">Επίπεδο (αύξουσα)</option>
+          <option value="level-desc">Επίπεδο (φθίνουσα)</option>
+        </select>
+      </div>
+      <div class="cards-grid grid-trading" id="grid-spell"></div>
+    </section>
+
+    <section class="category-section" id="section-item" style="display:none">
+      <h2>⚔️ Αντικείμενα / Όπλα — trading card (63×88mm)</h2>
+      <div class="section-toolbar">
+        <span id="count-item"></span>
+        <select id="sort-item">
+          <option value="name">Όνομα (Α-Ω)</option>
+          <option value="rarity-asc">Σπανιότητα (αύξουσα)</option>
+          <option value="rarity-desc">Σπανιότητα (φθίνουσα)</option>
+        </select>
+      </div>
+      <div class="cards-grid grid-trading" id="grid-item"></div>
+    </section>
+  </main>
+
+  <div id="printRoot"></div>
+
+  <footer class="note screen-only">Οι κάρτες αποθηκεύονται τοπικά στον browser σου (localStorage). Η εκτύπωση φτιάχνει πρώτα όλες τις μπροστινές όψεις κάθε κατηγορίας και μετά τις πίσω όψεις (ίδια σειρά) — τύπωσε διπλής όψης ή γύρισε το χαρτί χειροκίνητα.</footer>
+</div>
+
+<div class="modal-overlay hidden" id="categoryModal">
+  <div class="modal-box">
+    <h2>Τι είδους κάρτες περιέχει αυτό το αρχείο;</h2>
+    <div id="categoryBody"></div>
+    <div class="modal-actions">
+      <button class="btn" id="categoryCancelBtn" type="button">Ακύρωση</button>
+      <button class="btn" id="categoryContinueBtn" type="button" style="background:var(--accent);color:#fff;">Συνέχεια</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay hidden" id="mappingModal">
+  <div class="modal-box">
+    <h2>Αντιστοίχιση στηλών CSV</h2>
+    <div id="mappingBody"></div>
+    <div class="modal-actions">
+      <button class="btn" id="mappingCancelBtn" type="button">Ακύρωση</button>
+      <button class="btn" id="mappingApplyBtn" type="button" style="background:var(--accent);color:#fff;">Εφαρμογή</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ================= Category / field definitions =================
+  var CATEGORY_DEFS = {
+    monster: {
+      label:'Τέρας', sizeClass:'postcard',
+      filenameHints:['monster','τερας','τερατα','beast','bestiary'],
+      fields:[
+        {key:'name', label:'Όνομα', aliases:['name','ονομα','monster','τερας']},
+        {key:'typeline', label:'Μέγεθος/Τύπος', aliases:['type','size','μεγεθος','τυπος','sizetype','μεγεθοστυπος']},
+        {key:'alignment', label:'Ευθυγράμμιση', aliases:['alignment','ευθυγραμμιση']},
+        {key:'ac', label:'AC', aliases:['ac','armorclass','κλασηθωρακισης','κτ']},
+        {key:'armorNote', label:'Πανοπλία', aliases:['armor','armornote','πανοπλια','εξοπλισμος']},
+        {key:'hp', label:'HP', aliases:['hp','hitpoints','ποντοιζωης','pz']},
+        {key:'hpDice', label:'HP Ζάρια', aliases:['hpdice','hitdice','ζαρια']},
+        {key:'speed', label:'Ταχύτητα', aliases:['speed','ταχυτητα']},
+        {key:'str', label:'STR', aliases:['str','strength','δυναμη']},
+        {key:'dex', label:'DEX', aliases:['dex','dexterity','επιδεξιοτητα']},
+        {key:'con', label:'CON', aliases:['con','constitution','αντοχη']},
+        {key:'int', label:'INT', aliases:['int','intelligence','νοημοσυνη']},
+        {key:'wis', label:'WIS', aliases:['wis','wisdom','σοφια']},
+        {key:'cha', label:'CHA', aliases:['cha','charisma','χαρισμα']},
+        {key:'saves', label:'Σωτηρίες', aliases:['saves','savingthrows','σωτηριες']},
+        {key:'skills', label:'Δεξιότητες', aliases:['skills','δεξιοτητες']},
+        {key:'vulnerabilities', label:'Ευαλωτότητες', aliases:['vulnerabilities','vulnerable','ευαλωτοτητες']},
+        {key:'resistances', label:'Αντιστάσεις', aliases:['resistances','αντιστασεις','damageresistances']},
+        {key:'immunities', label:'Ανοσίες', aliases:['immunities','ανοσιες','ασυλιες']},
+        {key:'damageImmunities', label:'Damage Immunities', aliases:['damageimmunities']},
+        {key:'conditionImmunities', label:'Condition Immunities', aliases:['conditionimmunities']},
+        {key:'senses', label:'Αισθήσεις', aliases:['senses','αισθησεις']},
+        {key:'languages', label:'Γλώσσες', aliases:['languages','γλωσσες']},
+        {key:'cr', label:'CR', aliases:['cr','challengerating','βαθμοσπροκλησης','βπ']},
+        {key:'xp', label:'XP', aliases:['xp','εμπειρια','ποντοιεμπειριας']},
+        {key:'description', label:'Περιγραφή', aliases:['description','flavor','περιγραφη']},
+        {key:'actions', label:'Ενέργειες', aliases:['actions','ενεργειες','attack']},
+        {key:'legendary', label:'Θρυλικές Ενέργειες', aliases:['legendary','legendaryactions','θρυλικεσενεργειες']},
+        {key:'traits', label:'Ικανότητες', aliases:['traits','ικανοτητες','χαρακτηριστικα','specialabilities']}
+      ],
+      positionalKeys:['name','typeline','alignment','ac','armorNote','hp','hpDice','speed','str','dex','con','int','wis','cha','saves','skills','vulnerabilities','resistances','immunities','senses','languages','cr','xp','description','actions','legendary','traits']
+    },
+    spell: {
+      label:'Ξόρκι', sizeClass:'trading',
+      filenameHints:['spell','ξορκι','ξορκια','magic','spellbook'],
+      fields:[
+        {key:'name', label:'Όνομα', aliases:['name','ονομα','spell']},
+        {key:'level', label:'Επίπεδο', aliases:['level','επιπεδο']},
+        {key:'school', label:'Σχολή', aliases:['school','σχολη']},
+        {key:'castingTime', label:'Χρόνος Casting', aliases:['castingtime','χρονοςκασταρισματος','casttime','χρονοςεπικλησης']},
+        {key:'range', label:'Εμβέλεια', aliases:['range','εμβελεια']},
+        {key:'duration', label:'Διάρκεια', aliases:['duration','διαρκεια']},
+        {key:'description', label:'Περιγραφή', aliases:['description','flavor','περιγραφη','effect']}
+      ],
+      positionalKeys:['name','level','school','castingTime','range','duration','description']
+    },
+    item: {
+      label:'Αντικείμενο/Όπλο', sizeClass:'trading',
+      filenameHints:['item','weapon','οπλο','οπλα','αντικειμενο','equipment','gear'],
+      fields:[
+        {key:'name', label:'Όνομα', aliases:['name','ονομα','item','weapon']},
+        {key:'type', label:'Τύπος', aliases:['type','τυπος']},
+        {key:'rarity', label:'Σπανιότητα', aliases:['rarity','σπανιοτητα']},
+        {key:'effect', label:'Ζημιά / Effect', aliases:['effect','damage','ζημια','damageeffect']},
+        {key:'properties', label:'Ιδιότητες', aliases:['properties','ιδιοτητες']},
+        {key:'description', label:'Περιγραφή', aliases:['description','flavor','περιγραφη']},
+        {key:'price', label:'Τιμή', aliases:['price','τιμη','cost']}
+      ],
+      positionalKeys:['name','type','rarity','effect','properties','description','price']
+    }
+  };
+  var CATEGORY_ORDER = ['monster','spell','item'];
+
+  // Downloadable example CSVs (with header rows), embedded so the tool works from a single file.
+  var SAMPLE_CSV_MONSTER = `"Name; Size/Type; Alignment; AC; Armor; HP; Hit Dice; Speed; STR; DEX; CON; INT; WIS; CHA; Saving Throws; Skills; Damage Resistances; Damage Immunities; Condition Immunities; Senses; Languages; CR; XP; Description; Attack; Legendary Actions; Special Abilities; ; "
+"Giant Rat (Γιγαντιαίος Αρουραίος); Μικρό θηρίο; αδιάφορο; 11; φυσική επιδερμίδα; 5; 2d4; 9 μ.; 6; 15; 10; 2; 10; 4; ; Perception +2 (Αντίληψη); ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 12 (Παθητική Αντίληψη); —; 1/8; 25; Ένας αρουραίος στο μέγεθος μικρού σκύλου, με λαμπερά κόκκινα μάτια και κοφτερά δόντια. Ζει σε σμήνη μέσα σε υπόγεια, αποχετεύσεις και σκουπιδότοπους, και σπάνια επιτίθεται μόνος του — αν δείτε έναν, μάλλον υπάρχουν κι άλλοι κοντά. Αγαπημένο πρώτο τέρας για μια ομάδα πρωτάρηδων: αδύναμο, αλλά σε ζευγάρια δείχνει πώς λειτουργεί η Ομαδική Τακτική.; Δάγκωμα. Επίθεση Όπλου Σώμα με Σώμα: +3 στο χτύπημα, εμβέλεια 1,5μ., ένας στόχος. Χτύπημα: 1d4 ζημιά δαγκώματος.; ; Ομαδική Τακτική. Ο αρουραίος έχει Πλεονέκτημα στη ζαριά επίθεσης αν τουλάχιστον ένας σύμμαχός του βρίσκεται δίπλα στον στόχο.; ; "
+"Kobold (Κόμπολντ); Μικρό ανθρωποειδές (κόμπολντ); νόμιμο κακό; 12; φυσική επιδερμίδα; 5; 2d6-2; 9 μ.; 7; 15; 9; 8; 7; 8; ; ; ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 8 (Παθητική Αντίληψη); Draconic (Δρακική); 1/8; 25; Μικρόσωμο, λεπιδωτό πλάσμα με μεγάλα αυτιά και μάτια που βλέπουν στο σκοτάδι. Ζει σε ουρές μέσα σε τούνελ και σπηλιές, στήνοντας απλές παγίδες για να αντισταθμίσει την αδυναμία του. Μόνο του είναι δειλό και φεύγει εύκολα, αλλά σε ομάδα γίνεται πιο τολμηρό — και δυσκολεύεται στο φως της ημέρας.; Στιλέτο. Επίθεση Όπλου Σώμα με Σώμα ή εξ Αποστάσεως: +4 στο χτύπημα, εμβέλεια 1,5μ. ή 6/18μ., ένας στόχος. Χτύπημα: 1d4+2 ζημιά διάτρησης.; ; Ομαδική Τακτική. Πλεονέκτημα στη ζαριά επίθεσης αν σύμμαχος είναι δίπλα στον στόχο.<br><br>Ευαισθησία στο Φως. Μειονέκτημα σε ζαριές επίθεσης και Αντίληψης στο φως του ήλιου.; ; "
+"Goblin (Γκόμπλιν); Μικρό ανθρωποειδές (γκομπλινοειδές); ουδέτερο κακό; 13; δερμάτινη πανοπλία, ασπίδα; 8; 2d6+1; 9 μ.; 8; 15; 10; 10; 8; 8; ; Stealth +6 (Κρυφότητα); ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 9 (Παθητική Αντίληψη); Common (Κοινή), Goblin (Γκομπλινική); 1/4; 50; Μικρόσωμο, πράσινο ανθρωποειδές με μεγάλα αυτιά και πονηρό χαμόγελο. Ζει σε φυλές μέσα σε σπηλιές και εγκαταλελειμμένα φρούρια, κλέβοντας ό,τι βρει στον δρόμο του. Προτιμά να πολεμήσει από απόσταση ή σε ενέδρα, και δεν ντρέπεται να το βάλει στα πόδια αν η μάχη πάει άσχημα.; Σπαθάκι. Επίθεση Όπλου Σώμα με Σώμα: +4 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d6+2 ζημιά κοπής.<br><br>Κοντό Τόξο. Επίθεση Όπλου εξ Αποστάσεως: +4 στο χτύπημα, εμβέλεια 24/96μ. Χτύπημα: 1d6+2 ζημιά διάτρησης.; ; Ευέλικτη Διαφυγή. Μπορεί να αποχωρήσει ή να κρυφτεί ως δωρεάν ενέργεια κάθε γύρο.; ; "
+"Skeleton (Σκελετός); Μεσαίο απέθαντο; νόμιμο κακό; 13; κομμάτια πανοπλίας; 13; 2d8+4; 9 μ.; 10; 14; 15; 6; 8; 5; ; ; Vulnerable to bludgeoning damage (Ευάλωτος σε μωλωπιστική ζημιά); poison (δηλητήριο); exhaustion (εξάντληση), poisoned (δηλητηρίαση); Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 9 (Παθητική Αντίληψη); Understands the languages it knew in life but can't speak (Καταλαβαίνει τις γλώσσες που ήξερε εν ζωή, αλλά δεν μπορεί να μιλήσει); 1/4; 50; Τα κόκαλα ενός παλιού πολεμιστή, σηκωμένα ξανά όρθια με σκοτεινή μαγεία, χωρίς μνήμη της παλιάς του ζωής. Φυλάει ό,τι του έχει ανατεθεί — έναν τάφο, έναν διάδρομο, έναν θησαυρό — χωρίς κούραση ή φόβο. Δεν σκέφτεται, απλώς υπακούει, και χτυπάει με όποιο όπλο κρατούσε όσο ζούσε.; Σπαθί. Επίθεση Όπλου Σώμα με Σώμα: +4 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d6+2 ζημιά κοπής.<br><br>Τόξο. Επίθεση Όπλου εξ Αποστάσεως: +4 στο χτύπημα, εμβέλεια 24/96μ. Χτύπημα: 1d6+2 ζημιά διάτρησης.; ; ; ; "
+"Zombie (Ζόμπι); Μεσαίο απέθαντο; ουδέτερο κακό; 10; φυσική επιδερμίδα; 14; 3d8+3; 6 μ.; 13; 6; 16; 3; 6; 5; WIS +0; ; ; poison (δηλητήριο); poisoned (δηλητηρίαση); Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 8 (Παθητική Αντίληψη); Understands the languages it knew in life but can't speak (Καταλαβαίνει τις γλώσσες που ήξερε εν ζωή, αλλά δεν μπορεί να μιλήσει); 1/4; 50; Ένα σώμα που κινείται ξανά χωρίς ζωή, αργό αλλά ανελέητο, με μάτια θολά και δέρμα χλωμό. Δεν κουράζεται ποτέ και δεν νιώθει πόνο, οπότε συνεχίζει να επιτίθεται ακόμα κι όταν είναι βαριά χτυπημένο. Είναι αργό όμως — οι ήρωες μπορούν εύκολα να ξεφύγουν τρέχοντας, αν δεν θέλουν να παλέψουν.; Χτύπημα. Επίθεση Όπλου Σώμα με Σώμα: +3 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d6+1 ζημιά μωλωπισμού.; ; Απαρέγκλιτη Αντοχή. Αν μια ζημιά φέρει το ζόμπι στα 0 HP, κάνει Σωτηρία Αντοχής (DC = 5 + ζημιά, εκτός αν είναι κρίσιμο χτύπημα ή ζημιά φωτιάς) — αν πετύχει, μένει στη ζωή με 1 HP.; ; "
+"Wolf (Λύκος); Μεσαίο θηρίο; αδιάφορο; 13; φυσική επιδερμίδα; 11; 2d8+2; 12 μ.; 12; 15; 12; 3; 12; 6; ; Perception +3 (Αντίληψη), Stealth +4 (Κρυφότητα); ; ; ; Passive Perception 13 (Παθητική Αντίληψη); —; 1/4; 50; Γκρίζος, γρήγορος κυνηγός με οξεία όσφρηση, που ζει και κυνηγάει σε αγέλες μέσα στο δάσος. Σπάνια επιτίθεται μόνος — προτιμάει να περικυκλώσει τον στόχο του μαζί με άλλους λύκους. Αν νιώσει ότι η μάχη πάει άσχημα για την αγέλη, μπορεί να υποχωρήσει αντί να παλέψει μέχρι τέλους.; Δάγκωμα. Επίθεση Όπλου Σώμα με Σώμα: +4 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d6+2 ζημιά δαγκώματος. Αν ο στόχος είναι πλάσμα, κάνει Σωτηρία Δύναμης (DC 11) ή πέφτει Πεσμένος.; ; Οξεία Ακοή και Όσφρηση. Πλεονέκτημα σε Δοκιμές Αντίληψης βασισμένες στην ακοή ή την όσφρηση.<br><br>Ομαδική Τακτική. Πλεονέκτημα στη ζαριά επίθεσης αν σύμμαχος είναι δίπλα στον στόχο.; ; "
+"Bandit (Ληστής); Μεσαίο ανθρωποειδές (άνθρωπος); χαοτικό ουδέτερο; 12; δερμάτινη πανοπλία; 12; 2d8+2; 9 μ.; 11; 12; 12; 10; 10; 10; ; ; ; ; ; Passive Perception 10 (Παθητική Αντίληψη); Common (Κοινή); 1/8; 25; Ένας άνθρωπος που διάλεξε να ζει έξω από τον νόμο, συνήθως σε ομάδες, κρυμμένος σε δρόμους και περάσματα. Επιτίθεται σε ταξιδιώτες για χρήματα, όχι από κακία — προτιμά να απειλήσει και να κλέψει παρά να πολεμήσει μέχρι τέλους. Αν βρεθεί μόνος του απέναντι σε δυνατούς ήρωες, συνήθως τα παρατάει.; Σπαθί. Επίθεση Όπλου Σώμα με Σώμα: +3 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d6+1 ζημιά κοπής.<br><br>Χιαστό Τόξο. Επίθεση Όπλου εξ Αποστάσεως: +3 στο χτύπημα, εμβέλεια 24/96μ. Χτύπημα: 1d8+1 ζημιά διάτρησης.; ; ; ; "
+"Orc (Ορκ); Μεσαίο ανθρωποειδές (ορκ); χαοτικό κακό; 13; πανοπλία δέρματος; 16; 2d8+7; 9 μ.; 16; 12; 16; 7; 11; 10; ; Intimidation +2 (Εκφοβισμός); ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 10 (Παθητική Αντίληψη); Common (Κοινή), Orc (Ορκική); 1/2; 100; Ψηλός, μυώδης πολεμιστής με πράσινο δέρμα και κυνόδοντες, μέλος φυλής που ζει στα βουνά και τιμά τη δύναμη πάνω απ' όλα. Πολεμάει με ορμή, ριχνόμενος στην πρώτη γραμμή χωρίς δισταγμό. Δεν είναι απαραίτητα κακός — πολλές φυλές ορκ απλώς προστατεύουν το έδαφός τους από εισβολείς.; Μεγάλο Τσεκούρι. Επίθεση Όπλου Σώμα με Σώμα: +5 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d12+3 ζημιά κοπής.; ; Επιθετικότητα. Ως bonus ενέργεια, το ορκ μπορεί να κινηθεί μέχρι την ταχύτητά του προς έναν εχθρό που βλέπει.; ; "
+"Gryphon (Γρύπας); Μεγάλο τερατόμορφο; αδιάφορο; 12; φυσική επιδερμίδα; 35; 5d10+10; 9 μ., πτήση 24 μ.; 18; 15; 13; 2; 12; 8; ; Perception +5 (Αντίληψη); ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 15 (Παθητική Αντίληψη); —; 2; 450; Μισός αετός, μισό λιοντάρι — με φτερωτό σώμα, γαμψό ράμφος και δυνατά νύχια. Φτιάχνει τη φωλιά του σε απόκρημνες κορυφές βουνών και υπερασπίζεται σφιχτά την περιοχή του, ειδικά αν έχει μικρά. Πετάει, οπότε είναι δύσκολο να τον χτυπήσει κανείς που δεν έχει τόξο ή ξόρκι.; Πολλαπλή Επίθεση. Ο γρύπας επιτίθεται δύο φορές: μία με το ράμφος του και μία με τα νύχια του.<br><br>Ράμφος. Επίθεση Όπλου Σώμα με Σώμα: +6 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d8+4 ζημιά διάτρησης.<br><br>Νύχια. Επίθεση Όπλου Σώμα με Σώμα: +6 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 2d6+4 ζημιά κοπής.; ; ; ; "
+"Owlbear (Κουκουβαγιάρκτος); Μεγάλο τερατόμορφο; αδιάφορο; 13; φυσική επιδερμίδα; 40; 5d10+12; 12 μ.; 20; 12; 17; 3; 12; 7; ; Perception +3 (Αντίληψη); ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 13 (Παθητική Αντίληψη); —; 3; 700; Μισή αρκούδα, μισή κουκουβάγια — τεράστιο, τριχωτό πλάσμα με μεγάλα κίτρινα μάτια που βλέπουν στο σκοτάδι. Ζει μόνο του βαθιά μέσα στο δάσος και βρυχάται δυνατά πριν επιτεθεί, δίνοντας στους προσεκτικούς ήρωες μια προειδοποίηση. Άγριο αλλά όχι κακό — απλώς υπερασπίζεται την περιοχή του.; Πολλαπλή Επίθεση. Ο κουκουβαγιάρκτος επιτίθεται δύο φορές: μία με το ράμφος του και μία με τα νύχια του.<br><br>Ράμφος. Επίθεση Όπλου Σώμα με Σώμα: +7 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d10+5 ζημιά διάτρησης.<br><br>Νύχια. Επίθεση Όπλου Σώμα με Σώμα: +7 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 2d8+5 ζημιά κοπής.; ; ; ; "
+"Troll (Τρολ); Μεγάλος γίγαντας; χαοτικό κακό; 15; φυσική επιδερμίδα; 55; 7d10+17; 9 μ.; 18; 13; 20; 7; 9; 7; ; Perception +2 (Αντίληψη); ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 12 (Παθητική Αντίληψη); Giant (Γιγαντική); 5; 1800; Τεράστιο, πρασινωπό πλάσμα με μακριά χέρια, ατελείωτη πείνα και ένα σώμα που επουλώνεται σχεδόν στιγμιαία. Ζει σε σκοτεινές σπηλιές ή κάτω από γέφυρες, μακριά από άλλα πλάσματα. Ο μόνος σίγουρος τρόπος να το σταματήσεις μόνιμα είναι φωτιά ή οξύ — χωρίς αυτά, μπορεί να σηκωθεί ξανά και ξανά.; Πολλαπλή Επίθεση. Το τρολ επιτίθεται τρεις φορές: μία δάγκωμα και δύο νύχια.<br><br>Δάγκωμα. Επίθεση Όπλου Σώμα με Σώμα: +7 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 1d6+4 ζημιά διάτρησης.<br><br>Νύχια. Επίθεση Όπλου Σώμα με Σώμα: +7 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 2d6+4 ζημιά κοπής.; ; Αναγέννηση. Το τρολ ανακτά 10 HP στην αρχή της σειράς του. Αν δεχτεί ζημιά φωτιάς ή οξέος, αυτή η ικανότητα δεν ενεργοποιείται τον επόμενο γύρο.; ; "
+"Young Dragon (Νεαρός Δράκος); Μεγάλος δράκος; χαοτικό κακό; 17; φυσική επιδερμίδα; 75; 10d10+20; 12 μ., πτήση 24 μ.; 19; 10; 17; 12; 11; 15; CON +6, WIS +3, CHA +5; Perception +6 (Αντίληψη), Stealth +3 (Κρυφότητα); ; fire (φωτιά); ; Blindsight 30 ft. (Τυφλή Αντίληψη), Darkvision 120 ft. (Νυχτερινή Όραση), Passive Perception 16 (Παθητική Αντίληψη); Common (Κοινή), Draconic (Δρακική); 6; 2300; Το αφεντικό της περιπέτειας — μεγαλόπρεπο, τρομερό, και ακόμα νεαρό για τα δεδομένα των δρακόντων. Έχτισε τη φωλιά του ψηλά στο βουνό και μαζεύει γύρω του άλλα πλάσματα, όχι επειδή είναι κακό, αλλά επειδή προστατεύει το έδαφός του όπως κάθε δράκος. Φυσάει φωτιά, πετάει, και μπορεί να ενεργήσει ακόμα κι όταν δεν είναι η σειρά του — ένας αντίπαλος που χρειάζεται ομαδική δουλειά για να νικηθεί.; Πολλαπλή Επίθεση. Ο δράκος επιτίθεται τρεις φορές: μία δάγκωμα και δύο νύχια.<br><br>Δάγκωμα. Επίθεση Όπλου Σώμα με Σώμα: +8 στο χτύπημα, εμβέλεια 3μ. Χτύπημα: 2d10+5 ζημιά διάτρησης.<br><br>Νύχια. Επίθεση Όπλου Σώμα με Σώμα: +8 στο χτύπημα, εμβέλεια 1,5μ. Χτύπημα: 2d6+5 ζημιά κοπής.; Ο δράκος μπορεί να επιλέξει 1 από τις παρακάτω ενέργειες στο τέλος της σειράς κάθε άλλου παίκτη. Μπορεί να χρησιμοποιήσει μόνο μία τέτοια ενέργεια τη φορά και μόνο στο τέλος της σειράς κάποιου άλλου. Ανακτά τις χρησιμοποιημένες επιλογές στην αρχή της δικής του σειράς.<br><br>Ουρά. Επίθεση Όπλου Σώμα με Σώμα: +8 στο χτύπημα, εμβέλεια 3μ. Χτύπημα: 1d8+5 ζημιά μωλωπισμού.<br><br>Φτεροκόπημα (Κοστίζει 2 Ενέργειες). Κάθε πλάσμα σε απόσταση 3μ. κάνει Σωτηρία Επιδεξιότητας (DC 15) ή δέχεται 1d6+5 ζημιά κοπής και πέφτει Πεσμένο. Ο δράκος μπορεί μετά να πετάξει έως τη μισή ταχύτητά του.<br><br>Τρομακτικό Βλέμμα. Ένας εχθρός που ο δράκος βλέπει κάνει Σωτηρία Σοφίας (DC 13) ή γίνεται Τρομαγμένος για 1 γύρο.; Ανάσα Φωτιάς (Επαναφορτίζεται με 5-6). Ο δράκος φυσάει φωτιά σε κώνο 9 μέτρων. Κάθε πλάσμα στην περιοχή κάνει Σωτηρία Επιδεξιότητας (DC 15): αποτυχία σημαίνει 7d6 ζημιά φωτιάς, επιτυχία σημαίνει μισή ζημιά.; ; "
+`;
+  var SAMPLE_CSV_SPELL =
+'"Name; Level; School; Casting Time; Range; Duration; Description"\n'+
+'"Fireball (Βολή Φωτιάς); 3; Evocation (Επίκληση); 1 ενέργεια; 45 μ. (σφαίρα ακτίνας 6μ.); Στιγμιαία; Μια φλογερή σφαίρα εκρήγνυται στο σημείο-στόχο. Κάθε πλάσμα σε ακτίνα 6μ. κάνει Σωτηρία Επιδεξιότητας, αποτυχία σημαίνει 8d6 ζημιά φωτιάς, επιτυχία μισή ζημιά."\n'+
+'"Magic Missile (Μαγικό Βλήμα); 1; Evocation (Επίκληση); 1 ενέργεια; 36 μ.; Στιγμιαία; Δημιουργείς τρία βλήματα μαγικής ενέργειας. Κάθε βλήμα χτυπά αυτόματα έναν στόχο της επιλογής σου και προκαλεί 1d4+1 ζημιά δύναμης."\n'+
+'"Shield (Ασπίδα); 1; Abjuration (Απαγόρευση); 1 αντίδραση; Ο εαυτός σου; 1 γύρος; Μια αόρατη ασπίδα ενέργειας εμφανίζεται και σε προστατεύει, δίνοντας +5 στο AC μέχρι την αρχή του επόμενου γύρου σου."\n';
+  var SAMPLE_CSV_ITEM =
+'"Name; Type; Rarity; Effect; Properties; Description; Price"\n'+
+'"Σπαθί +1 (Sword +1); Όπλο (μακρύ ξίφος); Σπάνιο; +1 στο χτύπημα και τη ζημιά; Απαιτεί επίθεση σώμα με σώμα; Μαγικό σπαθί φτιαγμένο από νανικό ατσάλι, χαράγματα ρούνων κατά μήκος της λεπίδας.; 500 gp"\n'+
+'"Φίλτρο Θεραπείας (Potion of Healing); Ρόφημα; Κοινό; Αναρρώνει 2d4+2 HP; Καταναλώνεται με μία ενέργεια (bonus action); Ένα κόκκινο υγρό που λάμπει απαλά μέσα στο μπουκάλι του.; 50 gp"\n'+
+'"Δαχτυλίδι Προστασίας (Ring of Protection); Δαχτυλίδι; Σπάνιο; +1 στο AC και σε Σωτηρίες; Απαιτεί εξοικείωση (attunement); Ένα απλό ασημένιο δαχτυλίδι με μια χαραγμένη ασπίδα.; 3500 gp"\n';
+  function downloadText(filename, text){
+    var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 2000);
+  }
+
+  // Fixed geometry (mm) for the monster card's full-width name header, kept in sync with the CSS
+  // above, so every card reserves the same space for the name and the name never shrinks with
+  // the rest of the card.
+  var MM_TO_PX = 96/25.4;
+  var POSTCARD_WIDTH_MM = 148;
+  var OUTER_PAD_MM = 2.2;
+  var HEADER_PAD_H_MM = 3;
+  var CRBOX_WIDTH_MM = 16;
+  var NAME_ROW_GAP_MM = 2;
+  var NAME_FONT_MM = 5.2;
+  var NAME_FONT_FAMILY = "'Segoe UI',Verdana,Arial,sans-serif";
+  var NAME_AREA_WIDTH_PX = (function(){
+    var headerInner = (POSTCARD_WIDTH_MM - 2*OUTER_PAD_MM) - 2*HEADER_PAD_H_MM;
+    return (headerInner - CRBOX_WIDTH_MM - NAME_ROW_GAP_MM) * MM_TO_PX;
+  })();
+
+  var LIB_KEY = 'cardGen_library_v2';
+  var OLD_LIB_KEY = 'monsterCardGen_library_v1';
+  var MAP_CACHE_KEY = 'cardGen_mappingCache_v2';
+
+  var state = { sources: [], cards: [] };
+  var pendingImageCardId = null;
+
+  // ================= Helpers =================
+  var ACCENT_MAP = {'ά':'α','έ':'ε','ή':'η','ί':'ι','ό':'ο','ύ':'υ','ώ':'ω','ϊ':'ι','ΐ':'ι','ϋ':'υ','ΰ':'υ'};
+  function normalize(s){
+    if(!s) return '';
+    var out = String(s).toLowerCase();
+    out = out.split('').map(function(ch){ return ACCENT_MAP[ch] || ch; }).join('');
+    out = out.replace(/[^a-zα-ω0-9]/g,'');
+    return out;
+  }
+  function escapeHtml(s){
+    return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+  function findFieldByAlias(fieldsArr, cell){
+    var norm = normalize(cell);
+    if(!norm) return null;
+    for(var i=0;i<fieldsArr.length;i++){ if(fieldsArr[i].aliases.indexOf(norm) !== -1) return fieldsArr[i]; }
+    return null;
+  }
+  function modeOf(arr){
+    var freq={}, best=arr[0], bestCount=0;
+    arr.forEach(function(v){ freq[v]=(freq[v]||0)+1; if(freq[v]>bestCount){bestCount=freq[v]; best=v;} });
+    return best;
+  }
+  function crToNumber(cr){
+    if(!cr) return -1;
+    cr = String(cr).trim();
+    if(cr==='—'||cr==='-'||cr==='') return -1;
+    if(cr.indexOf('/')!==-1){ var p=cr.split('/'); var a=parseFloat(p[0]), b=parseFloat(p[1]); return b?a/b:0; }
+    var n=parseFloat(cr.replace(',','.'));
+    return isNaN(n)?-1:n;
+  }
+  var RARITY_ORDER = {'common':1,'κοινο':1,'uncommon':2,'ασυνηθιστο':2,'rare':3,'σπανιο':3,'veryrare':4,'πολυσπανιο':4,'legendary':5,'θρυλικο':5,'artifact':6,'artefact':6,'θειικο':6};
+  function rarityRank(r){ return RARITY_ORDER[normalize(r)] || 0; }
+  function signatureOf(headerRow){ return headerRow.length + '::' + headerRow.map(normalize).join('|').slice(0,300); }
+
+  function getMappingCache(){ try{ return JSON.parse(localStorage.getItem(MAP_CACHE_KEY) || '{}'); }catch(e){ return {}; } }
+  function saveMappingCache(sig, val){ var c=getMappingCache(); c[sig]=val; try{ localStorage.setItem(MAP_CACHE_KEY, JSON.stringify(c)); }catch(e){} }
+
+  function saveLibrary(){ try{ localStorage.setItem(LIB_KEY, JSON.stringify({sources:state.sources, cards:state.cards})); }catch(e){} }
+  function loadLibrary(){
+    try{
+      var oldRaw = localStorage.getItem(OLD_LIB_KEY);
+      var newRaw = localStorage.getItem(LIB_KEY);
+      if(oldRaw && !newRaw){
+        var old = JSON.parse(oldRaw);
+        var migrated = {
+          sources: (old.sources||[]).map(function(s){ return {id:s.id, filename:s.filename, count:s.count, category:'monster'}; }),
+          cards: (old.monsters||[]).map(function(m){ m._category='monster'; return m; })
+        };
+        localStorage.setItem(LIB_KEY, JSON.stringify(migrated));
+        newRaw = JSON.stringify(migrated);
+      }
+      if(newRaw){
+        var d = JSON.parse(newRaw);
+        state.sources = d.sources || [];
+        state.cards = d.cards || [];
+      }
+    }catch(e){}
+  }
+
+  // ================= CSV parsing =================
+  function parseCSV(text){
+    var rows=[], row=[], field='', inQuotes=false;
+    for(var i=0;i<text.length;i++){
+      var c=text[i];
+      if(inQuotes){
+        if(c==='"'){ if(text[i+1]==='"'){ field+='"'; i++; } else inQuotes=false; }
+        else field+=c;
+      } else {
+        if(c==='"') inQuotes=true;
+        else if(c===','){ row.push(field); field=''; }
+        else if(c==='\r'){}
+        else if(c==='\n'){ row.push(field); rows.push(row); row=[]; field=''; }
+        else field+=c;
+      }
+    }
+    if(field.length>0 || row.length>0){ row.push(field); rows.push(row); }
+    return rows.filter(function(r){ return !(r.length===1 && r[0].trim()===''); });
+  }
+  function tableFromRaw(raw){
+    if(!raw.length) return [];
+    var colCounts = raw.map(function(r){ return r.length; });
+    var mode = modeOf(colCounts);
+    if(mode===1){ return raw.map(function(r){ return (r[0]||'').split(';').map(function(s){ return s.trim(); }); }); }
+    return raw;
+  }
+  function autoMapHeader(fieldsArr, header){
+    var mapping={};
+    header.forEach(function(cell,i){ var fd=findFieldByAlias(fieldsArr, cell); if(fd && mapping[fd.key]===undefined) mapping[fd.key]=i; });
+    return mapping;
+  }
+  function positionalMapping(positionalKeys){
+    var mapping={}; positionalKeys.forEach(function(k,i){ mapping[k]=i; }); return mapping;
+  }
+  function buildCard(rowArr, mapping, sourceId, category){
+    var fieldsArr = CATEGORY_DEFS[category].fields;
+    function get(key){ var idx=mapping[key]; if(idx===undefined||idx===null||idx<0) return ''; return (rowArr[idx]||'').trim(); }
+    var c = { _id:'c_'+Date.now()+'_'+Math.random().toString(36).slice(2,8), _source:sourceId, _category:category };
+    fieldsArr.forEach(function(fd){ c[fd.key] = get(fd.key); });
+    return c;
+  }
+  function hasAnyData(c){
+    return Object.keys(c).some(function(k){ return k.charAt(0)!=='_' && c[k] && String(c[k]).trim()!==''; });
+  }
+
+  function guessCategoryFromFilename(name){
+    var n = normalize(name);
+    for(var i=0;i<CATEGORY_ORDER.length;i++){
+      var cat = CATEGORY_ORDER[i];
+      if(CATEGORY_DEFS[cat].filenameHints.some(function(h){ return n.indexOf(normalize(h))!==-1; })) return cat;
+    }
+    return null;
+  }
+  function guessCategoryFromHeader(header){
+    var scores={}, best=null, bestScore=0, second=0;
+    CATEGORY_ORDER.forEach(function(cat){
+      var s = header.filter(function(cell){ return findFieldByAlias(CATEGORY_DEFS[cat].fields, cell); }).length;
+      scores[cat]=s;
+    });
+    CATEGORY_ORDER.forEach(function(cat){
+      if(scores[cat]>bestScore){ second=bestScore; best=cat; bestScore=scores[cat]; }
+      else if(scores[cat]>second){ second=scores[cat]; }
+    });
+    return (best && bestScore>=3 && bestScore>second) ? best : null;
+  }
+
+  // ================= Category modal =================
+  function askCategoryModal(filename, guessed){
+    return new Promise(function(resolve){
+      var modal = document.getElementById('categoryModal');
+      var body = document.getElementById('categoryBody');
+      var html = '<p>Το αρχείο <strong>'+escapeHtml(filename)+'</strong> δεν αναγνωρίστηκε αυτόματα. Διάλεξε κατηγορία:</p>';
+      CATEGORY_ORDER.forEach(function(cat, i){
+        var checked = (guessed ? guessed===cat : i===0) ? 'checked' : '';
+        var emoji = cat==='monster' ? '🐉' : cat==='spell' ? '📜' : '⚔️';
+        var sizeTxt = CATEGORY_DEFS[cat].sizeClass==='postcard' ? 'καρτ-ποστάλ 148×105mm' : 'trading card 63×88mm';
+        html += '<label class="cat-choice"><input type="radio" name="catChoice" value="'+cat+'" '+checked+'> '+emoji+' '+CATEGORY_DEFS[cat].label+' <span style="opacity:.6">('+sizeTxt+')</span></label>';
+      });
+      body.innerHTML = html;
+      modal.classList.remove('hidden');
+      var contBtn = document.getElementById('categoryContinueBtn');
+      var cancelBtn = document.getElementById('categoryCancelBtn');
+      function cleanup(){ modal.classList.add('hidden'); contBtn.onclick=null; cancelBtn.onclick=null; }
+      contBtn.onclick = function(){
+        var sel = body.querySelector('input[name=catChoice]:checked');
+        var val = sel ? sel.value : null;
+        cleanup(); resolve(val);
+      };
+      cancelBtn.onclick = function(){ cleanup(); resolve(null); };
+    });
+  }
+
+  // ================= Mapping modal =================
+  function askUserForMapping(table, filename, fieldsArr){
+    return new Promise(function(resolve){
+      var modal = document.getElementById('mappingModal');
+      var body = document.getElementById('mappingBody');
+      var ncols = table[0].length;
+      var sampleRows = table.slice(0, Math.min(3, table.length));
+      var html = '<p>Το αρχείο <strong>'+escapeHtml(filename)+'</strong> έχει άγνωστη δομή στηλών. Αντιστοίχισε (ή άφησε "Παράβλεψη"):</p>';
+      html += '<label class="headerRowToggle"><input type="checkbox" id="isHeaderCheckbox" checked> Η πρώτη γραμμή περιέχει επικεφαλίδες (όχι δεδομένα)</label>';
+      html += '<div class="mapping-table-wrap"><table class="mapping-table"><thead><tr>';
+      for(var c=0;c<ncols;c++){
+        html += '<th>Στήλη '+(c+1)+'<br><select data-col="'+c+'"><option value="">(Παράβλεψη)</option>';
+        var guess = findFieldByAlias(fieldsArr, (sampleRows[0] && sampleRows[0][c]) || '');
+        fieldsArr.forEach(function(fd){
+          var sel = (guess && guess.key===fd.key) ? 'selected' : '';
+          html += '<option value="'+fd.key+'" '+sel+'>'+escapeHtml(fd.label)+'</option>';
+        });
+        html += '</select></th>';
+      }
+      html += '</tr></thead><tbody>';
+      sampleRows.forEach(function(r){ html += '<tr>'+r.map(function(cell){ return '<td>'+escapeHtml((cell||'').slice(0,50))+'</td>'; }).join('')+'</tr>'; });
+      html += '</tbody></table></div>';
+      body.innerHTML = html;
+      modal.classList.remove('hidden');
+      var applyBtn = document.getElementById('mappingApplyBtn');
+      var cancelBtn = document.getElementById('mappingCancelBtn');
+      function cleanup(){ modal.classList.add('hidden'); applyBtn.onclick=null; cancelBtn.onclick=null; }
+      applyBtn.onclick = function(){
+        var mapping={};
+        body.querySelectorAll('select[data-col]').forEach(function(sel){ var col=Number(sel.getAttribute('data-col')); if(sel.value) mapping[sel.value]=col; });
+        var isHeaderRow = document.getElementById('isHeaderCheckbox').checked;
+        cleanup(); resolve({mapping:mapping, isHeaderRow:isHeaderRow});
+      };
+      cancelBtn.onclick = function(){ cleanup(); resolve(null); };
+    });
+  }
+
+  // ================= File processing =================
+  async function processOneFile(file){
+    var text = await file.text();
+    var raw = parseCSV(text);
+    if(!raw.length) return;
+    var table = tableFromRaw(raw);
+    if(!table.length) return;
+    var header = table[0];
+
+    var category = guessCategoryFromFilename(file.name) || guessCategoryFromHeader(header);
+    if(!category){
+      category = await askCategoryModal(file.name, null);
+      if(!category) return;
+    }
+    var catDef = CATEGORY_DEFS[category];
+    var threshold = Math.max(3, Math.ceil(catDef.fields.length/6));
+    var matches = header.filter(function(cell){ return findFieldByAlias(catDef.fields, cell); }).length;
+    var sig = category+'::'+signatureOf(header);
+    var cache = getMappingCache()[sig];
+
+    var mapping, isHeaderRow;
+    if(matches>=threshold){ mapping=autoMapHeader(catDef.fields, header); isHeaderRow=true; }
+    else if(header.length===catDef.positionalKeys.length || header.length===catDef.positionalKeys.length+1){ mapping=positionalMapping(catDef.positionalKeys); isHeaderRow=false; }
+    else if(cache){ mapping=cache.mapping; isHeaderRow=cache.isHeaderRow; }
+    else {
+      var result = await askUserForMapping(table, file.name, catDef.fields);
+      if(!result) return;
+      mapping=result.mapping; isHeaderRow=result.isHeaderRow;
+      saveMappingCache(sig, {mapping:mapping, isHeaderRow:isHeaderRow});
+    }
+
+    var dataRows = isHeaderRow ? table.slice(1) : table;
+    var sourceId = 'src_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
+    var cards = dataRows.map(function(r){ return buildCard(r, mapping, sourceId, category); }).filter(hasAnyData);
+    if(cards.length===0) return;
+
+    state.sources.push({id:sourceId, filename:file.name, count:cards.length, category:category});
+    state.cards = state.cards.concat(cards);
+    saveLibrary();
+    renderAll();
+  }
+  async function handleFiles(fileList){
+    var files = Array.from(fileList).filter(function(f){ return /\.csv$/i.test(f.name) || f.type==='text/csv' || f.type===''; });
+    for(var i=0;i<files.length;i++){ await processOneFile(files[i]); }
+  }
+
+  // ================= Content rendering (shared front/back builders) =================
+  function formatBlock(raw){
+    if(!raw) return '';
+    var esc = escapeHtml(raw);
+    esc = esc.replace(/&lt;br\s*\/?&gt;/gi, '<br>');
+    var parts = esc.split(/(?:<br>\s*){2,}/i).map(function(p){ return p.trim(); }).filter(Boolean);
+    if(parts.length===0) parts=[esc];
+    return parts.map(function(p){
+      var m = p.match(/^([^.]{2,45}\.)(\s+)/);
+      if(m && !/^\d/.test(m[1])) return '<p><strong>'+m[1]+'</strong>'+p.slice(m[0].length)+'</p>';
+      return '<p>'+p+'</p>';
+    }).join('');
+  }
+  function abilCell(label, score){
+    var mod = '';
+    if(score!==''&&score!==undefined&&score!==null){
+      var n = Number(score);
+      if(!isNaN(n)){ var md=Math.floor((n-10)/2); mod=' ('+(md>=0?'+':'')+md+')'; }
+    }
+    return '<div class="m-abil-cell"><div class="m-abil-label">'+label+'</div><div class="m-abil-value">'+(score?escapeHtml(score)+mod:'—')+'</div></div>';
+  }
+  function metaRow(label, val){ if(!val) return ''; return '<div class="meta-row"><strong>'+escapeHtml(label)+':</strong> '+escapeHtml(val)+'</div>'; }
+
+  function measureTextWidthPx(text, fontPx, weight, family){
+    if(typeof document==='undefined' || !document.createElement) return 0;
+    var canvas = measureTextWidthPx._c || (measureTextWidthPx._c = document.createElement('canvas'));
+    var ctx = canvas.getContext('2d');
+    ctx.font = weight+' '+fontPx+'px '+family;
+    return ctx.measureText(text).width;
+  }
+  // Builds the name block: keeps one fixed font size for every card. If "English (Greek)" doesn't
+  // fit on one line at that size, splits English on line 1 and the Greek part (smaller) on line 2 —
+  // so every card reserves the exact same header space regardless of name length.
+  function buildNameBlock(fullName, subtitle){
+    var raw = String(fullName||'').trim() || '(No name)';
+    var m = raw.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
+    var eng = m ? m[1].trim() : raw;
+    var gr = m ? m[2].trim() : '';
+    var fontPx = NAME_FONT_MM*MM_TO_PX;
+    var subHTML = subtitle ? '<div class="m-sub">'+escapeHtml(subtitle)+'</div>' : '';
+    if(!gr){
+      return '<div class="m-name-wrap"><div class="m-name">'+escapeHtml(eng)+'</div>'+subHTML+'</div>';
+    }
+    var combined = eng+' ('+gr+')';
+    var fits = measureTextWidthPx(combined, fontPx, '700', NAME_FONT_FAMILY) <= NAME_AREA_WIDTH_PX;
+    if(fits){
+      return '<div class="m-name-wrap"><div class="m-name">'+escapeHtml(combined)+'</div>'+subHTML+'</div>';
+    }
+    return '<div class="m-name-wrap"><div class="m-name-en">'+escapeHtml(eng)+'</div><div class="m-name-gr">('+escapeHtml(gr)+')</div>'+subHTML+'</div>';
+  }
+
+  function pickMonsterIcon(text){
+    var n = normalize(text);
+    if(/δρακ|dragon/.test(n)) return 'icon-dragon';
+    if(/απεθαντ|undead|σκελετ|skeleton|ζομπι|zombie|lich|βρικολακ|vampire/.test(n)) return 'icon-skull';
+    if(/ανθρωποειδ|humanoid|ορκ|orc|κομπολντ|kobold|γκομπλιν|goblin|ληστ|bandit|γιγαντ|giant|τρολ|troll/.test(n)) return 'icon-humanoid';
+    if(/θηρι|beast|λυκ|wolf|αρουραι|rat|αετ|gryphon|αρκτ|bear/.test(n)) return 'icon-paw';
+    return 'icon-claw';
+  }
+  function pickSpellIcon(school){
+    var n = normalize(school);
+    if(/πυρ|fire|evocation|επικλησ/.test(n)) return 'icon-flame';
+    if(/προστασ|abjuration|shield/.test(n)) return 'icon-shield';
+    return 'icon-book';
+  }
+  function pickItemIcon(type){
+    var n = normalize(type);
+    if(/οπλο|weapon|σπαθ|sword|τσεκουρ|axe|τοξ|bow|μαχαιρ|dagger/.test(n)) return 'icon-sword';
+    if(/φιλτρ|potion|flask/.test(n)) return 'icon-flask';
+    if(/δαχτυλιδ|ring|κοσμημα|amulet|gem/.test(n)) return 'icon-gem';
+    if(/ασπιδα|shield|πανοπλ|armor/.test(n)) return 'icon-shield';
+    return 'icon-box';
+  }
+
+  // Shared full-width header (name + CR/XP) used identically on both the front and back of a
+  // monster card, so the nameplate stays in the exact same place when the card is flipped.
+  function buildMonsterHeader(m){
+    var crText = m.cr || '';
+    var xpText = m.xp ? (m.xp+' xp') : '';
+    var subtitle=[m.typeline,m.alignment].filter(Boolean).join(', ');
+    return '<div class="m-header">'+buildNameBlock(m.name, subtitle)
+      + ((crText||xpText) ? ('<div class="m-crbox"><div class="m-cr">'+escapeHtml(crText)+'</div>'+(xpText?'<div class="m-xp">'+escapeHtml(xpText)+'</div>':'')+'</div>') : '')
+      + '</div>';
+  }
+
+  function monsterFrontInner(m){
+    var abilCells = ['str','dex','con','int','wis','cha'].map(function(k){ return abilCell(k.toUpperCase(), m[k]); }).join('');
+
+    var statRow = '';
+    if(m.ac) statRow += '<div class="m-stat"><div class="m-stat-label">Armor class</div><div class="m-stat-value">'+escapeHtml(m.ac)+'</div>'+(m.armorNote?'<div class="m-stat-sub">('+escapeHtml(m.armorNote)+')</div>':'')+'</div>';
+    if(m.hp) statRow += '<div class="m-stat"><div class="m-stat-label">Hit points</div><div class="m-stat-value">'+escapeHtml(m.hp)+'</div>'+(m.hpDice?'<div class="m-stat-sub">('+escapeHtml(m.hpDice)+')</div>':'')+'</div>';
+    if(m.speed) statRow += '<div class="m-stat"><div class="m-stat-label">Speed</div><div class="m-stat-value-sm">'+escapeHtml(m.speed)+'</div></div>';
+
+    var immunityLines = (m.damageImmunities||m.conditionImmunities)
+      ? (metaRow('Damage Immunities', m.damageImmunities)+metaRow('Condition Immunities', m.conditionImmunities))
+      : metaRow('Immunities', m.immunities);
+    var metaLines = metaRow('Saving Throws',m.saves)+metaRow('Skills',m.skills)+metaRow('Damage Vulnerabilities',m.vulnerabilities)+metaRow('Damage Resistances',m.resistances)+immunityLines+metaRow('Senses',m.senses)+metaRow('Languages',m.languages)+(m.cr?metaRow('Challenge', m.cr+(m.xp?(' ('+m.xp+' xp)'):'')):'');
+
+    var leftCol = '<div class="m-col m-col-left">'
+      + '<div class="m-statrow">'+statRow+'</div>'
+      + '<div class="m-rule"></div>'
+      + '<div class="m-abilgrid">'+abilCells+'</div>'
+      + (metaLines?'<div class="m-rule"></div><div class="m-meta">'+metaLines+'</div>':'')
+      + '<div class="m-rule"></div>'
+      + (m.traits?formatBlock(m.traits):'')
+      + '<div class="m-rule"></div>'
+      + '<div class="m-secheader">Description</div>'
+      + '<p class="m-flavor">'+escapeHtml(m.description||'')+'</p>'
+      + '</div>';
+
+    var rightCol = '<div class="m-col m-col-right">'
+      + (m.actions?'<div class="m-secheader">Actions</div>'+formatBlock(m.actions):'')
+      + (m.legendary?'<div class="m-secheader" style="margin-top:2mm;">Legendary Actions</div>'+formatBlock(m.legendary):'')
+      + '</div>';
+
+    return '<div class="m-outer"><div class="m-topbar"></div>'+buildMonsterHeader(m)+'<div class="m-columns">'+leftCol+rightCol+'</div></div>';
+  }
+  function monsterBackInner(m){
+    var imageContent;
+    if(m._customImage){
+      imageContent = '<img class="m-back-img" src="'+m._customImage+'" alt="">'
+        + '<button type="button" class="m-back-imgremove" data-remove-image="'+m._id+'" title="Αφαίρεση εικόνας">✕</button>';
+    } else {
+      var icon = pickMonsterIcon((m.typeline||'')+' '+(m.name||''));
+      imageContent = '<svg class="m-back-icon" viewBox="0 0 100 100"><use href="#'+icon+'"></use></svg>'
+        + '<div class="m-back-hint">Κλικ για ανέβασμα εικόνας</div>';
+    }
+    return '<div class="m-outer"><div class="m-topbar"></div>'+buildMonsterHeader(m)
+      + '<div class="m-back-imagearea" data-upload-image="'+m._id+'">'+imageContent+'</div>'
+      + '</div>';
+  }
+  function spellFrontInner(c){
+    var icon = pickSpellIcon(c.school);
+    var infoLines = [];
+    if(c.range) infoLines.push('<b>Εμβέλεια:</b> '+escapeHtml(c.range));
+    if(c.duration) infoLines.push('<b>Διάρκεια:</b> '+escapeHtml(c.duration));
+    return '<div class="t-front">'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.level||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
+      +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
+      +'<div class="t-sub">'+escapeHtml([c.school,c.castingTime].filter(Boolean).join(' · '))+'</div>'
+      +(infoLines.length?'<div class="t-info">'+infoLines.join('<br>')+'</div>':'')
+      +(c.description?'<p class="t-desc">'+escapeHtml(c.description)+'</p>':'')
+      +'<div class="t-tag">ΞΟΡΚΙ</div>'
+      +'</div>';
+  }
+  function itemFrontInner(c){
+    var icon = pickItemIcon(c.type);
+    return '<div class="t-front">'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.rarity||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
+      +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
+      +'<div class="t-sub">'+escapeHtml([c.type,c.price].filter(Boolean).join(' · '))+'</div>'
+      +(c.effect?'<div class="t-info"><b>Ζημιά/Effect:</b> '+escapeHtml(c.effect)+'</div>':'')
+      +(c.properties?'<div class="t-info"><b>Ιδιότητες:</b> '+escapeHtml(c.properties)+'</div>':'')
+      +(c.description?'<p class="t-desc">'+escapeHtml(c.description)+'</p>':'')
+      +'<div class="t-tag">ΑΝΤΙΚΕΙΜΕΝΟ</div>'
+      +'</div>';
+  }
+  function tradingBackInner(){
+    return '<div class="t-back"><div class="t-back-border">'
+      +'<svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg>'
+      +'<div class="t-back-title">ARCANUM<span>CODEX</span></div>'
+      +'</div></div>';
+  }
+  function frontInnerFor(c){ return c._category==='monster'?monsterFrontInner(c): c._category==='spell'?spellFrontInner(c):itemFrontInner(c); }
+  function backInnerFor(c){ return c._category==='monster'?monsterBackInner(c):tradingBackInner(); }
+
+  function cardWrapHTML(c){
+    var size = CATEGORY_DEFS[c._category].sizeClass;
+    return '<div class="card-flip-wrap card-'+size+'" data-card-id="'+c._id+'">'
+      +'<div class="card-face card-front active" data-card-id="'+c._id+'" data-face="front">'+frontInnerFor(c)+'<button type="button" class="flip-btn">🔄 Πίσω όψη</button></div>'
+      +'<div class="card-face card-back" data-card-id="'+c._id+'" data-face="back">'+backInnerFor(c)+'<button type="button" class="flip-btn">🔄 Μπροστά</button></div>'
+      +'</div>';
+  }
+  function printFaceHTML(c, faceType){
+    var size = CATEGORY_DEFS[c._category].sizeClass;
+    var inner = faceType==='front' ? frontInnerFor(c) : backInnerFor(c);
+    var px = c['_fs_'+faceType] || (size==='postcard'?12.5:10);
+    return '<div class="card-face-print card-'+size+'" style="font-size:'+px+'px;">'+inner+'</div>';
+  }
+
+  function fitCardText(faceEl){
+    var cs = getComputedStyle(faceEl);
+    var base = parseFloat(cs.fontSize);
+    var min = base*0.55;
+    var step = Math.max(0.3, base*0.035);
+    faceEl.style.fontSize = base+'px';
+    var guard=0;
+    while(faceEl.scrollHeight > faceEl.clientHeight+1 && base>min && guard<40){
+      base -= step;
+      faceEl.style.fontSize = base+'px';
+      guard++;
+    }
+    return base;
+  }
+
+  function sortComparator(category, sortKey){
+    return function(a,b){
+      if(sortKey==='name') return (a.name||'').localeCompare(b.name||'','el');
+      if(category==='monster'){
+        if(sortKey==='cr-asc') return crToNumber(a.cr)-crToNumber(b.cr);
+        if(sortKey==='cr-desc') return crToNumber(b.cr)-crToNumber(a.cr);
+      }
+      if(category==='spell'){
+        if(sortKey==='level-asc') return (parseFloat(a.level)||0)-(parseFloat(b.level)||0);
+        if(sortKey==='level-desc') return (parseFloat(b.level)||0)-(parseFloat(a.level)||0);
+      }
+      if(category==='item'){
+        if(sortKey==='rarity-asc') return rarityRank(a.rarity)-rarityRank(b.rarity);
+        if(sortKey==='rarity-desc') return rarityRank(b.rarity)-rarityRank(a.rarity);
+      }
+      return 0;
+    };
+  }
+
+  // ================= Top-level render =================
+  function renderSourcesBar(){
+    var el = document.getElementById('sourcesBar');
+    el.innerHTML = state.sources.map(function(s){
+      var emoji = s.category==='monster'?'🐉':s.category==='spell'?'📜':'⚔️';
+      return '<span class="chip">'+emoji+' '+escapeHtml(s.filename)+' ('+s.count+') <button data-remove-source="'+s.id+'" title="Αφαίρεση">×</button></span>';
+    }).join('');
+  }
+
+  function renderCards(){
+    var q = normalize(document.getElementById('searchInput').value);
+    var totalCount = state.cards.length;
+    document.getElementById('emptyState').style.display = totalCount===0 ? 'block' : 'none';
+    var printRoot = document.getElementById('printRoot');
+    printRoot.innerHTML = '';
+    var grandVisible = 0;
+
+    CATEGORY_ORDER.forEach(function(cat){
+      var all = state.cards.filter(function(c){ return c._category===cat; });
+      var section = document.getElementById('section-'+cat);
+      if(all.length===0){ section.style.display='none'; return; }
+      section.style.display='block';
+
+      var list = all.filter(function(c){ return !q || normalize(c.name).indexOf(q)!==-1; });
+      grandVisible += list.length;
+      var sortSel = document.getElementById('sort-'+cat);
+      list = list.slice().sort(sortComparator(cat, sortSel.value));
+
+      var grid = document.getElementById('grid-'+cat);
+      grid.innerHTML = list.map(cardWrapHTML).join('');
+      document.getElementById('count-'+cat).textContent = list.length + (list.length!==all.length?(' / '+all.length):'') + ' κάρτες';
+
+      var byId = {}; list.forEach(function(c){ byId[c._id]=c; });
+      grid.querySelectorAll('.card-face').forEach(function(face){
+        var id = face.getAttribute('data-card-id');
+        var ftype = face.getAttribute('data-face');
+        var px = fitCardText(face);
+        var card = byId[id];
+        if(card) card['_fs_'+ftype] = px;
+      });
+
+      var frontsHTML = list.map(function(c){ return printFaceHTML(c,'front'); }).join('');
+      var backsHTML = list.map(function(c){ return printFaceHTML(c,'back'); }).join('');
+      var sizeClass = CATEGORY_DEFS[cat].sizeClass;
+      var block = document.createElement('div');
+      block.innerHTML =
+        '<div class="cards-grid grid-'+sizeClass+'">'+frontsHTML+'</div><div class="page-break"></div>'
+        +'<div class="cards-grid grid-'+sizeClass+'">'+backsHTML+'</div><div class="page-break"></div>';
+      printRoot.appendChild(block);
+    });
+
+    document.getElementById('countBadge').textContent = totalCount+' κάρτες συνολικά'+(grandVisible!==totalCount?(' ('+grandVisible+' εμφανίζονται)'):'');
+
+    var flipAllBtn = document.getElementById('flipAllBtn');
+    flipAllBtn.setAttribute('data-state','front');
+    flipAllBtn.textContent = '🔄 Όλες πίσω';
+  }
+
+  function renderAll(){ renderSourcesBar(); renderCards(); }
+
+  // ================= Events =================
+  document.getElementById('fileInput').addEventListener('change', function(e){
+    handleFiles(e.target.files).then(function(){ e.target.value=''; });
+  });
+  document.body.addEventListener('dragover', function(e){ e.preventDefault(); });
+  document.body.addEventListener('drop', function(e){
+    e.preventDefault();
+    if(e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+  });
+  document.getElementById('searchInput').addEventListener('input', renderCards);
+  CATEGORY_ORDER.forEach(function(cat){
+    document.getElementById('sort-'+cat).addEventListener('change', renderCards);
+  });
+  document.getElementById('printBtn').addEventListener('click', function(){ window.print(); });
+  document.getElementById('sampleMonsterBtn').addEventListener('click', function(){ downloadText('sample-monsters.csv', SAMPLE_CSV_MONSTER); });
+  document.getElementById('sampleSpellBtn').addEventListener('click', function(){ downloadText('sample-spells.csv', SAMPLE_CSV_SPELL); });
+  document.getElementById('sampleItemBtn').addEventListener('click', function(){ downloadText('sample-items.csv', SAMPLE_CSV_ITEM); });
+  document.getElementById('flipAllBtn').addEventListener('click', function(){
+    var toBack = this.getAttribute('data-state') !== 'back';
+    document.querySelectorAll('.card-flip-wrap').forEach(function(wrap){
+      var front = wrap.querySelector('.card-face[data-face="front"]');
+      var back = wrap.querySelector('.card-face[data-face="back"]');
+      if(toBack){ front.classList.remove('active'); back.classList.add('active'); }
+      else { back.classList.remove('active'); front.classList.add('active'); }
+    });
+    this.setAttribute('data-state', toBack ? 'back' : 'front');
+    this.textContent = toBack ? '🔄 Όλες μπροστά' : '🔄 Όλες πίσω';
+  });
+  document.getElementById('clearBtn').addEventListener('click', function(){
+    if(!confirm('Σίγουρα θέλεις να διαγράψεις όλη τη βιβλιοθήκη καρτών;')) return;
+    state.sources=[]; state.cards=[];
+    try{ localStorage.removeItem(LIB_KEY); }catch(e){}
+    renderAll();
+  });
+  document.getElementById('sourcesBar').addEventListener('click', function(e){
+    var btn = e.target.closest('[data-remove-source]');
+    if(!btn) return;
+    var id = btn.getAttribute('data-remove-source');
+    state.sources = state.sources.filter(function(s){ return s.id!==id; });
+    state.cards = state.cards.filter(function(c){ return c._source!==id; });
+    saveLibrary(); renderAll();
+  });
+  document.querySelector('main').addEventListener('click', function(e){
+    var uploadTrigger = e.target.closest('[data-upload-image]');
+    if(uploadTrigger){
+      pendingImageCardId = uploadTrigger.getAttribute('data-upload-image');
+      document.getElementById('cardImageInput').click();
+      return;
+    }
+    var removeBtn = e.target.closest('[data-remove-image]');
+    if(removeBtn){
+      var rid = removeBtn.getAttribute('data-remove-image');
+      var rcard = state.cards.find(function(c){ return c._id===rid; });
+      if(rcard){ delete rcard._customImage; saveLibrary(); renderCards(); }
+      return;
+    }
+    var wrap = e.target.closest('.card-flip-wrap');
+    if(!wrap) return;
+    var front = wrap.querySelector('.card-face[data-face="front"]');
+    var back = wrap.querySelector('.card-face[data-face="back"]');
+    if(front.classList.contains('active')){ front.classList.remove('active'); back.classList.add('active'); }
+    else { back.classList.remove('active'); front.classList.add('active'); }
+  });
+
+  document.getElementById('cardImageInput').addEventListener('change', function(e){
+    var file = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if(!file || !pendingImageCardId) return;
+    var cardId = pendingImageCardId;
+    var card = state.cards.find(function(c){ return c._id===cardId; });
+    if(!card) return;
+    var isPng = /png/i.test(file.type) || /\.png$/i.test(file.name);
+    var reader = new FileReader();
+    reader.onload = function(ev){
+      var img = new Image();
+      img.onload = function(){
+        var maxDim = 900;
+        var scale = Math.min(1, maxDim/Math.max(img.width, img.height));
+        var w = Math.max(1, Math.round(img.width*scale));
+        var h = Math.max(1, Math.round(img.height*scale));
+        var canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        // Don't fill any background first — leaves the canvas transparent so PNG alpha is preserved.
+        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+        card._customImage = isPng ? canvas.toDataURL('image/png') : canvas.toDataURL('image/jpeg', 0.9);
+        saveLibrary();
+        renderCards();
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+  // ================= Init =================
+  loadLibrary();
+  renderAll();
+})();
+</script>
+</body>
+</html>
