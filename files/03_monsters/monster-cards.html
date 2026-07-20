@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<style>
+@page { size: A4; margin: 10mm; }
+body {
+  font-family: 'DejaVu Sans', Arial, sans-serif;
+  color: #2b2b2b;
+  margin: 0;
+}
+.page-title {
+  text-align: center;
+  font-size: 20px;
+  color: #7a1f1f;
+  margin: 0 0 8mm 0;
+}
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5mm;
+  page-break-after: always;
+}
+.card-grid:last-child { page-break-after: auto; }
+.card {
+  border-radius: 12px;
+  padding: 7px 9px;
+  height: 86mm;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border: 3px solid #888;
+  background: #fffdf8;
+  page-break-inside: avoid;
+}
+.tier-easy   { border-color: #5c8a4a; }
+.tier-medium { border-color: #c98a2e; }
+.tier-hard   { border-color: #a4302c; }
+.tier-boss   { border-color: #5b2c6f; }
+
+.card-header {
+  text-align: center;
+  border-radius: 8px;
+  padding: 4px 4px;
+  color: white;
+  margin-bottom: 4px;
+}
+.tier-easy .card-header   { background: #5c8a4a; }
+.tier-medium .card-header { background: #c98a2e; }
+.tier-hard .card-header   { background: #a4302c; }
+.tier-boss .card-header   { background: #5b2c6f; }
+
+.card-icon { font-size: 26px; }
+.card-name-el { font-size: 13px; font-weight: bold; margin: 1px 0 0 0; }
+.card-name-en { font-size: 9.5px; font-style: italic; opacity: 0.9; }
+.tier-badge {
+  display: inline-block;
+  font-size: 8px;
+  font-weight: bold;
+  background: rgba(255,255,255,0.25);
+  border-radius: 6px;
+  padding: 1px 6px;
+  margin-top: 2px;
+}
+.stat-row {
+  display: flex;
+  justify-content: space-around;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 4px 0;
+}
+.stat-row div { text-align: center; }
+.stat-label { font-size: 8px; font-weight: normal; color: #666; display:block; }
+.card-body {
+  font-size: 9.5px;
+  line-height: 1.35;
+  flex-grow: 1;
+}
+.card-body b { color: #333; }
+.card-line { margin-bottom: 3px; }
+.card-special {
+  background: #f3ecff;
+  border-radius: 6px;
+  padding: 3px 5px;
+  font-size: 8.7px;
+  margin-top: 3px;
+}
+.card-flavor {
+  font-size: 8.3px;
+  font-style: italic;
+  color: #555;
+  border-top: 1px dashed #ccc;
+  margin-top: 4px;
+  padding-top: 3px;
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">🐲 Κάρτες Τεράτων — Monster Cards</div>
+
+<div class="card-grid">
+
+<div class="card tier-easy">
+  <div class="card-header">
+    <div class="card-icon">🐀</div>
+    <div class="card-name-el">Γιγαντιαίος Αρουραίος</div>
+    <div class="card-name-en">Giant Rat</div>
+    <div class="tier-badge">ΕΥΚΟΛΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 5<span class="stat-label">HP</span></div>
+    <div>🛡️ 11<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Δάγκωμα +3</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d4</div>
+    <div class="card-special">✨ Κινείται γρήγορα και κρύβεται εύκολα σε στενά περάσματα.</div>
+  </div>
+  <div class="card-flavor">Ζει σε σμήνη μέσα σε υπόγεια και σκουπιδότοπους.</div>
+</div>
+
+<div class="card tier-easy">
+  <div class="card-header">
+    <div class="card-icon">🦎</div>
+    <div class="card-name-el">Κόμπολντ</div>
+    <div class="card-name-en">Kobold</div>
+    <div class="tier-badge">ΕΥΚΟΛΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 6<span class="stat-label">HP</span></div>
+    <div>🛡️ 12<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Στιλέτο +3</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d4+1</div>
+    <div class="card-special">✨ Παλεύει καλύτερα όταν είναι σε ομάδα με άλλα κόμπολντ.</div>
+  </div>
+  <div class="card-flavor">Μικρόσωμος, δειλός μόνος του, αλλά επικίνδυνος σε κοπάδι.</div>
+</div>
+
+<div class="card tier-easy">
+  <div class="card-header">
+    <div class="card-icon">👺</div>
+    <div class="card-name-el">Γκόμπλιν</div>
+    <div class="card-name-en">Goblin</div>
+    <div class="tier-badge">ΕΥΚΟΛΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 8<span class="stat-label">HP</span></div>
+    <div>🛡️ 13<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Σπαθάκι +4</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d6+2</div>
+    <div class="card-special">✨ Πολύ γρήγορος — μπορεί να αποχωρήσει από μάχη χωρίς κίνδυνο.</div>
+  </div>
+  <div class="card-flavor">Ζει σε φυλές μέσα σε σπηλιές και εγκαταλελειμμένα φρούρια.</div>
+</div>
+
+</div>
+
+<div class="card-grid">
+
+<div class="card tier-medium">
+  <div class="card-header">
+    <div class="card-icon">🦴</div>
+    <div class="card-name-el">Σκελετός</div>
+    <div class="card-name-en">Skeleton</div>
+    <div class="tier-badge">ΜΕΤΡΙΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 13<span class="stat-label">HP</span></div>
+    <div>🛡️ 13<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Σπαθί +4</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d6+2</div>
+    <div class="card-special">✨ Ανθεκτικός σε βέλη, αδύναμος σε ιερή μαγεία.</div>
+  </div>
+  <div class="card-flavor">Παλιός πολεμιστής που σηκώθηκε ξανά με σκοτεινή μαγεία.</div>
+</div>
+
+<div class="card tier-medium">
+  <div class="card-header">
+    <div class="card-icon">🧟</div>
+    <div class="card-name-el">Ζόμπι</div>
+    <div class="card-name-en">Zombie</div>
+    <div class="tier-badge">ΜΕΤΡΙΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 14<span class="stat-label">HP</span></div>
+    <div>🛡️ 10<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Χτύπημα +3</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d6+1</div>
+    <div class="card-special">✨ Πολύ αργός, αλλά δύσκολο να πέσει αναίσθητο εντελώς.</div>
+  </div>
+  <div class="card-flavor">Κινείται αργά αλλά σταθερά, χωρίς να κουράζεται ποτέ.</div>
+</div>
+
+<div class="card tier-medium">
+  <div class="card-header">
+    <div class="card-icon">🐺</div>
+    <div class="card-name-el">Λύκος</div>
+    <div class="card-name-en">Wolf</div>
+    <div class="tier-badge">ΜΕΤΡΙΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 12<span class="stat-label">HP</span></div>
+    <div>🛡️ 13<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Δάγκωμα +4</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d6+2</div>
+    <div class="card-special">✨ Κυνηγάει σε αγέλες — πιο επικίνδυνος όταν δεν είναι μόνος.</div>
+  </div>
+  <div class="card-flavor">Γρήγορος και έξυπνος κυνηγός των δασών.</div>
+</div>
+
+</div>
+
+<div class="card-grid">
+
+<div class="card tier-medium">
+  <div class="card-header">
+    <div class="card-icon">🥷</div>
+    <div class="card-name-el">Ληστής</div>
+    <div class="card-name-en">Bandit</div>
+    <div class="tier-badge">ΜΕΤΡΙΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 12<span class="stat-label">HP</span></div>
+    <div>🛡️ 12<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Σπαθί +3</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d6+1</div>
+    <div class="card-special">✨ Προτιμά να κλέψει και να φύγει παρά να παλέψει μέχρι τέλους.</div>
+  </div>
+  <div class="card-flavor">Κρύβεται σε δρόμους και επιτίθεται σε ταξιδιώτες.</div>
+</div>
+
+<div class="card tier-hard">
+  <div class="card-header">
+    <div class="card-icon">👹</div>
+    <div class="card-name-el">Ορκ</div>
+    <div class="card-name-en">Orc</div>
+    <div class="tier-badge">ΔΥΣΚΟΛΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 16<span class="stat-label">HP</span></div>
+    <div>🛡️ 13<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Τσεκούρι +5</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d12+3</div>
+    <div class="card-special">✨ Χτυπάει ακόμα πιο δυνατά όταν έχει λίγα HP — θυμωμένος πολεμιστής!</div>
+  </div>
+  <div class="card-flavor">Δυνατός πολεμιστής φυλής που ζει στα βουνά.</div>
+</div>
+
+<div class="card tier-hard">
+  <div class="card-header">
+    <div class="card-icon">🦅</div>
+    <div class="card-name-el">Γρύπας</div>
+    <div class="card-name-en">Gryphon</div>
+    <div class="tier-badge">ΔΥΣΚΟΛΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 35<span class="stat-label">HP</span></div>
+    <div>🛡️ 14<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Νύχια +6</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 2d6+3</div>
+    <div class="card-special">✨ Πετάει! Μπορεί να επιτεθεί από ψηλά και να ξεφύγει εύκολα.</div>
+  </div>
+  <div class="card-flavor">Μισός αετός, μισό λιοντάρι, φύλακας ψηλών βουνοκορφών.</div>
+</div>
+
+</div>
+
+<div class="card-grid">
+
+<div class="card tier-hard">
+  <div class="card-header">
+    <div class="card-icon">🦉</div>
+    <div class="card-name-el">Κουκουβαγιάρκτος</div>
+    <div class="card-name-en">Owlbear</div>
+    <div class="tier-badge">ΔΥΣΚΟΛΟ</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 40<span class="stat-label">HP</span></div>
+    <div>🛡️ 13<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Νύχια +6</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 2d8+4</div>
+    <div class="card-special">✨ Βρυχάται δυνατά πριν επιτεθεί — ακούγεται από μακριά!</div>
+  </div>
+  <div class="card-flavor">Μισή αρκούδα, μισή κουκουβάγια, άγριο πλάσμα του δάσους.</div>
+</div>
+
+<div class="card tier-boss">
+  <div class="card-header">
+    <div class="card-icon">🧌</div>
+    <div class="card-name-el">Τρολ</div>
+    <div class="card-name-en">Troll</div>
+    <div class="tier-badge">BOSS</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 55<span class="stat-label">HP</span></div>
+    <div>🛡️ 15<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Νύχια +7</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 2d6+4</div>
+    <div class="card-special">✨ <b>Αναγέννηση:</b> Θεραπεύει 5 HP στην αρχή κάθε γύρου, εκτός αν καεί με φωτιά!</div>
+  </div>
+  <div class="card-flavor">Τεράστιο, δυνατό πλάσμα που επουλώνεται εκτός αν το κάψεις.</div>
+</div>
+
+<div class="card tier-boss">
+  <div class="card-header">
+    <div class="card-icon">🐉</div>
+    <div class="card-name-el">Νεαρός Δράκος</div>
+    <div class="card-name-en">Young Dragon</div>
+    <div class="tier-badge">BOSS</div>
+  </div>
+  <div class="stat-row">
+    <div>❤️ 75<span class="stat-label">HP</span></div>
+    <div>🛡️ 17<span class="stat-label">AC</span></div>
+  </div>
+  <div class="card-body">
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Δάγκωμα +8</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 2d10+5</div>
+    <div class="card-special">✨ <b>Ανάσα Φωτιάς:</b> Μια φορά κάθε λίγους γύρους, φυσάει φωτιά σε κώνο — 4d6 ζημιά σε όσους δεν αποφύγουν (Σωτηρία Επιδεξιότητας DC 15).</div>
+  </div>
+  <div class="card-flavor">Το αφεντικό της περιπέτειας — μεγαλόπρεπο και τρομερό!</div>
+</div>
+
+</div>
+
+</body>
+</html>

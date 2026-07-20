@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Generated PDF exports (regenerate from the .md/.html sources)
+*.pdf
+
+# Local Claude Code session state
+.claude/

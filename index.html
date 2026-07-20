@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dungeons & Dragons — Για Μικρούς Ήρωες</title>
+<style>
+  :root {
+    --red: #7a1f1f;
+    --red-dark: #5c1717;
+    --gold: #f2c14e;
+    --brown: #6b4a2b;
+    --parchment: #f2e2b8;
+    --parchment-light: #fffdf7;
+    --ink: #2b2b2b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--ink);
+    background: radial-gradient(ellipse at top, #fdf6e3 0%, #f2e2b8 60%, #e8d19a 100%);
+    background-attachment: fixed;
+  }
+  header {
+    text-align: center;
+    padding: 48px 20px 32px;
+    background: linear-gradient(180deg, var(--red) 0%, var(--red-dark) 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  }
+  header .emoji { font-size: 48px; }
+  header h1 {
+    margin: 8px 0 4px;
+    font-size: clamp(24px, 5vw, 40px);
+    text-shadow: 2px 2px 0 rgba(0,0,0,0.25);
+  }
+  header p {
+    margin: 0;
+    font-size: clamp(13px, 2.5vw, 16px);
+    color: var(--gold);
+    font-style: italic;
+  }
+  main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 16px 60px;
+  }
+  .intro {
+    background: var(--parchment-light);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 18px 24px;
+    margin-bottom: 32px;
+    line-height: 1.7;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+  .intro b { color: var(--red); }
+  h2.section-title {
+    color: var(--red);
+    border-bottom: 3px solid var(--gold);
+    padding-bottom: 6px;
+    margin: 40px 0 16px;
+    font-size: 20px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    background: var(--parchment-light);
+    border: 2px solid #c9a35a;
+    border-radius: 12px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.15); }
+  .card .icon { font-size: 30px; margin-bottom: 4px; }
+  .card h3 { margin: 0 0 4px; color: var(--red); font-size: 16px; }
+  .card p.desc { margin: 0 0 12px; font-size: 13px; color: var(--brown); flex-grow: 1; line-height: 1.5; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .links a {
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1.5px solid var(--red);
+    color: var(--red);
+    background: white;
+  }
+  .links a:hover { background: var(--red); color: white; }
+  .links a.primary { background: var(--red); color: white; }
+  .links a.primary:hover { background: var(--red-dark); }
+  .card.placeholder {
+    border-style: dashed;
+    opacity: 0.75;
+  }
+  .card.placeholder .icon { opacity: 0.6; }
+  .badge-soon {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    background: var(--brown);
+    border-radius: 10px;
+    padding: 2px 8px;
+    margin-bottom: 6px;
+  }
+  footer {
+    text-align: center;
+    padding: 24px 16px 40px;
+    font-size: 12px;
+    color: var(--brown);
+  }
+  @media (prefers-color-scheme: dark) {
+    body { background: radial-gradient(ellipse at top, #2a2118 0%, #1c150f 60%, #120d09 100%); background-attachment: fixed; color: #f0e6d2; }
+    .intro, .card { background: #2b2118; border-color: #8a6a3a; color: #f0e6d2; }
+    .intro b { color: #ff9b7a; }
+    h2.section-title { color: #ffb98a; border-bottom-color: #b8863a; }
+    .card h3 { color: #ffb98a; }
+    .card p.desc { color: #d9c49a; }
+    .links a { background: #1c150f; border-color: #ffb98a; color: #ffb98a; }
+    .links a:hover, .links a.primary { background: #ffb98a; color: #1c150f; }
+    .links a.primary:hover { background: #ff9b5a; }
+    footer { color: #d9c49a; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="emoji">🎲🐉</div>
+  <h1>Dungeons & Dragons — Για Μικρούς Ήρωες</h1>
+  <p>Ένα πλήρες, έτοιμο-για-παιχνίδι πακέτο περιπέτειας για παιδιά 6–12 ετών</p>
+</header>
+
+<main>
+
+  <div class="intro">
+    Καλώς ήρθατε! Αυτό το πακέτο περιέχει <b>όλα όσα χρειάζεστε</b> για να τρέξετε μια πρώτη περιπέτεια D&D
+    με παιδιά γύρω από το τραπέζι: έναν απλό οδηγό κανόνων, οδηγό για τον Game Master, μια πλήρη πρώτη
+    εκστρατεία 5 κεφαλαίων, κάρτες τεράτων &amp; ξορκιών, και τυπώσιμα handouts. Κάθε ενότητα υπάρχει σε
+    μορφή <b>.md</b> (πηγή), <b>.html</b> (μορφοποιημένο, έτοιμο για εκτύπωση) και <b>.pdf</b> (τελικό αρχείο).
+  </div>
+
+  <h2 class="section-title">📘 Ξεκινήστε Εδώ</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🎲</div>
+      <h3>Οι Βασικοί Κανόνες</h3>
+      <p class="desc">Τι είναι το D&D, τα ζάρια, δημιουργία χαρακτήρα, μάχη βήμα-βήμα και ένα mini φύλλο χαρακτήρα. Το πρώτο πράγμα που διαβάζει μια νέα ομάδα.</p>
+      <div class="links">
+        <a class="primary" href="files/01_tutorial/tutorial.html">🖨️ HTML</a>
+        <a href="files/01_tutorial/tutorial.md">📄 Markdown</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">🐉🗺️</div>
+      <h3>Οδηγός Game Master</h3>
+      <p class="desc">Πώς να προετοιμαστείτε, να περιγράφετε σκηνές, να φτιάχνετε NPC, να ισορροπείτε μάχες και τι να αποφύγετε. Με cheat sheet στο τέλος.</p>
+      <div class="links">
+        <a class="primary" href="files/06_dm_notes/dm-notes.html">🖨️ HTML</a>
+        <a href="files/06_dm_notes/dm-notes.md">📄 Markdown</a>
+      </div>
+    </div>
+
+    <div class="card placeholder">
+      <span class="badge-soon">Έρχεται σύντομα</span>
+      <div class="icon">🧙‍♀️🧝‍♂️</div>
+      <h3>Έτοιμοι Χαρακτήρες</h3>
+      <p class="desc">4–6 έτοιμοι ήρωες με όνομα, τάξη, στατιστικά, ειδικές ικανότητες και προσωπικότητα — ιδανικό για παιδιά που θέλουν να ξεκινήσουν αμέσως χωρίς δημιουργία χαρακτήρα.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title">🗺️ Η Εκστρατεία</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">🐉🗺️</div>
+      <h3>Η Κοιλάδα του Δράκου</h3>
+      <p class="desc">Πλήρες πρώτο campaign, 5 κεφάλαια: από το χαμένο πρόβατο του Μπάρναμπι μέχρι το τελικό boss fight με τον νεαρό δράκο. Με NPCs, ανταμοιβές και checklist.</p>
+      <div class="links">
+        <a class="primary" href="files/02_campaign/campaign.html">🖨️ HTML</a>
+        <a href="files/02_campaign/campaign.md">📄 Markdown</a>
+        <a href="files/02_campaign/map.svg">🗺️ Χάρτης</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">👹 Τέρατα</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">📖</div>
+      <h3>Οδηγός Τεράτων</h3>
+      <p class="desc">Πώς να διαβάσετε ένα stat block, βασικοί μηχανισμοί μάχης, και οι ειδικές ικανότητες πίσω από κάθε τέρας (Ομαδική Τακτική, Αναγέννηση, Ανάσα Φωτιάς κ.ά.).</p>
+      <div class="links">
+        <a class="primary" href="files/03_monsters/monsters.html">🖨️ HTML</a>
+        <a href="files/03_monsters/monsters.md">📄 Markdown</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="icon">🐲</div>
+      <h3>Κάρτες Τεράτων</h3>
+      <p class="desc">12 τυπώσιμες κάρτες τεράτων, από τον γιγαντιαίο αρουραίο μέχρι τον νεαρό δράκο, ταξινομημένες σε 4 επίπεδα δυσκολίας.</p>
+      <div class="links">
+        <a class="primary" href="files/03_monsters/monster-cards.html">🖨️ HTML</a>
+        <a href="files/03_monsters/monster-cards.md">📄 Markdown</a>
+        <a href="files/03_monsters/monster-stats.csv">📊 Πλήρη Stat Blocks (CSV)</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">✨ Ξόρκια</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">✨</div>
+      <h3>Οδηγός Ξορκιών</h3>
+      <p class="desc">Ποιες τάξεις ρίχνουν ξόρκια, τι είναι τα spell slots, οι τρεις τύποι ξορκιών, και οι μηχανισμοί πίσω από 12 βασικά ξόρκια.</p>
+      <div class="links">
+        <a class="primary" href="files/04_spells/spells.html">🖨️ HTML</a>
+        <a href="files/04_spells/spells.md">📄 Markdown</a>
+      </div>
+    </div>
+    <div class="card">
+      <div class="icon">🔮</div>
+      <h3>Κάρτες Ξορκιών</h3>
+      <p class="desc">16 τυπώσιμες κάρτες ξορκιών για Μάγο, Ιερέα, Παλαδίνο και Ρέιντζερ — από τη Μαγική Βολή μέχρι τη Φλογερή Μπάλα.</p>
+      <div class="links">
+        <a class="primary" href="files/04_spells/spell-cards.html">🖨️ HTML</a>
+        <a href="files/04_spells/spell-cards.md">📄 Markdown</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title">🖨️ Handouts & Props</h2>
+  <div class="grid">
+    <div class="card">
+      <div class="icon">📜</div>
+      <h3>Handouts & Props</h3>
+      <p class="desc">Φύλλο ήρωα, το γράμμα του Μπάρναμπι, η αφίσα «Εξαφανίστηκαν Ζώα!» και ένα initiative tracker — όλα έτοιμα για εκτύπωση.</p>
+      <div class="links">
+        <a class="primary" href="files/05_handouts/handouts.html">🖨️ HTML</a>
+        <a href="files/05_handouts/handouts.md">📄 Markdown</a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  🎲 Απλοποιημένο υλικό ρόλων για παιδιά, εμπνευσμένο από τους γενικούς μηχανισμούς παιχνιδιών ρόλων με ζάρια d20 (SRD).
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+body {
+  font-family: 'DejaVu Sans', Arial, sans-serif;
+  color: #2b2b2b;
+  line-height: 1.5;
+  font-size: 12.5px;
+}
+.cover {
+  text-align: center;
+  padding-top: 60px;
+  page-break-after: always;
+}
+.cover h1 {
+  font-size: 44px;
+  color: #7a1f1f;
+  margin-bottom: 0;
+  text-shadow: 2px 2px 0 #f2c14e;
+}
+.cover .subtitle {
+  font-size: 20px;
+  color: #4a4a4a;
+  margin-top: 10px;
+}
+.cover .badge {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 14px 26px;
+  background: #f2c14e;
+  border: 3px solid #7a1f1f;
+  border-radius: 14px;
+  font-size: 18px;
+  color: #7a1f1f;
+  font-weight: bold;
+}
+.cover .dice-row {
+  margin-top: 50px;
+  font-size: 46px;
+}
+.cover .footer-note {
+  margin-top: 70px;
+  font-size: 13px;
+  color: #888;
+}
+h1.section-title {
+  background: #7a1f1f;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+h2 {
+  color: #7a1f1f;
+  font-size: 16px;
+  border-bottom: 2px solid #f2c14e;
+  padding-bottom: 4px;
+  margin-top: 22px;
+}
+h3 {
+  color: #4a5d23;
+  font-size: 13.5px;
+  margin-bottom: 4px;
+}
+.section { page-break-inside: avoid; margin-bottom: 10px;}
+.box {
+  background: #fff8e7;
+  border: 2px solid #f2c14e;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 10px 0;
+}
+.box.green {
+  background: #f2f7e9;
+  border-color: #8aa872;
+}
+.box.blue {
+  background: #eaf3fa;
+  border-color: #6ea8d8;
+}
+.tip {
+  background: #fdeeee;
+  border-left: 5px solid #c0392b;
+  padding: 8px 12px;
+  margin: 10px 0;
+  font-style: italic;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 12px;
+}
+th {
+  background: #7a1f1f;
+  color: white;
+  padding: 6px 8px;
+  text-align: left;
+}
+td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #e0d7c0;
+}
+tr:nth-child(even) { background: #fdf9ef; }
+.class-grid {
+  display: block;
+}
+.class-card {
+  border: 2px solid #d8c48a;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: #fffdf7;
+}
+.class-card b { color: #7a1f1f; }
+ul { margin-top: 4px; }
+li { margin-bottom: 3px; }
+.emoji { font-size: 15px; }
+.page-break { page-break-before: always; }
+.small { font-size: 11px; color: #666; }
+</style>
+</head>
+<body>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="dice-row">📖🐲⚔️</div>
+  <h1>ΟΔΗΓΟΣ ΤΕΡΑΤΩΝ</h1>
+  <div class="subtitle">Βασικοί Μηχανισμοί &amp; Οδηγίες για τα 12 Τέρατα</div>
+  <div class="badge">Συνοδεύει τις Κάρτες Τεράτων &amp; το CSV</div>
+  <div class="footer-note">Πώς να διαβάζετε μια κάρτα τέρατος και πώς λειτουργεί<br>κάθε ειδικός μηχανισμός στο τραπέζι.</div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section">
+<h1 class="section-title">1. Πώς να Διαβάσετε μια Κάρτα Τέρατος</h1>
+<table>
+<tr><th>Στοιχείο</th><th>Τι σημαίνει</th></tr>
+<tr><td><b>HP</b> (Πόντοι Ζωής)</td><td>Πόσο "αντέχει" το τέρας πριν πέσει αναίσθητο</td></tr>
+<tr><td><b>AC</b> (Κλάση Άμυνας)</td><td>Πόσο δύσκολο είναι να το χτυπήσετε — ο επιτιθέμενος πρέπει να ρίξει d20 + modifier ≥ AC</td></tr>
+<tr><td><b>Επίθεση</b></td><td>Ο αριθμός που προστίθεται στη ζαριά d20 όταν το τέρας επιτίθεται</td></tr>
+<tr><td><b>Ζημιά</b></td><td>Το ζάρι (+ modifier) που ρίχνεται όταν μια επίθεση πετυχαίνει</td></tr>
+<tr><td><b>CR</b> (Βαθμός Πρόκλησης)</td><td>Πόσο δυνατό είναι το τέρας συνολικά — όσο μεγαλύτερο, τόσο πιο επικίνδυνο</td></tr>
+<tr><td><b>XP</b></td><td>Πόντοι εμπειρίας — χρήσιμο μόνο αν μετράτε XP αντί για Milestone Leveling</td></tr>
+</table>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+<h1 class="section-title">2. Βασικοί Μηχανισμοί Μάχης (Υπενθύμιση)</h1>
+<ul>
+<li><b>Επίθεση:</b> Το τέρας ρίχνει d20 + το bonus επίθεσής του. Αν ισοφαρίσει ή ξεπεράσει το AC του στόχου, πετυχαίνει.</li>
+<li><b>Ζημιά:</b> Αν πετύχει, ρίχνει το ζάρι ζημιάς της κάρτας. Ο στόχος χάνει τόσα HP.</li>
+<li><b>Σωτηρία (Saving Throw):</b> Όταν μια ικανότητα αναφέρει "Σωτηρία", ο στόχος ρίχνει d20 + modifier έναντι ενός DC. Επιτυχία συνήθως σημαίνει μισή ζημιά ή αποφυγή του αποτελέσματος.</li>
+<li><b>Πολλαπλή Επίθεση (Multiattack):</b> Το τέρας επιτίθεται περισσότερες από μία φορές στη σειρά του — κάθε επίθεση ρίχνεται ξεχωριστά.</li>
+</ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 3 -->
+<div class="section">
+<h1 class="section-title">3. Ειδικοί Μηχανισμοί ανά Τέρας</h1>
+
+<h2>🐀 Ομαδική Τακτική (Pack Tactics)</h2>
+<p><i>Γιγαντιαίος Αρουραίος, Κόμπολντ, Λύκος</i></p>
+<div class="box">Το τέρας έχει <b>Πλεονέκτημα</b> στη ζαριά επίθεσης αν τουλάχιστον ένας σύμμαχός του βρίσκεται δίπλα στον ίδιο στόχο. Στο τραπέζι: αν παλεύετε πολλά τέρατα αυτού του τύπου μαζί, ελέγξτε αν είναι "μαζεμένα" γύρω από τον ίδιο ήρωα.</div>
+
+<h2>🦴 Ευαισθησία στο Φως</h2>
+<p><i>Κόμπολντ</i></p>
+<div class="box">Μειονέκτημα σε ζαριές επίθεσης και Αντίληψης στο φως του ήλιου. Αν η μάχη γίνεται σε ηλιόλουστο μέρος, θυμηθείτε αυτό το μειονέκτημα.</div>
+
+<h2>🦴 Ευάλωτος σε Μωλωπιστική Ζημιά</h2>
+<p><i>Σκελετός</i></p>
+<div class="box">Όπλα σαν ρόπαλα και σφυριά κάνουν <b>διπλάσια ζημιά</b> στον σκελετό. Αν ένας ήρωας χρησιμοποιεί τέτοιο όπλο, υπενθυμίστε το!</div>
+
+<h2>🧟 Απαρέγκλιτη Αντοχή (Undead Fortitude)</h2>
+<p><i>Ζόμπι</i></p>
+<div class="box">Αν μια ζημιά φέρει το ζόμπι στα 0 HP, κάνει Σωτηρία Αντοχής (DC = 5 + η ζημιά που δέχτηκε). Αν πετύχει, μένει στη ζωή με 1 HP. <b>Εξαίρεση:</b> δεν ισχύει αν η ζημιά ήταν κρίσιμο χτύπημα ή ζημιά φωτιάς.</div>
+
+<h2>🥷 Ευέλικτη Διαφυγή</h2>
+<p><i>Γκόμπλιν</i></p>
+<div class="box">Το γκόμπλιν μπορεί να αποχωρήσει ή να κρυφτεί χωρίς να "σπαταλήσει" την κύρια ενέργειά του — δύσκολο να το παγιδεύσετε!</div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="section">
+<h2>👹 Επιθετικότητα</h2>
+<p><i>Ορκ</i></p>
+<div class="box">Ως bonus ενέργεια, το ορκ μπορεί να τρέξει προς έναν εχθρό που βλέπει, πριν επιτεθεί κανονικά. Στο τραπέζι: το ορκ "χτυπάει πρώτο" και πλησιάζει γρήγορα.</div>
+
+<h2>🧌 Αναγέννηση (Regeneration)</h2>
+<p><i>Τρολ</i></p>
+<div class="box">Το τρολ ανακτά <b>10 HP</b> στην αρχή κάθε σειράς του! Αν δεν του κάνετε ζημιά φωτιάς ή οξέος έστω μία φορά στη μάχη, μπορεί να είναι αδύνατο να το νικήσετε.</div>
+<div class="tip">💡 Συμβουλή για τον GM: βεβαιωθείτε ότι υπάρχει κάποιος τρόπος πρόσβασης σε φωτιά στη σκηνή (δάδα, ξόρκι φωτιάς, κ.λπ.).</div>
+
+<h2>🐉 Ανάσα Φωτιάς (Recharge 5-6)</h2>
+<p><i>Νεαρός Δράκος</i></p>
+<div class="box">Στην αρχή της σειράς του δράκου, ρίχνετε d6. Αν βγει <b>5 ή 6</b>, η ικανότητα "επαναφορτίζεται" και μπορεί να χρησιμοποιηθεί ξανά αυτόν τον γύρο. Είναι κώνος ζημιάς σε περιοχή — όλοι μέσα κάνουν Σωτηρία Επιδεξιότητας (DC 15) για μισή ζημιά.</div>
+
+<h2>🐉 Legendary Actions (Νεαρός Δράκος)</h2>
+<div class="box">Ο δράκος μπορεί να κάνει <b>1 επιπλέον ενέργεια στο τέλος της σειράς κάθε άλλου παίκτη</b> (όχι μόνο στη δική του σειρά!). Μόνο 1 legendary action τη φορά, και ανανεώνονται στην αρχή της σειράς του δράκου.</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 4 -->
+<div class="section">
+<h1 class="section-title">4. Πίνακας Δυσκολίας — Ποιο Τέρας για Ποιον Παίκτη</h1>
+<table>
+<tr><th>CR</th><th>Τέρατα</th><th>Κατάλληλο για...</th></tr>
+<tr><td>1/8</td><td>Γιγαντιαίος Αρουραίος, Κόμπολντ, Ληστής</td><td>Επίπεδο 1, μεμονωμένα ή σε ζευγάρια</td></tr>
+<tr><td>1/4</td><td>Γκόμπλιν, Σκελετός, Ζόμπι, Λύκος</td><td>Επίπεδο 1-2, 2-3 τέρατα ταυτόχρονα</td></tr>
+<tr><td>1/2</td><td>Ορκ</td><td>Επίπεδο 2-3</td></tr>
+<tr><td>2</td><td>Γρύπας</td><td>Επίπεδο 3, μοναδικός αντίπαλος</td></tr>
+<tr><td>3</td><td>Κουκουβαγιάρκτος</td><td>Επίπεδο 3-4, μοναδικός αντίπαλος</td></tr>
+<tr><td>5</td><td>Τρολ</td><td>Επίπεδο 4-5, "mini-boss"</td></tr>
+<tr><td>6</td><td>Νεαρός Δράκος</td><td>Επίπεδο 4-5, τελικό boss περιπέτειας</td></tr>
+</table>
+<div class="tip">💡 Γενικός κανόνας: όσο μεγαλύτερο το CR σε σχέση με το επίπεδο της ομάδας, τόσο πιο επικίνδυνη η μάχη. Ένα boss (CR 5-6) ταιριάζει σε μια ομάδα 3-4 ηρώων επιπέδου 4+.</div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="section">
+<h1 class="section-title">5. Γρήγορη Αναφορά — Όλα τα Τέρατα</h1>
+<table style="font-size: 11px;">
+<tr><th>Τέρας</th><th>HP</th><th>AC</th><th>Επίθεση</th><th>Ζημιά</th><th>CR</th></tr>
+<tr><td>Giant Rat (Γιγαντιαίος Αρουραίος)</td><td>5</td><td>11</td><td>+3</td><td>1d4</td><td>1/8</td></tr>
+<tr><td>Kobold (Κόμπολντ)</td><td>5</td><td>12</td><td>+4</td><td>1d4+2</td><td>1/8</td></tr>
+<tr><td>Goblin (Γκόμπλιν)</td><td>8</td><td>13</td><td>+4</td><td>1d6+2</td><td>1/4</td></tr>
+<tr><td>Skeleton (Σκελετός)</td><td>13</td><td>13</td><td>+4</td><td>1d6+2</td><td>1/4</td></tr>
+<tr><td>Zombie (Ζόμπι)</td><td>14</td><td>10</td><td>+3</td><td>1d6+1</td><td>1/4</td></tr>
+<tr><td>Wolf (Λύκος)</td><td>11</td><td>13</td><td>+4</td><td>1d6+2</td><td>1/4</td></tr>
+<tr><td>Bandit (Ληστής)</td><td>12</td><td>12</td><td>+3</td><td>1d6+1</td><td>1/8</td></tr>
+<tr><td>Orc (Ορκ)</td><td>16</td><td>13</td><td>+5</td><td>1d12+3</td><td>1/2</td></tr>
+<tr><td>Gryphon (Γρύπας)</td><td>35</td><td>12</td><td>+6</td><td>2d6+4 (×2 επιθέσεις)</td><td>2</td></tr>
+<tr><td>Owlbear (Κουκουβαγιάρκτος)</td><td>40</td><td>13</td><td>+7</td><td>2d8+5 (×2 επιθέσεις)</td><td>3</td></tr>
+<tr><td>Troll (Τρολ)</td><td>55</td><td>15</td><td>+7</td><td>2d6+4 (×3 επιθέσεις)</td><td>5</td></tr>
+<tr><td>Young Dragon (Νεαρός Δράκος)</td><td>75</td><td>17</td><td>+8</td><td>2d10+5 (×3 επιθέσεις)</td><td>6</td></tr>
+</table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 6 -->
+<div class="section">
+<h1 class="section-title">6. Γρήγορες Συμβουλές για τον GM</h1>
+<ul>
+<li>🎯 <b>Μην τα χρησιμοποιείτε όλα μαζί.</b> 2-3 αδύναμα τέρατα (CR 1/8-1/4) είναι ήδη μια δίκαιη μάχη για ομάδα επιπέδου 1.</li>
+<li>🔥 <b>Θυμηθείτε τις αδυναμίες.</b> Σκελετός φοβάται τα ρόπαλα, το Τρολ φοβάται τη φωτιά — δώστε στους παίκτες την ευκαιρία να το ανακαλύψουν.</li>
+<li>🎲 <b>Χρησιμοποιήστε τη Ζαριά Ζημιάς όπως γράφεται.</b> Π.χ. "2d6+4" σημαίνει ρίχνετε δύο ζάρια d6, προσθέτετε 4.</li>
+<li>🐉 <b>Το Recharge (5-6)</b> χρησιμοποιείται μόνο για ειδικές ικανότητες — ρίχνετε d6 στην αρχή της σειράς του τέρατος για να δείτε αν είναι διαθέσιμη ξανά.</li>
+<li>🧌 <b>Μην ξεχνάτε την Αναγέννηση του Τρολ</b> — αν την ξεχάσετε, η μάχη γίνεται πολύ πιο εύκολη απ' όσο θα έπρεπε!</li>
+</ul>
+</div>
+
+<p class="small" style="text-align:center; margin-top: 30px;">Συνοδευτικός οδηγός στις Κάρτες Τεράτων, για γρήγορη αναφορά στο τραπέζι.</p>
+
+</body>
+</html>

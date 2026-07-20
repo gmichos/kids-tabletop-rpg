@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+body {
+  font-family: 'DejaVu Sans', Arial, sans-serif;
+  color: #2b2b2b;
+  line-height: 1.5;
+  font-size: 12.5px;
+}
+.cover {
+  text-align: center;
+  padding-top: 60px;
+  page-break-after: always;
+}
+.cover h1 {
+  font-size: 44px;
+  color: #7a1f1f;
+  margin-bottom: 0;
+  text-shadow: 2px 2px 0 #f2c14e;
+}
+.cover .subtitle {
+  font-size: 20px;
+  color: #4a4a4a;
+  margin-top: 10px;
+}
+.cover .badge {
+  display: inline-block;
+  margin-top: 40px;
+  padding: 14px 26px;
+  background: #f2c14e;
+  border: 3px solid #7a1f1f;
+  border-radius: 14px;
+  font-size: 18px;
+  color: #7a1f1f;
+  font-weight: bold;
+}
+.cover .dice-row {
+  margin-top: 50px;
+  font-size: 46px;
+}
+.cover .footer-note {
+  margin-top: 70px;
+  font-size: 13px;
+  color: #888;
+}
+h1.section-title {
+  background: #7a1f1f;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 22px;
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+h2 {
+  color: #7a1f1f;
+  font-size: 16px;
+  border-bottom: 2px solid #f2c14e;
+  padding-bottom: 4px;
+  margin-top: 22px;
+}
+h3 {
+  color: #4a5d23;
+  font-size: 13.5px;
+  margin-bottom: 4px;
+}
+.section { page-break-inside: avoid; margin-bottom: 10px;}
+.box {
+  background: #fff8e7;
+  border: 2px solid #f2c14e;
+  border-radius: 10px;
+  padding: 10px 14px;
+  margin: 10px 0;
+}
+.box.green {
+  background: #f2f7e9;
+  border-color: #8aa872;
+}
+.box.blue {
+  background: #eaf3fa;
+  border-color: #6ea8d8;
+}
+.tip {
+  background: #fdeeee;
+  border-left: 5px solid #c0392b;
+  padding: 8px 12px;
+  margin: 10px 0;
+  font-style: italic;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0;
+  font-size: 12px;
+}
+th {
+  background: #7a1f1f;
+  color: white;
+  padding: 6px 8px;
+  text-align: left;
+}
+td {
+  padding: 6px 8px;
+  border-bottom: 1px solid #e0d7c0;
+}
+tr:nth-child(even) { background: #fdf9ef; }
+.class-grid {
+  display: block;
+}
+.class-card {
+  border: 2px solid #d8c48a;
+  border-radius: 10px;
+  padding: 8px 12px;
+  margin-bottom: 8px;
+  background: #fffdf7;
+}
+.class-card b { color: #7a1f1f; }
+ul { margin-top: 4px; }
+li { margin-bottom: 3px; }
+.emoji { font-size: 15px; }
+.page-break { page-break-before: always; }
+.small { font-size: 11px; color: #666; }
+</style>
+</head>
+<body>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <div class="dice-row">✨🔮📖</div>
+  <h1>ΟΔΗΓΟΣ ΞΟΡΚΙΩΝ</h1>
+  <div class="subtitle">Βασικοί Μηχανισμοί &amp; Οδηγίες για τα 12 Ξόρκια</div>
+  <div class="badge">Συνοδεύει τις Κάρτες Ξορκιών</div>
+  <div class="footer-note">Πώς λειτουργούν τα spell slots, πώς να διαβάζετε<br>μια κάρτα ξορκιού, και τι κάνει το καθένα στο τραπέζι.</div>
+</div>
+
+<!-- SECTION 1 -->
+<div class="section">
+<h1 class="section-title">1. Ποιες Τάξεις Ρίχνουν Ξόρκια;</h1>
+<p>Δεν ρίχνουν όλες οι τάξεις μαγεία με τον ίδιο τρόπο:</p>
+<table>
+<tr><th>Τάξη</th><th>Τύπος</th></tr>
+<tr><td>🔮 Μάγος</td><td><b>Πλήρης caster</b> — μεγάλη ποικιλία ξορκιών, πολλά slots</td></tr>
+<tr><td>✨ Ιερέας</td><td><b>Πλήρης caster</b> — θεϊκή μαγεία, θεραπεία και προστασία</td></tr>
+<tr><td>🛡️ Παλαδίνος</td><td><b>Μισός caster</b> — λίγα ξόρκια, κυρίως ενισχύσεις (buffs), ξεκινάει από Επίπεδο 2</td></tr>
+<tr><td>🏹 Ρέιντζερ</td><td><b>Μισός caster</b> — ξόρκια φύσης/κυνηγιού, ξεκινάει από Επίπεδο 2</td></tr>
+<tr><td>⚔️ Πολεμιστής</td><td><b>Δεν ρίχνει ξόρκια</b> — βασίζεται σε όπλα, επιπλέον επιθέσεις και αντοχή</td></tr>
+<tr><td>🗡️ Κλέφτης</td><td><b>Δεν ρίχνει ξόρκια</b> — βασίζεται σε ευκινησία, κρυφότητα και "Sneak Attack"</td></tr>
+</table>
+<div class="tip">💡 Αν παίζετε Πολεμιστή ή Κλέφτη, μην ανησυχείτε που δεν έχετε ξόρκια — έχετε τις δικές σας ξεχωριστές δυνατότητες! Δείτε το Απλό Φύλλο Χαρακτήρα και τις Ειδικές Ικανότητες της τάξης σας στους Βασικούς Κανόνες.</div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+<h1 class="section-title">2. Πώς να Διαβάσετε μια Κάρτα Ξορκιού</h1>
+<table>
+<tr><th>Στοιχείο</th><th>Τι σημαίνει</th></tr>
+<tr><td><b>Επίπεδο / Cantrip</b></td><td>Πόσο "δυνατό" είναι το ξόρκι. Τα Cantrips είναι τα πιο απλά — δεν χρειάζονται slot.</td></tr>
+<tr><td><b>Τάξη</b></td><td>Ποιος μπορεί να το μάθει (Μάγος, Ιερέας, ή και οι δύο)</td></tr>
+<tr><td><b>Εμβέλεια</b></td><td>Πόσο μακριά φτάνει το ξόρκι</td></tr>
+<tr><td><b>Ζαριά / Σωτηρία</b></td><td>Πώς αποφασίζεται αν το ξόρκι πετυχαίνει</td></tr>
+<tr><td><b>Ζημιά / Αποτέλεσμα</b></td><td>Τι κάνει όταν πετύχει</td></tr>
+</table>
+</div>
+
+<!-- SECTION 2 -->
+<div class="section">
+<h1 class="section-title">3. Spell Slots — Ο Βασικός Μηχανισμός</h1>
+<p>Οι μάγοι και οι ιερείς δεν μπορούν να ρίχνουν ξόρκια ατελείωτα! Χρησιμοποιούν <b>"θέσεις ξορκιών" (spell slots)</b> που ξοδεύονται και ξαναγεμίζουν μόνο μετά από Μεγάλη Ξεκούραση.</p>
+
+<h2>Κάντριπς (Cantrips) — Δωρεάν Μαγεία</h2>
+<p>Τα cantrips (όπως η <b>Φλόγα Χεριού</b>) είναι τόσο απλά που <b>δεν χρειάζονται slot</b>. Μπορείτε να τα ρίχνετε όσες φορές θέλετε, κάθε γύρο, χωρίς όριο.</p>
+
+<h2>Ξόρκια με Επίπεδο — Χρειάζονται Slot</h2>
+<p>Όλα τα άλλα ξόρκια χρειάζονται ένα slot <b>ίσου ή μεγαλύτερου επιπέδου</b>. Μόλις το χρησιμοποιήσετε, δεν είναι διαθέσιμο ξανά μέχρι να ξεκουραστείτε.</p>
+
+<h3>Απλοποιημένος Πίνακας Θέσεων Ξορκιών</h3>
+<table>
+<tr><th>Επίπεδο Ήρωα</th><th>Slots Επιπέδου 1</th><th>Slots Επιπέδου 2</th></tr>
+<tr><td>1</td><td>2</td><td>—</td></tr>
+<tr><td>2</td><td>3</td><td>—</td></tr>
+<tr><td>3</td><td>4</td><td>2</td></tr>
+<tr><td>4</td><td>4</td><td>3</td></tr>
+</table>
+<div class="tip">💡 Ξόρκια Επιπέδου 3 (όπως η Φλογερή Μπάλα) είναι πολύ ισχυρά και συνήθως διαθέσιμα μόνο σε πιο έμπειρους (Επίπεδο 5+) χαρακτήρες — κρατήστε τα σαν "μελλοντικό στόχο"!</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 3 -->
+<div class="section">
+<h1 class="section-title">4. Τρεις Τύποι Ξορκιών</h1>
+
+<h2>🎯 Ξόρκια με Ζαριά Επίθεσης</h2>
+<div class="box">Ρίχνετε d20 + modifier όπως μια κανονική επίθεση. Αν πετύχετε το AC του στόχου, κάνετε ζημιά.<br><i>Παραδείγματα: Φλόγα Χεριού, Μαγική Βολή (πετυχαίνει πάντα!), Φωτεινή Βολή</i></div>
+
+<h2>🛡️ Ξόρκια με Σωτηρία</h2>
+<div class="box">Ο <b>στόχος</b> ρίχνει τη ζαριά, όχι εσείς! Κάνει Σωτηρία έναντι ενός DC. Αποτυχία συνήθως σημαίνει πλήρη ζημιά, επιτυχία μισή.<br><i>Παραδείγματα: Κύμα Βροντής, Καίουσες Χούφτες, Φλογερή Μπάλα</i></div>
+
+<h2>✨ Αυτόματα Ξόρκια</h2>
+<div class="box">Δεν χρειάζονται ζαριά ή σωτηρία — απλά συμβαίνουν!<br><i>Παραδείγματα: Ασπίδα, Πανοπλία του Μάγου, Θεραπεία Τραυμάτων, Ανίχνευση Μαγείας, Αοράτος, Ύπνος</i></div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="section">
+<h1 class="section-title">5. Ειδικοί Μηχανισμοί ανά Ξόρκι</h1>
+
+<h2>💫 Μαγική Βολή (Magic Missile)</h2>
+<p>Πετυχαίνει <b>πάντα</b> — δεν χρειάζεται ζαριά επίθεσης! Ρίχνει 3 ξεχωριστά "βέλη" (1d4+1 το καθένα). Μπορείτε να τα στείλετε όλα σε έναν στόχο ή να τα μοιράσετε σε πολλούς.</p>
+
+<h2>🛡️ Ασπίδα (Shield)</h2>
+<p>Το μόνο ξόρκι-<b>Αντίδραση</b> στη λίστα. Ρίχνεται ΜΟΝΟ όταν κάποιος σας επιτίθεται — όχι στη δική σας σειρά. Θυμηθείτε ότι το έχετε διαθέσιμο ακόμα κι όταν δεν παίζει η σειρά σας!</p>
+
+<h2>💤 Ύπνος (Sleep)</h2>
+<p>Επηρεάζει μια <b>περιοχή</b>, όχι συγκεκριμένο στόχο. Καλύπτει έως 5d8 HP συνολικά, ξεκινώντας από τα πλάσματα με τα λιγότερα HP. Χρήσιμο εναντίον πολλών αδύναμων εχθρών, άχρηστο εναντίον ενός δυνατού boss.</p>
+
+<h2>👻 Αοράτος (Invisibility)</h2>
+<p>Η αοράτητα <b>σταματά αμέσως</b> αν ο στόχος επιτεθεί ή ρίξει άλλο ξόρκι. Ιδανικό για διαφυγή ή κρυφή εξερεύνηση.</p>
+
+<h2>☀️ Φωτεινή Βολή (Guiding Bolt)</h2>
+<p>Ο <b>επόμενος</b> που θα χτυπήσει τον ίδιο στόχο έχει Πλεονέκτημα. Καλή συνεργασία: ο ιερέας "σημαδεύει" πριν χτυπήσει ο πολεμιστής.</p>
+
+<h2>🔥 Φλογερή Μπάλα (Fireball)</h2>
+<div class="tip">⚠️ Προσοχή: χτυπάει ΟΛΟΥΣ μέσα στην περιοχή έκρηξης — και τους συμμάχους σας αν είναι κοντά! Καλό για μεγάλες ομάδες εχθρών, επικίνδυνο σε στενούς χώρους.</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 5 -->
+<div class="section">
+<h1 class="section-title">6. Ποια Ξόρκια Ταιριάζουν σε Ποιο Επίπεδο</h1>
+<table>
+<tr><th>Επίπεδο Ήρωα</th><th>Διαθέσιμα Ξόρκια</th></tr>
+<tr><td>1</td><td>Όλα τα Cantrips + έως 2 ξόρκια Επιπέδου 1</td></tr>
+<tr><td>2</td><td>Έως 3 ξόρκια Επιπέδου 1</td></tr>
+<tr><td>3</td><td>Ξόρκια Επιπέδου 1 και 2 (π.χ. Αοράτος)</td></tr>
+<tr><td>4</td><td>Περισσότερα slots Επιπέδου 1-2</td></tr>
+<tr><td>5+</td><td>Ξεκλειδώνει Επίπεδο 3 (π.χ. Φλογερή Μπάλα)</td></tr>
+</table>
+</div>
+
+<!-- SECTION 6 -->
+<div class="section">
+<h1 class="section-title">7. Γρήγορη Αναφορά — Όλα τα Ξόρκια</h1>
+<table style="font-size: 11px;">
+<tr><th>Ξόρκι</th><th>Επίπεδο</th><th>Τάξη</th><th>Τύπος</th></tr>
+<tr><td>Fire Bolt (Φλόγα Χεριού)</td><td>Cantrip</td><td>Μάγος</td><td>Ζαριά Επίθεσης</td></tr>
+<tr><td>Magic Missile (Μαγική Βολή)</td><td>1</td><td>Μάγος</td><td>Αυτόματο</td></tr>
+<tr><td>Thunderwave (Κύμα Βροντής)</td><td>1</td><td>Μάγος</td><td>Σωτηρία</td></tr>
+<tr><td>Burning Hands (Καίουσες Χούφτες)</td><td>1</td><td>Μάγος</td><td>Σωτηρία</td></tr>
+<tr><td>Sleep (Ύπνος)</td><td>1</td><td>Μάγος</td><td>Αυτόματο</td></tr>
+<tr><td>Shield (Ασπίδα)</td><td>1</td><td>Μάγος</td><td>Αντίδραση</td></tr>
+<tr><td>Mage Armor (Πανοπλία του Μάγου)</td><td>1</td><td>Μάγος</td><td>Αυτόματο</td></tr>
+<tr><td>Detect Magic (Ανίχνευση Μαγείας)</td><td>1</td><td>Μάγος / Ιερέας</td><td>Αυτόματο</td></tr>
+<tr><td>Cure Wounds (Θεραπεία Τραυμάτων)</td><td>1</td><td>Ιερέας</td><td>Αυτόματο</td></tr>
+<tr><td>Guiding Bolt (Φωτεινή Βολή)</td><td>1</td><td>Ιερέας</td><td>Ζαριά Επίθεσης</td></tr>
+<tr><td>Invisibility (Αοράτος)</td><td>2</td><td>Μάγος</td><td>Αυτόματο</td></tr>
+<tr><td>Fireball (Φλογερή Μπάλα)</td><td>3</td><td>Μάγος</td><td>Σωτηρία</td></tr>
+<tr><td>Bless (Ευλογία)</td><td>1</td><td>Παλαδίνος / Ιερέας</td><td>Αυτόματο (buff)</td></tr>
+<tr><td>Shield of Faith (Ασπίδα Πίστης)</td><td>1</td><td>Παλαδίνος / Ιερέας</td><td>Αυτόματο (buff)</td></tr>
+<tr><td>Hunter's Mark (Σημάδι Κυνηγού)</td><td>1</td><td>Ρέιντζερ</td><td>Αυτόματο (buff)</td></tr>
+<tr><td>Goodberry (Καλό Μούρο)</td><td>1</td><td>Ρέιντζερ / Ιερέας</td><td>Αυτόματο</td></tr>
+</table>
+</div>
+
+<div class="page-break"></div>
+
+<!-- SECTION 7 -->
+<div class="section">
+<h1 class="section-title">8. Συμβουλές</h1>
+<h2>Για Παίκτες</h2>
+<ul>
+<li>🎯 Χρησιμοποιήστε cantrips (Φλόγα Χεριού) στις "εύκολες" μάχες, κρατήστε τα slots για δύσκολες.</li>
+<li>🛡️ Η Ασπίδα ρίχνεται ΜΟΝΟ σαν αντίδραση σε επίθεση — μη ξεχνάτε ότι την έχετε!</li>
+<li>💚 Ο ιερέας πρέπει να κρατά πάντα ένα slot διαθέσιμο για Θεραπεία Τραυμάτων σε περίπτωση ανάγκης.</li>
+</ul>
+<h2>Για τον GM</h2>
+<ul>
+<li>📋 Κρατήστε σημείωση πόσα slots έχει ξοδέψει κάθε παίκτης-caster.</li>
+<li>🌙 Υπενθυμίστε ότι slots γεμίζουν ξανά μόνο μετά από Μεγάλη Ξεκούραση.</li>
+<li>⚖️ Αν ένα ξόρκι σαν το Ύπνος λύνει μια μάχη πολύ εύκολα, δεν πειράζει — ανταμείψτε την έξυπνη χρήση μαγείας!</li>
+</ul>
+</div>
+
+<p class="small" style="text-align:center; margin-top: 30px;">Συνοδευτικός οδηγός στις Κάρτες Ξορκιών, για γρήγορη αναφορά στο τραπέζι.</p>
+
+</body>
+</html>
