@@ -4,14 +4,17 @@
 <meta charset="UTF-8">
 <style>
 @page { size: A4; margin: 10mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
 body {
-  font-family: 'DejaVu Sans', Arial, sans-serif;
-  color: #2b2b2b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #201c2b;
   margin: 0;
 }
 .page-title {
   text-align: center;
-  font-size: 20px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
   color: #5a3e85;
   margin: 0 0 8mm 0;
 }
@@ -23,72 +26,74 @@ body {
 }
 .card-grid:last-child { page-break-after: auto; }
 .card {
-  border-radius: 12px;
-  padding: 7px 9px;
+  border-radius: 10px;
+  padding: 8px 9px;
   height: 86mm;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  border: 3px solid #888;
-  background: #fbf9ff;
+  background: #ffffff;
+  border: 1px solid #e6e1ef;
+  border-top: 5px solid #888;
+  box-shadow: 0 1px 4px rgba(32,28,43,0.08);
   page-break-inside: avoid;
 }
-.school-evo { border-color: #c0392b; }
-.school-abj { border-color: #2e6da4; }
-.school-con { border-color: #5c8a4a; }
-.school-div { border-color: #c98a2e; }
-.school-ill { border-color: #6b5b95; }
+.school-evo { border-top-color: #b6342a; }
+.school-abj { border-top-color: #2969a0; }
+.school-con { border-top-color: #4f8a3d; }
+.school-div { border-top-color: #c07f1e; }
+.school-ill { border-top-color: #6b5b95; }
 
 .card-header {
   text-align: center;
-  border-radius: 8px;
-  padding: 4px 4px;
+  border-radius: 7px;
+  padding: 5px 4px;
   color: white;
   margin-bottom: 4px;
 }
-.school-evo .card-header { background: #c0392b; }
-.school-abj .card-header { background: #2e6da4; }
-.school-con .card-header { background: #5c8a4a; }
-.school-div .card-header { background: #c98a2e; }
+.school-evo .card-header { background: #b6342a; }
+.school-abj .card-header { background: #2969a0; }
+.school-con .card-header { background: #4f8a3d; }
+.school-div .card-header { background: #c07f1e; }
 .school-ill .card-header { background: #6b5b95; }
 
 .card-icon { font-size: 24px; }
-.card-name-el { font-size: 12.5px; font-weight: bold; margin: 1px 0 0 0; }
-.card-name-en { font-size: 9px; font-style: italic; opacity: 0.9; }
+.card-name-el { font-size: 12.5px; font-weight: 700; margin: 2px 0 0 0; }
+.card-name-en { font-size: 9px; font-style: italic; opacity: 0.85; }
 .level-badge {
   display: inline-block;
-  font-size: 8px;
-  font-weight: bold;
-  background: rgba(255,255,255,0.25);
-  border-radius: 6px;
-  padding: 1px 6px;
-  margin-top: 2px;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background: rgba(255,255,255,0.28);
+  border-radius: 20px;
+  padding: 2px 8px;
+  margin-top: 3px;
 }
 .class-row {
   text-align: center;
   font-size: 9px;
   margin: 4px 0 2px 0;
-  color: #555;
+  color: #6b6478;
 }
 .card-body {
   font-size: 9.3px;
-  line-height: 1.35;
+  line-height: 1.4;
   flex-grow: 1;
 }
-.card-body b { color: #333; }
+.card-body b { color: #201c2b; }
 .card-line { margin-bottom: 3px; }
 .card-effect {
-  background: #f0edff;
+  background: #f4f0fb;
   border-radius: 6px;
-  padding: 3px 5px;
+  padding: 4px 6px;
   font-size: 8.6px;
   margin-top: 3px;
 }
 .card-flavor {
   font-size: 8.2px;
   font-style: italic;
-  color: #555;
-  border-top: 1px dashed #ccc;
+  color: #6b6478;
+  border-top: 1px dashed #e6e1ef;
   margin-top: 4px;
   padding-top: 3px;
 }

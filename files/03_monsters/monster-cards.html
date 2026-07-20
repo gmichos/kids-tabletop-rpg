@@ -4,14 +4,17 @@
 <meta charset="UTF-8">
 <style>
 @page { size: A4; margin: 10mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
 body {
-  font-family: 'DejaVu Sans', Arial, sans-serif;
-  color: #2b2b2b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #201c2b;
   margin: 0;
 }
 .page-title {
   text-align: center;
-  font-size: 20px;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
   color: #5a3e85;
   margin: 0 0 8mm 0;
 }
@@ -23,73 +26,78 @@ body {
 }
 .card-grid:last-child { page-break-after: auto; }
 .card {
-  border-radius: 12px;
-  padding: 7px 9px;
+  border-radius: 10px;
+  padding: 8px 9px;
   height: 86mm;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  border: 3px solid #888;
-  background: #fffdf8;
+  background: #ffffff;
+  border: 1px solid #e6e1ef;
+  border-top: 5px solid #888;
+  box-shadow: 0 1px 4px rgba(32,28,43,0.08);
   page-break-inside: avoid;
 }
-.tier-easy   { border-color: #5c8a4a; }
-.tier-medium { border-color: #c98a2e; }
-.tier-hard   { border-color: #c0392b; }
-.tier-boss   { border-color: #8b3a62; }
+.tier-easy   { border-top-color: #4f8a3d; }
+.tier-medium { border-top-color: #c07f1e; }
+.tier-hard   { border-top-color: #b6342a; }
+.tier-boss   { border-top-color: #7c3159; }
 
 .card-header {
   text-align: center;
-  border-radius: 8px;
-  padding: 4px 4px;
+  border-radius: 7px;
+  padding: 5px 4px;
   color: white;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
-.tier-easy .card-header   { background: #5c8a4a; }
-.tier-medium .card-header { background: #c98a2e; }
-.tier-hard .card-header   { background: #c0392b; }
-.tier-boss .card-header   { background: #8b3a62; }
+.tier-easy .card-header   { background: #4f8a3d; }
+.tier-medium .card-header { background: #c07f1e; }
+.tier-hard .card-header   { background: #b6342a; }
+.tier-boss .card-header   { background: #7c3159; }
 
-.card-icon { font-size: 26px; }
-.card-name-el { font-size: 13px; font-weight: bold; margin: 1px 0 0 0; }
-.card-name-en { font-size: 9.5px; font-style: italic; opacity: 0.9; }
+.card-icon { font-size: 24px; }
+.card-name-el { font-size: 12.5px; font-weight: 700; margin: 2px 0 0 0; }
+.card-name-en { font-size: 9px; font-style: italic; opacity: 0.85; }
 .tier-badge {
   display: inline-block;
-  font-size: 8px;
-  font-weight: bold;
-  background: rgba(255,255,255,0.25);
-  border-radius: 6px;
-  padding: 1px 6px;
-  margin-top: 2px;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  background: rgba(255,255,255,0.28);
+  border-radius: 20px;
+  padding: 2px 8px;
+  margin-top: 3px;
 }
 .stat-row {
   display: flex;
   justify-content: space-around;
   font-size: 11px;
-  font-weight: bold;
-  margin: 4px 0;
+  font-weight: 700;
+  margin: 5px 0;
+  background: #faf9fc;
+  border-radius: 6px;
+  padding: 4px 0;
 }
 .stat-row div { text-align: center; }
-.stat-label { font-size: 8px; font-weight: normal; color: #666; display:block; }
+.stat-label { font-size: 7.5px; font-weight: 500; color: #8b8494; display:block; text-transform: uppercase; letter-spacing: 0.3px; }
 .card-body {
   font-size: 9.5px;
-  line-height: 1.35;
+  line-height: 1.4;
   flex-grow: 1;
 }
-.card-body b { color: #333; }
+.card-body b { color: #201c2b; }
 .card-line { margin-bottom: 3px; }
 .card-special {
-  background: #f3ecff;
+  background: #f4f0fb;
   border-radius: 6px;
-  padding: 3px 5px;
+  padding: 4px 6px;
   font-size: 8.7px;
   margin-top: 3px;
 }
 .card-flavor {
   font-size: 8.3px;
   font-style: italic;
-  color: #555;
-  border-top: 1px dashed #ccc;
+  color: #6b6478;
+  border-top: 1px dashed #e6e1ef;
   margin-top: 4px;
   padding-top: 3px;
 }
@@ -128,12 +136,12 @@ body {
     <div class="tier-badge">ΕΥΚΟΛΟ</div>
   </div>
   <div class="stat-row">
-    <div>❤️ 6<span class="stat-label">HP</span></div>
+    <div>❤️ 5<span class="stat-label">HP</span></div>
     <div>🛡️ 12<span class="stat-label">AC</span></div>
   </div>
   <div class="card-body">
-    <div class="card-line">⚔️ <b>Επίθεση:</b> Στιλέτο +3</div>
-    <div class="card-line">💥 <b>Ζημιά:</b> 1d4+1</div>
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Στιλέτο +4</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 1d4+2</div>
     <div class="card-special">✨ Παλεύει καλύτερα όταν είναι σε ομάδα με άλλα κόμπολντ.</div>
   </div>
   <div class="card-flavor">Μικρόσωμος, δειλός μόνος του, αλλά επικίνδυνος σε κοπάδι.</div>
@@ -208,7 +216,7 @@ body {
     <div class="tier-badge">ΜΕΤΡΙΟ</div>
   </div>
   <div class="stat-row">
-    <div>❤️ 12<span class="stat-label">HP</span></div>
+    <div>❤️ 11<span class="stat-label">HP</span></div>
     <div>🛡️ 13<span class="stat-label">AC</span></div>
   </div>
   <div class="card-body">
@@ -270,11 +278,11 @@ body {
   </div>
   <div class="stat-row">
     <div>❤️ 35<span class="stat-label">HP</span></div>
-    <div>🛡️ 14<span class="stat-label">AC</span></div>
+    <div>🛡️ 12<span class="stat-label">AC</span></div>
   </div>
   <div class="card-body">
     <div class="card-line">⚔️ <b>Επίθεση:</b> Νύχια +6</div>
-    <div class="card-line">💥 <b>Ζημιά:</b> 2d6+3</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 2d6+4</div>
     <div class="card-special">✨ Πετάει! Μπορεί να επιτεθεί από ψηλά και να ξεφύγει εύκολα.</div>
   </div>
   <div class="card-flavor">Μισός αετός, μισό λιοντάρι, φύλακας ψηλών βουνοκορφών.</div>
@@ -296,8 +304,8 @@ body {
     <div>🛡️ 13<span class="stat-label">AC</span></div>
   </div>
   <div class="card-body">
-    <div class="card-line">⚔️ <b>Επίθεση:</b> Νύχια +6</div>
-    <div class="card-line">💥 <b>Ζημιά:</b> 2d8+4</div>
+    <div class="card-line">⚔️ <b>Επίθεση:</b> Νύχια +7</div>
+    <div class="card-line">💥 <b>Ζημιά:</b> 2d8+5</div>
     <div class="card-special">✨ Βρυχάται δυνατά πριν επιτεθεί — ακούγεται από μακριά!</div>
   </div>
   <div class="card-flavor">Μισή αρκούδα, μισή κουκουβάγια, άγριο πλάσμα του δάσους.</div>

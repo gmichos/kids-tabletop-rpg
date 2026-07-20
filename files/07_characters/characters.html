@@ -4,21 +4,24 @@
 <meta charset="UTF-8">
 <style>
 @page { size: A4; margin: 12mm; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
 body {
-  font-family: 'DejaVu Sans', Arial, sans-serif;
-  color: #2b2b2b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: #201c2b;
   margin: 0;
 }
 .page-title {
   text-align: center;
-  font-size: 22px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
   color: #5a3e85;
   margin: 0 0 3mm 0;
 }
 .page-subtitle {
   text-align: center;
   font-size: 12px;
-  color: #6b4a2b;
+  color: #6b6478;
   margin: 0 0 8mm 0;
 }
 .card-grid {
@@ -27,56 +30,51 @@ body {
   gap: 6mm;
 }
 .card {
-  border-radius: 12px;
+  border-radius: 10px;
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box;
-  border: 3px solid #888;
-  background: #fffdf8;
+  background: #ffffff;
+  border: 1px solid #e6e1ef;
+  border-top: 5px solid #888;
+  box-shadow: 0 1px 4px rgba(32,28,43,0.08);
   page-break-inside: avoid;
   margin-bottom: 6mm;
 }
-.class-fighter { border-color: #a4302c; }
-.class-wizard  { border-color: #5a3e85; }
-.class-rogue   { border-color: #2e6d6d; }
-.class-cleric  { border-color: #c9a35a; }
-.class-ranger  { border-color: #4a7c2e; }
+.class-fighter { border-top-color: #b6342a; }
+.class-wizard  { border-top-color: #5a3e85; }
+.class-rogue   { border-top-color: #2e6d6d; }
+.class-cleric  { border-top-color: #b8863a; }
+.class-ranger  { border-top-color: #4a7c2e; }
 
-.card-header {
-  text-align: center;
-  border-radius: 8px;
-  padding: 6px 6px;
-  color: white;
-  margin-bottom: 6px;
-}
-.class-fighter .card-header { background: #a4302c; }
+.card-header { text-align: center; border-radius: 7px; padding: 6px 6px; color: white; margin-bottom: 6px; }
+.class-fighter .card-header { background: #b6342a; }
 .class-wizard  .card-header { background: #5a3e85; }
 .class-rogue   .card-header { background: #2e6d6d; }
 .class-cleric  .card-header { background: #b8863a; }
 .class-ranger  .card-header { background: #4a7c2e; }
 
-.card-icon { font-size: 28px; }
-.card-name-el { font-size: 15px; font-weight: bold; margin: 2px 0 0 0; }
-.card-class { font-size: 11px; font-style: italic; opacity: 0.95; }
-.card-meta { text-align: center; font-size: 10.5px; color: #6b4a2b; margin-bottom: 6px; }
+.card-icon { font-size: 27px; }
+.card-name-el { font-size: 15px; font-weight: 700; margin: 2px 0 0 0; }
+.card-class { font-size: 11px; font-style: italic; opacity: 0.9; }
+.card-meta { text-align: center; font-size: 10.5px; color: #6b6478; margin-bottom: 6px; }
 .stat-row {
   display: flex;
   justify-content: space-around;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 700;
   margin: 6px 0;
-  background: #fff8e7;
+  background: #faf9fc;
   border-radius: 6px;
   padding: 4px 0;
 }
 .stat-row div { text-align: center; }
-.stat-label { font-size: 8.5px; font-weight: normal; color: #666; display:block; }
+.stat-label { font-size: 8.5px; font-weight: 500; color: #8b8494; display:block; text-transform: uppercase; letter-spacing: 0.3px; }
 .card-body { font-size: 10.5px; line-height: 1.45; flex-grow: 1; }
-.card-body b { color: #333; }
+.card-body b { color: #201c2b; }
 .card-line { margin-bottom: 4px; }
 .card-abilities {
-  background: #f3ecff;
+  background: #f4f0fb;
   border-radius: 6px;
   padding: 5px 8px;
   font-size: 10px;
@@ -87,16 +85,17 @@ body {
 .card-flavor {
   font-size: 10px;
   font-style: italic;
-  color: #555;
-  border-top: 1px dashed #ccc;
+  color: #6b6478;
+  border-top: 1px dashed #e6e1ef;
   margin-top: 6px;
   padding-top: 5px;
 }
 .pick-guide {
   margin-top: 4mm;
-  background: #fff8e7;
-  border: 2px solid #f2c14e;
-  border-radius: 10px;
+  background: #fdf3e0;
+  border: 1px solid #f0d9a8;
+  border-left: 4px solid #e8a93b;
+  border-radius: 8px;
   padding: 10px 16px;
   font-size: 11.5px;
   line-height: 1.6;
@@ -169,7 +168,7 @@ body {
   <div class="card-body">
     <div class="card-line">🤸 Επιδεξιότητα: Πολύ Ευκίνητη (+3) &nbsp;|&nbsp; 🎭 Χάρισμα: Καλή (+1) &nbsp;|&nbsp; 🧠 Εξυπνάδα: Μέτρια (+0)</div>
     <div class="card-abilities">
-      <div>🥷 <b>Ύπουλο Χτύπημα</b> — απροειδοποίητα ή με σύμμαχο δίπλα: +2d6</div>
+      <div>🥷 <b>Ύπουλο Χτύπημα</b> — απροειδοποίητα ή με σύμμαχο δίπλα: +1d6 (γίνεται +2d6 στο Επίπεδο 3)</div>
       <div>👤 <b>Σκιά</b> — κρύβεται/υποχωρεί χωρίς να χάσει τη σειρά της</div>
     </div>
     <div class="card-inventory">🎒 Δύο στιλέτα, κοντό τόξο, εργαλεία διάρρηξης, σκούρα ρούχα, 8 gp</div>

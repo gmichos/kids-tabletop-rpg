@@ -4,38 +4,39 @@
 <meta charset="UTF-8">
 <style>
 @page { size: A4; margin: 14mm; }
-body { font-family: 'DejaVu Sans', Arial, sans-serif; color: #2b2b2b; margin: 0; }
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #201c2b; margin: 0; }
 .page { page-break-after: always; }
 .page:last-child { page-break-after: auto; }
 
 /* ===== CHARACTER SHEET ===== */
 .cs-title {
-  text-align: center; font-size: 26px; font-weight: bold; color: #5a3e85;
-  border-bottom: 4px solid #f2c14e; padding-bottom: 8px; margin-bottom: 4px;
+  text-align: center; font-size: 25px; font-weight: 800; letter-spacing: -0.3px; color: #5a3e85;
+  border-bottom: 2px solid #e6e1ef; padding-bottom: 10px; margin-bottom: 6px;
 }
-.cs-subtitle { text-align: center; font-size: 13px; color: #6b4a2b; margin-bottom: 14px; }
+.cs-subtitle { text-align: center; font-size: 12.5px; color: #6b6478; margin-bottom: 16px; }
 .cs-row { display: flex; gap: 10px; margin-bottom: 10px; }
 .cs-field { flex: 1; }
-.cs-label { font-size: 10px; font-weight: bold; color: #6b4a2b; text-transform: uppercase; margin-bottom: 2px; }
-.cs-box { border: 2px solid #c9a35a; border-radius: 6px; height: 30px; background: #fffdf7; }
-.cs-box-tall { border: 2px solid #c9a35a; border-radius: 6px; height: 60px; background: #fffdf7; }
+.cs-label { font-size: 9.5px; font-weight: 700; color: #6b6478; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px; }
+.cs-box { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 30px; background: #fefdfb; }
+.cs-box-tall { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 60px; background: #fefdfb; }
 .cs-section-title {
-  background: #5a3e85; color: white; padding: 5px 10px; border-radius: 6px;
-  font-size: 13px; font-weight: bold; margin: 14px 0 8px 0;
+  background: #5a3e85; color: white; padding: 6px 10px; border-radius: 6px;
+  font-size: 12.5px; font-weight: 700; margin: 16px 0 8px 0;
 }
 .ability-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
-.ability-box { border: 2px solid #5a3e85; border-radius: 8px; text-align: center; padding: 6px 2px; background: #fff8e7; }
-.ability-name { font-size: 9px; font-weight: bold; color: #5a3e85; }
-.ability-score { border: 1.5px solid #c9a35a; border-radius: 5px; height: 26px; margin: 3px auto; width: 34px; background: white; }
-.ability-mod { font-size: 9px; color: #666; }
-.inv-lines { border: 2px solid #c9a35a; border-radius: 6px; height: 90px; background: #fffdf7; padding: 6px; }
-.inv-lines div { border-bottom: 1px dotted #d8c48a; height: 16px; }
+.ability-box { border: 1.5px solid #e6e1ef; border-radius: 8px; text-align: center; padding: 6px 2px; background: #f8f6fb; }
+.ability-name { font-size: 8.5px; font-weight: 700; color: #5a3e85; text-transform: uppercase; letter-spacing: 0.2px; }
+.ability-score { border: 1.5px solid #d9d3e6; border-radius: 5px; height: 26px; margin: 4px auto; width: 34px; background: white; }
+.ability-mod { font-size: 8.5px; color: #8b8494; }
+.inv-lines { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 90px; background: #fefdfb; padding: 6px; }
+.inv-lines div { border-bottom: 1px dotted #d9d3e6; height: 16px; }
 
-/* ===== PARCHMENT PROP (Letter / Poster) ===== */
+/* ===== PARCHMENT PROP (Letter / Poster) — deliberately in-world, not the app UI ===== */
 .parchment {
   background: #f2e2b8;
   background-image: radial-gradient(ellipse at top left, #f8ecc8 0%, #e8d19a 100%);
-  border: 10px solid #6b4a2b;
+  border: 8px solid #6b4a2b;
   border-radius: 4px;
   padding: 40px 50px;
   min-height: 240mm;
@@ -57,25 +58,25 @@ body { font-family: 'DejaVu Sans', Arial, sans-serif; color: #2b2b2b; margin: 0;
 }
 
 /* ===== POSTER ===== */
-.poster-title { text-align: center; font-size: 36px; font-weight: bold; color: #5a3e85; text-shadow: 2px 2px 0 #f2c14e; margin: 10px 0 4px 0; letter-spacing: 1px; }
+.poster-title { text-align: center; font-size: 34px; font-weight: 800; color: #5a3e85; margin: 10px 0 4px 0; letter-spacing: 0.5px; }
 .poster-sub { text-align: center; font-size: 16px; color: #6b4a2b; margin-bottom: 20px; font-style: italic; }
 .poster-body { font-size: 15px; line-height: 1.8; color: #3a2a1a; text-align: center; margin: 0 20px; }
 .poster-reward { text-align: center; margin: 24px 0; }
-.poster-reward-box { display: inline-block; border: 3px double #5a3e85; border-radius: 10px; padding: 12px 30px; background: #fff8e7; font-size: 20px; font-weight: bold; color: #5a3e85; }
+.poster-reward-box { display: inline-block; border: 2px solid #5a3e85; border-radius: 10px; padding: 12px 30px; background: #fff8e7; font-size: 20px; font-weight: 700; color: #5a3e85; }
 .poster-contact { text-align: center; margin-top: 26px; font-size: 14px; color: #6b4a2b; }
 .tear-strips { display: flex; justify-content: space-around; margin-top: 30px; border-top: 2px dashed #8a6a3a; padding-top: 10px; }
 .tear-strip { writing-mode: vertical-rl; font-size: 12px; color: #6b4a2b; padding: 4px; }
 
 /* ===== INITIATIVE TRACKER ===== */
-.it-title { text-align: center; font-size: 24px; font-weight: bold; color: #5a3e85; margin-bottom: 4px; }
-.it-subtitle { text-align: center; font-size: 13px; color: #6b4a2b; margin-bottom: 18px; }
+.it-title { text-align: center; font-size: 23px; font-weight: 800; letter-spacing: -0.3px; color: #5a3e85; margin-bottom: 4px; }
+.it-subtitle { text-align: center; font-size: 12.5px; color: #6b6478; margin-bottom: 18px; }
 table.it-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-table.it-table th { background: #5a3e85; color: white; padding: 8px; font-size: 12px; }
-table.it-table td { border: 1px solid #d8c48a; padding: 10px 8px; height: 34px; }
-table.it-table tr:nth-child(even) td { background: #fdf9ef; }
-.it-legend { background: #fff8e7; border: 2px solid #f2c14e; border-radius: 10px; padding: 10px 14px; margin-top: 16px; font-size: 12px; }
+table.it-table th { background: #f1ecfa; color: #3d2a5c; padding: 9px 8px; font-size: 12px; font-weight: 700; border-bottom: 2px solid #5a3e85; text-align: left; }
+table.it-table td { border-bottom: 1px solid #e6e1ef; padding: 10px 8px; height: 34px; }
+table.it-table tr:nth-child(even) td { background: #fbfaf7; }
+.it-legend { background: #fdf3e0; border: 1px solid #f0d9a8; border-left: 4px solid #e8a93b; border-radius: 8px; padding: 10px 14px; margin-top: 16px; font-size: 12px; }
 
-h2.section-h { color: #5a3e85; font-size: 16px; border-bottom: 2px solid #f2c14e; padding-bottom: 4px; margin-top: 20px; }
+h2.section-h { color: #5a3e85; font-size: 15px; font-weight: 700; border-bottom: 2px solid #e6e1ef; padding-bottom: 6px; margin-top: 20px; }
 </style>
 </head>
 <body>
