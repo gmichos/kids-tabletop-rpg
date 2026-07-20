@@ -3,8 +3,8 @@
   <!-- Background parchment -->
   <defs>
     <radialGradient id="parchment" cx="50%" cy="45%" r="75%">
-      <stop offset="0%" stop-color="#f5ecd2"/>
-      <stop offset="100%" stop-color="#e6d3a0"/>
+      <stop offset="0%" stop-color="#fefdfb"/>
+      <stop offset="100%" stop-color="#f1ecfa"/>
     </radialGradient>
     <pattern id="waterPattern" width="20" height="10" patternUnits="userSpaceOnUse">
       <path d="M0,5 Q5,0 10,5 T20,5" stroke="#5b8fb0" stroke-width="1.2" fill="none"/>
@@ -14,12 +14,12 @@
   <rect x="0" y="0" width="1000" height="700" fill="url(#parchment)"/>
 
   <!-- Decorative border -->
-  <rect x="12" y="12" width="976" height="676" fill="none" stroke="#6b4a2b" stroke-width="6" rx="14"/>
-  <rect x="22" y="22" width="956" height="656" fill="none" stroke="#6b4a2b" stroke-width="1.5" rx="10"/>
+  <rect x="12" y="12" width="976" height="676" fill="none" stroke="#5a3e85" stroke-width="2" rx="14"/>
+  <rect x="22" y="22" width="956" height="656" fill="none" stroke="#e6e1ef" stroke-width="1" rx="10"/>
 
   <!-- Title -->
-  <text x="500" y="60" text-anchor="middle" font-size="34" font-weight="bold" fill="#6b2a1f" style="letter-spacing:2px;">Η ΚΟΙΛΑΔΑ ΤΟΥ ΔΡΑΚΟΥ</text>
-  <text x="500" y="84" text-anchor="middle" font-size="15" fill="#6b4a2b" font-style="italic">Χάρτης Πρώτου Campaign</text>
+  <text x="500" y="60" text-anchor="middle" font-size="34" font-weight="bold" fill="#5a3e85" style="letter-spacing:-0.5px;">Η ΚΟΙΛΑΔΑ ΤΟΥ ΔΡΑΚΟΥ</text>
+  <text x="500" y="84" text-anchor="middle" font-size="15" fill="#6b6478" font-style="italic">Χάρτης Πρώτου Campaign</text>
 
   <!-- River -->
   <path d="M 80 620 Q 220 560 260 480 Q 300 400 250 340 Q 200 270 280 210 Q 340 165 320 100"
@@ -89,74 +89,74 @@
   <!-- Path connecting locations (dotted route) -->
   <path d="M 150 600 Q 200 540 260 500 Q 340 460 420 420 Q 480 400 520 385
            Q 600 340 650 280 Q 690 245 700 232 Q 770 220 845 212"
-        fill="none" stroke="#6b2a1f" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round" opacity="0.8"/>
+        fill="none" stroke="#5a3e85" stroke-width="3" stroke-dasharray="2 10" stroke-linecap="round" opacity="0.8"/>
 
   <!-- Location markers with numbers -->
-  <g font-size="15" font-weight="bold" fill="#3a2a1a">
-    <circle cx="150" cy="600" r="16" fill="#f2c14e" stroke="#6b2a1f" stroke-width="2"/>
+  <g font-size="15" font-weight="bold" fill="#201c2b">
+    <circle cx="150" cy="600" r="16" fill="#e8a93b" stroke="#5a3e85" stroke-width="2"/>
     <text x="150" y="606" text-anchor="middle">1</text>
 
-    <circle cx="280" cy="470" r="16" fill="#f2c14e" stroke="#6b2a1f" stroke-width="2"/>
+    <circle cx="280" cy="470" r="16" fill="#e8a93b" stroke="#5a3e85" stroke-width="2"/>
     <text x="280" y="476" text-anchor="middle">2</text>
 
-    <circle cx="520" cy="390" r="16" fill="#f2c14e" stroke="#6b2a1f" stroke-width="2"/>
+    <circle cx="520" cy="390" r="16" fill="#e8a93b" stroke="#5a3e85" stroke-width="2"/>
     <text x="520" y="396" text-anchor="middle">3</text>
 
-    <circle cx="700" cy="230" r="16" fill="#f2c14e" stroke="#6b2a1f" stroke-width="2"/>
+    <circle cx="700" cy="230" r="16" fill="#e8a93b" stroke="#5a3e85" stroke-width="2"/>
     <text x="700" y="236" text-anchor="middle">4</text>
 
-    <circle cx="845" cy="210" r="16" fill="#f2c14e" stroke="#6b2a1f" stroke-width="2"/>
+    <circle cx="845" cy="210" r="16" fill="#e8a93b" stroke="#5a3e85" stroke-width="2"/>
     <text x="845" y="216" text-anchor="middle">5</text>
   </g>
 
   <!-- Legend box -->
   <g>
-    <rect x="45" y="120" width="270" height="185" rx="10" fill="#f5ecd2" stroke="#6b4a2b" stroke-width="2" opacity="0.95"/>
-    <text x="60" y="145" font-size="15" font-weight="bold" fill="#6b2a1f">Υπόμνημα</text>
-    <circle cx="65" cy="165" r="10" fill="#f2c14e" stroke="#6b2a1f" stroke-width="1.5"/>
+    <rect x="45" y="120" width="270" height="185" rx="10" fill="#ffffff" stroke="#e6e1ef" stroke-width="1.5" opacity="0.97"/>
+    <text x="60" y="145" font-size="15" font-weight="bold" fill="#5a3e85">Υπόμνημα</text>
+    <circle cx="65" cy="165" r="10" fill="#e8a93b" stroke="#5a3e85" stroke-width="1.5"/>
     <text x="65" y="169" text-anchor="middle" font-size="10" font-weight="bold">1</text>
-    <text x="85" y="169" font-size="12.5" fill="#3a2a1a">Χωριό Ξεκινήματος</text>
+    <text x="85" y="169" font-size="12.5" fill="#201c2b">Χωριό Ξεκινήματος</text>
 
-    <circle cx="65" cy="192" r="10" fill="#f2c14e" stroke="#6b2a1f" stroke-width="1.5"/>
+    <circle cx="65" cy="192" r="10" fill="#e8a93b" stroke="#5a3e85" stroke-width="1.5"/>
     <text x="65" y="196" text-anchor="middle" font-size="10" font-weight="bold">2</text>
-    <text x="85" y="196" font-size="12.5" fill="#3a2a1a">Δάσος των Γκόμπλιν</text>
+    <text x="85" y="196" font-size="12.5" fill="#201c2b">Δάσος των Γκόμπλιν</text>
 
-    <circle cx="65" cy="219" r="10" fill="#f2c14e" stroke="#6b2a1f" stroke-width="1.5"/>
+    <circle cx="65" cy="219" r="10" fill="#e8a93b" stroke="#5a3e85" stroke-width="1.5"/>
     <text x="65" y="223" text-anchor="middle" font-size="10" font-weight="bold">3</text>
-    <text x="85" y="223" font-size="12.5" fill="#3a2a1a">Ερείπια των Σκελετών</text>
+    <text x="85" y="223" font-size="12.5" fill="#201c2b">Ερείπια των Σκελετών</text>
 
-    <circle cx="65" cy="246" r="10" fill="#f2c14e" stroke="#6b2a1f" stroke-width="1.5"/>
+    <circle cx="65" cy="246" r="10" fill="#e8a93b" stroke="#5a3e85" stroke-width="1.5"/>
     <text x="65" y="250" text-anchor="middle" font-size="10" font-weight="bold">4</text>
-    <text x="85" y="250" font-size="12.5" fill="#3a2a1a">Φωλιά του Γρύπα</text>
+    <text x="85" y="250" font-size="12.5" fill="#201c2b">Φωλιά του Γρύπα</text>
 
-    <circle cx="65" cy="273" r="10" fill="#f2c14e" stroke="#6b2a1f" stroke-width="1.5"/>
+    <circle cx="65" cy="273" r="10" fill="#e8a93b" stroke="#5a3e85" stroke-width="1.5"/>
     <text x="65" y="277" text-anchor="middle" font-size="10" font-weight="bold">5</text>
-    <text x="85" y="277" font-size="12.5" fill="#3a2a1a">Σπηλιά του Δράκου</text>
+    <text x="85" y="277" font-size="12.5" fill="#201c2b">Σπηλιά του Δράκου</text>
 
-    <line x1="65" y1="292" x2="65" y2="292" stroke="#6b2a1f"/>
-    <path d="M55,292 L75,292" stroke="#6b2a1f" stroke-width="2" stroke-dasharray="1 5"/>
-    <text x="85" y="296" font-size="12" fill="#3a2a1a">Μονοπάτι Περιπέτειας</text>
+    <line x1="65" y1="292" x2="65" y2="292" stroke="#5a3e85"/>
+    <path d="M55,292 L75,292" stroke="#5a3e85" stroke-width="2" stroke-dasharray="1 5"/>
+    <text x="85" y="296" font-size="12" fill="#201c2b">Μονοπάτι Περιπέτειας</text>
   </g>
 
   <!-- Compass rose -->
   <g transform="translate(910,600)">
-    <circle r="42" fill="#f5ecd2" stroke="#6b4a2b" stroke-width="2"/>
-    <line x1="0" y1="-34" x2="0" y2="34" stroke="#6b2a1f" stroke-width="1.5"/>
-    <line x1="-34" y1="0" x2="34" y2="0" stroke="#6b2a1f" stroke-width="1.5"/>
-    <polygon points="0,-34 6,-10 -6,-10" fill="#a4302c"/>
-    <text x="0" y="-40" text-anchor="middle" font-size="13" font-weight="bold" fill="#6b2a1f">Β</text>
-    <text x="0" y="52" text-anchor="middle" font-size="11" fill="#6b2a1f">Ν</text>
-    <text x="-46" y="4" text-anchor="middle" font-size="11" fill="#6b2a1f">Δ</text>
-    <text x="46" y="4" text-anchor="middle" font-size="11" fill="#6b2a1f">Α</text>
+    <circle r="42" fill="#ffffff" stroke="#e6e1ef" stroke-width="1.5"/>
+    <line x1="0" y1="-34" x2="0" y2="34" stroke="#5a3e85" stroke-width="1.5"/>
+    <line x1="-34" y1="0" x2="34" y2="0" stroke="#5a3e85" stroke-width="1.5"/>
+    <polygon points="0,-34 6,-10 -6,-10" fill="#e8a93b"/>
+    <text x="0" y="-40" text-anchor="middle" font-size="13" font-weight="bold" fill="#5a3e85">Β</text>
+    <text x="0" y="52" text-anchor="middle" font-size="11" fill="#5a3e85">Ν</text>
+    <text x="-46" y="4" text-anchor="middle" font-size="11" fill="#5a3e85">Δ</text>
+    <text x="46" y="4" text-anchor="middle" font-size="11" fill="#5a3e85">Α</text>
   </g>
 
   <!-- Scale bar -->
   <g transform="translate(60,650)">
-    <text x="0" y="-8" font-size="11" fill="#3a2a1a">Κλίμακα (περίπου)</text>
-    <line x1="0" y1="0" x2="80" y2="0" stroke="#3a2a1a" stroke-width="3"/>
-    <line x1="0" y1="-4" x2="0" y2="4" stroke="#3a2a1a" stroke-width="2"/>
-    <line x1="80" y1="-4" x2="80" y2="4" stroke="#3a2a1a" stroke-width="2"/>
-    <text x="40" y="16" text-anchor="middle" font-size="10" fill="#3a2a1a">~1 μέρα ταξιδιού</text>
+    <text x="0" y="-8" font-size="11" fill="#201c2b">Κλίμακα (περίπου)</text>
+    <line x1="0" y1="0" x2="80" y2="0" stroke="#201c2b" stroke-width="3"/>
+    <line x1="0" y1="-4" x2="0" y2="4" stroke="#201c2b" stroke-width="2"/>
+    <line x1="80" y1="-4" x2="80" y2="4" stroke="#201c2b" stroke-width="2"/>
+    <text x="40" y="16" text-anchor="middle" font-size="10" fill="#201c2b">~1 μέρα ταξιδιού</text>
   </g>
 
 </svg>
