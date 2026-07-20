@@ -1,6 +1,7 @@
-# 🎲🐉 D&D για Μικρούς Ήρωες (SRD Kids Greek)
+# 🎲🐉 Μικροί Ήρωες (SRD Kids Greek)
 
-Ένα πλήρες, ελληνικό, παιδικό πακέτο Dungeons & Dragons: κανόνες, οδηγός Game Master, μια πρώτη
+Ένα πλήρες, ελληνικό, παιδικό πακέτο παιχνιδιού ρόλων (βασισμένο στο SRD 5.1, χωρίς branding της
+Wizards of the Coast): κανόνες, 5 έτοιμους χαρακτήρες, οδηγός Game Master, μια πρώτη
 εκστρατεία 5 κεφαλαίων, κάρτες τεράτων & ξορκιών, και τυπώσιμα handouts — έτοιμο να τρέξει μια
 οικογένεια ή μια ομάδα παιδιών γύρω από το τραπέζι.
 
@@ -12,15 +13,17 @@
 index.html              ← κεντρική σελίδα, συνδέει όλο το υλικό
 CLAUDE.md               ← οδηγίες παραγωγής περιεχομένου για το project
 files/
-  01_tutorial/   tutorial.md/html            Οι Βασικοί Κανόνες
-  02_campaign/   campaign.md/html, map.svg   Η Κοιλάδα του Δράκου
-  03_monsters/   monsters.md/html            Οδηγός Τεράτων
-                 monster-cards.md/html       Κάρτες Τεράτων
-                 monster-stats.csv           Πλήρη stat blocks
-  04_spells/     spells.md/html              Οδηγός Ξορκιών
-                 spell-cards.md/html         Κάρτες Ξορκιών
-  05_handouts/   handouts.md/html            Handouts & Props
-  06_dm_notes/   dm-notes.md/html            Οδηγός Game Master
+  01_tutorial/     tutorial.md/html            Οι Βασικοί Κανόνες
+  02_campaign/     campaign.md/html, map.svg   Η Κοιλάδα του Δράκου
+  03_monsters/     monsters.md/html            Οδηγός Τεράτων
+                   monster-cards.md/html       Κάρτες Τεράτων
+                   monster-stats.csv           Πλήρη stat blocks
+  04_spells/       spells.md/html              Οδηγός Ξορκιών
+                   spell-cards.md/html         Κάρτες Ξορκιών
+  05_handouts/     handouts.md/html            Handouts & Props
+  06_dm_notes/     dm-notes.md/html            Οδηγός Game Master
+  07_characters/   characters.md/html          Έτοιμοι Χαρακτήρες
+  images/          goblins.png                 Εικονογράφηση (χρησιμοποιείται στο campaign, Κεφάλαιο 2)
 ```
 
 Κάθε deliverable υπάρχει σε δύο μορφές:
@@ -33,16 +36,16 @@ files/
 
 Όλα τα `.html` deliverables μοιράζονται ένα ενιαίο, παιχνιδιάρικο fantasy θέμα: μαγικό μοβ (`#5a3e85`) ως
 κύριο χρώμα branding αντί για το πιο "επίσημο"/σκούρο κόκκινο, ζεστό χρυσό (`#f2c14e`) για τονισμό, και
-parchment-style φόντο. Τα tiers δυσκολίας τεράτων και οι σχολές ξορκιών κρατούν ξεχωριστά, διαχωρίσιμα
-χρώματα (πράσινο/πορτοκαλί/κόκκινο/μοβ κ.ά.) για γρήγορη αναγνώριση.
+parchment-style φόντο. Τα tiers δυσκολίας τεράτων, οι σχολές ξορκιών και οι τάξεις χαρακτήρων κρατούν
+ξεχωριστά, διαχωρίσιμα χρώματα (πράσινο/πορτοκαλί/κόκκινο/μοβ κ.ά.) για γρήγορη αναγνώριση.
 
-## Γνωστό Κενό
+## Νομική Συμμόρφωση (OGL / SRD)
 
-Λείπει ακόμα το deliverable **"Έτοιμοι Χαρακτήρες"** (4–6 pre-generated ήρωες με όνομα, στατιστικά,
-ικανότητες και προσωπικότητα) που προβλέπεται στο `CLAUDE.md`. Επισημαίνεται ως placeholder card στο
-`index.html`.
+Όλο το υλικό είναι Open Game Content βασισμένο στο SRD 5.1 — καμία αναφορά σε "Dungeons & Dragons",
+"D&D", "5e" ή σε Product Identity της Wizards of the Coast (κόσμοι, επώνυμα τέρατα/χαρακτήρες)
+πουθενά στο repo. Το `OGL.md` στη ρίζα περιέχει το πλήρες, αυτούσιο κείμενο της Open Game License
+v1.0a και είναι η πηγή αλήθειας για τη licensing συμμόρφωση. Κάθε deliverable (`.md` και `.html`)
+έχει στο footer του μια σύντομη δήλωση που παραπέμπει σε αυτό.
 
-## Σχετικά με το SRD-OGL
-
-Το `SRD-OGL_V5.1.pdf` στη ρίζα είναι το επίσημο έγγραφο άδειας (Open Gaming License) του SRD στο οποίο
-βασίζεται το υλικό. Δεν παρακολουθείται στο git (μεγάλο binary) — κρατήστε το τοπικά για αναφορά.
+Το `SRD-OGL_V5.1.pdf` στη ρίζα είναι το επίσημο έγγραφο του SRD από το οποίο αντλήθηκε το κείμενο
+της άδειας. Δεν παρακολουθείται στο git (μεγάλο binary) — κρατήστε το τοπικά για αναφορά.

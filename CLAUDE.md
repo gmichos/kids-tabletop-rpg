@@ -1,8 +1,12 @@
-# Kids' D&D Campaign Generator — Project Memory
+# Kids' SRD Tabletop RPG Campaign Generator — Project Memory
 
-This project generates a complete, ready-to-run Dungeons & Dragons experience
-for kids. Follow the guardrails and structure below for every piece of
-content generated in this repo, unless the user explicitly overrides them.
+This project generates a complete, ready-to-run SRD-based tabletop RPG
+experience for kids ("Μικροί Ήρωες"), built entirely from Open Game Content
+(SRD 5.1) — no Wizards of the Coast trademarks or Product Identity terms
+("Dungeons & Dragons", "D&D", "5e", etc.) anywhere in generated content. See
+`OGL.md` for the license this project ships under. Follow the guardrails and
+structure below for every piece of content generated in this repo, unless the
+user explicitly overrides them.
 
 ## Audience & Defaults
 
@@ -24,7 +28,7 @@ Treat each of these as a distinct deliverable. When asked for one, generate
 only that one unless told to do the whole set. (See `.claude/commands/` for
 matching slash commands.)
 
-1. **Tutorial / "How to Play" guide** — what D&D is in 2–3 kid-friendly
+1. **Tutorial / "How to Play" guide** — what the game is in 2–3 kid-friendly
    sentences; simplified core mechanic (roll d20 + modifier vs. a target
    number); character sheet walkthrough (Name, Class, 3–4 stats, HP, 2–3
    special moves, Inventory); how combat turns work, step by step; a short
@@ -86,12 +90,17 @@ started:
 
 ## File Conventions
 
-- Save generated content as Markdown in `output/` at the project root,
-  one file per deliverable (e.g. `output/tutorial.md`,
-  `output/characters.md`, `output/campaign.md`, `output/monsters.md`,
-  `output/handouts.md`, `output/dm-notes.md`).
-- If the user asks for print-ready handouts, convert the relevant
-  `output/*.md` file to a `.docx` or `.pdf` on request rather than by
-  default.
+- Save generated content as Markdown under `files/NN_name/` at the project
+  root, one numbered folder per deliverable (e.g. `files/01_tutorial/tutorial.md`,
+  `files/07_characters/characters.md`, `files/02_campaign/campaign.md`,
+  `files/03_monsters/monsters.md`, `files/05_handouts/handouts.md`,
+  `files/06_dm_notes/dm-notes.md`). Mirror each `.md` with a print-ready
+  `.html` in the same folder (A4, same visual theme — see README's
+  "Χρωματικό Θέμα" section), and link both from `index.html`.
+- If the user asks for a PDF, export it from the `.html` on request rather
+  than by default — `.pdf` files are gitignored, not committed.
+- Every `.md`/`.html` deliverable ends with a short OGL/SRD attribution
+  footer pointing to `OGL.md` (see any existing deliverable for the exact
+  wording) — carry it over when creating new ones.
 - Keep each deliverable self-contained so it can be shared/printed on its
   own.
