@@ -16,6 +16,10 @@
     --line:#e6e1ef;
     --paper:#fefdfb;
     --card:#ffffff;
+    /* Card text sizes: 3 reused tiers, ~8/10/20px at the 14px card base. */
+    --fs-sm:.57em;
+    --fs-md:.71em;
+    --fs-lg:1.43em;
   }
   *{box-sizing:border-box;}
   body{margin:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:var(--paper);color:var(--ink);}
@@ -49,7 +53,7 @@
   .grid-trading{grid-template-columns:repeat(auto-fill,63mm);}
 
   .card-postcard{width:148mm;height:105mm;font-size:14px;}
-  .card-trading{width:63mm;height:88mm;font-size:11.5px;}
+  .card-trading{width:63mm;height:88mm;font-size:14px;}
 
   .card-flip-wrap{position:relative;cursor:pointer;}
   .card-face{position:absolute;inset:0;overflow:hidden;opacity:0;pointer-events:none;
@@ -58,7 +62,7 @@
   .card-face.active{opacity:1;pointer-events:auto;z-index:2;}
   .card-face-print{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--muted);border-radius:3mm;}
 
-  .flip-btn{position:absolute;bottom:1.5mm;right:2mm;font-size:.62em;background:var(--brand);color:#fff;
+  .flip-btn{position:absolute;bottom:1.5mm;right:2mm;font-size:var(--fs-sm);background:var(--brand);color:#fff;
     border:none;border-radius:3mm;padding:.7mm 2.2mm;cursor:pointer;z-index:3;font-family:inherit;box-shadow:0 1px 3px rgba(0,0,0,.2);}
   .flip-btn:hover{background:var(--brand-dark);}
 
@@ -76,68 +80,69 @@
   .m-col-right{flex:1 1 0;min-width:0;}
 
   .m-name-wrap{flex:1 1 auto;min-width:0;}
-  .m-name{margin:0;font-size:5.2mm;font-weight:700;color:var(--brand-dark);line-height:1.05;
+  .m-name{margin:0;font-size:var(--fs-lg);font-weight:700;color:var(--brand-dark);line-height:1.05;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .m-name-en{font-size:5.2mm;font-weight:700;color:var(--brand-dark);line-height:1.05;
+  .m-name-en{font-size:var(--fs-lg);font-weight:700;color:var(--brand-dark);line-height:1.05;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .m-name-gr{font-size:3.9mm;font-weight:700;color:var(--brand-dark);line-height:1.05;opacity:.82;
+  .m-name-gr{font-size:var(--fs-md);font-weight:700;color:var(--brand-dark);line-height:1.05;opacity:.82;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.3mm;}
   .m-crbox{flex:0 0 16mm;width:16mm;text-align:right;white-space:nowrap;}
-  .m-cr{font-size:1.3em;font-weight:700;color:var(--brand-dark);line-height:1;}
-  .m-xp{font-size:.6em;font-style:italic;color:var(--muted);}
-  .m-sub{font-style:italic;font-size:.75em;color:var(--muted);margin-top:.3mm;}
+  .m-cr{font-size:var(--fs-lg);font-weight:700;color:var(--brand-dark);line-height:1;}
+  .m-xp{font-size:var(--fs-sm);font-style:italic;color:var(--muted);}
+  .m-sub{font-style:italic;font-size:var(--fs-sm);color:var(--muted);margin-top:.3mm;}
   .m-rule{border-top:1.4px solid var(--line);margin:1.3mm 0;}
 
-  .m-statrow{display:flex;justify-content:space-around;text-align:center;}
-  .m-stat-label{font-size:.6em;font-weight:600;color:var(--brand-dark);}
-  .m-stat-value{font-size:1.35em;font-weight:700;color:var(--brand-dark);line-height:1.1;}
-  .m-stat-value-sm{font-size:.85em;font-style:italic;color:var(--brand-dark);}
-  .m-stat-sub{font-size:.58em;font-style:italic;color:var(--muted);}
+  .m-statrow{display:flex;text-align:center;}
+  .m-stat{flex:1 1 0;min-width:0;}
+  .m-stat-label{font-size:var(--fs-md);font-weight:600;color:var(--brand-dark);}
+  .m-stat-value{font-size:var(--fs-lg);font-weight:700;color:var(--brand-dark);line-height:1.1;}
+  .m-stat-value-sm{font-size:var(--fs-md);font-style:italic;color:var(--brand-dark);}
+  .m-stat-sub{font-size:var(--fs-sm);font-style:italic;color:var(--muted);}
 
   .m-abilgrid{display:grid;grid-template-columns:repeat(6,1fr);text-align:center;}
-  .m-abil-label{font-size:.62em;font-weight:700;color:var(--brand-dark);}
-  .m-abil-value{font-size:.75em;}
+  .m-abil-label{font-size:var(--fs-md);font-weight:700;color:var(--brand-dark);}
+  .m-abil-value{font-size:var(--fs-md);}
 
-  .m-meta .meta-row{font-size:.6em;margin-bottom:.8mm;line-height:1.3;}
+  .m-meta .meta-row{font-size:var(--fs-sm);margin-bottom:.8mm;line-height:1.3;}
   .m-meta .meta-row strong{color:var(--brand-dark);}
 
-  .m-flavor{font-size:.6em;font-style:italic;margin:0 0 1mm;line-height:1.3;}
+  .m-flavor{font-size:var(--fs-sm);font-style:italic;margin:0 0 1mm;line-height:1.3;}
 
-  .m-secheader{font-size:.78em;font-weight:700;color:var(--brand-dark);border-bottom:1.4px solid var(--line);padding-bottom:.6mm;margin:0 0 1.2mm;}
-  .m-col-right p{font-size:.6em;margin:0 0 .8em;line-height:1.3;}
+  .m-secheader{font-size:var(--fs-md);font-weight:700;color:var(--brand-dark);border-bottom:1.4px solid var(--line);padding-bottom:.6mm;margin:0 0 1.2mm;}
+  .m-col-right p{font-size:var(--fs-sm);margin:0 0 .8em;line-height:1.3;}
   .m-col-right p strong{color:var(--brand-dark);}
-  .m-col-left p{font-size:.6em;margin:0 0 .8em;line-height:1.3;}
+  .m-col-left p{font-size:var(--fs-sm);margin:0 0 .8em;line-height:1.3;}
   .m-col-left p strong{color:var(--brand-dark);}
 
   /* ---- Monster back (same header as front, rest is an uploadable image area) ---- */
   .m-back-imagearea{flex:1;min-height:0;background:linear-gradient(135deg,var(--card),var(--brand-tint));
     display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;}
   .m-back-icon{width:30mm;height:30mm;color:var(--brand);opacity:.55;}
-  .m-back-hint{margin-top:2.5mm;font-size:.8em;color:var(--muted);opacity:.85;font-style:italic;text-align:center;padding:0 4mm;}
+  .m-back-hint{margin-top:2.5mm;font-size:var(--fs-sm);color:var(--muted);opacity:.85;font-style:italic;text-align:center;padding:0 4mm;}
   .m-back-img{width:100%;height:100%;object-fit:contain;display:block;}
   .m-back-imgremove{position:absolute;top:1.5mm;right:2mm;background:var(--brand);color:#fff;border:none;
-    border-radius:3mm;padding:.7mm 2.2mm;font-size:.62em;cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+    border-radius:3mm;padding:.7mm 2.2mm;font-size:var(--fs-sm);cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.2);}
   .m-back-imgremove:hover{background:var(--brand-dark);}
 
   /* ---- Trading card front (spell/item) ---- */
   .t-front{height:100%;padding:2.5mm;display:flex;flex-direction:column;text-align:center;}
   .t-top{display:flex;justify-content:space-between;align-items:center;}
-  .t-badge{background:var(--brand);color:#fff;font-size:.65em;padding:.5mm 1.5mm;border-radius:2mm;}
+  .t-badge{background:var(--brand);color:#fff;font-size:var(--fs-sm);padding:.5mm 1.5mm;border-radius:2mm;}
   .t-icon{width:6mm;height:6mm;color:var(--brand-dark);}
-  .t-name{margin:1mm 0 0;font-size:1.05em;color:var(--brand-dark);}
-  .t-sub{font-style:italic;font-size:.7em;color:var(--muted);margin-bottom:1mm;}
-  .t-info{font-size:.68em;text-align:left;margin-bottom:1mm;}
+  .t-name{margin:1mm 0 0;font-size:var(--fs-lg);color:var(--brand-dark);}
+  .t-sub{font-style:italic;font-size:var(--fs-sm);color:var(--muted);margin-bottom:1mm;}
+  .t-info{font-size:var(--fs-sm);text-align:left;margin-bottom:1mm;}
   .t-info strong{color:var(--brand-dark);}
-  .t-desc{font-size:.68em;text-align:left;flex:1;overflow:hidden;margin:1mm 0;}
-  .t-tag{font-size:.55em;letter-spacing:.12em;color:var(--gold);border-top:1px solid var(--gold);padding-top:1mm;}
+  .t-desc{font-size:var(--fs-sm);text-align:left;flex:1;overflow:hidden;margin:1mm 0;}
+  .t-tag{font-size:var(--fs-sm);letter-spacing:.12em;color:var(--gold);border-top:1px solid var(--gold);padding-top:1mm;}
 
   /* ---- Trading card back (shared logo) ---- */
   .t-back{height:100%;display:flex;align-items:center;justify-content:center;
     background:radial-gradient(circle,var(--brand-tint),var(--card));}
   .t-back-border{border:2px solid var(--brand);border-radius:3mm;width:85%;height:85%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
   .t-back-emblem{width:18mm;height:18mm;color:var(--gold);}
-  .t-back-title{margin-top:2mm;font-size:.85em;letter-spacing:.15em;color:var(--brand-dark);text-align:center;}
-  .t-back-title span{font-size:.7em;opacity:.8;display:block;}
+  .t-back-title{margin-top:2mm;font-size:var(--fs-md);letter-spacing:.15em;color:var(--brand-dark);text-align:center;}
+  .t-back-title span{font-size:var(--fs-sm);opacity:.8;display:block;}
 
   #printRoot{display:none;}
 
@@ -165,6 +170,7 @@
     .category-section h2{display:none;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
     .page-break{break-after:page;}
+    .m-back-imgremove{display:none !important;}
   }
 </style>
 </head>
@@ -442,8 +448,8 @@
   var HEADER_PAD_H_MM = 3;
   var CRBOX_WIDTH_MM = 16;
   var NAME_ROW_GAP_MM = 2;
-  var NAME_FONT_MM = 5.2;
-  var NAME_FONT_FAMILY = "'Segoe UI',Verdana,Arial,sans-serif";
+  var NAME_FONT_PX = 20; // must match --fs-lg (1.43em * 14px card base) in the CSS above
+  var NAME_FONT_FAMILY = "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif";
   var NAME_AREA_WIDTH_PX = (function(){
     var headerInner = (POSTCARD_WIDTH_MM - 2*OUTER_PAD_MM) - 2*HEADER_PAD_H_MM;
     return (headerInner - CRBOX_WIDTH_MM - NAME_ROW_GAP_MM) * MM_TO_PX;
@@ -729,7 +735,7 @@
     var m = raw.match(/^(.*?)\s*\(([^)]+)\)\s*$/);
     var eng = m ? m[1].trim() : raw;
     var gr = m ? m[2].trim() : '';
-    var fontPx = NAME_FONT_MM*MM_TO_PX;
+    var fontPx = NAME_FONT_PX;
     var subHTML = subtitle ? '<div class="m-sub">'+escapeHtml(subtitle)+'</div>' : '';
     if(!gr){
       return '<div class="m-name-wrap"><div class="m-name">'+escapeHtml(eng)+'</div>'+subHTML+'</div>';
@@ -867,7 +873,7 @@
   function printFaceHTML(c, faceType){
     var size = CATEGORY_DEFS[c._category].sizeClass;
     var inner = faceType==='front' ? frontInnerFor(c) : backInnerFor(c);
-    var px = c['_fs_'+faceType] || (size==='postcard'?14:11.5);
+    var px = c['_fs_'+faceType] || 14;
     return '<div class="card-face-print card-'+size+'" style="font-size:'+px+'px;">'+inner+'</div>';
   }
 
