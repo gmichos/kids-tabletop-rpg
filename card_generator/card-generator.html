@@ -267,15 +267,6 @@
   <div class="intro screen-only">Κάθε κατηγορία παρακάτω — τέρατα, ξόρκια, αντικείμενα, δεξιότητες, NPCs — έχει τη δική της ζώνη: ανέβασε το CSV σου εκεί που ανήκει και το εργαλείο αντιστοιχίζει αυτόματα τις στήλες στα πεδία της κάρτας. (Μπορείς επίσης να σύρεις αρχεία οπουδήποτε στη σελίδα — θα μαντέψει την κατηγορία.) Τυπώνει κάρτες σε πραγματικό μέγεθος· όλα δουλεύουν τοπικά στον browser σου (localStorage) — καμία εγκατάσταση.</div>
 
   <div class="toolbar screen-only">
-    <div class="group">
-      <button class="btn" id="exportDataBtn" type="button">💾 Εξαγωγή Δεδομένων (JSON)</button>
-      <label class="upload-btn" for="importDataInput">📂 Εισαγωγή Δεδομένων</label>
-      <input type="file" id="importDataInput" accept=".json,application/json" hidden>
-    </div>
-    <div class="count-badge">Backup ή μεταφορά της βιβλιοθήκης καρτών σε άλλο browser/υπολογιστή</div>
-  </div>
-
-  <div class="toolbar screen-only">
     <input type="file" id="cardImageInput" accept="image/*" hidden>
     <div class="group"><input type="text" id="searchInput" placeholder="Αναζήτηση ονόματος..."></div>
     <div class="group">
@@ -393,6 +384,15 @@
       <div class="cards-grid grid-trading" id="grid-npc"></div>
     </section>
   </main>
+
+  <div class="toolbar screen-only">
+    <div class="group">
+      <button class="btn" id="exportDataBtn" type="button">💾 Εξαγωγή Δεδομένων (JSON)</button>
+      <label class="upload-btn" for="importDataInput">📂 Εισαγωγή Δεδομένων</label>
+      <input type="file" id="importDataInput" accept=".json,application/json" hidden>
+    </div>
+    <div class="count-badge">Backup ή μεταφορά της βιβλιοθήκης καρτών σε άλλο browser/υπολογιστή</div>
+  </div>
 
   <div id="printRoot"></div>
 
@@ -1008,7 +1008,7 @@
   function tradingBackInner(){
     return '<div class="t-back"><div class="t-back-border">'
       +'<svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg>'
-      +'<div class="t-back-title">ARCANUM<span>CODEX</span></div>'
+      +'<div class="t-back-title">ΜΙΚΡΟΙ<span>ΗΡΩΕΣ</span></div>'
       +'</div></div>';
   }
   function frontInnerFor(c){
