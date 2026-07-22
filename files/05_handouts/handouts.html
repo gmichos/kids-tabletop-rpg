@@ -78,51 +78,19 @@ table.it-table tr:nth-child(even) td { background: #fbfaf7; }
 
 h2.section-h { color: #5a3e85; font-size: 15px; font-weight: 700; border-bottom: 2px solid #e6e1ef; padding-bottom: 6px; margin-top: 20px; }
 
-/* ===== NPC / ITEM CARDS ===== */
+/* ===== NPC / ITEM CARDS: now separate printable decks ===== */
 .page-title {
   text-align: center; font-size: 19px; font-weight: 800; letter-spacing: -0.3px; color: #5a3e85; margin: 0 0 8mm 0;
 }
-.card-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6mm; }
-.card-grid + .card-grid { margin-top: 6mm; }
-.card {
-  border-radius: 10px; padding: 10px 14px; display: flex; flex-direction: column;
-  background: #ffffff; border: 1px solid #e6e1ef; border-top: 5px solid #888;
-  box-shadow: 0 1px 4px rgba(32,28,43,0.08); page-break-inside: avoid;
+.deck-links { display: flex; flex-direction: column; gap: 16px; align-items: center; margin-top: 30px; }
+.deck-link-box {
+  border: 1.5px solid #e6e1ef; border-radius: 10px; padding: 16px 26px; text-align: center;
+  max-width: 420px; background: #fbfaf7;
 }
-.npc-quest { border-top-color: #e8a93b; }
-.npc-elder { border-top-color: #6b5b95; }
-.npc-ally { border-top-color: #4f8a3d; }
-.npc-boss { border-top-color: #b6342a; }
-.item-common { border-top-color: #8a6a3a; }
-.item-magic { border-top-color: #2969a0; }
-.item-plot { border-top-color: #2e6d6d; }
-.item-legendary { border-top-color: #c07f1e; }
-
-.card-header { text-align: center; border-radius: 7px; padding: 6px 6px; color: white; margin-bottom: 6px; }
-.npc-quest .card-header { background: #e8a93b; }
-.npc-elder .card-header { background: #6b5b95; }
-.npc-ally .card-header { background: #4f8a3d; }
-.npc-boss .card-header { background: #b6342a; }
-.item-common .card-header { background: #8a6a3a; }
-.item-magic .card-header { background: #2969a0; }
-.item-plot .card-header { background: #2e6d6d; }
-.item-legendary .card-header { background: #c07f1e; }
-
-.card-icon { font-size: 27px; }
-.card-name-el { font-size: 15px; font-weight: 700; margin: 2px 0 0 0; }
-.role-badge {
-  display: inline-block; font-size: 7.5px; font-weight: 700; letter-spacing: 0.3px;
-  background: rgba(255,255,255,0.28); border-radius: 20px; padding: 2px 8px; margin-top: 3px;
-}
-.card-body { font-size: 10.5px; line-height: 1.45; flex-grow: 1; }
-.card-body b { color: #201c2b; }
-.card-line { margin-bottom: 4px; }
-.card-highlight {
-  background: #f4f0fb; border-radius: 6px; padding: 5px 8px; font-size: 10px; margin: 5px 0;
-}
-.card-flavor {
-  font-size: 10px; font-style: italic; color: #6b6478; border-top: 1px dashed #e6e1ef;
-  margin-top: 6px; padding-top: 5px;
+.deck-link-box p { font-size: 13px; color: #6b6478; margin: 4px 0 12px; }
+.deck-link-box a {
+  display: inline-block; background: #5a3e85; color: #fff; text-decoration: none;
+  font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 6px;
 }
 </style>
 </head>
@@ -246,155 +214,21 @@ h2.section-h { color: #5a3e85; font-size: 15px; font-weight: 700; border-bottom:
 
 </div>
 
-<!-- ============ PAGE 5: NPC CARDS ============ -->
+<!-- ============ PAGE 5: NPC & ITEM CARD DECKS (separate printable files) ============ -->
 <div class="page">
-<div class="page-title">🎭 Κάρτες NPC</div>
+<div class="page-title">🎭🎒 Κάρτες NPC &amp; Αντικειμένων</div>
 
-<div class="card-grid">
-
-<div class="card npc-quest">
-  <div class="card-header">
-    <div class="card-icon">🧑‍🌾</div>
-    <div class="card-name-el">Μπάρναμπι</div>
-    <div class="role-badge">ΔΙΝΕΙ ΤΗΝ ΑΠΟΣΤΟΛΗ</div>
+<div class="deck-links">
+  <div class="deck-link-box">
+    <div style="font-size:22px;">🎭</div>
+    <p>Οι 4 κάρτες NPC (Μπάρναμπι, Γέρος Θάντος, Γκρέβιν, Ο Νεαρός Δράκος) τυπώνονται πλέον ξεχωριστά, σε πραγματικό μέγεθος κάρτας (63×88mm) — έτοιμες για κοπή.</p>
+    <a href="npc-cards.html">🎭 Άνοιγμα Καρτών NPC</a>
   </div>
-  <div class="card-body">
-    <div class="card-line">😰 Νευρικός, μιλάει γρήγορα, πολύ ευγνώμων</div>
-    <div class="card-highlight">🎭 <b>Quirk:</b> τρίβει συνέχεια τα χέρια του, ξαναλέει προτάσεις διαφορετικά</div>
-    <div class="card-line">🎯 <b>Θέλει:</b> να βρεθεί το πρόβατό του, ο Κύρος</div>
-    <div class="card-line">💰 <b>Ανταμοιβή:</b> 20 χρυσά νομίσματα</div>
+  <div class="deck-link-box">
+    <div style="font-size:22px;">🎒</div>
+    <p>Οι 5 κάρτες αντικειμένων της εκστρατείας τυπώνονται πλέον ξεχωριστά, σε πραγματικό μέγεθος κάρτας (63×88mm) — έτοιμες για κοπή.</p>
+    <a href="item-cards.html">🎒 Άνοιγμα Καρτών Αντικειμένων</a>
   </div>
-  <div class="card-flavor">"Σε παρακαλώ... πρέπει να βοηθήσετε! Δεν μπορώ να κοιμηθώ μέχρι να μάθω τι έγινε ο Κύρος!"</div>
-</div>
-
-<div class="card npc-elder">
-  <div class="card-header">
-    <div class="card-icon">👴</div>
-    <div class="card-name-el">Γέρος Θάντος</div>
-    <div class="role-badge">ΔΙΝΕΙ ΠΛΗΡΟΦΟΡΙΕΣ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">🗣️ Μιλάει αργά, χρειάζεται υπομονή, λατρεύει να αφηγείται</div>
-    <div class="card-highlight">🎭 <b>Quirk:</b> διακόπτεται συνέχεια ("Πού είχα μείνει;")</div>
-    <div class="card-line">📖 <b>Ξέρει:</b> παλιές ιστορίες για τα Ερείπια των Σκελετών</div>
-  </div>
-  <div class="card-flavor">"Ααα, τα Ερείπια... θυμάμαι όταν ήμουν παιδί, η γιαγιά μου έλεγε πως εκεί στοιχειώνει κάτι παλιό..."</div>
-</div>
-
-</div>
-
-<div class="card-grid">
-
-<div class="card npc-ally">
-  <div class="card-header">
-    <div class="card-icon">⛏️</div>
-    <div class="card-name-el">Γκρέβιν</div>
-    <div class="role-badge">ΠΙΘΑΝΟΣ ΣΥΜΜΑΧΟΣ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">💪 Θαρραλέος, λίγο καυχησιάρης, καλόκαρδος</div>
-    <div class="card-highlight">🎭 <b>Quirk:</b> χτυπάει το τσεκούρι του στο έδαφος όταν ενθουσιάζεται</div>
-    <div class="card-line">🤝 <b>Μπορεί να:</b> δώσει συμβουλή ή να πολεμήσει μαζί τους μία μάχη</div>
-  </div>
-  <div class="card-flavor">"Ε, δεν φοβάμαι τίποτα εγώ! Πάμε, δείξτε μου πού είναι το πρόβλημα!"</div>
-</div>
-
-<div class="card npc-boss">
-  <div class="card-header">
-    <div class="card-icon">🐉</div>
-    <div class="card-name-el">Ο Νεαρός Δράκος</div>
-    <div class="role-badge">ΤΕΛΙΚΟ ΑΦΕΝΤΙΚΟ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">👑 Υπερήφανος, προστατευτικός — δεν είναι κακός, υπερασπίζεται τη φωλιά του</div>
-    <div class="card-highlight">🎭 <b>Quirk:</b> βαριά αργή φωνή, ροχαλίζει πολύ δυνατά</div>
-    <div class="card-line">💬 <b>GM tip:</b> Δοκιμή Πειθούς DC 18 τον πείθει να φύγει ειρηνικά</div>
-  </div>
-  <div class="card-flavor">"Γιατί ήρθατε στη φωλιά μου; Φύγετε... ή θα σας κάψω!"</div>
-</div>
-
-</div>
-</div>
-
-<!-- ============ PAGE 6: ITEM CARDS ============ -->
-<div class="page">
-<div class="page-title">🎒 Κάρτες Αντικειμένων</div>
-
-<div class="card-grid">
-
-<div class="card item-common">
-  <div class="card-header">
-    <div class="card-icon">📖</div>
-    <div class="card-name-el">Το Παλιό Βιβλίο Ξορκιών</div>
-    <div class="role-badge">ΚΕΦΑΛΑΙΟ 2 — ΔΑΣΟΣ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">📍 Βρίσκεται στη σπηλιά των Γκόμπλιν</div>
-    <div class="card-highlight">✨ <b>Effect:</b> περιέχει την κάρτα ξορκιού 🔥 Φλόγα Χεριού — αν έχετε μάγο, τη μαθαίνει</div>
-  </div>
-  <div class="card-flavor">"Οι σελίδες είναι τσαλακωμένες και μυρίζουν καπνό."</div>
-</div>
-
-<div class="card item-magic">
-  <div class="card-header">
-    <div class="card-icon">💍</div>
-    <div class="card-name-el">Το Δαχτυλίδι της Επιδεξιότητας</div>
-    <div class="role-badge">ΚΕΦΑΛΑΙΟ 3 — ΕΡΕΙΠΙΑ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">📍 Βρίσκεται στα Ερείπια των Σκελετών</div>
-    <div class="card-highlight">✨ <b>Effect:</b> +1 σε μία δοκιμή δεξιότητας της επιλογής σας (π.χ. Αντίληψη)</div>
-  </div>
-  <div class="card-flavor">"Ένα απλό ασημένιο δαχτυλίδι, χαραγμένο με μικροσκοπικά αστέρια."</div>
-</div>
-
-</div>
-
-<div class="card-grid">
-
-<div class="card item-common">
-  <div class="card-header">
-    <div class="card-icon">🗿</div>
-    <div class="card-name-el">Η Σκαλισμένη Πέτρα Θεραπείας</div>
-    <div class="role-badge">ΚΕΦΑΛΑΙΟ 3 — ΕΡΕΙΠΙΑ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">📍 Βρίσκεται στα Ερείπια των Σκελετών</div>
-    <div class="card-highlight">✨ <b>Effect:</b> περιέχει την κάρτα ξορκιού 💚 Θεραπεία Τραυμάτων — αν έχετε ιερέα, τη μαθαίνει</div>
-  </div>
-  <div class="card-flavor">"Στην πέτρα είναι σκαλισμένο ένα χέρι που λάμπει απαλά."</div>
-</div>
-
-<div class="card item-plot">
-  <div class="card-header">
-    <div class="card-icon">🗺️</div>
-    <div class="card-name-el">Ο Μυστηριώδης Χάρτης</div>
-    <div class="role-badge">ΤΕΛΟΣ ΠΕΡΙΠΕΤΕΙΑΣ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">📍 Βρίσκεται στον θησαυρό του δράκου</div>
-    <div class="card-highlight">✨ <b>Effect:</b> δείχνει προς μια νέα, μακρινή περιοχή — hook για την επόμενη περιπέτεια!</div>
-  </div>
-  <div class="card-flavor">"Σβησμένα μελανιά, αλλά ένα σημείο είναι σημειωμένο με κόκκινο X."</div>
-</div>
-
-</div>
-
-<div class="card-grid">
-
-<div class="card item-legendary">
-  <div class="card-header">
-    <div class="card-icon">💰</div>
-    <div class="card-name-el">Ο Θησαυρός του Δράκου</div>
-    <div class="role-badge">ΚΕΦΑΛΑΙΟ 5 — ΤΕΛΙΚΟ ΒΡΑΒΕΙΟ</div>
-  </div>
-  <div class="card-body">
-    <div class="card-line">📍 Βρίσκεται στη Σπηλιά του Δράκου</div>
-    <div class="card-highlight">✨ <b>Effect:</b> χρυσά νομίσματα, κοσμήματα, και ένα ισχυρό μαγικό αντικείμενο της επιλογής σας</div>
-  </div>
-  <div class="card-flavor">"Μια λαμπερή στοίβα χρυσού, πιο ψηλή από έναν ήρωα."</div>
-</div>
-
 </div>
 </div>
 
