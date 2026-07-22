@@ -525,7 +525,7 @@
   var SAMPLE_CSV_NPC =
 '"Name; Role; Personality; Quirk; Wants; Reward; Quote"\n'+
 '"Μπάρναμπι; Δίνει την αποστολή; Νευρικός, μιλάει γρήγορα, πολύ ευγνώμων; Τρίβει συνέχεια τα χέρια του; Να βρεθεί το πρόβατό του, ο Κύρος; 20 χρυσά νομίσματα; Σε παρακαλώ... πρέπει να βοηθήσετε!"\n'+
-'"Γέρος Θάντος; Δίνει πληροφορίες; Μιλάει αργά, λατρεύει να αφηγείται; Διακόπτεται συνέχεια (\'Πού είχα μείνει;\'); Να τον ακούσουν με υπομονή; ; Ααα, τα Ερείπια... θυμάμαι όταν ήμουν παιδί..."\n';
+'"Γέρος Θάντος; Δίνει πληροφορίες; Μιλάει αργά, λατρεύει να αφηγείται; Χάνει συνέχεια το νήμα της ιστορίας του; Να τον ακούσουν με υπομονή; ; Ααα, τα Ερείπια... θυμάμαι όταν ήμουν παιδί..."\n';
   function downloadText(filename, text, mimeType){
     var blob = new Blob([text], {type:(mimeType||'text/csv;charset=utf-8')});
     var url = URL.createObjectURL(blob);
@@ -947,7 +947,7 @@
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +'<div class="t-sub">'+escapeHtml([c.school,c.class].filter(Boolean).join(' · '))+'</div>'
       +(infoLines.length?'<div class="t-info">'+infoLines.join('<br>')+'</div>':'')
-      +(c.description?'<p class="t-desc">'+escapeHtml(c.description)+'</p>':'')
+      +'<p class="t-desc">'+(c.description?escapeHtml(c.description):'')+'</p>'
       +'<div class="t-tag">ΞΟΡΚΙ</div>'
       +'</div>';
   }
@@ -959,7 +959,7 @@
       +'<div class="t-sub">'+escapeHtml([c.type,c.price].filter(Boolean).join(' · '))+'</div>'
       +(c.effect?'<div class="t-info"><b>Ζημιά/Effect:</b> '+escapeHtml(c.effect)+'</div>':'')
       +(c.properties?'<div class="t-info"><b>Ιδιότητες:</b> '+escapeHtml(c.properties)+'</div>':'')
-      +(c.description?'<p class="t-desc">'+escapeHtml(c.description)+'</p>':'')
+      +'<p class="t-desc">'+(c.description?escapeHtml(c.description):'')+'</p>'
       +'<div class="t-tag">ΑΝΤΙΚΕΙΜΕΝΟ</div>'
       +'</div>';
   }
@@ -969,7 +969,7 @@
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +(c.cost?'<div class="t-sub">'+escapeHtml(c.cost)+'</div>':'')
       +(c.effect?'<div class="t-info"><b>Effect:</b> '+escapeHtml(c.effect)+'</div>':'')
-      +(c.description?'<p class="t-desc">'+escapeHtml(c.description)+'</p>':'')
+      +'<p class="t-desc">'+(c.description?escapeHtml(c.description):'')+'</p>'
       +'<div class="t-tag">ΙΚΑΝΟΤΗΤΑ</div>'
       +'</div>';
   }
@@ -978,10 +978,10 @@
       +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.role||'NPC')+'</span><svg class="t-icon"><use href="#icon-humanoid"></use></svg></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +(c.personality?'<div class="t-info">'+escapeHtml(c.personality)+'</div>':'')
-      +(c.quirk?'<div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;"><b>Quirk:</b> '+escapeHtml(c.quirk)+'</div>':'')
+      +(c.quirk?'<div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Quirk:</b> '+escapeHtml(c.quirk)+'</div>':'')
       +(c.wants?'<div class="t-info"><b>Θέλει:</b> '+escapeHtml(c.wants)+'</div>':'')
       +(c.reward?'<div class="t-info"><b>Ανταμοιβή:</b> '+escapeHtml(c.reward)+'</div>':'')
-      +(c.quote?'<p class="t-desc" style="font-style:italic;">"'+escapeHtml(c.quote)+'"</p>':'')
+      +'<p class="t-desc" style="font-style:italic;">'+(c.quote?('"'+escapeHtml(c.quote)+'"'):'')+'</p>'
       +'<div class="t-tag">NPC</div>'
       +'</div>';
   }
