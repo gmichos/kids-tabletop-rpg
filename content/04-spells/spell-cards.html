@@ -49,14 +49,20 @@
   .t-back-emblem{width:18mm;height:18mm;color:var(--gold);}
   
   @media print{
+    .back-link{display:none;}
     body{background:#fff;color:#000;}
     .page-title{display:none;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
     .print-page{break-after:page;page-break-after:always;}
   }
+  .back-link{text-align:center;font-size:13px;margin:0 0 10px;}
+  .back-link a{color:var(--brand);text-decoration:none;font-weight:600;}
+  .back-link a:hover{text-decoration:underline;}
 </style>
 </head>
 <body>
+<div class="back-link screen-only"><a href="spells.html">&larr; Πίσω στα Ξόρκια</a></div>
+
 
 <svg style="display:none" aria-hidden="true">
   <symbol id="icon-dragon" viewBox="0 0 100 100">

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<style>
+@page { size: A4; margin: 20mm 18mm; }
+:root {
+  --ink: #201c2b;
+  --muted: #6b6478;
+  --brand: #5a3e85;
+  --brand-dark: #3d2a5c;
+  --brand-tint: #f1ecfa;
+  --gold: #e8a93b;
+  --gold-tint: #fdf3e0;
+  --line: #e6e1ef;
+  --paper: #fefdfb;
+  --card: #ffffff;
+}
+* { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--ink);
+  line-height: 1.6;
+  font-size: 14px;
+  background: var(--paper);
+}
+.back-link{text-align:center;font-size:13px;margin:0 0 10px;}
+.back-link a{color:var(--brand);text-decoration:none;font-weight:600;}
+.back-link a:hover{text-decoration:underline;}
+@media print{ .back-link{display:none;} }
+.cover {
+  text-align: center;
+  padding-top: 70px;
+  page-break-after: always;
+}
+.cover h1 {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--brand);
+  margin: 8px 0 0 0;
+}
+.cover .subtitle {
+  font-size: 17px;
+  color: var(--muted);
+  margin-top: 10px;
+  font-weight: 500;
+}
+.cover .badge {
+  display: inline-block;
+  margin-top: 36px;
+  padding: 10px 22px;
+  background: var(--brand);
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: white;
+  font-weight: 700;
+}
+h1.section-title {
+  background: var(--brand);
+  color: white;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+h2 {
+  color: var(--brand);
+  font-size: 15px;
+  font-weight: 700;
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 6px;
+  margin-top: 26px;
+}
+.section { page-break-inside: avoid; margin-bottom: 12px;}
+.box {
+  background: var(--gold-tint);
+  border: 1px solid #f0d9a8;
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin: 12px 0;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 14px 0;
+  font-size: 12.5px;
+}
+th {
+  background: var(--brand-tint);
+  color: var(--brand-dark);
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 700;
+  border-bottom: 2px solid var(--brand);
+}
+td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line);
+}
+tr:nth-child(even) { background: #fbfaf7; }
+ul { margin-top: 6px; }
+li { margin-bottom: 4px; }
+.page-break { page-break-before: always; }
+.small { font-size: 11px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="back-link screen-only"><a href="../../index.html">&larr; Αρχική Σελίδα</a></div>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <h1>ΔΗΜΙΟΥΡΓΙΑ ΧΑΡΑΚΤΗΡΑ &amp; ΕΞΕΛΙΞΗ</h1>
+  <div class="subtitle">Οδηγός για Νέους Παίκτες και Game Masters — Επίπεδα 1–5</div>
+  <div class="badge">Πλήρης πίνακας εξέλιξης για 6 τάξεις</div>
+</div>
+
+<h1 class="section-title">Μέρος 1: Δημιουργία Νέου Ήρωα Βήμα-Βήμα</h1>
+<div class="section">
+<p>Η δημιουργία χαρακτήρα είναι το πρώτο διασκεδαστικό βήμα! Ακολουθήστε τα παρακάτω 6 απλά βήματα:</p>
+
+<h2>Βήμα 1: Η Αρχική Ιδέα (Concept)</h2>
+<p>Σκεφτείτε ποιος θέλετε να είναι ο ήρωάς σας:</p>
+<ul>
+<li><b>Όνομα</b>: Πώς τον λένε; (π.χ. Αλέξανδρος, Φοίβος, Αριάδνη, Λέων, Ιάσων).</li>
+<li><b>Εμφάνιση &amp; Προσωπικότητα</b>: Είναι ψηλός, γρήγορος, γελαστός, ή σοβαρός; Τι του αρέσει να κάνει;</li>
+</ul>
+
+<h2>Βήμα 2: Επιλογή Καταγωγής / Φυλής (Ancestry)</h2>
+<p>Κάθε φυλή προσφέρει μια μοναδική ειδική ικανότητα:</p>
+<table>
+<tr><th>Φυλή (Ελληνικά)</th><th>Φυλή (Αγγλικά)</th><th>Ειδική Ικανότητα για Παιδιά</th></tr>
+<tr><td><b>Άνθρωπος</b></td><td>Human</td><td><b>Πολυμήχανος</b>: +1 σε όλα τα modifiers ή 1 επιπλέον Δεξιότητα.</td></tr>
+<tr><td><b>Ξωτικό</b></td><td>Elf</td><td><b>Νυχτερινή Όραση &amp; Εγρήγορση</b>: Βλέπει στο σκότος (18μ.) και δεν κοιμάται βαθιά.</td></tr>
+<tr><td><b>Νάνος</b></td><td>Dwarf</td><td><b>Αντοχή Νάνου</b>: +1 HP σε κάθε επίπεδο και αντοχή σε δηλητήρια.</td></tr>
+<tr><td><b>Χάλφλινγκ</b></td><td>Halfling</td><td><b>Τύχη Χάλφλινγκ</b>: Αν φέρετε 1 στο d20, μπορείτε να το ξαναρίξετε!</td></tr>
+<tr><td><b>Γκνομ</b></td><td>Gnome</td><td><b>Μικρός Εφευρέτης</b>: Πλεονέκτημα σε ζαριές σωτηρίας ενάντια σε μαγεία.</td></tr>
+<tr><td><b>Δρακόμορφος</b></td><td>Dragonborn</td><td><b>Δρακική Ανάσα</b>: 1 φορά/ξεκούραση εκτοξεύει φωτιά ή πάγο (2d6 ζημιά).</td></tr>
+</table>
+
+<h2>Βήμα 3: Επιλογή Τάξης (Class)</h2>
+<p>Η τάξη καθορίζει πώς μάχεται και τι μαγικές ικανότητες έχει ο ήρωας:</p>
+<ol>
+<li><b>Πολεμιστής (Fighter)</b>: Δυνατός, ανθεκτικός, ειδικός στα όπλα.</li>
+<li><b>Μάγος (Wizard)</b>: Σοφός, ρίχνει ισχυρά ξόρκια από το βιβλίο του.</li>
+<li><b>Ιερέας (Cleric)</b>: Θεραπεύει συμμάχους και προστατεύει την ομάδα με θεϊκή δύναμη.</li>
+<li><b>Κλέφτης / Ιχνηλάτης (Rogue)</b>: Γρήγορος, αθόρυβος, χτυπάει από τις σκιές (Sneak Attack).</li>
+<li><b>Ρέιντζερ (Ranger)</b>: Τοξότης και εξερευνητής της φύσης.</li>
+<li><b>Παλαδίνος (Paladin)</b>: Ιερός πολεμιστής με βαριά πανοπλία, θεϊκά χτυπήματα και ξόρκια προστασίας (Bless, Shield of Faith).</li>
+</ol>
+
+<h2>Βήμα 4: Κατανομή Στατιστικών (Ability Scores)</h2>
+<p>Για γρήγορο και δίκαιο υπολογισμό, χρησιμοποιήστε τους <b>Έτοιμους Τροποποιητές (Modifiers)</b>: <b>+3, +2, +2, +1, +0, -1</b></p>
+<p>Τοποθετήστε αυτούς τους 6 αριθμούς στα 6 χαρακτηριστικά του χαρακτήρα σας ανάλογα με την τάξη του:</p>
+<ul>
+<li><b>Πολεμιστής</b>: +3 στη Δύναμη (STR) ή Επιδεξιότητα (DEX), +2 στο Σθένος (CON).</li>
+<li><b>Μάγος</b>: +3 στην Νοημοσύνη (INT), +2 στην Επιδεξιότητα (DEX) ή Σθένος (CON).</li>
+<li><b>Ιερέας</b>: +3 στη Σοφία (WIS), +2 στη Δύναμη (STR) ή Σθένος (CON).</li>
+<li><b>Κλέφτης</b>: +3 στην Επιδεξιότητα (DEX), +2 στη Χαρισματικότητα (CHA) ή Νοημοσύνη (INT).</li>
+<li><b>Ρέιντζερ</b>: +3 στην Επιδεξιότητα (DEX), +2 στη Σοφία (WIS).</li>
+<li><b>Παλαδίνος</b>: +3 στη Δύναμη (STR), +2 στη Χαρισματικότητα (CHA) ή Σθένος (CON).</li>
+</ul>
+
+<h2>Βήμα 5: Πόντοι Ζωής (HP) &amp; Κλάση Άμυνας (AC)</h2>
+<ul>
+<li><b>Αρχικοί Πόντοι Ζωής (HP στο Επίπεδο 1)</b>:
+  <ul>
+  <li><b>Πολεμιστής / Παλαδίνος</b>: 10 + CON modifier</li>
+  <li><b>Ιερέας / Ρέιντζερ</b>: 8 + CON modifier</li>
+  <li><b>Κλέφτης</b>: 8 + CON modifier</li>
+  <li><b>Μάγος</b>: 6 + CON modifier</li>
+  </ul>
+</li>
+<li><b>Κλάση Άμυνας (AC)</b>: 10 + DEX modifier + Bonus Πανοπλίας (π.χ. Δερμάτινη +1, Αλυσίδα +4, Ασπίδα +2).</li>
+</ul>
+
+<h2>Βήμα 6: Εξοπλισμός &amp; Ξεκίνημα</h2>
+<p>Κάθε ήρωας ξεκινά με:</p>
+<ul>
+<li>1 Βασικό Όπλο (Σπαθί, Τόξο, Ρόπαλο, ή Ραβδί).</li>
+<li>1 Πανοπλία (αν τη χρησιμοποιεί η τάξη του).</li>
+<li><b>Πακέτο Περιπέτειας</b>: Σακίδιο, σχοινί 15μ., πυρσούς, παγούρι νερού, 10 χρυσά νομίσματα (gp).</li>
+</ul>
+</div>
+
+<div class="page-break"></div>
+<h1 class="section-title">Μέρος 2: Οδηγός Εξέλιξης &amp; Level Up (Επίπεδα 1–5)</h1>
+<div class="section">
+<p>Όταν η ομάδα ολοκληρώνει αποστολές, νικά τέρατα ή λύνει γρίφους, ο Game Master ανακοινώνει: <b>"Ανεβαίνετε Επίπεδο!" (Level Up)</b>.</p>
+
+<div class="box">
+<b>Τι κερδίζετε σε ΚΑΘΕ Level Up:</b>
+<ol>
+<li><b>Περισσότερα HP</b>: Ρίχνετε το Ζάρι Ζωής (Hit Die) της τάξης σας, προσθέτετε το CON modifier, και προσθέτετε το αποτέλεσμα στα συνολικά HP σας.</li>
+<li><b>Νέες Ικανότητες &amp; Ξόρκια</b>: Ξεκλειδώνετε τις ικανότητες του νέου επιπέδου από τους παρακάτω πίνακες!</li>
+<li><b>Bonus Επάρκειας (Proficiency Bonus)</b>: Επίπεδα 1–4: +2 · Επίπεδο 5: +3 (Όλες οι επιθέσεις και οι δεξιότητές σας γίνονται πιο δυνατές!)</li>
+</ol>
+</div>
+
+<h2>Πίνακας Εξέλιξης Πολεμιστή (Fighter)</h2>
+<table>
+<tr><th>Επίπεδο</th><th>Hit Die</th><th>Ικανότητες &amp; Αναβαθμίσεις</th></tr>
+<tr><td>1</td><td>d10</td><td><b>Στυλ Μάχης</b> (+1 AC ή +2 ζημιά) &amp; <b>Δεύτερη Ανάσα</b> (θεραπεύει 1d10+Level HP 1x/ξεκούραση).</td></tr>
+<tr><td>2</td><td>d10</td><td><b>Ορμή Δράσης (Action Surge)</b>: Κάνετε 1 επιπλέον ενέργεια στη σειρά σας (1x/μεγάλη ξεκούραση).</td></tr>
+<tr><td>3</td><td>d10</td><td><b>Πρωταθλητής (Champion)</b>: Πετυχαίνετε Κρίσιμο Χτύπημα (Critical Hit) στο d20 αν φέρετε 19 ή 20!</td></tr>
+<tr><td>4</td><td>d10</td><td><b>Αύξηση Χαρακτηριστικού</b>: +2 σε ένα modifier (π.χ. Δύναμη +1) ή +1 σε δύο.</td></tr>
+<tr><td>5</td><td>d10</td><td><b>Επιπλέον Επίθεση (Extra Attack)</b>: Επιτίθεστε 2 φορές σε κάθε γύρο μάχης! (Proficiency +3).</td></tr>
+</table>
+
+<h2>Πίνακας Εξέλιξης Μάγου (Wizard)</h2>
+<table>
+<tr><th>Επίπεδο</th><th>Hit Die</th><th>Ξόρκια &amp; Θέσεις</th><th>Ικανότητες &amp; Αναβαθμίσεις</th></tr>
+<tr><td>1</td><td>d6</td><td>3 Cantrips, 2x 1st Level Slots</td><td><b>Αρκτική Ανάκτηση</b>: Ανακτάτε 1 spell slot σε σύντομη ξεκούραση.</td></tr>
+<tr><td>2</td><td>d6</td><td>3 Cantrips, 3x 1st Level Slots</td><td><b>Σχολή Επίκλησης (Evocation)</b>: Προστατεύετε τους συμμάχους σας ώστε να μην παίρνουν ζημιά από τα δικά σας ξόρκια περιοχής (π.χ. Fireball)!</td></tr>
+<tr><td>3</td><td>d6</td><td>3 Cantrips, 4x 1st, 2x 2nd Slots</td><td><b>Ξόρκια 2ου Επιπέδου</b>: Ξεκλειδώνετε Misty Step (Τηλεμεταφορά) &amp; Invisibility (Αορατότητα).</td></tr>
+<tr><td>4</td><td>d6</td><td>4 Cantrips, 4x 1st, 3x 2nd Slots</td><td><b>Αύξηση Χαρακτηριστικού</b>: +2 στην Νοημοσύνη (INT modifier).</td></tr>
+<tr><td>5</td><td>d6</td><td>4 Cantrips, 4x 1st, 3x 2nd, 2x 3rd</td><td><b>Ξόρκια 3ου Επιπέδου</b>: Ξεκλειδώνετε Fireball (Φλογερή Μπάλα) &amp; Counterspell! (Proficiency +3).</td></tr>
+</table>
+
+<h2>Πίνακας Εξέλιξης Ιερέα (Cleric)</h2>
+<table>
+<tr><th>Επίπεδο</th><th>Hit Die</th><th>Ξόρκια &amp; Θέσεις</th><th>Ικανότητες &amp; Αναβαθμίσεις</th></tr>
+<tr><td>1</td><td>d8</td><td>3 Cantrips, 2x 1st Level Slots</td><td><b>Τομέας Ζωής (Life Domain)</b>: Όλα τα θεραπευτικά ξόρκια θεραπεύουν +2 επιπλέον HP.</td></tr>
+<tr><td>2</td><td>d8</td><td>3 Cantrips, 3x 1st Level Slots</td><td><b>Θεϊκό Κανάλι (Preserve Life)</b>: Θεραπεύετε αμέσως τραυματισμένους συμμάχους στο τραπέζι!</td></tr>
+<tr><td>3</td><td>d8</td><td>3 Cantrips, 4x 1st, 2x 2nd Slots</td><td><b>Ξόρκια 2ου Επιπέδου</b>: Spiritual Weapon (Πνευματικό Όπλο) &amp; Lesser Restoration.</td></tr>
+<tr><td>4</td><td>d8</td><td>4 Cantrips, 4x 1st, 3x 2nd Slots</td><td><b>Αύξηση Χαρακτηριστικού</b>: +2 στη Σοφία (WIS modifier).</td></tr>
+<tr><td>5</td><td>d8</td><td>4 Cantrips, 4x 1st, 3x 2nd, 2x 3rd</td><td><b>Ξόρκια 3ου Επιπέδου</b>: Spirit Guardians &amp; Revivify (Αναζωογόνηση). (Proficiency +3).</td></tr>
+</table>
+
+<h2>Πίνακας Εξέλιξης Κλέφτη (Rogue)</h2>
+<table>
+<tr><th>Επίπεδο</th><th>Hit Die</th><th>Sneak Attack</th><th>Ικανότητες &amp; Αναβαθμίσεις</th></tr>
+<tr><td>1</td><td>d8</td><td>+1d6</td><td><b>Ύπουλη Επίθεση (Sneak Attack)</b>: +1d6 ζημιά όταν έχετε πλεονέκτημα ή σύμμαχο κοντά στον εχθρό.</td></tr>
+<tr><td>2</td><td>d8</td><td>+1d6</td><td><b>Πονηρή Ενέργεια (Cunning Action)</b>: Μπορείτε να κάνετε Dash, Disengage, ή Hide ως Bonus Ενέργεια!</td></tr>
+<tr><td>3</td><td>d8</td><td>+2d6</td><td><b>Εξειδίκευση Ιχνηλάτη</b>: Γρήγορο σκαρφάλωμα και άνοιγμα κλειδαριών.</td></tr>
+<tr><td>4</td><td>d8</td><td>+2d6</td><td><b>Αύξηση Χαρακτηριστικού</b>: +2 στην Επιδεξιότητα (DEX modifier).</td></tr>
+<tr><td>5</td><td>d8</td><td>+3d6</td><td><b>Απίστευτη Αποφυγή (Uncanny Dodge)</b>: Μειώνετε στη μισή τη ζημιά από επίθεση που σας χτυπά! (Proficiency +3).</td></tr>
+</table>
+
+<h2>Πίνακας Εξέλιξης Ρέιντζερ (Ranger)</h2>
+<table>
+<tr><th>Επίπεδο</th><th>Hit Die</th><th>Ξόρκια &amp; Θέσεις</th><th>Ικανότητες &amp; Αναβαθμίσεις</th></tr>
+<tr><td>1</td><td>d10</td><td>—</td><td><b>Αγαπημένος Εχθρός &amp; Εξερευνητής</b>: Πλεονέκτημα σε ζαριές Αντίληψης και ιχνηλάτησης στη φύση.</td></tr>
+<tr><td>2</td><td>d10</td><td>2x 1st Level Slots</td><td><b>Στυλ Τοξοβολίας</b> (+2 στις ζαριές επίθεσης με τόξο) &amp; Ξόρκια (Hunter's Mark, Cure Wounds).</td></tr>
+<tr><td>3</td><td>d10</td><td>3x 1st Level Slots</td><td><b>Εξολοθρευτής Κολοσσών (Colossus Slayer)</b>: +1d8 επιπλέον ζημιά 1x/γύρο σε εχθρό που είναι ήδη τραυματισμένος!</td></tr>
+<tr><td>4</td><td>d10</td><td>3x 1st Level Slots</td><td><b>Αύξηση Χαρακτηριστικού</b>: +2 στην Επιδεξιότητα (DEX modifier).</td></tr>
+<tr><td>5</td><td>d10</td><td>4x 1st, 2x 2nd Slots</td><td><b>Επιπλέον Επίθεση (Extra Attack)</b> &amp; Ξόρκια 2ου Επιπέδου (Pass Without Trace). (Proficiency +3).</td></tr>
+</table>
+
+<h2>Πίνακας Εξέλιξης Παλαδίνου (Paladin)</h2>
+<table>
+<tr><th>Επίπεδο</th><th>Hit Die</th><th>Ξόρκια &amp; Θέσεις</th><th>Ικανότητες &amp; Αναβαθμίσεις</th></tr>
+<tr><td>1</td><td>d10</td><td>—</td><td><b>Άγγιγμα Θεραπείας (Lay on Hands)</b>: Θεραπεύει HP ίσα με 5 × Επίπεδο (1x/ξεκούραση) &amp; Θεϊκή Αίσθηση.</td></tr>
+<tr><td>2</td><td>d10</td><td>2x 1st Level Slots</td><td><b>Στυλ Μάχης</b> (+1 AC) &amp; Ξόρκια 1ου Επιπέδου (Bless, Shield of Faith, Cure Wounds).</td></tr>
+<tr><td>3</td><td>d10</td><td>3x 1st Level Slots</td><td><b>Θεϊκό Χτύπημα (Divine Smite)</b>: Ξοδεύετε 1 spell slot για να προσθέσετε +2d8 θεϊκή ζημιά σε χτύπημα με όπλο!</td></tr>
+<tr><td>4</td><td>d10</td><td>3x 1st Level Slots</td><td><b>Αύξηση Χαρακτηριστικού</b>: +2 στη Δύναμη (STR) ή Χαρισματικότητα (CHA modifier).</td></tr>
+<tr><td>5</td><td>d10</td><td>4x 1st, 2x 2nd Slots</td><td><b>Επιπλέον Επίθεση (Extra Attack)</b>: 2 επιθέσεις ανά γύρο &amp; Ξόρκια 2ου Επιπέδου (Magic Weapon). (Proficiency +3).</td></tr>
+</table>
+</div>
+
+<h1 class="section-title">Μέρος 3: Συμβουλές για τον Game Master</h1>
+<div class="section">
+<ul>
+<li><b>Γιορτάστε το Level Up</b>: Κάντε το Level Up μια στιγμή χαράς στο τέλος της συνεδρίας. Αφήστε τα παιδιά να διαλέξουν τα νέα τους ξόρκια ή να περιγράψουν πώς προπονήθηκε ο ήρωάς τους!</li>
+<li><b>Ισορροπία Μάχης στο Επίπεδο 5</b>: Στο Επίπεδο 5 οι ήρωες γίνονται πολύ δυνατοί (Extra Attack, Fireball, Divine Smite). Μπορείτε πλέον να τους βάλετε να αντιμετωπίσουν μεγαλύτερα τέρατα όπως ο Νεαρός Δράκος (Young Dragon) ή ομάδες από γκόμπλιν και σκελετούς μαζί!</li>
+</ul>
+</div>
+
+<p class="small" style="text-align:center; margin-top: 30px;">Συνοδευτικός οδηγός δημιουργίας &amp; εξέλιξης χαρακτήρα, για χρήση μαζί με τους Βασικούς Κανόνες.</p>
+<p class="small" style="text-align:center; margin-top: 6px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <code>OGL.md</code>.</p>
+
+</body>
+</html>

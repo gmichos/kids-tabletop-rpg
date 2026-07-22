@@ -141,7 +141,7 @@
 
 ## 8. Βασικοί NPCs
 
-*Έτοιμες κάρτες με ατάκες και performable quirks για τα 4 βασικά NPCs: βλ. `files/05_handouts/handouts.md`, ενότητα 5.*
+*Έτοιμες κάρτες με ατάκες και performable quirks για τα 4 βασικά NPCs: βλ. `llm-reference/05-handouts/handouts.md`, ενότητα 5.*
 
 | NPC | Ρόλος | Σημειώσεις |
 |-----|--------|--------------|

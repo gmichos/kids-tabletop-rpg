@@ -150,9 +150,15 @@ li { margin-bottom: 4px; }
 .emoji { font-size: 15px; }
 .page-break { page-break-before: always; }
 .small { font-size: 11px; color: var(--muted); }
+  .back-link{text-align:center;font-size:13px;margin:0 0 10px;}
+  .back-link a{color:var(--brand);text-decoration:none;font-weight:600;}
+  .back-link a:hover{text-decoration:underline;}
+  @media print{ .back-link{display:none;} }
 </style>
 </head>
 <body>
+<div class="back-link screen-only"><a href="../../index.html">&larr; Αρχική Σελίδα</a></div>
+
 
 <!-- COVER PAGE -->
 <div class="cover">
