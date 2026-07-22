@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Γεννήτρια Καρτών — Τέρατα, Ξόρκια, Αντικείμενα, Δεξιότητες, NPCs</title>
+<title>Εργαλείο Καρτών — Τέρατα, Ξόρκια, Αντικείμενα, Δεξιότητες, NPCs</title>
 <style>
   :root{
     --ink:#201c2b;
@@ -53,6 +53,12 @@
   .chip .cat-tag{opacity:.7;font-size:.72rem;}
 
   .empty-state{text-align:center;padding:50px 20px;color:var(--muted);border:2px dashed var(--line);border-radius:10px;margin-bottom:20px;}
+
+  .cat-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .cat-nav-btn{background:var(--brand-tint);color:var(--brand-dark);border:1px solid var(--line);border-radius:20px;
+    padding:6px 14px;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;}
+  .cat-nav-btn:hover{background:var(--brand);color:#fff;}
+  .cat-nav-btn.active{background:var(--brand);color:#fff;border-color:var(--brand-dark);}
 
   .category-section{margin-bottom:34px;}
   .category-section h2{font-size:1.15rem;color:var(--brand);margin:0 0 4px;border-bottom:1px solid var(--line);padding-bottom:6px;}
@@ -173,7 +179,7 @@
 
   @media print{
     body{background:#fff;color:#000;}
-    header,.intro,.toolbar,.sources-bar,.empty-state,footer.note,.section-toolbar,#mappingModal,#categoryModal{display:none !important;}
+    header,.intro,.toolbar,.sources-bar,.cat-nav,.empty-state,footer.note,.section-toolbar,#mappingModal,#categoryModal{display:none !important;}
     .screen-only{display:none !important;}
     #printRoot{display:none;}
     body.printing-cards #printRoot{display:block;}
@@ -250,7 +256,7 @@
 <header class="screen-only">
   <a class="home-link" href="../index.html">← Αρχική Σελίδα</a>
   <div class="emoji">🃏</div>
-  <h1>Γεννήτρια Καρτών</h1>
+  <h1>Εργαλείο Καρτών</h1>
   <p>Ανέβασε CSV με τέρατα, ξόρκια, αντικείμενα, δεξιότητες ή NPCs και τύπωσε κάρτες σε πραγματικό μέγεθος</p>
 </header>
 
@@ -291,6 +297,7 @@
 
   <div class="sources-bar screen-only" id="sourcesBar"></div>
   <div class="empty-state screen-only" id="emptyState">Ανέβασε ένα CSV για να ξεκινήσεις — τέρατα, ξόρκια, ικανότητες, NPCs ή αντικείμενα/όπλα, όσα αρχεία θέλεις.</div>
+  <nav class="cat-nav screen-only" id="catNav"></nav>
 
   <main class="screen-only">
     <section class="category-section" id="section-monster" style="display:none">
@@ -549,6 +556,7 @@
   var MAP_CACHE_KEY = 'cardGen_mappingCache_v2';
 
   var state = { sources: [], cards: [] };
+  var VIEW_STATE = { activeCat: 'all' };
   var pendingImageCardId = null;
 
   // ================= Helpers =================
@@ -775,6 +783,14 @@
     var sourceId = 'src_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
     var cards = dataRows.map(function(r){ return buildCard(r, mapping, sourceId, category); }).filter(hasAnyData);
     if(cards.length===0) return;
+
+    var existing = state.sources.find(function(s){ return s.filename===file.name; });
+    if(existing){
+      var replace = confirm('Το αρχείο «'+file.name+'» έχει ήδη ανέβει ('+existing.count+' κάρτες). Αντικατάσταση με τη νέα έκδοση;');
+      if(!replace) return;
+      state.cards = state.cards.filter(function(c){ return c._source!==existing.id; });
+      state.sources = state.sources.filter(function(s){ return s.id!==existing.id; });
+    }
 
     state.sources.push({id:sourceId, filename:file.name, count:cards.length, category:category});
     state.cards = state.cards.concat(cards);
@@ -1044,6 +1060,28 @@
     }).join('');
   }
 
+  function renderCatNav(){
+    var nav = document.getElementById('catNav');
+    var counts = {};
+    CATEGORY_ORDER.forEach(function(cat){ counts[cat] = state.cards.filter(function(c){ return c._category===cat; }).length; });
+    var present = CATEGORY_ORDER.filter(function(cat){ return counts[cat]>0; });
+    if(present.length<2){ nav.innerHTML=''; VIEW_STATE.activeCat='all'; return; }
+    if(VIEW_STATE.activeCat!=='all' && counts[VIEW_STATE.activeCat]===0) VIEW_STATE.activeCat='all';
+    var btns = ['<button type="button" class="cat-nav-btn'+(VIEW_STATE.activeCat==='all'?' active':'')+'" data-cat="all">Όλες ('+state.cards.length+')</button>'];
+    present.forEach(function(cat){
+      var emoji = CATEGORY_EMOJI[cat] || '🃏';
+      btns.push('<button type="button" class="cat-nav-btn'+(VIEW_STATE.activeCat===cat?' active':'')+'" data-cat="'+cat+'">'+emoji+' '+CATEGORY_DEFS[cat].label+' ('+counts[cat]+')</button>');
+    });
+    nav.innerHTML = btns.join('');
+  }
+  document.getElementById('catNav').addEventListener('click', function(e){
+    var btn = e.target.closest('.cat-nav-btn');
+    if(!btn) return;
+    VIEW_STATE.activeCat = btn.getAttribute('data-cat');
+    renderCatNav();
+    renderCards();
+  });
+
   function renderCards(){
     var q = normalize(document.getElementById('searchInput').value);
     var totalCount = state.cards.length;
@@ -1056,10 +1094,10 @@
       var all = state.cards.filter(function(c){ return c._category===cat; });
       var section = document.getElementById('section-'+cat);
       if(all.length===0){ section.style.display='none'; return; }
-      section.style.display='block';
+      section.style.display = (VIEW_STATE.activeCat==='all' || VIEW_STATE.activeCat===cat) ? 'block' : 'none';
 
       var list = all.filter(function(c){ return !q || normalize(c.name).indexOf(q)!==-1; });
-      grandVisible += list.length;
+      if(VIEW_STATE.activeCat==='all' || VIEW_STATE.activeCat===cat) grandVisible += list.length;
       var sortSel = document.getElementById('sort-'+cat);
       list = list.slice().sort(sortComparator(cat, sortSel.value));
 
@@ -1093,7 +1131,7 @@
     flipAllBtn.textContent = '🔄 Όλες πίσω';
   }
 
-  function renderAll(){ renderSourcesBar(); renderCards(); }
+  function renderAll(){ renderSourcesBar(); renderCatNav(); renderCards(); }
 
   // ================= Events =================
   document.getElementById('fileInput').addEventListener('change', function(e){
