@@ -165,13 +165,13 @@
     background:radial-gradient(circle,var(--brand-tint),var(--card));}
   .t-back-symbol{width:16mm;height:16mm;color:var(--gold);opacity:.85;}
   .t-back-hint{margin-top:2.5mm;font-size:var(--fs-sm);color:var(--muted);opacity:.85;font-style:italic;text-align:center;padding:0 4mm;}
-  .t-back-img{width:100%;height:100%;object-fit:contain;display:block;}
-  /* NPC portraits are usually tall/narrow, which left big empty bars under
-     "contain" — fill the card instead, like a photo. */
-  .t-back[data-category="npc"] .t-back-img{object-fit:cover;}
+  .t-back-img{width:100%;height:100%;display:block;}
   .t-back-imgremove{position:absolute;top:1.5mm;right:2mm;background:var(--brand);color:#fff;border:none;
     border-radius:3mm;padding:.7mm 2.2mm;font-size:var(--fs-sm);cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.2);}
   .t-back-imgremove:hover{background:var(--brand-dark);}
+  .t-back-imgfit{position:absolute;top:1.5mm;left:2mm;background:var(--brand);color:#fff;border:none;
+    border-radius:3mm;padding:.7mm 2.2mm;font-size:var(--fs-sm);cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+  .t-back-imgfit:hover{background:var(--brand-dark);}
 
   #printRoot{display:none;}
 
@@ -200,7 +200,7 @@
     .app{max-width:none;padding:0;margin:0;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
     .print-page{break-after:page;page-break-after:always;}
-    .m-back-imgremove, .t-back-imgremove{display:none !important;}
+    .m-back-imgremove, .t-back-imgremove, .t-back-imgfit{display:none !important;}
   }
 </style>
 </head>
@@ -1061,10 +1061,21 @@
       +'<div class="t-tag">NPC</div>'
       +'</div>';
   }
+  // NPC portraits are usually tall/narrow; default them to filling the card
+  // (cropped) instead of the letterboxed "whole image" fit other categories get.
+  // The user can flip either category's choice per card with the fit toggle.
+  function defaultImageFit(category){ return category==='npc' ? 'cover' : 'contain'; }
+  function effectiveImageFit(c){ return c._imageFit || defaultImageFit(c._category); }
   function tradingBackInner(c){
     var imageContent;
     if(c._customImage){
-      imageContent = '<img class="t-back-img" src="'+c._customImage+'" alt="">'
+      var fit = effectiveImageFit(c);
+      // Clicking always offers the OTHER mode: from a filled/cropped image, offer
+      // to show it whole; from an uncropped image, offer to fill the card.
+      var fitLabel = fit==='cover' ? 'Ολόκληρη εικόνα (χωρίς περικοπή)' : 'Γέμισμα κάρτας (με περικοπή)';
+      var fitIcon = fit==='cover' ? '⛶' : '⤢';
+      imageContent = '<img class="t-back-img" style="object-fit:'+fit+'" src="'+c._customImage+'" alt="">'
+        + '<button type="button" class="t-back-imgfit" data-toggle-fit="'+c._id+'" title="'+fitLabel+'">'+fitIcon+'</button>'
         + '<button type="button" class="t-back-imgremove" data-remove-image="'+c._id+'" title="Αφαίρεση εικόνας">✕</button>';
     } else {
       var icon = pickBackSymbolIcon(c);
@@ -1268,14 +1279,25 @@
       saveLibrary(); renderAll();
       return;
     }
-    // Check the remove-image button before the upload trigger: the button lives
-    // inside the upload-trigger area, so its own closest([data-upload-image])
-    // would also match its ancestor and re-open the file picker instead.
+    // Check the remove-image and fit-toggle buttons before the upload trigger:
+    // both live inside the upload-trigger area, so their own
+    // closest([data-upload-image]) would also match that ancestor and
+    // re-open the file picker instead.
     var removeBtn = e.target.closest('[data-remove-image]');
     if(removeBtn){
       var rid = removeBtn.getAttribute('data-remove-image');
       var rcard = state.cards.find(function(c){ return c._id===rid; });
       if(rcard){ delete rcard._customImage; saveLibrary(); renderCards(); }
+      return;
+    }
+    var fitBtn = e.target.closest('[data-toggle-fit]');
+    if(fitBtn){
+      var fid = fitBtn.getAttribute('data-toggle-fit');
+      var fcard = state.cards.find(function(c){ return c._id===fid; });
+      if(fcard){
+        fcard._imageFit = effectiveImageFit(fcard)==='cover' ? 'contain' : 'cover';
+        saveLibrary(); renderCards();
+      }
       return;
     }
     var uploadTrigger = e.target.closest('[data-upload-image]');
