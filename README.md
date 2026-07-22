@@ -10,29 +10,45 @@ Wizards of the Coast): κανόνες, 5 έτοιμους χαρακτήρες, 
 ## Δομή Φακέλων
 
 ```
-index.html              ← κεντρική σελίδα, συνδέει όλο το υλικό
+index.html              ← κεντρική σελίδα, συνδέει όλο το υλικό (μόνο .html, το κοινό/live site)
 CLAUDE.md               ← οδηγίες παραγωγής περιεχομένου για το project
-files/
-  01_tutorial/     tutorial.md/html            Οι Βασικοί Κανόνες
-  02_campaign/     campaign.md/html, map.svg   Η Κοιλάδα του Δράκου
-  03_monsters/     monsters.md/html            Οδηγός Τεράτων
-                   monster-cards.md/html       Κάρτες Τεράτων
-                   monster-stats.csv           Πλήρη stat blocks
-  04_spells/       spells.md/html              Οδηγός Ξορκιών
-                   spell-cards.md/html         Κάρτες Ξορκιών
-                   spell-stats.csv             Πλήρη στοιχεία ξορκιών
-  05_handouts/     handouts.md/html            Handouts & Props
-                   items-stats.csv             Πλήρη στοιχεία αντικειμένων
-  06_dm_notes/     dm-notes.md/html            Οδηγός Game Master
-  07_characters/   characters.md/html          Έτοιμοι Χαρακτήρες
-  images/          goblins.png                 Εικονογράφηση (χρησιμοποιείται στο campaign, Κεφάλαιο 2)
+content/
+  01-tutorial/           tutorial.html                Οι Βασικοί Κανόνες
+  02-campaign/           campaign.html, map.svg,
+                         npc-stats.csv                Η Κοιλάδα του Δράκου
+  03-monsters/           monsters.html                Οδηγός Τεράτων
+                         monster-cards.html           Κάρτες Τεράτων
+                         monster-stats.csv            Πλήρη stat blocks
+  04-spells/             spells.html                  Οδηγός Ξορκιών
+                         spell-cards.html             Κάρτες Ξορκιών
+                         spell-stats.csv              Πλήρη στοιχεία ξορκιών
+  05-handouts/            handouts.html                Handouts & Props
+                         item-cards.html, npc-cards.html
+                         items-stats.csv              Πλήρη στοιχεία αντικειμένων
+  06-dm-guide/            dm-guide.html                Οδηγός Game Master
+  07-characters/          characters.html              Έτοιμοι Χαρακτήρες
+  08-character-creation/  character-creation.html      Δημιουργία Χαρακτήρα & Εξέλιξη
+  images/                 goblins.png, gryphon-cutout.png, skeleton-cutout.png,
+                         monsters/*.png, npcs/*.png   Όλες οι εικόνες που χρησιμοποιούν τα deliverables
+llm-reference/            ίδια δομή με content/, αλλά μόνο .md — πηγή/αναφορά για
+                         AI-assisted επεξεργασία, ΔΕΝ είναι μέρος του live site
+card_generator/          εργαλείο κάρτας (card-generator.html + sample CSVs), ανεξάρτητο εργαλείο
 ```
 
-Κάθε deliverable υπάρχει σε δύο μορφές:
-- **`.md`** — η πηγή, εύκολη για επεξεργασία
-- **`.html`** — μορφοποιημένη έκδοση, έτοιμη για εκτύπωση (A4). Αν χρειαστείς PDF, εξήγαγέ το από το `.html` κατά ζήτηση (δεν παρακολουθούνται `.pdf` στο repo — βλ. `.gitignore`).
+Κάθε deliverable ζει πλέον ως ένα `.html` κάτω από `content/NN-name/` — αυτό είναι το μόνο
+δημόσιο/shipped format. Η αντίστοιχη πηγή `.md` υπάρχει ξεχωριστά κάτω από `llm-reference/NN-name/`,
+με ακριβώς την ίδια αρίθμηση/ονομασία φακέλου, αλλά **δεν** συνδέεται από το `index.html` ή από
+καμία live σελίδα — προορίζεται μόνο ως ευανάγνωστο κείμενο-αναφορά για μελλοντική AI-assisted
+επεξεργασία περιεχομένου. Αν αλλάξεις κάτι σε ένα `.html`, ενημέρωσε (αν θες) και το αντίστοιχο `.md`
+στο `llm-reference/` — δεν υπάρχει generator που να συγχρονίζει το ένα από το άλλο.
 
-Τα `.md` και `.html` κάθε deliverable κρατιούνται σε sync σκόπιμα — αν αλλάξεις το ένα, ενημέρωσε και το άλλο.
+Κάθε σελίδα `content/NN-name/*.html` έχει ένα μικρό, ενιαίο link πλοήγησης (`.back-link.screen-only`)
+κοντά στην κορυφή — «← Αρχική Σελίδα» στις περισσότερες σελίδες, ή link προς το «αδελφό» βασικό
+έγγραφο στις σελίδες-κάρτες (π.χ. `monster-cards.html` → `monsters.html`). Το link κρύβεται στην
+εκτύπωση (`@media print`). Νέα deliverables πρέπει να ακολουθούν την ίδια σύμβαση.
+
+Αν χρειαστείς PDF, εξήγαγέ το από το `.html` κατά ζήτηση (δεν παρακολουθούνται `.pdf` στο repo — βλ.
+`.gitignore`).
 
 ## Χρωματικό Θέμα
 

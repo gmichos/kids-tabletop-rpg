@@ -13,15 +13,16 @@ truth for the license this project ships under, and every deliverable's
 footer links back to it.
 
 There is no application code to run — the repo *is* the deliverable
-(Markdown + print-ready HTML + CSV data + a standalone HTML tool).
+(print-ready HTML + CSV data + a standalone HTML tool, plus a separate
+Markdown reference tree kept only for AI-assisted editing — see Architecture).
 
 ## Commands
 
 There is no package manager, build step, linter, or test suite — this is a
-static content repo (Markdown, hand-authored HTML/CSS, CSV, SVG).
+static content repo (hand-authored HTML/CSS, Markdown, CSV, SVG).
 
 - **Preview a deliverable**: open its `.html` file directly in a browser
-  (e.g. `open files/02_campaign/campaign.html`), or open `index.html` for
+  (e.g. `open content/02-campaign/campaign.html`), or open `index.html` for
   the full navigable hub.
 - **Preview/use the card generator**: `open card_generator/card-generator.html`
   — a single self-contained file, no server or install needed.
@@ -31,17 +32,37 @@ static content repo (Markdown, hand-authored HTML/CSS, CSV, SVG).
 
 ## Architecture
 
-### Deliverable folders (`files/NN_name/`)
+### Deliverable folders (`content/NN-name/`)
 
-Each deliverable lives in its own numbered folder under `files/` and ships
-as a **pair of files kept manually in sync**: a `.md` source (easy to edit)
-and a mirrored `.html` (A4 print-ready, same visual theme). There is no
-generator that produces one from the other — editing one requires updating
-the other by hand. Some folders also carry a `.csv` with the deliverable's
-structured stat data (`monster-stats.csv`, `spell-stats.csv`,
-`items-stats.csv`) and one folder (`02_campaign`) has a `map.svg`.
-`index.html` at the repo root links every deliverable and must be updated
-when a new one is added.
+Each deliverable lives in its own numbered folder under `content/` and ships
+as a single print-ready `.html` (A4, shared visual theme) — this is the only
+public/live format; there is no Markdown shipped alongside it (see
+`llm-reference/` below). Some folders also carry a `.csv` with the
+deliverable's structured stat data (`monster-stats.csv`, `spell-stats.csv`,
+`items-stats.csv`, `npc-stats.csv`) and `02-campaign` has a `map.svg`. Images
+live under `content/images/` (with `monsters/` and `npcs/` subfolders for
+per-creature portraits). `index.html` at the repo root links every
+deliverable and must be updated when a new one is added.
+
+Every `content/NN-name/*.html` page carries a small `.back-link.screen-only`
+navigation element near the top: `← Αρχική Σελίδα` linking to
+`../../index.html` on most pages, or a link to the sibling reference doc on
+"card sheet" pages (e.g. `monster-cards.html` → `monsters.html`,
+`item-cards.html`/`npc-cards.html` → `handouts.html`). It's hidden from print
+via `@media print{ .back-link{display:none;} }`. New deliverables must follow
+this same convention — copy the CSS/markup from any existing page.
+
+### `llm-reference/` — Markdown source, not part of the site
+
+`llm-reference/NN-name/` mirrors the `content/NN-name/` numbering exactly,
+but holds only the `.md` source text for each deliverable (e.g.
+`llm-reference/03-monsters/monsters.md` alongside
+`content/03-monsters/monsters.html`). These files are **never linked from
+`index.html` or any live page** — they exist purely as easy-to-read/edit
+plain text for AI-assisted content work. There is no generator that
+produces one format from the other; if you edit a `.md` here in a way that
+should ship, hand-port the change into the matching `content/` `.html`
+yourself (and vice versa).
 
 ### Shared visual theme
 
@@ -67,8 +88,8 @@ server) for turning CSV stat data into printable card sheets:
   `localStorage` (keyed by a signature derived from the CSV header) so
   re-uploading the same shape of CSV doesn't require re-mapping.
 - `card_generator/*-sample.csv` files are example/template CSVs bundled for
-  users to download and fill in; they mirror the schemas the `files/03_monsters`,
-  `files/04_spells`, and `files/05_handouts` CSVs use.
+  users to download and fill in; they mirror the schemas the `content/03-monsters`,
+  `content/04-spells`, and `content/05-handouts` CSVs use.
 
 ### Content-generation guardrails
 
@@ -158,17 +179,22 @@ started:
 
 #### File Conventions
 
-- Save generated content as Markdown under `files/NN_name/` at the project
-  root, one numbered folder per deliverable (e.g. `files/01_tutorial/tutorial.md`,
-  `files/07_characters/characters.md`, `files/02_campaign/campaign.md`,
-  `files/03_monsters/monsters.md`, `files/05_handouts/handouts.md`,
-  `files/06_dm_notes/dm-notes.md`). Mirror each `.md` with a print-ready
-  `.html` in the same folder (A4, same visual theme — see README's
-  "Χρωματικό Θέμα" section), and link both from `index.html`.
+- Save generated content as a print-ready `.html` under `content/NN-name/`
+  at the project root, one numbered folder per deliverable (e.g.
+  `content/01-tutorial/tutorial.html`, `content/07-characters/characters.html`,
+  `content/02-campaign/campaign.html`, `content/03-monsters/monsters.html`,
+  `content/05-handouts/handouts.html`, `content/06-dm-guide/dm-guide.html`),
+  A4, same visual theme (see README's "Χρωματικό Θέμα" section), with a
+  `.back-link.screen-only` nav element per the Architecture section above,
+  and link it from `index.html`.
+- Also save a plain-text `.md` version of the same content under the
+  mirrored `llm-reference/NN-name/` folder (e.g.
+  `llm-reference/01-tutorial/tutorial.md`) — reference/editing material only,
+  never linked from `index.html` or any live page.
 - If the user asks for a PDF, export it from the `.html` on request rather
   than by default — `.pdf` files are gitignored, not committed.
-- Every `.md`/`.html` deliverable ends with a short OGL/SRD attribution
-  footer pointing to `OGL.md` (see any existing deliverable for the exact
-  wording) — carry it over when creating new ones.
+- Every `content/NN-name/*.html` deliverable ends with a short OGL/SRD
+  attribution footer pointing to `OGL.md` (see any existing deliverable for
+  the exact wording) — carry it over when creating new ones.
 - Keep each deliverable self-contained so it can be shared/printed on its
   own.
