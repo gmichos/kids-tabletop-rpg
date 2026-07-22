@@ -159,11 +159,16 @@
   .t-desc{font-size:var(--fs-sm);text-align:left;flex:1;overflow:hidden;margin:1mm 0;}
   .t-tag{font-size:var(--fs-sm);letter-spacing:.12em;color:var(--gold);border-top:1px solid var(--gold);padding-top:1mm;}
 
-  /* ---- Trading card back (shared logo) ---- */
-  .t-back{height:100%;display:flex;align-items:center;justify-content:center;
+  /* ---- Trading card back (per-card symbol, or an uploaded image replacing it) ---- */
+  .t-back{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;cursor:pointer;
     background:radial-gradient(circle,var(--brand-tint),var(--card));}
-  .t-back-border{border:2px solid var(--brand);border-radius:3mm;width:85%;height:85%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
-  .t-back-emblem{width:18mm;height:18mm;color:var(--gold);}
+  .t-back-symbol{width:16mm;height:16mm;color:var(--gold);opacity:.85;}
+  .t-back-hint{margin-top:2.5mm;font-size:var(--fs-sm);color:var(--muted);opacity:.85;font-style:italic;text-align:center;padding:0 4mm;}
+  .t-back-img{width:100%;height:100%;object-fit:contain;display:block;}
+  .t-back-imgremove{position:absolute;top:1.5mm;right:2mm;background:var(--brand);color:#fff;border:none;
+    border-radius:3mm;padding:.7mm 2.2mm;font-size:var(--fs-sm);cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+  .t-back-imgremove:hover{background:var(--brand-dark);}
 
   #printRoot{display:none;}
 
@@ -192,7 +197,7 @@
     .app{max-width:none;padding:0;margin:0;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
     .print-page{break-after:page;page-break-after:always;}
-    .m-back-imgremove{display:none !important;}
+    .m-back-imgremove, .t-back-imgremove{display:none !important;}
   }
 </style>
 </head>
@@ -919,6 +924,18 @@
   function pickItemIcon(type){
     return '\u{1F392}'; // 🎒 backpack
   }
+  // Back-of-card symbol for trading cards: reuses the same icon already shown on that
+  // card's front, so every deck ends up with a varied set of single-color symbols
+  // instead of one repeated logo.
+  function pickBackSymbolIcon(c){
+    switch(c._category){
+      case 'spell': return pickSpellIcon(c.school);
+      case 'item': return pickItemIcon(c.type);
+      case 'npc': return 'icon-humanoid';
+      case 'skill': return 'icon-emblem';
+      default: return 'icon-gem';
+    }
+  }
 
   // Shared full-width header (name + CR/XP) used identically on both the front and back of a
   // monster card, so the nameplate stays in the exact same place when the card is flipped.
@@ -1029,10 +1046,17 @@
       +'<div class="t-tag">NPC</div>'
       +'</div>';
   }
-  function tradingBackInner(){
-    return '<div class="t-back"><div class="t-back-border">'
-      +'<svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg>'
-      +'</div></div>';
+  function tradingBackInner(c){
+    var imageContent;
+    if(c._customImage){
+      imageContent = '<img class="t-back-img" src="'+c._customImage+'" alt="">'
+        + '<button type="button" class="t-back-imgremove" data-remove-image="'+c._id+'" title="Αφαίρεση εικόνας">✕</button>';
+    } else {
+      var icon = pickBackSymbolIcon(c);
+      imageContent = '<svg class="t-back-symbol" viewBox="0 0 100 100"><use href="#'+icon+'"></use></svg>'
+        + '<div class="t-back-hint">Κλικ για ανέβασμα εικόνας</div>';
+    }
+    return '<div class="t-back" data-upload-image="'+c._id+'">'+imageContent+'</div>';
   }
   function frontInnerFor(c){
     switch(c._category){
@@ -1044,7 +1068,7 @@
       default: return itemFrontInner(c);
     }
   }
-  function backInnerFor(c){ return c._category==='monster'?monsterBackInner(c):tradingBackInner(); }
+  function backInnerFor(c){ return c._category==='monster'?monsterBackInner(c):tradingBackInner(c); }
 
   function cardWrapHTML(c){
     var size = CATEGORY_DEFS[c._category].sizeClass;
@@ -1229,17 +1253,20 @@
       saveLibrary(); renderAll();
       return;
     }
-    var uploadTrigger = e.target.closest('[data-upload-image]');
-    if(uploadTrigger){
-      pendingImageCardId = uploadTrigger.getAttribute('data-upload-image');
-      document.getElementById('cardImageInput').click();
-      return;
-    }
+    // Check the remove-image button before the upload trigger: the button lives
+    // inside the upload-trigger area, so its own closest([data-upload-image])
+    // would also match its ancestor and re-open the file picker instead.
     var removeBtn = e.target.closest('[data-remove-image]');
     if(removeBtn){
       var rid = removeBtn.getAttribute('data-remove-image');
       var rcard = state.cards.find(function(c){ return c._id===rid; });
       if(rcard){ delete rcard._customImage; saveLibrary(); renderCards(); }
+      return;
+    }
+    var uploadTrigger = e.target.closest('[data-upload-image]');
+    if(uploadTrigger){
+      pendingImageCardId = uploadTrigger.getAttribute('data-upload-image');
+      document.getElementById('cardImageInput').click();
       return;
     }
     var wrap = e.target.closest('.card-flip-wrap');
