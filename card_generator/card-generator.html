@@ -166,6 +166,9 @@
   .t-back-symbol{width:16mm;height:16mm;color:var(--gold);opacity:.85;}
   .t-back-hint{margin-top:2.5mm;font-size:var(--fs-sm);color:var(--muted);opacity:.85;font-style:italic;text-align:center;padding:0 4mm;}
   .t-back-img{width:100%;height:100%;object-fit:contain;display:block;}
+  /* NPC portraits are usually tall/narrow, which left big empty bars under
+     "contain" — fill the card instead, like a photo. */
+  .t-back[data-category="npc"] .t-back-img{object-fit:cover;}
   .t-back-imgremove{position:absolute;top:1.5mm;right:2mm;background:var(--brand);color:#fff;border:none;
     border-radius:3mm;padding:.7mm 2.2mm;font-size:var(--fs-sm);cursor:pointer;z-index:4;box-shadow:0 1px 3px rgba(0,0,0,.2);}
   .t-back-imgremove:hover{background:var(--brand-dark);}
@@ -1068,7 +1071,7 @@
       imageContent = '<svg class="t-back-symbol" viewBox="0 0 100 100"><use href="#'+icon+'"></use></svg>'
         + '<div class="t-back-hint">Κλικ για ανέβασμα εικόνας</div>';
     }
-    return '<div class="t-back" data-upload-image="'+c._id+'">'+imageContent+'</div>';
+    return '<div class="t-back" data-category="'+c._category+'" data-upload-image="'+c._id+'">'+imageContent+'</div>';
   }
   function frontInnerFor(c){
     switch(c._category){
