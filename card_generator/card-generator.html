@@ -336,6 +336,15 @@
     <button type="button" class="tab-btn" data-tab="cards">🃏 Κάρτες</button>
   </nav>
 
+  <div class="toolbar screen-only">
+    <div class="group">
+      <button class="btn" id="exportDataBtn" type="button">💾 Εξαγωγή Δεδομένων (JSON)</button>
+      <label class="upload-btn" for="importDataInput">📂 Εισαγωγή Δεδομένων</label>
+      <input type="file" id="importDataInput" accept=".json,application/json" hidden>
+    </div>
+    <div class="count-badge">Καμπάνιες, NPCs, χάρτες &amp; κάρτες όλα μαζί — χρήσιμο για backup ή μεταφορά σε άλλο browser/υπολογιστή</div>
+  </div>
+
   <section id="tab-campaign" class="tab-panel active">
     <div class="toolbar screen-only">
       <div class="group"><button class="btn" id="campaignNewBtn" type="button">+ Νέα Καμπάνια</button></div>
@@ -692,8 +701,8 @@
 '"Name; Role; Personality; Quirk; Wants; Reward; Quote"\n'+
 '"Μπάρναμπι; Δίνει την αποστολή; Νευρικός, μιλάει γρήγορα, πολύ ευγνώμων; Τρίβει συνέχεια τα χέρια του; Να βρεθεί το πρόβατό του, ο Κύρος; 20 χρυσά νομίσματα; Σε παρακαλώ... πρέπει να βοηθήσετε!"\n'+
 '"Γέρος Θάντος; Δίνει πληροφορίες; Μιλάει αργά, λατρεύει να αφηγείται; Διακόπτεται συνέχεια (\'Πού είχα μείνει;\'); Να τον ακούσουν με υπομονή; ; Ααα, τα Ερείπια... θυμάμαι όταν ήμουν παιδί..."\n';
-  function downloadText(filename, text){
-    var blob = new Blob([text], {type:'text/csv;charset=utf-8'});
+  function downloadText(filename, text, mimeType){
+    var blob = new Blob([text], {type:(mimeType||'text/csv;charset=utf-8')});
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
     a.href = url; a.download = filename;
@@ -1291,6 +1300,32 @@
   document.getElementById('sampleItemBtn').addEventListener('click', function(){ downloadText('sample-items.csv', SAMPLE_CSV_ITEM); });
   document.getElementById('sampleSkillBtn').addEventListener('click', function(){ downloadText('sample-skills.csv', SAMPLE_CSV_SKILL); });
   document.getElementById('sampleNpcBtn').addEventListener('click', function(){ downloadText('sample-npcs.csv', SAMPLE_CSV_NPC); });
+
+  document.getElementById('exportDataBtn').addEventListener('click', function(){
+    var payload = JSON.stringify({sources:state.sources, cards:state.cards, campaigns:state.campaigns, maps:state.maps}, null, 2);
+    var stamp = new Date().toISOString().slice(0,10);
+    downloadText('gm-studio-backup-'+stamp+'.json', payload, 'application/json;charset=utf-8');
+  });
+  document.getElementById('importDataInput').addEventListener('change', function(e){
+    var file = e.target.files && e.target.files[0];
+    e.target.value = '';
+    if(!file) return;
+    file.text().then(function(text){
+      var d;
+      try{ d = JSON.parse(text); }
+      catch(err){ alert('Το αρχείο δεν είναι έγκυρο JSON.'); return; }
+      if(!confirm('Η εισαγωγή θα αντικαταστήσει ΟΛΗ την τρέχουσα βιβλιοθήκη (καμπάνιες, NPCs, χάρτες, κάρτες) με το περιεχόμενο του αρχείου. Συνέχεια;')) return;
+      state.sources = d.sources || [];
+      state.cards = d.cards || [];
+      state.campaigns = d.campaigns || [];
+      state.maps = d.maps || [];
+      CAMP_STATE.currentId = state.campaigns.length ? state.campaigns[0].id : null;
+      MAP_STATE.currentMapId = state.maps.length ? state.maps[0].id : null;
+      saveLibrary();
+      renderAll(); renderNpcTab(); renderMapTab(); renderCampaignTab();
+      alert('Η βιβλιοθήκη εισήχθη με επιτυχία.');
+    });
+  });
   document.getElementById('flipAllBtn').addEventListener('click', function(){
     var toBack = this.getAttribute('data-state') !== 'back';
     document.querySelectorAll('.card-flip-wrap').forEach(function(wrap){
