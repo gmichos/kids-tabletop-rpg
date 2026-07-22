@@ -72,6 +72,10 @@
   .grid-postcard{grid-template-columns:repeat(auto-fill,148mm);}
   .grid-trading{grid-template-columns:repeat(auto-fill,63mm);}
 
+  /* Fixed-capacity print page: exactly as many cards as fit the printable A4 area (see
+     @page margin above), so front/back pages pair up correctly under double-sided printing. */
+  .print-page{display:grid;gap:6mm;align-content:start;}
+
   .card-postcard{width:148mm;height:105mm;font-size:14px;}
   .card-trading{width:63mm;height:88mm;font-size:14px;}
 
@@ -182,6 +186,7 @@
   footer.note{margin-top:30px;font-size:.75rem;color:var(--muted);text-align:center;}
 
   @media print{
+    @page{size:A4;margin:10mm;}
     body{background:#fff;color:#000;}
     header,.intro,.toolbar,footer.note,.section-toolbar,#mappingModal,#categoryModal{display:none !important;}
     .screen-only{display:none !important;}
@@ -189,7 +194,7 @@
     body.printing-cards #printRoot{display:block;}
     .app{max-width:none;padding:0;margin:0;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
-    .page-break{break-after:page;}
+    .print-page{break-after:page;page-break-after:always;}
     .m-back-imgremove{display:none !important;}
   }
 </style>
@@ -396,7 +401,7 @@
 
   <div id="printRoot"></div>
 
-  <footer class="note screen-only">Η βιβλιοθήκη καρτών αποθηκεύεται τοπικά στον browser σου (localStorage) — τίποτα δεν φεύγει από τη συσκευή σου. Η εκτύπωση φτιάχνει πρώτα όλες τις μπροστινές όψεις κάθε κατηγορίας και μετά τις πίσω όψεις (ίδια σειρά) — τύπωσε διπλής όψης ή γύρισε το χαρτί χειροκίνητα.</footer>
+  <footer class="note screen-only">Η βιβλιοθήκη καρτών αποθηκεύεται τοπικά στον browser σου (localStorage) — τίποτα δεν φεύγει από τη συσκευή σου. Η εκτύπωση φτιάχνει ζευγάρια σελίδων (μπροστά, πίσω) για κάθε γέμισμα σελίδας — τύπωσε διπλής όψης με αναδίπλωση στη μεγάλη πλευρά (flip on long edge) για να ευθυγραμμιστούν σωστά.</footer>
 </div>
 
 <div class="modal-overlay hidden" id="categoryModal">
@@ -571,6 +576,39 @@
     var headerInner = (POSTCARD_WIDTH_MM - 2*OUTER_PAD_MM) - 2*HEADER_PAD_H_MM;
     return (headerInner - CRBOX_WIDTH_MM - NAME_ROW_GAP_MM) * MM_TO_PX;
   })();
+
+  // Print pagination geometry (mm), matching the @page margin above, so every printed page
+  // holds a fixed, known number of cards. That lets front/back pages be emitted as adjacent
+  // pairs (rather than "all fronts, then all backs") so double-sided printing lines each
+  // card's back up with its own front instead of a random later/earlier card.
+  var PRINT_MARGIN_MM = 10;
+  var PRINTABLE_W_MM = 210 - 2*PRINT_MARGIN_MM;
+  var PRINTABLE_H_MM = 297 - 2*PRINT_MARGIN_MM;
+  var PRINT_GAP_MM = 6;
+  function computePageGeometry(cardW, cardH){
+    var cols = Math.max(1, Math.floor((PRINTABLE_W_MM+PRINT_GAP_MM)/(cardW+PRINT_GAP_MM)));
+    var rows = Math.max(1, Math.floor((PRINTABLE_H_MM+PRINT_GAP_MM)/(cardH+PRINT_GAP_MM)));
+    return {cols:cols, rows:rows, perPage:cols*rows, cardW:cardW, cardH:cardH};
+  }
+  var PRINT_GEOMETRY = {
+    postcard: computePageGeometry(148,105),
+    trading: computePageGeometry(63,88)
+  };
+  function chunk(arr, size){
+    var out = [];
+    for(var i=0;i<arr.length;i+=size){ out.push(arr.slice(i, i+size)); }
+    return out;
+  }
+  // Duplex printers that flip on the long edge (the common default for portrait pages) mirror
+  // each sheet left-right when you look at the back. So a back page's cards need their column
+  // order reversed within each row for card N's back to land physically behind card N's front.
+  function mirrorRowsForBack(pageCards, cols){
+    var mirrored = [];
+    for(var i=0;i<pageCards.length;i+=cols){
+      mirrored = mirrored.concat(pageCards.slice(i, i+cols).reverse());
+    }
+    return mirrored;
+  }
 
   var LIB_KEY = 'cardGen_library_v2';
   var OLD_LIB_KEY = 'monsterCardGen_library_v1';
@@ -1114,13 +1152,17 @@
         if(card) card['_fs_'+ftype] = px;
       });
 
-      var frontsHTML = list.map(function(c){ return printFaceHTML(c,'front'); }).join('');
-      var backsHTML = list.map(function(c){ return printFaceHTML(c,'back'); }).join('');
       var sizeClass = CATEGORY_DEFS[cat].sizeClass;
+      var geo = PRINT_GEOMETRY[sizeClass];
+      var pageStyle = 'grid-template-columns:repeat('+geo.cols+','+geo.cardW+'mm);grid-template-rows:repeat('+geo.rows+','+geo.cardH+'mm);';
       var block = document.createElement('div');
-      block.innerHTML =
-        '<div class="cards-grid grid-'+sizeClass+'">'+frontsHTML+'</div><div class="page-break"></div>'
-        +'<div class="cards-grid grid-'+sizeClass+'">'+backsHTML+'</div><div class="page-break"></div>';
+      block.innerHTML = chunk(list, geo.perPage).map(function(pageCards){
+        var backOrder = mirrorRowsForBack(pageCards, geo.cols);
+        var frontHTML = pageCards.map(function(c){ return printFaceHTML(c,'front'); }).join('');
+        var backHTML = backOrder.map(function(c){ return printFaceHTML(c,'back'); }).join('');
+        return '<div class="print-page" style="'+pageStyle+'">'+frontHTML+'</div>'
+             + '<div class="print-page" style="'+pageStyle+'">'+backHTML+'</div>';
+      }).join('');
       printRoot.appendChild(block);
     });
 
