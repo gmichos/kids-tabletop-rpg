@@ -47,22 +47,26 @@
   button.btn:hover{background:var(--brand);color:#fff;}
   .count-badge{margin-left:auto;font-size:.85rem;color:var(--muted);}
 
-  .sources-bar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
   .chip{background:var(--brand-tint);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:.8rem;display:inline-flex;align-items:center;gap:6px;color:var(--brand-dark);}
   .chip button{background:none;border:none;color:#c0392b;cursor:pointer;font-size:.9rem;line-height:1;padding:0;}
-  .chip .cat-tag{opacity:.7;font-size:.72rem;}
 
-  .empty-state{text-align:center;padding:50px 20px;color:var(--muted);border:2px dashed var(--line);border-radius:10px;margin-bottom:20px;}
-
-  .cat-nav{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
-  .cat-nav-btn{background:var(--brand-tint);color:var(--brand-dark);border:1px solid var(--line);border-radius:20px;
-    padding:6px 14px;font-size:.85rem;font-weight:700;cursor:pointer;font-family:inherit;}
-  .cat-nav-btn:hover{background:var(--brand);color:#fff;}
-  .cat-nav-btn.active{background:var(--brand);color:#fff;border-color:var(--brand-dark);}
-
-  .category-section{margin-bottom:34px;}
-  .category-section h2{font-size:1.15rem;color:var(--brand);margin:0 0 4px;border-bottom:1px solid var(--line);padding-bottom:6px;}
-  .section-toolbar{display:flex;align-items:center;gap:10px;margin:8px 0 12px;font-size:.82rem;color:var(--muted);}
+  /* ---- Per-category upload panels ---- */
+  .cat-panel{border:1px solid var(--line);border-left:5px solid var(--brand);border-radius:10px;
+    padding:16px 18px;margin-bottom:20px;background:var(--card);box-shadow:0 1px 4px rgba(32,28,43,0.06);}
+  .cat-panel[data-cat="monster"]{border-left-color:#b6342a;}
+  .cat-panel[data-cat="spell"]{border-left-color:#3d6fb4;}
+  .cat-panel[data-cat="item"]{border-left-color:#c07f1e;}
+  .cat-panel[data-cat="skill"]{border-left-color:#4f8a3d;}
+  .cat-panel[data-cat="npc"]{border-left-color:#7c3159;}
+  .cat-panel-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;}
+  .cat-panel-head h2{font-size:1.1rem;color:var(--brand);margin:0;display:flex;align-items:baseline;gap:8px;}
+  .cat-panel-hint{font-size:.75rem;font-weight:400;color:var(--muted);}
+  .cat-panel-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .cat-panel-actions .upload-btn, .cat-panel-actions .btn{padding:6px 10px;font-size:.8rem;}
+  .cat-panel-sources{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+  .cat-panel-sources:empty{display:none;}
+  .cat-panel-empty{font-size:.85rem;color:var(--muted);padding:14px;border:1.5px dashed var(--line);border-radius:8px;text-align:center;}
+  .section-toolbar{display:flex;align-items:center;gap:10px;margin:0 0 12px;font-size:.82rem;color:var(--muted);}
 
   .cards-grid{display:grid;gap:6mm;}
   .grid-postcard{grid-template-columns:repeat(auto-fill,148mm);}
@@ -179,12 +183,11 @@
 
   @media print{
     body{background:#fff;color:#000;}
-    header,.intro,.toolbar,.sources-bar,.cat-nav,.empty-state,footer.note,.section-toolbar,#mappingModal,#categoryModal{display:none !important;}
+    header,.intro,.toolbar,footer.note,.section-toolbar,#mappingModal,#categoryModal{display:none !important;}
     .screen-only{display:none !important;}
     #printRoot{display:none;}
     body.printing-cards #printRoot{display:block;}
     .app{max-width:none;padding:0;margin:0;}
-    .category-section h2{display:none;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
     .page-break{break-after:page;}
     .m-back-imgremove{display:none !important;}
@@ -261,7 +264,7 @@
 </header>
 
 <div class="app">
-  <div class="intro screen-only">Ανέβασε ένα ή περισσότερα CSV αρχεία· το εργαλείο μαντεύει την κατηγορία από το όνομα αρχείου ή τις επικεφαλίδες, αντιστοιχίζει αυτόματα τις στήλες στα πεδία της κάρτας, και τυπώνει κάρτες τεράτων, ξορκιών, ικανοτήτων, αντικειμένων και NPCs σε πραγματικό μέγεθος. Όλα δουλεύουν τοπικά στον browser σου (localStorage) — καμία εγκατάσταση.</div>
+  <div class="intro screen-only">Κάθε κατηγορία παρακάτω — τέρατα, ξόρκια, αντικείμενα, δεξιότητες, NPCs — έχει τη δική της ζώνη: ανέβασε το CSV σου εκεί που ανήκει και το εργαλείο αντιστοιχίζει αυτόματα τις στήλες στα πεδία της κάρτας. (Μπορείς επίσης να σύρεις αρχεία οπουδήποτε στη σελίδα — θα μαντέψει την κατηγορία.) Τυπώνει κάρτες σε πραγματικό μέγεθος· όλα δουλεύουν τοπικά στον browser σου (localStorage) — καμία εγκατάσταση.</div>
 
   <div class="toolbar screen-only">
     <div class="group">
@@ -273,20 +276,8 @@
   </div>
 
   <div class="toolbar screen-only">
-    <div class="group">
-      <label class="upload-btn" for="fileInput">📄 Ανέβασμα CSV</label>
-      <input type="file" id="fileInput" accept=".csv,text/csv" multiple hidden>
-    </div>
     <input type="file" id="cardImageInput" accept="image/*" hidden>
     <div class="group"><input type="text" id="searchInput" placeholder="Αναζήτηση ονόματος..."></div>
-    <div class="group">
-      <span style="font-size:.8rem;color:var(--muted);">Παραδείγματα CSV:</span>
-      <button class="btn" id="sampleMonsterBtn" type="button">🐉 Τέρατα</button>
-      <button class="btn" id="sampleSpellBtn" type="button">📜 Ξόρκια</button>
-      <button class="btn" id="sampleItemBtn" type="button">⚔️ Αντικείμενα</button>
-      <button class="btn" id="sampleSkillBtn" type="button">⭐ Δεξιότητες</button>
-      <button class="btn" id="sampleNpcBtn" type="button">🎭 NPCs</button>
-    </div>
     <div class="group">
       <button class="btn" id="flipAllBtn" type="button" data-state="front">🔄 Όλες πίσω</button>
       <button class="btn" id="printBtn" type="button">🖨️ Εκτύπωση / PDF</button>
@@ -295,14 +286,19 @@
     <div class="count-badge" id="countBadge">0 κάρτες</div>
   </div>
 
-  <div class="sources-bar screen-only" id="sourcesBar"></div>
-  <div class="empty-state screen-only" id="emptyState">Ανέβασε ένα CSV για να ξεκινήσεις — τέρατα, ξόρκια, ικανότητες, NPCs ή αντικείμενα/όπλα, όσα αρχεία θέλεις.</div>
-  <nav class="cat-nav screen-only" id="catNav"></nav>
-
   <main class="screen-only">
-    <section class="category-section" id="section-monster" style="display:none">
-      <h2>🐉 Τέρατα — καρτ-ποστάλ (148×105mm)</h2>
-      <div class="section-toolbar">
+    <section class="cat-panel" id="panel-monster" data-cat="monster">
+      <div class="cat-panel-head">
+        <h2>🐉 Τέρατα <span class="cat-panel-hint">καρτ-ποστάλ 148×105mm</span></h2>
+        <div class="cat-panel-actions">
+          <label class="upload-btn" for="fileInput-monster">📄 Ανέβασμα CSV</label>
+          <input type="file" id="fileInput-monster" accept=".csv,text/csv" multiple hidden>
+          <button class="btn" id="sample-monster" type="button">📊 Παράδειγμα</button>
+        </div>
+      </div>
+      <div class="cat-panel-sources" id="sources-monster"></div>
+      <div class="cat-panel-empty" id="empty-monster">Ανέβασε ένα CSV με τέρατα για να ξεκινήσεις.</div>
+      <div class="section-toolbar" id="toolbar-monster" style="display:none">
         <span id="count-monster"></span>
         <select id="sort-monster">
           <option value="name">Όνομα (Α-Ω)</option>
@@ -313,9 +309,18 @@
       <div class="cards-grid grid-postcard" id="grid-monster"></div>
     </section>
 
-    <section class="category-section" id="section-spell" style="display:none">
-      <h2>📜 Ξόρκια — trading card (63×88mm)</h2>
-      <div class="section-toolbar">
+    <section class="cat-panel" id="panel-spell" data-cat="spell">
+      <div class="cat-panel-head">
+        <h2>📜 Ξόρκια <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <div class="cat-panel-actions">
+          <label class="upload-btn" for="fileInput-spell">📄 Ανέβασμα CSV</label>
+          <input type="file" id="fileInput-spell" accept=".csv,text/csv" multiple hidden>
+          <button class="btn" id="sample-spell" type="button">📊 Παράδειγμα</button>
+        </div>
+      </div>
+      <div class="cat-panel-sources" id="sources-spell"></div>
+      <div class="cat-panel-empty" id="empty-spell">Ανέβασε ένα CSV με ξόρκια για να ξεκινήσεις.</div>
+      <div class="section-toolbar" id="toolbar-spell" style="display:none">
         <span id="count-spell"></span>
         <select id="sort-spell">
           <option value="name">Όνομα (Α-Ω)</option>
@@ -326,9 +331,18 @@
       <div class="cards-grid grid-trading" id="grid-spell"></div>
     </section>
 
-    <section class="category-section" id="section-item" style="display:none">
-      <h2>⚔️ Αντικείμενα / Όπλα — trading card (63×88mm)</h2>
-      <div class="section-toolbar">
+    <section class="cat-panel" id="panel-item" data-cat="item">
+      <div class="cat-panel-head">
+        <h2>⚔️ Αντικείμενα / Όπλα <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <div class="cat-panel-actions">
+          <label class="upload-btn" for="fileInput-item">📄 Ανέβασμα CSV</label>
+          <input type="file" id="fileInput-item" accept=".csv,text/csv" multiple hidden>
+          <button class="btn" id="sample-item" type="button">📊 Παράδειγμα</button>
+        </div>
+      </div>
+      <div class="cat-panel-sources" id="sources-item"></div>
+      <div class="cat-panel-empty" id="empty-item">Ανέβασε ένα CSV με αντικείμενα/όπλα για να ξεκινήσεις.</div>
+      <div class="section-toolbar" id="toolbar-item" style="display:none">
         <span id="count-item"></span>
         <select id="sort-item">
           <option value="name">Όνομα (Α-Ω)</option>
@@ -339,9 +353,18 @@
       <div class="cards-grid grid-trading" id="grid-item"></div>
     </section>
 
-    <section class="category-section" id="section-skill" style="display:none">
-      <h2>⭐ Ικανότητες — trading card (63×88mm)</h2>
-      <div class="section-toolbar">
+    <section class="cat-panel" id="panel-skill" data-cat="skill">
+      <div class="cat-panel-head">
+        <h2>⭐ Ικανότητες <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <div class="cat-panel-actions">
+          <label class="upload-btn" for="fileInput-skill">📄 Ανέβασμα CSV</label>
+          <input type="file" id="fileInput-skill" accept=".csv,text/csv" multiple hidden>
+          <button class="btn" id="sample-skill" type="button">📊 Παράδειγμα</button>
+        </div>
+      </div>
+      <div class="cat-panel-sources" id="sources-skill"></div>
+      <div class="cat-panel-empty" id="empty-skill">Ανέβασε ένα CSV με δεξιότητες για να ξεκινήσεις.</div>
+      <div class="section-toolbar" id="toolbar-skill" style="display:none">
         <span id="count-skill"></span>
         <select id="sort-skill">
           <option value="name">Όνομα (Α-Ω)</option>
@@ -350,9 +373,18 @@
       <div class="cards-grid grid-trading" id="grid-skill"></div>
     </section>
 
-    <section class="category-section" id="section-npc" style="display:none">
-      <h2>🎭 NPCs — trading card (63×88mm)</h2>
-      <div class="section-toolbar">
+    <section class="cat-panel" id="panel-npc" data-cat="npc">
+      <div class="cat-panel-head">
+        <h2>🎭 NPCs <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <div class="cat-panel-actions">
+          <label class="upload-btn" for="fileInput-npc">📄 Ανέβασμα CSV</label>
+          <input type="file" id="fileInput-npc" accept=".csv,text/csv" multiple hidden>
+          <button class="btn" id="sample-npc" type="button">📊 Παράδειγμα</button>
+        </div>
+      </div>
+      <div class="cat-panel-sources" id="sources-npc"></div>
+      <div class="cat-panel-empty" id="empty-npc">Ανέβασε ένα CSV με NPCs για να ξεκινήσεις.</div>
+      <div class="section-toolbar" id="toolbar-npc" style="display:none">
         <span id="count-npc"></span>
         <select id="sort-npc">
           <option value="name">Όνομα (Α-Ω)</option>
@@ -508,6 +540,13 @@
   var SAMPLE_CSV_NPC =
 '"Name; Role; Personality; Quirk; Wants; Reward; Quote"\n'+
 '"Μπάρναμπι; Δίνει την αποστολή; Νευρικός, μιλάει γρήγορα, πολύ ευγνώμων; Τρίβει συνέχεια τα χέρια του; Να βρεθεί το πρόβατό του, ο Κύρος; 20 χρυσά νομίσματα; Σε παρακαλώ... πρέπει να βοηθήσετε!"\n';
+  var SAMPLE_FILES = {
+    monster:{filename:'sample-monsters.csv', csv:SAMPLE_CSV_MONSTER},
+    spell:{filename:'sample-spells.csv', csv:SAMPLE_CSV_SPELL},
+    item:{filename:'sample-items.csv', csv:SAMPLE_CSV_ITEM},
+    skill:{filename:'sample-skills.csv', csv:SAMPLE_CSV_SKILL},
+    npc:{filename:'sample-npcs.csv', csv:SAMPLE_CSV_NPC}
+  };
   function downloadText(filename, text, mimeType){
     var blob = new Blob([text], {type:(mimeType||'text/csv;charset=utf-8')});
     var url = URL.createObjectURL(blob);
@@ -538,7 +577,6 @@
   var MAP_CACHE_KEY = 'cardGen_mappingCache_v2';
 
   var state = { sources: [], cards: [] };
-  var VIEW_STATE = { activeCat: 'all' };
   var pendingImageCardId = null;
 
   // ================= Helpers =================
@@ -731,7 +769,7 @@
   }
 
   // ================= File processing =================
-  async function processOneFile(file){
+  async function processOneFile(file, forcedCategory){
     var text = await file.text();
     var raw = parseCSV(text);
     if(!raw.length) return;
@@ -739,7 +777,7 @@
     if(!table.length) return;
     var header = table[0];
 
-    var category = guessCategoryFromFilename(file.name) || guessCategoryFromHeader(header);
+    var category = forcedCategory || guessCategoryFromFilename(file.name) || guessCategoryFromHeader(header);
     if(!category){
       category = await askCategoryModal(file.name, null);
       if(!category) return;
@@ -779,9 +817,9 @@
     saveLibrary();
     renderAll();
   }
-  async function handleFiles(fileList){
+  async function handleFiles(fileList, forcedCategory){
     var files = Array.from(fileList).filter(function(f){ return /\.csv$/i.test(f.name) || f.type==='text/csv' || f.type===''; });
-    for(var i=0;i<files.length;i++){ await processOneFile(files[i]); }
+    for(var i=0;i<files.length;i++){ await processOneFile(files[i], forcedCategory); }
   }
 
   // ================= Content rendering (shared front/back builders) =================
@@ -1034,52 +1072,32 @@
   }
 
   // ================= Top-level render =================
-  function renderSourcesBar(){
-    var el = document.getElementById('sourcesBar');
-    el.innerHTML = state.sources.map(function(s){
-      var emoji = CATEGORY_EMOJI[s.category] || '🃏';
-      return '<span class="chip">'+emoji+' '+escapeHtml(s.filename)+' ('+s.count+') <button data-remove-source="'+s.id+'" title="Αφαίρεση">×</button></span>';
-    }).join('');
-  }
-
-  function renderCatNav(){
-    var nav = document.getElementById('catNav');
-    var counts = {};
-    CATEGORY_ORDER.forEach(function(cat){ counts[cat] = state.cards.filter(function(c){ return c._category===cat; }).length; });
-    var present = CATEGORY_ORDER.filter(function(cat){ return counts[cat]>0; });
-    if(present.length<2){ nav.innerHTML=''; VIEW_STATE.activeCat='all'; return; }
-    if(VIEW_STATE.activeCat!=='all' && counts[VIEW_STATE.activeCat]===0) VIEW_STATE.activeCat='all';
-    var btns = ['<button type="button" class="cat-nav-btn'+(VIEW_STATE.activeCat==='all'?' active':'')+'" data-cat="all">Όλες ('+state.cards.length+')</button>'];
-    present.forEach(function(cat){
-      var emoji = CATEGORY_EMOJI[cat] || '🃏';
-      btns.push('<button type="button" class="cat-nav-btn'+(VIEW_STATE.activeCat===cat?' active':'')+'" data-cat="'+cat+'">'+emoji+' '+CATEGORY_DEFS[cat].label+' ('+counts[cat]+')</button>');
+  function renderSources(){
+    CATEGORY_ORDER.forEach(function(cat){
+      var el = document.getElementById('sources-'+cat);
+      var list = state.sources.filter(function(s){ return s.category===cat; });
+      el.innerHTML = list.map(function(s){
+        return '<span class="chip">'+escapeHtml(s.filename)+' ('+s.count+') <button data-remove-source="'+s.id+'" title="Αφαίρεση">×</button></span>';
+      }).join('');
     });
-    nav.innerHTML = btns.join('');
   }
-  document.getElementById('catNav').addEventListener('click', function(e){
-    var btn = e.target.closest('.cat-nav-btn');
-    if(!btn) return;
-    VIEW_STATE.activeCat = btn.getAttribute('data-cat');
-    renderCatNav();
-    renderCards();
-  });
 
   function renderCards(){
     var q = normalize(document.getElementById('searchInput').value);
     var totalCount = state.cards.length;
-    document.getElementById('emptyState').style.display = totalCount===0 ? 'block' : 'none';
     var printRoot = document.getElementById('printRoot');
     printRoot.innerHTML = '';
     var grandVisible = 0;
 
     CATEGORY_ORDER.forEach(function(cat){
       var all = state.cards.filter(function(c){ return c._category===cat; });
-      var section = document.getElementById('section-'+cat);
-      if(all.length===0){ section.style.display='none'; return; }
-      section.style.display = (VIEW_STATE.activeCat==='all' || VIEW_STATE.activeCat===cat) ? 'block' : 'none';
+      document.getElementById('empty-'+cat).style.display = all.length ? 'none' : 'block';
+      document.getElementById('toolbar-'+cat).style.display = all.length ? 'flex' : 'none';
+      var grid = document.getElementById('grid-'+cat);
+      if(all.length===0){ grid.innerHTML=''; return; }
 
       var list = all.filter(function(c){ return !q || normalize(c.name).indexOf(q)!==-1; });
-      if(VIEW_STATE.activeCat==='all' || VIEW_STATE.activeCat===cat) grandVisible += list.length;
+      grandVisible += list.length;
       var sortSel = document.getElementById('sort-'+cat);
       list = list.slice().sort(sortComparator(cat, sortSel.value));
 
@@ -1113,11 +1131,17 @@
     flipAllBtn.textContent = '🔄 Όλες πίσω';
   }
 
-  function renderAll(){ renderSourcesBar(); renderCatNav(); renderCards(); }
+  function renderAll(){ renderSources(); renderCards(); }
 
   // ================= Events =================
-  document.getElementById('fileInput').addEventListener('change', function(e){
-    handleFiles(e.target.files).then(function(){ e.target.value=''; });
+  CATEGORY_ORDER.forEach(function(cat){
+    document.getElementById('fileInput-'+cat).addEventListener('change', function(e){
+      handleFiles(e.target.files, cat).then(function(){ e.target.value=''; });
+    });
+    document.getElementById('sample-'+cat).addEventListener('click', function(){
+      var s = SAMPLE_FILES[cat];
+      downloadText(s.filename, s.csv);
+    });
   });
   document.body.addEventListener('dragover', function(e){ e.preventDefault(); });
   document.body.addEventListener('drop', function(e){
@@ -1130,11 +1154,6 @@
   });
   document.getElementById('printBtn').addEventListener('click', function(){ document.body.className='printing-cards'; window.print(); });
   window.addEventListener('afterprint', function(){ document.body.className=''; });
-  document.getElementById('sampleMonsterBtn').addEventListener('click', function(){ downloadText('sample-monsters.csv', SAMPLE_CSV_MONSTER); });
-  document.getElementById('sampleSpellBtn').addEventListener('click', function(){ downloadText('sample-spells.csv', SAMPLE_CSV_SPELL); });
-  document.getElementById('sampleItemBtn').addEventListener('click', function(){ downloadText('sample-items.csv', SAMPLE_CSV_ITEM); });
-  document.getElementById('sampleSkillBtn').addEventListener('click', function(){ downloadText('sample-skills.csv', SAMPLE_CSV_SKILL); });
-  document.getElementById('sampleNpcBtn').addEventListener('click', function(){ downloadText('sample-npcs.csv', SAMPLE_CSV_NPC); });
 
   document.getElementById('exportDataBtn').addEventListener('click', function(){
     var payload = JSON.stringify({sources:state.sources, cards:state.cards}, null, 2);
@@ -1174,15 +1193,15 @@
     try{ localStorage.removeItem(LIB_KEY); }catch(e){}
     renderAll();
   });
-  document.getElementById('sourcesBar').addEventListener('click', function(e){
-    var btn = e.target.closest('[data-remove-source]');
-    if(!btn) return;
-    var id = btn.getAttribute('data-remove-source');
-    state.sources = state.sources.filter(function(s){ return s.id!==id; });
-    state.cards = state.cards.filter(function(c){ return c._source!==id; });
-    saveLibrary(); renderAll();
-  });
   document.body.addEventListener('click', function(e){
+    var removeSourceBtn = e.target.closest('[data-remove-source]');
+    if(removeSourceBtn){
+      var sid = removeSourceBtn.getAttribute('data-remove-source');
+      state.sources = state.sources.filter(function(s){ return s.id!==sid; });
+      state.cards = state.cards.filter(function(c){ return c._source!==sid; });
+      saveLibrary(); renderAll();
+      return;
+    }
     var uploadTrigger = e.target.closest('[data-upload-image]');
     if(uploadTrigger){
       pendingImageCardId = uploadTrigger.getAttribute('data-upload-image');
