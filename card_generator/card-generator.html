@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Εργαστήριο GM — Καμπάνιες, NPCs, Χάρτες &amp; Κάρτες</title>
+<title>Γεννήτρια Καρτών — Τέρατα, Ξόρκια, Αντικείμενα, Δεξιότητες, NPCs</title>
 <style>
   :root{
     --ink:#201c2b;
@@ -171,84 +171,12 @@
 
   footer.note{margin-top:30px;font-size:.75rem;color:var(--muted);text-align:center;}
 
-  /* ---- Tab navigation ---- */
-  .tabs{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;}
-  .tab-btn{background:var(--brand-tint);color:var(--brand-dark);border:1px solid var(--line);border-radius:20px;
-    padding:8px 16px;font-size:.9rem;font-weight:700;cursor:pointer;font-family:inherit;}
-  .tab-btn:hover{background:var(--brand);color:#fff;}
-  .tab-btn.active{background:var(--brand);color:#fff;border-color:var(--brand-dark);}
-  .tab-panel{display:none;}
-  .tab-panel.active{display:block;}
-
-  /* ---- Shared form controls (Campaign / NPC / Map modals) ---- */
-  .form-grid{display:grid;gap:10px;}
-  .form-grid label{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:600;color:var(--brand-dark);}
-  .form-grid input, .form-grid textarea, .form-grid select{font-family:inherit;font-size:.85rem;padding:6px 10px;
-    border:1px solid var(--line);border-radius:6px;color:var(--ink);background:var(--card);}
-  .form-grid textarea{resize:vertical;}
-
-  /* ---- Campaign Planner ---- */
-  .camp-field-row{display:flex;gap:14px;margin-bottom:12px;flex-wrap:wrap;}
-  .camp-field-row label{flex:1;min-width:200px;display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:600;color:var(--brand-dark);}
-  .camp-field-row input, .camp-field-row select{font-family:inherit;font-size:.85rem;padding:7px 10px;border:1px solid var(--line);border-radius:6px;color:var(--ink);background:var(--card);}
-  .camp-block{display:flex;flex-direction:column;gap:4px;font-size:.82rem;font-weight:600;color:var(--brand-dark);margin-bottom:16px;}
-  .camp-block textarea{font-family:inherit;font-size:.85rem;padding:7px 10px;border:1px solid var(--line);border-radius:6px;color:var(--ink);resize:vertical;}
-  .camp-subtitle{font-size:.95rem;color:var(--brand);border-bottom:1px solid var(--line);padding-bottom:6px;margin:24px 0 10px;}
-  .session-item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-bottom:10px;box-shadow:0 1px 3px rgba(32,28,43,.05);}
-  .session-item-head{display:flex;gap:8px;margin-bottom:6px;}
-  .session-item-head input{flex:1;font-weight:700;color:var(--brand-dark);border:1px solid var(--line);border-radius:6px;padding:6px 10px;font-family:inherit;background:var(--card);}
-  .session-item textarea{width:100%;margin-top:6px;font-family:inherit;font-size:.83rem;border:1px solid var(--line);border-radius:6px;padding:6px 10px;resize:vertical;background:var(--card);color:var(--ink);}
-  .chip-picker{display:flex;flex-wrap:wrap;gap:8px;}
-  .chip-picker label{display:inline-flex;align-items:center;gap:5px;background:var(--brand-tint);border:1px solid var(--line);border-radius:20px;padding:4px 10px;font-size:.8rem;color:var(--brand-dark);cursor:pointer;}
-
-  /* ---- NPC Builder ---- */
-  .npc-grid{display:grid;grid-template-columns:repeat(auto-fill,63mm);gap:6mm;}
-  .npc-card-wrap{display:flex;flex-direction:column;gap:6px;}
-  .npc-card-actions{display:flex;gap:6px;}
-  .npc-card-actions .btn{flex:1;font-size:.75rem;padding:5px 8px;}
-
-  /* ---- Map Designer ---- */
-  .map-canvas-wrap{margin-top:10px;}
-  .map-canvas{position:relative;display:inline-block;max-width:100%;border:1px solid var(--line);border-radius:10px;
-    overflow:hidden;cursor:crosshair;background:#fff;}
-  .map-canvas img{display:block;max-width:100%;height:auto;pointer-events:none;}
-  .map-marker{position:absolute;transform:translate(-50%,-100%);cursor:pointer;text-align:center;}
-  .map-marker .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--brand);border:2px solid #fff;
-    box-shadow:0 1px 3px rgba(0,0,0,.4);transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;}
-  .map-marker .pin span{transform:rotate(45deg);font-size:12px;}
-  .map-marker .label{background:var(--ink);color:#fff;font-size:.7rem;padding:2px 6px;border-radius:4px;white-space:nowrap;
-    margin-top:2px;display:inline-block;}
-  .map-hint{font-size:.8rem;color:var(--muted);margin-top:8px;}
-
-  /* ---- Print-only surfaces for Map & Campaign (toggled via body.printing-*) ---- */
-  #mapPrintRoot, #campaignPrintRoot{display:none;}
-  .map-print-title{color:var(--brand);font-size:20px;text-align:center;margin:0 0 10px;}
-  .map-print-canvas{position:relative;width:100%;}
-  .map-print-canvas img{width:100%;display:block;border:1px solid var(--line);border-radius:8px;}
-  .map-print-pin{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:var(--brand);
-    color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;
-    box-shadow:0 1px 3px rgba(0,0,0,.4);}
-  .map-print-legend{margin-top:14px;font-size:12px;column-count:2;column-gap:20px;}
-  .map-print-legend-row{break-inside:avoid;margin-bottom:8px;}
-  .camp-print-cover{text-align:center;margin-bottom:20px;}
-  .camp-print-cover h1{color:var(--brand);font-size:26px;margin:0 0 4px;}
-  .camp-print-theme{color:var(--muted);font-style:italic;}
-  .camp-print-box{background:var(--gold-tint);border-left:4px solid var(--gold);border-radius:8px;padding:10px 14px;margin:14px 0;}
-  .camp-print-h2{color:var(--brand);font-size:15px;border-bottom:2px solid var(--line);padding-bottom:6px;margin:22px 0 10px;}
-  .camp-print-session{margin-bottom:14px;break-inside:avoid;}
-  .camp-print-session h3{color:var(--brand-dark);font-size:13px;margin:0 0 4px;}
-  .camp-print-npc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-  .camp-print-npc{border:1px solid var(--line);border-radius:8px;padding:8px 10px;font-size:12px;break-inside:avoid;}
-  .camp-print-map img{width:100%;border:1px solid var(--line);border-radius:8px;}
-
   @media print{
     body{background:#fff;color:#000;}
-    header,.intro,.tabs,.toolbar,.sources-bar,.empty-state,footer.note,.section-toolbar,#mappingModal,#categoryModal,#npcModal,#markerModal{display:none !important;}
+    header,.intro,.toolbar,.sources-bar,.empty-state,footer.note,.section-toolbar,#mappingModal,#categoryModal{display:none !important;}
     .screen-only{display:none !important;}
-    #printRoot,#mapPrintRoot,#campaignPrintRoot{display:none;}
+    #printRoot{display:none;}
     body.printing-cards #printRoot{display:block;}
-    body.printing-map #mapPrintRoot{display:block;}
-    body.printing-campaign #campaignPrintRoot{display:block;}
     .app{max-width:none;padding:0;margin:0;}
     .category-section h2{display:none;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
@@ -321,20 +249,13 @@
 
 <header class="screen-only">
   <a class="home-link" href="../index.html">← Αρχική Σελίδα</a>
-  <div class="emoji">🎨</div>
-  <h1>Εργαστήριο GM</h1>
-  <p>Σχεδίασε καμπάνιες, NPCs, χάρτες και κάρτες — όλα σε ένα εργαλείο</p>
+  <div class="emoji">🃏</div>
+  <h1>Γεννήτρια Καρτών</h1>
+  <p>Ανέβασε CSV με τέρατα, ξόρκια, αντικείμενα, δεξιότητες ή NPCs και τύπωσε κάρτες σε πραγματικό μέγεθος</p>
 </header>
 
 <div class="app">
-  <div class="intro screen-only">Ένα ενιαίο εργαλείο για τον Game Master: φτιάξε την καμπάνια σου σκηνή-σκηνή, σχεδίασε NPCs με προσωπικότητα, σημείωσε τοποθεσίες πάνω σε έναν χάρτη, και τύπωσε κάρτες τεράτων, ξορκιών, ικανοτήτων και αντικειμένων σε πραγματικό μέγεθος. Οι NPCs που φτιάχνεις γίνονται αυτόματα τυπώσιμες κάρτες. Όλα δουλεύουν τοπικά στον browser σου (localStorage) — καμία εγκατάσταση.</div>
-
-  <nav class="tabs screen-only" id="tabsNav">
-    <button type="button" class="tab-btn active" data-tab="campaign">🗺️ Καμπάνια</button>
-    <button type="button" class="tab-btn" data-tab="npc">🎭 NPCs</button>
-    <button type="button" class="tab-btn" data-tab="map">🖼️ Χάρτης</button>
-    <button type="button" class="tab-btn" data-tab="cards">🃏 Κάρτες</button>
-  </nav>
+  <div class="intro screen-only">Ανέβασε ένα ή περισσότερα CSV αρχεία· το εργαλείο μαντεύει την κατηγορία από το όνομα αρχείου ή τις επικεφαλίδες, αντιστοιχίζει αυτόματα τις στήλες στα πεδία της κάρτας, και τυπώνει κάρτες τεράτων, ξορκιών, ικανοτήτων, αντικειμένων και NPCs σε πραγματικό μέγεθος. Όλα δουλεύουν τοπικά στον browser σου (localStorage) — καμία εγκατάσταση.</div>
 
   <div class="toolbar screen-only">
     <div class="group">
@@ -342,73 +263,9 @@
       <label class="upload-btn" for="importDataInput">📂 Εισαγωγή Δεδομένων</label>
       <input type="file" id="importDataInput" accept=".json,application/json" hidden>
     </div>
-    <div class="count-badge">Καμπάνιες, NPCs, χάρτες &amp; κάρτες όλα μαζί — χρήσιμο για backup ή μεταφορά σε άλλο browser/υπολογιστή</div>
+    <div class="count-badge">Backup ή μεταφορά της βιβλιοθήκης καρτών σε άλλο browser/υπολογιστή</div>
   </div>
 
-  <section id="tab-campaign" class="tab-panel active">
-    <div class="toolbar screen-only">
-      <div class="group"><button class="btn" id="campaignNewBtn" type="button">+ Νέα Καμπάνια</button></div>
-      <div class="group"><select id="campaignSelect"></select></div>
-      <div class="group">
-        <button class="btn" id="campaignDeleteBtn" type="button">🗑️ Διαγραφή</button>
-        <button class="btn" id="campaignPrintBtn" type="button">🖨️ Εκτύπωση Καμπάνιας</button>
-      </div>
-    </div>
-    <div class="empty-state screen-only" id="campaignEmptyState">Δημιούργησε μια νέα καμπάνια για να ξεκινήσεις — τίτλος, θέμα, sessions, NPCs και χάρτης όλα σε ένα μέρος.</div>
-    <div id="campaignEditor" class="screen-only" style="display:none;">
-      <div class="camp-field-row">
-        <label>Τίτλος<input type="text" id="campTitle" placeholder="π.χ. Η Κοιλάδα του Δράκου"></label>
-        <label>Θέμα<input type="text" id="campTheme" placeholder="π.χ. πειρατές, μαγικό δάσος, διάστημα..."></label>
-      </div>
-      <label class="camp-block">🪝 Αρχικό Hook<textarea id="campHook" rows="2" placeholder="Τι φέρνει τους ήρωες στην περιπέτεια;"></textarea></label>
-
-      <h3 class="camp-subtitle">📖 Σκηνές / Sessions</h3>
-      <div id="sessionsList"></div>
-      <button class="btn" id="addSessionBtn" type="button">+ Νέα Σκηνή</button>
-
-      <h3 class="camp-subtitle">🎭 Συνδεδεμένα NPCs</h3>
-      <div id="campNpcPicker" class="chip-picker"></div>
-
-      <h3 class="camp-subtitle">🖼️ Χάρτης Καμπάνιας</h3>
-      <select id="campMapSelect"><option value="">(Κανένας)</option></select>
-
-      <label class="camp-block" style="margin-top:16px;">🏆 Κλιμάκωση &amp; Τέλος<textarea id="campClimax" rows="3" placeholder="Το boss fight ή η τελική σκηνή, και πώς κλείνει η ιστορία..."></textarea></label>
-    </div>
-  </section>
-
-  <section id="tab-npc" class="tab-panel">
-    <div class="toolbar screen-only">
-      <div class="group"><button class="btn" id="npcNewBtn" type="button">+ Νέο NPC</button></div>
-      <div class="count-badge" id="npcCountBadge">0 NPCs</div>
-    </div>
-    <div class="empty-state screen-only" id="npcEmptyState">Φτιάξε το πρώτο σου NPC — όνομα, ρόλος, προσωπικότητα, quirk και ατάκα. Κάθε NPC γίνεται αυτόματα μια τυπώσιμη κάρτα.</div>
-    <div class="npc-grid screen-only" id="npcGrid"></div>
-  </section>
-
-  <section id="tab-map" class="tab-panel">
-    <div class="toolbar screen-only">
-      <div class="group">
-        <label class="upload-btn" for="mapNewImageInput">🖼️ Νέος Χάρτης</label>
-        <input type="file" id="mapNewImageInput" accept="image/*" hidden>
-      </div>
-      <div class="group"><select id="mapSelect"></select></div>
-      <div class="group">
-        <button class="btn" id="mapRenameBtn" type="button">✏️ Μετονομασία</button>
-        <button class="btn" id="mapDeleteBtn" type="button">🗑️ Διαγραφή</button>
-        <button class="btn" id="mapPrintBtn" type="button">🖨️ Εκτύπωση Χάρτη</button>
-      </div>
-      <div class="count-badge" id="mapCountBadge">0 χάρτες</div>
-    </div>
-    <div class="empty-state screen-only" id="mapEmptyState">Ανέβασε μια εικόνα χάρτη για να ξεκινήσεις. Μετά κάνε κλικ πάνω στην εικόνα για να προσθέσεις σημεία (χωριά, μάχες, θησαυρούς κ.λπ.)</div>
-    <div class="map-canvas-wrap screen-only" id="mapCanvasWrap" style="display:none;">
-      <div class="map-canvas" id="mapCanvas">
-        <img id="mapImage" src="" alt="Χάρτης">
-      </div>
-      <p class="map-hint">💡 Κάνε κλικ πάνω στον χάρτη για να προσθέσεις ένα σημείο. Κλικ σε υπάρχον σημείο για να το επεξεργαστείς.</p>
-    </div>
-  </section>
-
-  <section id="tab-cards" class="tab-panel">
   <div class="toolbar screen-only">
     <div class="group">
       <label class="upload-btn" for="fileInput">📄 Ανέβασμα CSV</label>
@@ -499,47 +356,8 @@
   </main>
 
   <div id="printRoot"></div>
-  </section>
 
-  <div id="mapPrintRoot"></div>
-  <div id="campaignPrintRoot"></div>
-
-  <footer class="note screen-only">Όλα (καμπάνιες, NPCs, χάρτες, κάρτες) αποθηκεύονται τοπικά στον browser σου (localStorage) — τίποτα δεν φεύγει από τη συσκευή σου. Η εκτύπωση καρτών φτιάχνει πρώτα όλες τις μπροστινές όψεις κάθε κατηγορίας και μετά τις πίσω όψεις (ίδια σειρά) — τύπωσε διπλής όψης ή γύρισε το χαρτί χειροκίνητα.</footer>
-</div>
-
-<div class="modal-overlay hidden" id="npcModal">
-  <div class="modal-box" style="max-width:480px;">
-    <h2 id="npcModalTitle">Νέο NPC</h2>
-    <div class="form-grid">
-      <label>Όνομα<input type="text" id="npcName" placeholder="π.χ. Μπάρναμπι"></label>
-      <label>Ρόλος<input type="text" id="npcRole" placeholder="π.χ. Δίνει την αποστολή"></label>
-      <label>Προσωπικότητα<input type="text" id="npcPersonality" placeholder="π.χ. Νευρικός, μιλάει γρήγορα"></label>
-      <label>Quirk (performable)<input type="text" id="npcQuirk" placeholder="π.χ. Τρίβει συνέχεια τα χέρια του"></label>
-      <label>Τι θέλει<input type="text" id="npcWants" placeholder="π.χ. Να βρεθεί το πρόβατό του"></label>
-      <label>Ανταμοιβή<input type="text" id="npcReward" placeholder="π.χ. 20 χρυσά νομίσματα"></label>
-      <label>Ατάκα (quote)<textarea id="npcQuote" rows="2" placeholder="Μια χαρακτηριστική ατάκα..."></textarea></label>
-    </div>
-    <div class="modal-actions">
-      <button class="btn" id="npcCancelBtn" type="button">Ακύρωση</button>
-      <button class="btn" id="npcSaveBtn" type="button" style="background:var(--brand);color:#fff;">Αποθήκευση</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay hidden" id="markerModal">
-  <div class="modal-box" style="max-width:420px;">
-    <h2 id="markerModalTitle">Νέο Σημείο</h2>
-    <div class="form-grid">
-      <label>Εικονίδιο (emoji)<input type="text" id="markerIcon" maxlength="4" placeholder="📍"></label>
-      <label>Ετικέτα<input type="text" id="markerLabel" placeholder="π.χ. Χωριό Χλωροπηγή"></label>
-      <label>Σημείωση<textarea id="markerNote" rows="3" placeholder="Λεπτομέρειες για τον GM..."></textarea></label>
-    </div>
-    <div class="modal-actions">
-      <button class="btn" id="markerDeleteBtn" type="button" style="margin-right:auto;color:#c0392b;display:none;">🗑️ Διαγραφή</button>
-      <button class="btn" id="markerCancelBtn" type="button">Ακύρωση</button>
-      <button class="btn" id="markerSaveBtn" type="button" style="background:var(--brand);color:#fff;">Αποθήκευση</button>
-    </div>
-  </div>
+  <footer class="note screen-only">Η βιβλιοθήκη καρτών αποθηκεύεται τοπικά στον browser σου (localStorage) — τίποτα δεν φεύγει από τη συσκευή σου. Η εκτύπωση φτιάχνει πρώτα όλες τις μπροστινές όψεις κάθε κατηγορίας και μετά τις πίσω όψεις (ίδια σειρά) — τύπωσε διπλής όψης ή γύρισε το χαρτί χειροκίνητα.</footer>
 </div>
 
 <div class="modal-overlay hidden" id="categoryModal">
@@ -730,7 +548,7 @@
   var OLD_LIB_KEY = 'monsterCardGen_library_v1';
   var MAP_CACHE_KEY = 'cardGen_mappingCache_v2';
 
-  var state = { sources: [], cards: [], campaigns: [], maps: [] };
+  var state = { sources: [], cards: [] };
   var pendingImageCardId = null;
 
   // ================= Helpers =================
@@ -771,7 +589,7 @@
   function getMappingCache(){ try{ return JSON.parse(localStorage.getItem(MAP_CACHE_KEY) || '{}'); }catch(e){ return {}; } }
   function saveMappingCache(sig, val){ var c=getMappingCache(); c[sig]=val; try{ localStorage.setItem(MAP_CACHE_KEY, JSON.stringify(c)); }catch(e){} }
 
-  function saveLibrary(){ try{ localStorage.setItem(LIB_KEY, JSON.stringify({sources:state.sources, cards:state.cards, campaigns:state.campaigns, maps:state.maps})); }catch(e){} }
+  function saveLibrary(){ try{ localStorage.setItem(LIB_KEY, JSON.stringify({sources:state.sources, cards:state.cards})); }catch(e){} }
   function loadLibrary(){
     try{
       var oldRaw = localStorage.getItem(OLD_LIB_KEY);
@@ -780,8 +598,7 @@
         var old = JSON.parse(oldRaw);
         var migrated = {
           sources: (old.sources||[]).map(function(s){ return {id:s.id, filename:s.filename, count:s.count, category:'monster'}; }),
-          cards: (old.monsters||[]).map(function(m){ m._category='monster'; return m; }),
-          campaigns: [], maps: []
+          cards: (old.monsters||[]).map(function(m){ m._category='monster'; return m; })
         };
         localStorage.setItem(LIB_KEY, JSON.stringify(migrated));
         newRaw = JSON.stringify(migrated);
@@ -790,8 +607,6 @@
         var d = JSON.parse(newRaw);
         state.sources = d.sources || [];
         state.cards = d.cards || [];
-        state.campaigns = d.campaigns || [];
-        state.maps = d.maps || [];
       }
     }catch(e){}
   }
@@ -1302,9 +1117,9 @@
   document.getElementById('sampleNpcBtn').addEventListener('click', function(){ downloadText('sample-npcs.csv', SAMPLE_CSV_NPC); });
 
   document.getElementById('exportDataBtn').addEventListener('click', function(){
-    var payload = JSON.stringify({sources:state.sources, cards:state.cards, campaigns:state.campaigns, maps:state.maps}, null, 2);
+    var payload = JSON.stringify({sources:state.sources, cards:state.cards}, null, 2);
     var stamp = new Date().toISOString().slice(0,10);
-    downloadText('gm-studio-backup-'+stamp+'.json', payload, 'application/json;charset=utf-8');
+    downloadText('card-generator-backup-'+stamp+'.json', payload, 'application/json;charset=utf-8');
   });
   document.getElementById('importDataInput').addEventListener('change', function(e){
     var file = e.target.files && e.target.files[0];
@@ -1314,15 +1129,11 @@
       var d;
       try{ d = JSON.parse(text); }
       catch(err){ alert('Το αρχείο δεν είναι έγκυρο JSON.'); return; }
-      if(!confirm('Η εισαγωγή θα αντικαταστήσει ΟΛΗ την τρέχουσα βιβλιοθήκη (καμπάνιες, NPCs, χάρτες, κάρτες) με το περιεχόμενο του αρχείου. Συνέχεια;')) return;
+      if(!confirm('Η εισαγωγή θα αντικαταστήσει ΟΛΗ την τρέχουσα βιβλιοθήκη καρτών με το περιεχόμενο του αρχείου. Συνέχεια;')) return;
       state.sources = d.sources || [];
       state.cards = d.cards || [];
-      state.campaigns = d.campaigns || [];
-      state.maps = d.maps || [];
-      CAMP_STATE.currentId = state.campaigns.length ? state.campaigns[0].id : null;
-      MAP_STATE.currentMapId = state.maps.length ? state.maps[0].id : null;
       saveLibrary();
-      renderAll(); renderNpcTab(); renderMapTab(); renderCampaignTab();
+      renderAll();
       alert('Η βιβλιοθήκη εισήχθη με επιτυχία.');
     });
   });
@@ -1352,7 +1163,6 @@
     saveLibrary(); renderAll();
   });
   document.body.addEventListener('click', function(e){
-    if(e.target.closest('[data-edit-npc],[data-delete-npc]')) return;
     var uploadTrigger = e.target.closest('[data-upload-image]');
     if(uploadTrigger){
       pendingImageCardId = uploadTrigger.getAttribute('data-upload-image');
@@ -1403,400 +1213,9 @@
     reader.readAsDataURL(file);
   });
 
-  // ================= Tabs =================
-  document.getElementById('tabsNav').addEventListener('click', function(e){
-    var btn = e.target.closest('.tab-btn');
-    if(!btn) return;
-    var tab = btn.getAttribute('data-tab');
-    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.toggle('active', b===btn); });
-    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.toggle('active', p.id==='tab-'+tab); });
-  });
-
-  // ================= NPC Builder =================
-  var editingNpcId = null;
-  function openNpcModal(npc){
-    editingNpcId = npc ? npc._id : null;
-    document.getElementById('npcModalTitle').textContent = npc ? 'Επεξεργασία NPC' : 'Νέο NPC';
-    document.getElementById('npcName').value = npc ? (npc.name||'') : '';
-    document.getElementById('npcRole').value = npc ? (npc.role||'') : '';
-    document.getElementById('npcPersonality').value = npc ? (npc.personality||'') : '';
-    document.getElementById('npcQuirk').value = npc ? (npc.quirk||'') : '';
-    document.getElementById('npcWants').value = npc ? (npc.wants||'') : '';
-    document.getElementById('npcReward').value = npc ? (npc.reward||'') : '';
-    document.getElementById('npcQuote').value = npc ? (npc.quote||'') : '';
-    document.getElementById('npcModal').classList.remove('hidden');
-  }
-  function closeNpcModal(){ document.getElementById('npcModal').classList.add('hidden'); }
-  function renderNpcTab(){
-    var npcs = state.cards.filter(function(c){ return c._category==='npc'; });
-    document.getElementById('npcEmptyState').style.display = npcs.length ? 'none' : 'block';
-    var grid = document.getElementById('npcGrid');
-    grid.innerHTML = npcs.map(function(c){
-      return '<div class="npc-card-wrap">'
-        + cardWrapHTML(c)
-        + '<div class="npc-card-actions"><button class="btn" type="button" data-edit-npc="'+c._id+'">✏️ Επεξεργασία</button>'
-        + '<button class="btn" type="button" data-delete-npc="'+c._id+'">🗑️</button></div>'
-        + '</div>';
-    }).join('');
-    grid.querySelectorAll('.card-face').forEach(function(face){ fitCardText(face); });
-    document.getElementById('npcCountBadge').textContent = npcs.length+' NPCs';
-  }
-  document.getElementById('npcNewBtn').addEventListener('click', function(){ openNpcModal(null); });
-  document.getElementById('npcCancelBtn').addEventListener('click', closeNpcModal);
-  document.getElementById('npcSaveBtn').addEventListener('click', function(){
-    var data = {
-      name: document.getElementById('npcName').value.trim(),
-      role: document.getElementById('npcRole').value.trim(),
-      personality: document.getElementById('npcPersonality').value.trim(),
-      quirk: document.getElementById('npcQuirk').value.trim(),
-      wants: document.getElementById('npcWants').value.trim(),
-      reward: document.getElementById('npcReward').value.trim(),
-      quote: document.getElementById('npcQuote').value.trim()
-    };
-    if(!data.name){ alert('Δώσε ένα όνομα στο NPC.'); return; }
-    if(editingNpcId){
-      var existing = state.cards.find(function(c){ return c._id===editingNpcId; });
-      if(existing) Object.keys(data).forEach(function(k){ existing[k]=data[k]; });
-    } else {
-      data._id = 'c_'+Date.now()+'_'+Math.random().toString(36).slice(2,8);
-      data._category = 'npc';
-      data._source = 'manual_npc';
-      state.cards.push(data);
-    }
-    saveLibrary();
-    closeNpcModal();
-    renderNpcTab();
-    renderCards();
-    refreshCampaignNpcOptions();
-  });
-  document.getElementById('npcGrid').addEventListener('click', function(e){
-    var editBtn = e.target.closest('[data-edit-npc]');
-    if(editBtn){
-      var npc = state.cards.find(function(c){ return c._id===editBtn.getAttribute('data-edit-npc'); });
-      openNpcModal(npc);
-      return;
-    }
-    var delBtn = e.target.closest('[data-delete-npc]');
-    if(delBtn){
-      if(!confirm('Διαγραφή αυτού του NPC;')) return;
-      var id = delBtn.getAttribute('data-delete-npc');
-      state.cards = state.cards.filter(function(c){ return c._id!==id; });
-      saveLibrary(); renderNpcTab(); renderCards(); refreshCampaignNpcOptions();
-    }
-  });
-
-  // ================= Map Designer =================
-  var MAP_STATE = { currentMapId: null };
-  function currentMap(){ return state.maps.find(function(m){ return m.id===MAP_STATE.currentMapId; }); }
-  function renderMapTab(){
-    var sel = document.getElementById('mapSelect');
-    sel.innerHTML = state.maps.map(function(m){ return '<option value="'+m.id+'">'+escapeHtml(m.name)+'</option>'; }).join('');
-    if((!MAP_STATE.currentMapId || !currentMap()) && state.maps.length) MAP_STATE.currentMapId = state.maps[0].id;
-    sel.value = MAP_STATE.currentMapId || '';
-    document.getElementById('mapCountBadge').textContent = state.maps.length+' χάρτες';
-    var map = currentMap();
-    document.getElementById('mapEmptyState').style.display = map ? 'none' : 'block';
-    document.getElementById('mapCanvasWrap').style.display = map ? 'block' : 'none';
-    if(!map) return;
-    document.getElementById('mapImage').src = map.image;
-    renderMapMarkers();
-  }
-  function renderMapMarkers(){
-    var map = currentMap();
-    var canvas = document.getElementById('mapCanvas');
-    canvas.querySelectorAll('.map-marker').forEach(function(el){ el.remove(); });
-    if(!map) return;
-    map.markers.forEach(function(mk){
-      var el = document.createElement('div');
-      el.className = 'map-marker';
-      el.style.left = mk.x+'%'; el.style.top = mk.y+'%';
-      el.setAttribute('data-marker-id', mk.id);
-      el.innerHTML = '<div class="pin"><span>'+escapeHtml(mk.icon||'📍')+'</span></div><div class="label">'+escapeHtml(mk.label||'')+'</div>';
-      canvas.appendChild(el);
-    });
-  }
-  document.getElementById('mapNewImageInput').addEventListener('change', function(e){
-    var file = e.target.files && e.target.files[0];
-    e.target.value = '';
-    if(!file) return;
-    var reader = new FileReader();
-    reader.onload = function(ev){
-      var img = new Image();
-      img.onload = function(){
-        var maxDim = 1600;
-        var scale = Math.min(1, maxDim/Math.max(img.width, img.height));
-        var w = Math.max(1, Math.round(img.width*scale));
-        var h = Math.max(1, Math.round(img.height*scale));
-        var canvas = document.createElement('canvas');
-        canvas.width = w; canvas.height = h;
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h);
-        var isPng = /png/i.test(file.type) || /\.png$/i.test(file.name);
-        var dataUrl = isPng ? canvas.toDataURL('image/png') : canvas.toDataURL('image/jpeg', 0.9);
-        var id = 'map_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
-        var name = file.name.replace(/\.[^.]+$/,'') || ('Χάρτης '+(state.maps.length+1));
-        state.maps.push({id:id, name:name, image:dataUrl, markers:[]});
-        MAP_STATE.currentMapId = id;
-        saveLibrary(); renderMapTab(); refreshCampaignMapOptions();
-      };
-      img.src = ev.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-  document.getElementById('mapSelect').addEventListener('change', function(){ MAP_STATE.currentMapId=this.value; renderMapTab(); });
-  document.getElementById('mapRenameBtn').addEventListener('click', function(){
-    var map = currentMap(); if(!map) return;
-    var name = prompt('Νέο όνομα χάρτη:', map.name);
-    if(name && name.trim()){ map.name = name.trim(); saveLibrary(); renderMapTab(); refreshCampaignMapOptions(); }
-  });
-  document.getElementById('mapDeleteBtn').addEventListener('click', function(){
-    var map = currentMap(); if(!map) return;
-    if(!confirm('Διαγραφή του χάρτη «'+map.name+'»;')) return;
-    state.maps = state.maps.filter(function(m){ return m.id!==map.id; });
-    MAP_STATE.currentMapId = state.maps.length ? state.maps[0].id : null;
-    saveLibrary(); renderMapTab(); refreshCampaignMapOptions();
-  });
-  document.getElementById('mapCanvas').addEventListener('click', function(e){
-    var map = currentMap(); if(!map) return;
-    var markerEl = e.target.closest('.map-marker');
-    if(markerEl){
-      var mk = map.markers.find(function(m){ return m.id===markerEl.getAttribute('data-marker-id'); });
-      if(mk) openMarkerModal(mk, mk.x, mk.y);
-      return;
-    }
-    var rect = this.getBoundingClientRect();
-    var x = ((e.clientX-rect.left)/rect.width)*100;
-    var y = ((e.clientY-rect.top)/rect.height)*100;
-    openMarkerModal(null, x, y);
-  });
-  var editingMarker = null, pendingMarkerPos = null;
-  function openMarkerModal(marker, x, y){
-    editingMarker = marker || null;
-    pendingMarkerPos = marker ? {x:marker.x,y:marker.y} : {x:x,y:y};
-    document.getElementById('markerModalTitle').textContent = marker ? 'Επεξεργασία Σημείου' : 'Νέο Σημείο';
-    document.getElementById('markerIcon').value = marker ? (marker.icon||'📍') : '📍';
-    document.getElementById('markerLabel').value = marker ? (marker.label||'') : '';
-    document.getElementById('markerNote').value = marker ? (marker.note||'') : '';
-    document.getElementById('markerDeleteBtn').style.display = marker ? 'inline-block' : 'none';
-    document.getElementById('markerModal').classList.remove('hidden');
-  }
-  function closeMarkerModal(){ document.getElementById('markerModal').classList.add('hidden'); }
-  document.getElementById('markerCancelBtn').addEventListener('click', closeMarkerModal);
-  document.getElementById('markerSaveBtn').addEventListener('click', function(){
-    var map = currentMap(); if(!map) return;
-    var data = {
-      icon: document.getElementById('markerIcon').value.trim() || '📍',
-      label: document.getElementById('markerLabel').value.trim(),
-      note: document.getElementById('markerNote').value.trim()
-    };
-    if(editingMarker){
-      editingMarker.icon = data.icon; editingMarker.label = data.label; editingMarker.note = data.note;
-    } else {
-      data.id = 'mk_'+Date.now()+'_'+Math.random().toString(36).slice(2,6);
-      data.x = pendingMarkerPos.x; data.y = pendingMarkerPos.y;
-      map.markers.push(data);
-    }
-    saveLibrary(); closeMarkerModal(); renderMapMarkers();
-  });
-  document.getElementById('markerDeleteBtn').addEventListener('click', function(){
-    var map = currentMap(); if(!map || !editingMarker) return;
-    if(!confirm('Διαγραφή αυτού του σημείου;')) return;
-    map.markers = map.markers.filter(function(m){ return m.id!==editingMarker.id; });
-    saveLibrary(); closeMarkerModal(); renderMapMarkers();
-  });
-  function buildMapPrintView(){
-    var map = currentMap();
-    var root = document.getElementById('mapPrintRoot');
-    if(!map){ root.innerHTML=''; return; }
-    var pins = map.markers.map(function(mk,i){
-      return '<div class="map-print-pin" style="left:'+mk.x+'%;top:'+mk.y+'%;">'+(i+1)+'</div>';
-    }).join('');
-    var legend = map.markers.map(function(mk,i){
-      return '<div class="map-print-legend-row"><b>'+(i+1)+'. '+escapeHtml(mk.icon||'📍')+' '+escapeHtml(mk.label||'(χωρίς ετικέτα)')+'</b>'
-        + (mk.note?'<div>'+escapeHtml(mk.note)+'</div>':'') + '</div>';
-    }).join('');
-    root.innerHTML = '<h1 class="map-print-title">'+escapeHtml(map.name)+'</h1>'
-      + '<div class="map-print-canvas"><img src="'+map.image+'" alt="">'+pins+'</div>'
-      + (map.markers.length ? '<div class="map-print-legend">'+legend+'</div>' : '');
-  }
-  document.getElementById('mapPrintBtn').addEventListener('click', function(){
-    buildMapPrintView();
-    document.body.className='printing-map';
-    window.print();
-  });
-
-  // ================= Campaign Planner =================
-  var CAMP_STATE = { currentId: null };
-  function currentCampaign(){ return state.campaigns.find(function(c){ return c.id===CAMP_STATE.currentId; }); }
-  function renderCampaignSelect(){
-    var sel = document.getElementById('campaignSelect');
-    sel.innerHTML = state.campaigns.map(function(c){ return '<option value="'+c.id+'">'+escapeHtml(c.title||'(χωρίς τίτλο)')+'</option>'; }).join('');
-    if((!CAMP_STATE.currentId || !currentCampaign()) && state.campaigns.length) CAMP_STATE.currentId = state.campaigns[0].id;
-    sel.value = CAMP_STATE.currentId || '';
-  }
-  function refreshCampaignNpcOptions(){
-    var picker = document.getElementById('campNpcPicker');
-    var npcs = state.cards.filter(function(c){ return c._category==='npc'; });
-    var camp = currentCampaign();
-    if(!npcs.length){ picker.innerHTML = '<span style="font-size:.8rem;color:var(--muted);">Δεν έχεις φτιάξει NPCs ακόμα — πήγαινε στην καρτέλα NPCs.</span>'; return; }
-    picker.innerHTML = npcs.map(function(n){
-      var checked = camp && camp.npcIds.indexOf(n._id)!==-1 ? 'checked' : '';
-      return '<label><input type="checkbox" value="'+n._id+'" '+checked+'> '+escapeHtml(n.name||'(χωρίς όνομα)')+'</label>';
-    }).join('');
-  }
-  function refreshCampaignMapOptions(){
-    var sel = document.getElementById('campMapSelect');
-    var camp = currentCampaign();
-    sel.innerHTML = '<option value="">(Κανένας)</option>' + state.maps.map(function(m){
-      return '<option value="'+m.id+'" '+(camp && camp.mapId===m.id?'selected':'')+'>'+escapeHtml(m.name)+'</option>';
-    }).join('');
-  }
-  function renderSessionsList(){
-    var camp = currentCampaign();
-    document.getElementById('sessionsList').innerHTML = (camp ? camp.sessions : []).map(function(s){
-      return '<div class="session-item" data-session-id="'+s.id+'">'
-        + '<div class="session-item-head"><input type="text" class="session-title" value="'+escapeHtml(s.title)+'" placeholder="Τίτλος Session"><button class="btn" type="button" data-remove-session="'+s.id+'">🗑️</button></div>'
-        + '<textarea class="session-goal" rows="1" placeholder="Στόχος της σκηνής...">'+escapeHtml(s.goal)+'</textarea>'
-        + '<textarea class="session-scenes" rows="3" placeholder="Βασικές σκηνές (μία ανά γραμμή)...">'+escapeHtml(s.scenes)+'</textarea>'
-        + '<textarea class="session-resolution" rows="2" placeholder="Μίνι-επίλυση...">'+escapeHtml(s.resolution)+'</textarea>'
-        + '</div>';
-    }).join('');
-  }
-  function loadCampaignIntoEditor(){
-    var camp = currentCampaign();
-    document.getElementById('campaignEmptyState').style.display = camp ? 'none' : 'block';
-    document.getElementById('campaignEditor').style.display = camp ? 'block' : 'none';
-    if(!camp) return;
-    document.getElementById('campTitle').value = camp.title||'';
-    document.getElementById('campTheme').value = camp.theme||'';
-    document.getElementById('campHook').value = camp.hook||'';
-    document.getElementById('campClimax').value = camp.climax||'';
-    renderSessionsList();
-    refreshCampaignNpcOptions();
-    refreshCampaignMapOptions();
-  }
-  function renderCampaignTab(){ renderCampaignSelect(); loadCampaignIntoEditor(); }
-
-  document.getElementById('campaignNewBtn').addEventListener('click', function(){
-    var title = prompt('Τίτλος νέας καμπάνιας:');
-    if(!title || !title.trim()) return;
-    var camp = {id:'camp_'+Date.now()+'_'+Math.random().toString(36).slice(2,6), title:title.trim(), theme:'', hook:'', sessions:[], npcIds:[], mapId:'', climax:''};
-    state.campaigns.push(camp);
-    CAMP_STATE.currentId = camp.id;
-    saveLibrary(); renderCampaignTab();
-  });
-  document.getElementById('campaignSelect').addEventListener('change', function(){ CAMP_STATE.currentId=this.value; loadCampaignIntoEditor(); });
-  document.getElementById('campaignDeleteBtn').addEventListener('click', function(){
-    var camp = currentCampaign(); if(!camp) return;
-    if(!confirm('Διαγραφή της καμπάνιας «'+camp.title+'»;')) return;
-    state.campaigns = state.campaigns.filter(function(c){ return c.id!==camp.id; });
-    CAMP_STATE.currentId = state.campaigns.length ? state.campaigns[0].id : null;
-    saveLibrary(); renderCampaignTab();
-  });
-  ['campTitle','campTheme','campHook','campClimax'].forEach(function(id){
-    document.getElementById(id).addEventListener('input', function(){
-      var camp = currentCampaign(); if(!camp) return;
-      camp.title = document.getElementById('campTitle').value;
-      camp.theme = document.getElementById('campTheme').value;
-      camp.hook = document.getElementById('campHook').value;
-      camp.climax = document.getElementById('campClimax').value;
-      saveLibrary();
-      if(id==='campTitle'){
-        var opt = document.querySelector('#campaignSelect option[value="'+camp.id+'"]');
-        if(opt) opt.textContent = camp.title || '(χωρίς τίτλο)';
-      }
-    });
-  });
-  document.getElementById('addSessionBtn').addEventListener('click', function(){
-    var camp = currentCampaign(); if(!camp) return;
-    camp.sessions.push({id:'sess_'+Date.now()+'_'+Math.random().toString(36).slice(2,5), title:'', goal:'', scenes:'', resolution:''});
-    saveLibrary(); renderSessionsList();
-  });
-  document.getElementById('sessionsList').addEventListener('click', function(e){
-    var rm = e.target.closest('[data-remove-session]'); if(!rm) return;
-    var camp = currentCampaign(); if(!camp) return;
-    if(!confirm('Διαγραφή αυτής της σκηνής;')) return;
-    var id = rm.getAttribute('data-remove-session');
-    camp.sessions = camp.sessions.filter(function(s){ return s.id!==id; });
-    saveLibrary(); renderSessionsList();
-  });
-  document.getElementById('sessionsList').addEventListener('input', function(e){
-    var item = e.target.closest('.session-item'); if(!item) return;
-    var camp = currentCampaign(); if(!camp) return;
-    var s = camp.sessions.find(function(s){ return s.id===item.getAttribute('data-session-id'); });
-    if(!s) return;
-    s.title = item.querySelector('.session-title').value;
-    s.goal = item.querySelector('.session-goal').value;
-    s.scenes = item.querySelector('.session-scenes').value;
-    s.resolution = item.querySelector('.session-resolution').value;
-    saveLibrary();
-  });
-  document.getElementById('campNpcPicker').addEventListener('change', function(e){
-    if(e.target.tagName!=='INPUT') return;
-    var camp = currentCampaign(); if(!camp) return;
-    camp.npcIds = Array.from(document.querySelectorAll('#campNpcPicker input:checked')).map(function(i){ return i.value; });
-    saveLibrary();
-  });
-  document.getElementById('campMapSelect').addEventListener('change', function(){
-    var camp = currentCampaign(); if(!camp) return;
-    camp.mapId = this.value; saveLibrary();
-  });
-  function buildCampaignPrintView(){
-    var camp = currentCampaign();
-    var root = document.getElementById('campaignPrintRoot');
-    if(!camp){ root.innerHTML=''; return; }
-    var npcs = camp.npcIds.map(function(id){ return state.cards.find(function(c){ return c._id===id; }); }).filter(Boolean);
-    var map = state.maps.find(function(m){ return m.id===camp.mapId; });
-
-    var html = '<div class="camp-print-cover"><h1>'+escapeHtml(camp.title||'Χωρίς τίτλο')+'</h1>'
-      + (camp.theme?'<p class="camp-print-theme">'+escapeHtml(camp.theme)+'</p>':'') + '</div>';
-
-    if(camp.hook) html += '<div class="camp-print-box"><b>🪝 Hook:</b> '+escapeHtml(camp.hook).replace(/\n/g,'<br>')+'</div>';
-
-    if(camp.sessions.length){
-      html += '<h2 class="camp-print-h2">📖 Sessions</h2>';
-      camp.sessions.forEach(function(s, i){
-        html += '<div class="camp-print-session">'
-          + '<h3>'+(i+1)+'. '+escapeHtml(s.title||'(χωρίς τίτλο)')+'</h3>'
-          + (s.goal?'<p><b>Στόχος:</b> '+escapeHtml(s.goal)+'</p>':'')
-          + (s.scenes?'<p><b>Σκηνές:</b><br>'+escapeHtml(s.scenes).replace(/\n/g,'<br>')+'</p>':'')
-          + (s.resolution?'<p><b>Μίνι-επίλυση:</b> '+escapeHtml(s.resolution)+'</p>':'')
-          + '</div>';
-      });
-    }
-
-    if(npcs.length){
-      html += '<h2 class="camp-print-h2">🎭 NPCs</h2><div class="camp-print-npc-grid">';
-      npcs.forEach(function(n){
-        html += '<div class="camp-print-npc"><b>'+escapeHtml(n.name)+'</b>'+(n.role?' — <i>'+escapeHtml(n.role)+'</i>':'')
-          + (n.personality?'<div>'+escapeHtml(n.personality)+'</div>':'')
-          + (n.quirk?'<div><b>Quirk:</b> '+escapeHtml(n.quirk)+'</div>':'')
-          + (n.quote?'<div style="font-style:italic;">"'+escapeHtml(n.quote)+'"</div>':'')
-          + '</div>';
-      });
-      html += '</div>';
-    }
-
-    if(map){
-      html += '<h2 class="camp-print-h2">🖼️ Χάρτης: '+escapeHtml(map.name)+'</h2>'
-        + '<div class="camp-print-map"><img src="'+map.image+'" alt=""></div>';
-    }
-
-    if(camp.climax) html += '<h2 class="camp-print-h2">🏆 Κλιμάκωση &amp; Τέλος</h2><p>'+escapeHtml(camp.climax).replace(/\n/g,'<br>')+'</p>';
-
-    root.innerHTML = html;
-  }
-  document.getElementById('campaignPrintBtn').addEventListener('click', function(){
-    buildCampaignPrintView();
-    document.body.className='printing-campaign';
-    window.print();
-  });
-
   // ================= Init =================
   loadLibrary();
   renderAll();
-  renderNpcTab();
-  renderMapTab();
-  renderCampaignTab();
 })();
 </script>
 </body>
