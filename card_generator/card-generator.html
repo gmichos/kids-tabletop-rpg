@@ -25,7 +25,6 @@
   body{margin:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;}
   header{text-align:center;padding:48px 20px 44px;position:relative;
     background:linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);color:#fff;}
-  header .emoji{font-size:36px;}
   header h1{margin:14px 0 8px;font-size:clamp(24px, 5vw, 36px);font-weight:800;letter-spacing:-0.6px;}
   header p{margin:0 auto;max-width:560px;font-size:clamp(13px, 2.2vw, 15px);color:#e6dcf7;}
   header .home-link{position:absolute;top:16px;left:20px;font-size:.82rem;font-weight:700;
@@ -152,7 +151,7 @@
   .t-front{height:100%;padding:2.5mm;display:flex;flex-direction:column;text-align:center;}
   .t-top{display:flex;justify-content:space-between;align-items:center;}
   .t-badge{background:var(--brand);color:#fff;font-size:var(--fs-sm);padding:.5mm 1.5mm;border-radius:2mm;}
-  .t-icon{width:6mm;height:6mm;color:var(--brand-dark);}
+  .t-icon{font-size:5.5mm;line-height:1;}
   .t-name{margin:1mm 0 0;font-size:var(--fs-lg);color:var(--brand-dark);}
   .t-sub{font-style:italic;font-size:var(--fs-sm);color:var(--muted);margin-bottom:1mm;}
   .t-info{font-size:var(--fs-sm);text-align:left;margin-bottom:1mm;}
@@ -165,8 +164,6 @@
     background:radial-gradient(circle,var(--brand-tint),var(--card));}
   .t-back-border{border:2px solid var(--brand);border-radius:3mm;width:85%;height:85%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
   .t-back-emblem{width:18mm;height:18mm;color:var(--gold);}
-  .t-back-title{margin-top:2mm;font-size:var(--fs-md);letter-spacing:.15em;color:var(--brand-dark);text-align:center;}
-  .t-back-title span{font-size:var(--fs-sm);opacity:.8;display:block;}
 
   #printRoot{display:none;}
 
@@ -263,7 +260,6 @@
 
 <header class="screen-only">
   <a class="home-link" href="../index.html">← Αρχική Σελίδα</a>
-  <div class="emoji">🃏</div>
   <h1>Εργαλείο Καρτών</h1>
   <p>Ανέβασε CSV με τέρατα, ξόρκια, αντικείμενα, δεξιότητες ή NPCs και τύπωσε κάρτες σε πραγματικό μέγεθος</p>
 </header>
@@ -275,8 +271,8 @@
     <input type="file" id="cardImageInput" accept="image/*" hidden>
     <div class="group"><input type="text" id="searchInput" placeholder="Αναζήτηση ονόματος..."></div>
     <div class="group">
-      <button class="btn" id="flipAllBtn" type="button" data-state="front">🔄 Όλες πίσω</button>
-      <button class="btn" id="printBtn" type="button">🖨️ Εκτύπωση / PDF</button>
+      <button class="btn" id="flipAllBtn" type="button" data-state="front">Όλες πίσω</button>
+      <button class="btn" id="printBtn" type="button">Εκτύπωση / PDF</button>
       <button class="btn" id="clearBtn" type="button">Καθαρισμός βιβλιοθήκης</button>
     </div>
     <div class="count-badge" id="countBadge">0 κάρτες</div>
@@ -285,11 +281,11 @@
   <main class="screen-only">
     <section class="cat-panel" id="panel-monster" data-cat="monster">
       <div class="cat-panel-head">
-        <h2>🐉 Τέρατα <span class="cat-panel-hint">καρτ-ποστάλ 148×105mm</span></h2>
+        <h2>Τέρατα <span class="cat-panel-hint">καρτ-ποστάλ 148×105mm</span></h2>
         <div class="cat-panel-actions">
-          <label class="upload-btn" for="fileInput-monster">📄 Ανέβασμα CSV</label>
+          <label class="upload-btn" for="fileInput-monster">Ανέβασμα CSV</label>
           <input type="file" id="fileInput-monster" accept=".csv,text/csv" multiple hidden>
-          <button class="btn" id="sample-monster" type="button">📊 Παράδειγμα</button>
+          <button class="btn" id="sample-monster" type="button">Παράδειγμα</button>
         </div>
       </div>
       <div class="cat-panel-sources" id="sources-monster"></div>
@@ -307,11 +303,11 @@
 
     <section class="cat-panel" id="panel-spell" data-cat="spell">
       <div class="cat-panel-head">
-        <h2>📜 Ξόρκια <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <h2>Ξόρκια <span class="cat-panel-hint">trading card 63×88mm</span></h2>
         <div class="cat-panel-actions">
-          <label class="upload-btn" for="fileInput-spell">📄 Ανέβασμα CSV</label>
+          <label class="upload-btn" for="fileInput-spell">Ανέβασμα CSV</label>
           <input type="file" id="fileInput-spell" accept=".csv,text/csv" multiple hidden>
-          <button class="btn" id="sample-spell" type="button">📊 Παράδειγμα</button>
+          <button class="btn" id="sample-spell" type="button">Παράδειγμα</button>
         </div>
       </div>
       <div class="cat-panel-sources" id="sources-spell"></div>
@@ -329,11 +325,11 @@
 
     <section class="cat-panel" id="panel-item" data-cat="item">
       <div class="cat-panel-head">
-        <h2>⚔️ Αντικείμενα / Όπλα <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <h2>Αντικείμενα / Όπλα <span class="cat-panel-hint">trading card 63×88mm</span></h2>
         <div class="cat-panel-actions">
-          <label class="upload-btn" for="fileInput-item">📄 Ανέβασμα CSV</label>
+          <label class="upload-btn" for="fileInput-item">Ανέβασμα CSV</label>
           <input type="file" id="fileInput-item" accept=".csv,text/csv" multiple hidden>
-          <button class="btn" id="sample-item" type="button">📊 Παράδειγμα</button>
+          <button class="btn" id="sample-item" type="button">Παράδειγμα</button>
         </div>
       </div>
       <div class="cat-panel-sources" id="sources-item"></div>
@@ -351,11 +347,11 @@
 
     <section class="cat-panel" id="panel-skill" data-cat="skill">
       <div class="cat-panel-head">
-        <h2>⭐ Ικανότητες <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <h2>Ικανότητες <span class="cat-panel-hint">trading card 63×88mm</span></h2>
         <div class="cat-panel-actions">
-          <label class="upload-btn" for="fileInput-skill">📄 Ανέβασμα CSV</label>
+          <label class="upload-btn" for="fileInput-skill">Ανέβασμα CSV</label>
           <input type="file" id="fileInput-skill" accept=".csv,text/csv" multiple hidden>
-          <button class="btn" id="sample-skill" type="button">📊 Παράδειγμα</button>
+          <button class="btn" id="sample-skill" type="button">Παράδειγμα</button>
         </div>
       </div>
       <div class="cat-panel-sources" id="sources-skill"></div>
@@ -371,11 +367,11 @@
 
     <section class="cat-panel" id="panel-npc" data-cat="npc">
       <div class="cat-panel-head">
-        <h2>🎭 NPCs <span class="cat-panel-hint">trading card 63×88mm</span></h2>
+        <h2>NPCs <span class="cat-panel-hint">trading card 63×88mm</span></h2>
         <div class="cat-panel-actions">
-          <label class="upload-btn" for="fileInput-npc">📄 Ανέβασμα CSV</label>
+          <label class="upload-btn" for="fileInput-npc">Ανέβασμα CSV</label>
           <input type="file" id="fileInput-npc" accept=".csv,text/csv" multiple hidden>
-          <button class="btn" id="sample-npc" type="button">📊 Παράδειγμα</button>
+          <button class="btn" id="sample-npc" type="button">Παράδειγμα</button>
         </div>
       </div>
       <div class="cat-panel-sources" id="sources-npc"></div>
@@ -392,8 +388,8 @@
 
   <div class="toolbar screen-only">
     <div class="group">
-      <button class="btn" id="exportDataBtn" type="button">💾 Εξαγωγή Δεδομένων (JSON)</button>
-      <label class="upload-btn" for="importDataInput">📂 Εισαγωγή Δεδομένων</label>
+      <button class="btn" id="exportDataBtn" type="button">Εξαγωγή Δεδομένων (JSON)</button>
+      <label class="upload-btn" for="importDataInput">Εισαγωγή Δεδομένων</label>
       <input type="file" id="importDataInput" accept=".json,application/json" hidden>
     </div>
     <div class="count-badge">Backup ή μεταφορά της βιβλιοθήκης καρτών σε άλλο browser/υπολογιστή</div>
@@ -527,8 +523,6 @@
     }
   };
   var CATEGORY_ORDER = ['monster','spell','item','skill','npc'];
-  var CATEGORY_EMOJI = {monster:'🐉', spell:'📜', item:'⚔️', skill:'⭐', npc:'🎭'};
-
   // Downloadable example CSVs (with header rows), embedded so the tool works from a single file.
   var SAMPLE_CSV_MONSTER = `"Name; Size/Type; Alignment; AC; Armor; HP; Hit Dice; Speed; STR; DEX; CON; INT; WIS; CHA; Saving Throws; Skills; Damage Resistances; Damage Immunities; Condition Immunities; Senses; Languages; CR; XP; Description; Attack; Legendary Actions; Special Abilities; ; "
 "Giant Rat (Γιγαντιαίος Αρουραίος); Μικρό θηρίο; αδιάφορο; 11; φυσική επιδερμίδα; 5; 2d4; 9 μ.; 6; 15; 10; 2; 10; 4; ; Perception +2 (Αντίληψη); ; ; ; Darkvision 60 ft. (Νυχτερινή Όραση), Passive Perception 12 (Παθητική Αντίληψη); —; 1/8; 25; Αρουραίος με λαμπερά κόκκινα μάτια που ζει σε σμήνη μέσα σε υπόγεια και σκουπιδότοπους.; Δάγκωμα. Επίθεση Όπλου Σώμα με Σώμα: +3 στο χτύπημα, εμβέλεια 1,5μ., ένας στόχος. Χτύπημα: 1d4 ζημιά δαγκώματος.; ; Ομαδική Τακτική. Ο αρουραίος έχει Πλεονέκτημα στη ζαριά επίθεσης αν τουλάχιστον ένας σύμμαχός του βρίσκεται δίπλα στον στόχο.; ; "
@@ -713,7 +707,8 @@
   }
   function buildCard(rowArr, mapping, sourceId, category){
     var fieldsArr = CATEGORY_DEFS[category].fields;
-    function get(key){ var idx=mapping[key]; if(idx===undefined||idx===null||idx<0) return ''; return (rowArr[idx]||'').trim(); }
+    var fallbackName = (rowArr[0]||'').trim();
+    function get(key){ var idx=mapping[key]; if(idx===undefined||idx===null||idx<0){ if(key==='name' && fallbackName) return fallbackName; return ''; } return (rowArr[idx]||'').trim(); }
     var c = { _id:'c_'+Date.now()+'_'+Math.random().toString(36).slice(2,8), _source:sourceId, _category:category };
     fieldsArr.forEach(function(fd){ c[fd.key] = get(fd.key); });
     return c;
@@ -751,9 +746,8 @@
       var html = '<p>Το αρχείο <strong>'+escapeHtml(filename)+'</strong> δεν αναγνωρίστηκε αυτόματα. Διάλεξε κατηγορία:</p>';
       CATEGORY_ORDER.forEach(function(cat, i){
         var checked = (guessed ? guessed===cat : i===0) ? 'checked' : '';
-        var emoji = CATEGORY_EMOJI[cat] || '🃏';
         var sizeTxt = CATEGORY_DEFS[cat].sizeClass==='postcard' ? 'καρτ-ποστάλ 148×105mm' : 'trading card 63×88mm';
-        html += '<label class="cat-choice"><input type="radio" name="catChoice" value="'+cat+'" '+checked+'> '+emoji+' '+CATEGORY_DEFS[cat].label+' <span style="opacity:.6">('+sizeTxt+')</span></label>';
+        html += '<label class="cat-choice"><input type="radio" name="catChoice" value="'+cat+'" '+checked+'> '+CATEGORY_DEFS[cat].label+' <span style="opacity:.6">('+sizeTxt+')</span></label>';
       });
       body.innerHTML = html;
       modal.classList.remove('hidden');
@@ -920,18 +914,10 @@
     return 'icon-claw';
   }
   function pickSpellIcon(school){
-    var n = normalize(school);
-    if(/πυρ|fire|evocation|επικλησ/.test(n)) return 'icon-flame';
-    if(/προστασ|abjuration|shield/.test(n)) return 'icon-shield';
-    return 'icon-book';
+    return '\u{1F52E}'; // 🔮 crystal ball
   }
   function pickItemIcon(type){
-    var n = normalize(type);
-    if(/οπλο|weapon|σπαθ|sword|τσεκουρ|axe|τοξ|bow|μαχαιρ|dagger/.test(n)) return 'icon-sword';
-    if(/φιλτρ|potion|flask/.test(n)) return 'icon-flask';
-    if(/δαχτυλιδ|ring|κοσμημα|amulet|gem/.test(n)) return 'icon-gem';
-    if(/ασπιδα|shield|πανοπλ|armor/.test(n)) return 'icon-shield';
-    return 'icon-box';
+    return '\u{1F392}'; // 🎒 backpack
   }
 
   // Shared full-width header (name + CR/XP) used identically on both the front and back of a
@@ -1001,7 +987,7 @@
     if(c.effect) infoLines.push('<b>Ζημιά/Effect:</b> '+escapeHtml(c.effect));
     if(c.duration) infoLines.push('<b>Διάρκεια:</b> '+escapeHtml(c.duration));
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.level||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.level||'')+'</span><span class="t-icon" role="img" aria-label="Ξόρκι">'+icon+'</span></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +'<div class="t-sub">'+escapeHtml([c.school,c.class].filter(Boolean).join(' · '))+'</div>'
       +(infoLines.length?'<div class="t-info">'+infoLines.join('<br>')+'</div>':'')
@@ -1012,7 +998,7 @@
   function itemFrontInner(c){
     var icon = pickItemIcon(c.type);
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.rarity||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.rarity||'')+'</span><span class="t-icon" role="img" aria-label="Αντικείμενο">'+icon+'</span></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +'<div class="t-sub">'+escapeHtml([c.type,c.price].filter(Boolean).join(' · '))+'</div>'
       +(c.effect?'<div class="t-info"><b>Ζημιά/Effect:</b> '+escapeHtml(c.effect)+'</div>':'')
@@ -1033,7 +1019,7 @@
   }
   function npcFrontInner(c){
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.role||'NPC')+'</span><svg class="t-icon"><use href="#icon-humanoid"></use></svg></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.role||'NPC')+'</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +(c.personality?'<div class="t-info">'+escapeHtml(c.personality)+'</div>':'')
       +(c.quirk?'<div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Quirk:</b> '+escapeHtml(c.quirk)+'</div>':'')
@@ -1046,7 +1032,6 @@
   function tradingBackInner(){
     return '<div class="t-back"><div class="t-back-border">'
       +'<svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg>'
-      +'<div class="t-back-title">ΜΙΚΡΟΙ<span>ΗΡΩΕΣ</span></div>'
       +'</div></div>';
   }
   function frontInnerFor(c){
@@ -1064,8 +1049,8 @@
   function cardWrapHTML(c){
     var size = CATEGORY_DEFS[c._category].sizeClass;
     return '<div class="card-flip-wrap card-'+size+'" data-card-id="'+c._id+'">'
-      +'<div class="card-face card-front active" data-card-id="'+c._id+'" data-face="front">'+frontInnerFor(c)+'<button type="button" class="flip-btn">🔄 Πίσω όψη</button></div>'
-      +'<div class="card-face card-back" data-card-id="'+c._id+'" data-face="back">'+backInnerFor(c)+'<button type="button" class="flip-btn">🔄 Μπροστά</button></div>'
+      +'<div class="card-face card-front active" data-card-id="'+c._id+'" data-face="front">'+frontInnerFor(c)+'<button type="button" class="flip-btn">Πίσω όψη</button></div>'
+      +'<div class="card-face card-back" data-card-id="'+c._id+'" data-face="back">'+backInnerFor(c)+'<button type="button" class="flip-btn">Μπροστά</button></div>'
       +'</div>';
   }
   function printFaceHTML(c, faceType){
@@ -1170,7 +1155,7 @@
 
     var flipAllBtn = document.getElementById('flipAllBtn');
     flipAllBtn.setAttribute('data-state','front');
-    flipAllBtn.textContent = '🔄 Όλες πίσω';
+    flipAllBtn.textContent = 'Όλες πίσω';
   }
 
   function renderAll(){ renderSources(); renderCards(); }
@@ -1227,7 +1212,7 @@
       else { back.classList.remove('active'); front.classList.add('active'); }
     });
     this.setAttribute('data-state', toBack ? 'back' : 'front');
-    this.textContent = toBack ? '🔄 Όλες μπροστά' : '🔄 Όλες πίσω';
+    this.textContent = toBack ? 'Όλες μπροστά' : 'Όλες πίσω';
   });
   document.getElementById('clearBtn').addEventListener('click', function(){
     if(!confirm('Σίγουρα θέλεις να διαγράψεις όλη τη βιβλιοθήκη καρτών;')) return;
