@@ -151,7 +151,7 @@
   .t-front{height:100%;padding:2.5mm;display:flex;flex-direction:column;text-align:center;}
   .t-top{display:flex;justify-content:space-between;align-items:center;}
   .t-badge{background:var(--brand);color:#fff;font-size:var(--fs-sm);padding:.5mm 1.5mm;border-radius:2mm;}
-  .t-icon{font-size:5.5mm;line-height:1;}
+  .t-icon{width:6mm;height:6mm;color:var(--brand-dark);}
   .t-name{margin:1mm 0 0;font-size:var(--fs-lg);color:var(--brand-dark);}
   .t-sub{font-style:italic;font-size:var(--fs-sm);color:var(--muted);margin-bottom:1mm;}
   .t-info{font-size:var(--fs-sm);text-align:left;margin-bottom:1mm;}
@@ -256,6 +256,10 @@
   <symbol id="icon-box" viewBox="0 0 100 100">
     <rect x="15" y="35" width="70" height="50" fill="currentColor"/>
     <polygon points="15,35 50,15 85,35" fill="currentColor"/>
+  </symbol>
+  <symbol id="icon-coin" viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="38" fill="currentColor"/>
+    <circle cx="50" cy="50" r="26" fill="none" stroke="#f3e6cc" stroke-width="4"/>
   </symbol>
   <symbol id="icon-emblem" viewBox="0 0 100 100">
     <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="4"/>
@@ -919,10 +923,18 @@
     return 'icon-claw';
   }
   function pickSpellIcon(school){
-    return '\u{1F52E}'; // 🔮 crystal ball
+    var n = normalize(school);
+    if(/πυρ|fire|evocation|επικλησ/.test(n)) return 'icon-flame';
+    if(/προστασ|abjuration|shield/.test(n)) return 'icon-shield';
+    return 'icon-book';
   }
   function pickItemIcon(type){
-    return '\u{1F392}'; // 🎒 backpack
+    var n = normalize(type);
+    if(/οπλο|weapon|σπαθ|sword|τσεκουρ|axe|τοξ|bow|μαχαιρ|dagger/.test(n)) return 'icon-sword';
+    if(/φιλτρ|potion|flask/.test(n)) return 'icon-flask';
+    if(/δαχτυλιδ|ring|κοσμημα|amulet|gem/.test(n)) return 'icon-gem';
+    if(/ασπιδα|shield|πανοπλ|armor/.test(n)) return 'icon-shield';
+    return 'icon-coin';
   }
   // Back-of-card symbol for trading cards: reuses the same icon already shown on that
   // card's front, so every deck ends up with a varied set of single-color symbols
@@ -1004,7 +1016,7 @@
     if(c.effect) infoLines.push('<b>Ζημιά/Effect:</b> '+escapeHtml(c.effect));
     if(c.duration) infoLines.push('<b>Διάρκεια:</b> '+escapeHtml(c.duration));
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.level||'')+'</span><span class="t-icon" role="img" aria-label="Ξόρκι">'+icon+'</span></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.level||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +'<div class="t-sub">'+escapeHtml([c.school,c.class].filter(Boolean).join(' · '))+'</div>'
       +(infoLines.length?'<div class="t-info">'+infoLines.join('<br>')+'</div>':'')
@@ -1015,7 +1027,7 @@
   function itemFrontInner(c){
     var icon = pickItemIcon(c.type);
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.rarity||'')+'</span><span class="t-icon" role="img" aria-label="Αντικείμενο">'+icon+'</span></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.rarity||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +'<div class="t-sub">'+escapeHtml([c.type,c.price].filter(Boolean).join(' · '))+'</div>'
       +(c.effect?'<div class="t-info"><b>Ζημιά/Effect:</b> '+escapeHtml(c.effect)+'</div>':'')
@@ -1036,7 +1048,7 @@
   }
   function npcFrontInner(c){
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.role||'NPC')+'</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.role||'NPC')+'</span><svg class="t-icon"><use href="#icon-humanoid"></use></svg></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +(c.personality?'<div class="t-info">'+escapeHtml(c.personality)+'</div>':'')
       +(c.quirk?'<div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Quirk:</b> '+escapeHtml(c.quirk)+'</div>':'')
