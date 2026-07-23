@@ -39,9 +39,13 @@ as a single print-ready `.html` (A4, shared visual theme) — this is the only
 public/live format; there is no Markdown shipped alongside it (see
 `llm-reference/` below). Some folders also carry a `.csv` with the
 deliverable's structured stat data (`monster-stats.csv`, `spell-stats.csv`,
-`items-stats.csv`, `npc-stats.csv`) and `02-campaign` has a `map.svg`. Images
-live under `content/images/` (with `monsters/` and `npcs/` subfolders for
-per-creature portraits). `index.html` at the repo root links every
+`items-stats.csv`, `npc-stats.csv`) and `02-campaign` has a `map.svg`. Shared
+decorative images live under `content/images/`. Monster and NPC cards
+(`monster-cards.html`, `npc-cards.html`) don't use per-creature photos — their
+card backs render an inline SVG icon (from the `<symbol>` set already defined
+in each file, matching the icons used on `content/07-characters/characters.html`)
+plus the creature/NPC name, so there's nothing to keep in sync when a new
+monster or NPC is added. `index.html` at the repo root links every
 deliverable and must be updated when a new one is added.
 
 Every `content/NN-name/*.html` page carries a small `.back-link.screen-only`
@@ -142,7 +146,12 @@ only that one unless told to do the whole set.
 
 4. **Encounter & monster reference** — 4–6 simple stat blocks (low HP, low
    damage, one fun quirk each — favor silly or misunderstood creatures over
-   scary ones), plus difficulty-scaling notes for the DM.
+   scary ones), plus difficulty-scaling notes for the DM. Treat 4–6 as a
+   starting-set floor for a fresh request, not a hard cap: a monster
+   reference meant to support a full campaign (e.g. `content/03-monsters/`,
+   built to cover every `content/02-campaign/` chapter) should have one
+   creature per encounter the campaign actually calls for, even if that
+   exceeds 6.
 
 5. **Handouts & props** — printable character sheet template, 1–2
    illustrated prop items (map, NPC note, wanted poster), an
@@ -193,7 +202,7 @@ started:
   at the project root, one numbered folder per deliverable (e.g.
   `content/01-tutorial/tutorial.html`, `content/07-characters/characters.html`,
   `content/02-campaign/campaign.html`, `content/03-monsters/monsters.html`,
-  `content/05-handouts/handouts.html`, `content/06-dm-guide/dm-guide.html`,
+  `content/05-handouts/handouts.html`, `content/06-gm-guide/gm-guide.html`,
   `content/08-character-creation/character-creation.html`),
   A4, same visual theme (see README's "Χρωματικό Θέμα" section), with a
   `.back-link.screen-only` nav element per the Architecture section above,

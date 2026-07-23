@@ -26,7 +26,7 @@ content/
                          item-cards.html              Κάρτες Αντικειμένων
                          npc-cards.html               Κάρτες NPC
                          items-stats.csv              Πλήρη στοιχεία αντικειμένων
-  06-dm-guide/            dm-guide.html                Οδηγός Game Master
+  06-gm-guide/            gm-guide.html                Οδηγός Game Master
   07-characters/          characters.html              Κάρτες Ηρώων
   08-character-creation/  character-creation.html      Οδηγός Δημιουργίας Χαρακτήρα
   images/                 goblins.png, gryphon-cutout.png, skeleton-cutout.png,
