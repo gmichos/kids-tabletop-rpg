@@ -80,16 +80,20 @@ that shared theme.
 A single self-contained client-side app (no dependencies, no build, no
 server) for turning CSV stat data into printable card sheets:
 
-- User uploads one or more CSVs (monsters, spells, items, NPCs); the tool
-  guesses the category from filename/header, auto-maps columns to card
+- User uploads one or more CSVs across five card categories — monster,
+  spell, item, skill, npc (`CATEGORY_ORDER` in `card-generator.html`); the
+  tool guesses the category from filename/header, auto-maps columns to card
   fields by alias matching, and falls back to a manual-mapping modal when it
-  can't confidently match.
+  can't confidently match. The "skill" category (character/class abilities,
+  labelled "Ικανότητα") has no `content/` folder or stats CSV of its own —
+  it's card-generator-only.
 - Column-mapping choices and the working card library are cached in
   `localStorage` (keyed by a signature derived from the CSV header) so
   re-uploading the same shape of CSV doesn't require re-mapping.
 - `card_generator/*-sample.csv` files are example/template CSVs bundled for
   users to download and fill in; they mirror the schemas the `content/03-monsters`,
-  `content/04-spells`, and `content/05-handouts` CSVs use.
+  `content/04-spells`, and `content/05-handouts` CSVs use (plus a
+  skills-only sample with no `content/` counterpart).
 
 ### Content-generation guardrails
 
@@ -149,6 +153,12 @@ only that one unless told to do the whole set.
    guidance that failed rolls should be fun/interesting, never punishing or
    scary.
 
+7. **Character creation guide** (`content/08-character-creation/`) — a
+   step-by-step walkthrough for building a new hero from scratch (concept,
+   ancestry, class, ability scores, HP/AC, starting gear), plus a level-up
+   progression table (levels 1–5) per class and GM tips for helping kids
+   through it. Distinct from deliverable 2 (pre-generated characters).
+
 #### Style & Safety Guardrails (always apply)
 
 - No real-world scary themes; if death comes up, keep it soft/off-screen
@@ -183,7 +193,8 @@ started:
   at the project root, one numbered folder per deliverable (e.g.
   `content/01-tutorial/tutorial.html`, `content/07-characters/characters.html`,
   `content/02-campaign/campaign.html`, `content/03-monsters/monsters.html`,
-  `content/05-handouts/handouts.html`, `content/06-dm-guide/dm-guide.html`),
+  `content/05-handouts/handouts.html`, `content/06-dm-guide/dm-guide.html`,
+  `content/08-character-creation/character-creation.html`),
   A4, same visual theme (see README's "Χρωματικό Θέμα" section), with a
   `.back-link.screen-only` nav element per the Architecture section above,
   and link it from `index.html`.
