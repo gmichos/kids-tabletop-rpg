@@ -22,11 +22,12 @@ content/
   04-spells/             spells.html                  Οδηγός Ξορκιών
                          spell-cards.html             Κάρτες Ξορκιών
                          spell-stats.csv              Πλήρη στοιχεία ξορκιών
-  05-handouts/            handouts.html                Έντυπα & Αντικείμενα
-                         item-cards.html, npc-cards.html
+  05-handouts/            handouts.html                Έντυπα
+                         item-cards.html              Κάρτες Αντικειμένων
+                         npc-cards.html               Κάρτες NPC
                          items-stats.csv              Πλήρη στοιχεία αντικειμένων
   06-dm-guide/            dm-guide.html                Οδηγός Game Master
-  07-characters/          characters.html              Έτοιμοι Χαρακτήρες
+  07-characters/          characters.html              Κάρτες Ηρώων
   08-character-creation/  character-creation.html      Οδηγός Δημιουργίας Χαρακτήρα
   images/                 goblins.png, gryphon-cutout.png, skeleton-cutout.png,
                          monsters/*.png, npcs/*.png   Όλες οι εικόνες που χρησιμοποιούν τα deliverables
