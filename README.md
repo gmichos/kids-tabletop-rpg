@@ -2,7 +2,7 @@
 
 Ένα πλήρες, ελληνικό, παιδικό πακέτο παιχνιδιού ρόλων (βασισμένο στο SRD 5.1, χωρίς branding της
 Wizards of the Coast): κανόνες, 5 έτοιμους χαρακτήρες, οδηγός Game Master, μια πρώτη
-εκστρατεία 5 κεφαλαίων, κάρτες τεράτων & ξορκιών, και τυπώσιμα handouts — έτοιμο να τρέξει μια
+εκστρατεία 5 κεφαλαίων, κάρτες τεράτων & ξορκιών, και τυπώσιμα έντυπα — έτοιμο να τρέξει μια
 οικογένεια ή μια ομάδα παιδιών γύρω από το τραπέζι.
 
 Άνοιξε `index.html` για μια πλοηγήσιμη κεντρική σελίδα με όλο το υλικό.
@@ -22,12 +22,12 @@ content/
   04-spells/             spells.html                  Οδηγός Ξορκιών
                          spell-cards.html             Κάρτες Ξορκιών
                          spell-stats.csv              Πλήρη στοιχεία ξορκιών
-  05-handouts/            handouts.html                Handouts & Props
+  05-handouts/            handouts.html                Έντυπα & Αντικείμενα
                          item-cards.html, npc-cards.html
                          items-stats.csv              Πλήρη στοιχεία αντικειμένων
   06-dm-guide/            dm-guide.html                Οδηγός Game Master
   07-characters/          characters.html              Έτοιμοι Χαρακτήρες
-  08-character-creation/  character-creation.html      Δημιουργία Χαρακτήρα & Εξέλιξη
+  08-character-creation/  character-creation.html      Οδηγός Δημιουργίας Χαρακτήρα
   images/                 goblins.png, gryphon-cutout.png, skeleton-cutout.png,
                          monsters/*.png, npcs/*.png   Όλες οι εικόνες που χρησιμοποιούν τα deliverables
 llm-reference/            ίδια δομή με content/, αλλά μόνο .md — πηγή/αναφορά για

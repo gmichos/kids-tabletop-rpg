@@ -2,26 +2,39 @@
 <html lang="el">
 <head>
 <meta charset="UTF-8">
+<title>Έτοιμοι Χαρακτήρες — Μικροί Ήρωες</title>
 <style>
+:root {
+  --ink: #201c2b;
+  --muted: #6b6478;
+  --brand: #5a3e85;
+  --brand-dark: #3d2a5c;
+  --brand-tint: #f1ecfa;
+  --gold: #e8a93b;
+  --gold-tint: #fdf3e0;
+  --line: #e6e1ef;
+  --paper: #fefdfb;
+  --card: #ffffff;
+}
 @page { size: A4; margin: 12mm; }
 * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  color: #201c2b;
+  color: var(--ink);
   margin: 0;
 }
 .page-title {
   text-align: center;
-  font-size: 21px;
+  font-size: 22px;
   font-weight: 800;
   letter-spacing: -0.3px;
-  color: #5a3e85;
+  color: var(--brand);
   margin: 0 0 3mm 0;
 }
 .page-subtitle {
   text-align: center;
   font-size: 12px;
-  color: #6b6478;
+  color: var(--muted);
   margin: 0 0 8mm 0;
 }
 .card-grid {
@@ -34,29 +47,29 @@ body {
   padding: 10px 14px;
   display: flex;
   flex-direction: column;
-  background: #ffffff;
-  border: 1px solid #e6e1ef;
+  background: var(--card);
+  border: 1px solid var(--line);
   border-top: 5px solid #888;
   box-shadow: 0 1px 4px rgba(32,28,43,0.08);
   page-break-inside: avoid;
   margin-bottom: 6mm;
 }
 .class-fighter { border-top-color: #b6342a; }
-.class-wizard  { border-top-color: #5a3e85; }
+.class-wizard  { border-top-color: var(--brand); }
 .class-rogue   { border-top-color: #2e6d6d; }
 .class-cleric  { border-top-color: #b8863a; }
 .class-ranger  { border-top-color: #4a7c2e; }
 
 .card-header { text-align: center; border-radius: 7px; padding: 6px 6px; color: white; margin-bottom: 6px; }
 .class-fighter .card-header { background: #b6342a; }
-.class-wizard  .card-header { background: #5a3e85; }
+.class-wizard  .card-header { background: var(--brand); }
 .class-rogue   .card-header { background: #2e6d6d; }
 .class-cleric  .card-header { background: #b8863a; }
 .class-ranger  .card-header { background: #4a7c2e; }
 
 .card-name-el { font-size: 15px; font-weight: 700; margin: 2px 0 0 0; }
 .card-class { font-size: 11px; font-style: italic; opacity: 0.9; }
-.card-meta { text-align: center; font-size: 10.5px; color: #6b6478; margin-bottom: 6px; }
+.card-meta { text-align: center; font-size: 10.5px; color: var(--muted); margin-bottom: 6px; }
 .stat-row {
   display: flex;
   justify-content: space-around;
@@ -70,10 +83,10 @@ body {
 .stat-row div { text-align: center; }
 .stat-label { font-size: 8.5px; font-weight: 500; color: #8b8494; display:block; text-transform: uppercase; letter-spacing: 0.3px; }
 .card-body { font-size: 10.5px; line-height: 1.45; flex-grow: 1; }
-.card-body b { color: #201c2b; }
+.card-body b { color: var(--ink); }
 .card-line { margin-bottom: 4px; }
 .card-abilities {
-  background: #f4f0fb;
+  background: var(--brand-tint);
   border-radius: 6px;
   padding: 5px 8px;
   font-size: 10px;
@@ -84,24 +97,25 @@ body {
 .card-flavor {
   font-size: 10px;
   font-style: italic;
-  color: #6b6478;
-  border-top: 1px dashed #e6e1ef;
+  color: var(--muted);
+  border-top: 1px dashed var(--line);
   margin-top: 6px;
   padding-top: 5px;
 }
 .pick-guide {
   margin-top: 4mm;
-  background: #fdf3e0;
+  background: var(--gold-tint);
   border: 1px solid #f0d9a8;
-  border-left: 4px solid #e8a93b;
+  border-left: 4px solid var(--gold);
   border-radius: 8px;
   padding: 10px 16px;
   font-size: 11.5px;
   line-height: 1.6;
 }
-.pick-guide h2 { color: #5a3e85; font-size: 14px; margin-top: 0; }
+.pick-guide h2 { color: var(--brand); font-size: 14px; margin-top: 0; }
+  .small{font-size:11px;color:var(--muted);}
   .back-link{text-align:center;font-size:13px;margin:0 0 10px;}
-  .back-link a{color:#5a3e85;text-decoration:none;font-weight:600;}
+  .back-link a{color:var(--brand);text-decoration:none;font-weight:600;}
   .back-link a:hover{text-decoration:underline;}
   @media print{ .back-link{display:none;} }
 </style>
@@ -141,7 +155,7 @@ body {
     <div class="card-name-el">Νικόλας ο Βιβλιοφάγος</div>
     <div class="card-class">Μάγος — Ο έξυπνος που ρίχνει ξόρκια</div>
   </div>
-  <div class="card-meta">Γνώμος &nbsp;•&nbsp; Επίπεδο 1</div>
+  <div class="card-meta">Γκνομ &nbsp;•&nbsp; Επίπεδο 1</div>
   <div class="stat-row">
     <div>7<span class="stat-label">HP</span></div>
     <div>11<span class="stat-label">AC</span></div>
@@ -162,7 +176,7 @@ body {
     <div class="card-name-el">Σέλα Ελαφρόχερη</div>
     <div class="card-class">Κλέφτης — Η γρήγορη που κρύβεται και ανοίγει κλειδαριές</div>
   </div>
-  <div class="card-meta">Χόμπιτ &nbsp;•&nbsp; Επίπεδο 1</div>
+  <div class="card-meta">Χάλφλινγκ &nbsp;•&nbsp; Επίπεδο 1</div>
   <div class="stat-row">
     <div>9<span class="stat-label">HP</span></div>
     <div>14<span class="stat-label">AC</span></div>
@@ -231,7 +245,8 @@ body {
 Χτυπά από μακριά, συνεργάζεται με ζώα → <b>Ρόκο</b>
 </div>
 
-<p style="text-align:center; font-size: 11px; color: #666; margin-top: 20px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <code>OGL.md</code>.</p>
+<p class="small" style="text-align:center; margin-top: 30px;">Πέντε έτοιμοι χαρακτήρες, έτοιμοι για άμεσο παιχνίδι χωρίς δημιουργία χαρακτήρα.</p>
+<p class="small" style="text-align:center; margin-top: 6px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <code>OGL.md</code>.</p>
 
 </body>
 </html>

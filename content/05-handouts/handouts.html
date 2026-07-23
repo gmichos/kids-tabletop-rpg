@@ -2,34 +2,48 @@
 <html lang="el">
 <head>
 <meta charset="UTF-8">
+<title>Handouts & Props — Μικροί Ήρωες</title>
 <style>
+:root {
+  --ink: #201c2b;
+  --muted: #6b6478;
+  --brand: #5a3e85;
+  --brand-dark: #3d2a5c;
+  --brand-tint: #f1ecfa;
+  --gold: #e8a93b;
+  --gold-tint: #fdf3e0;
+  --line: #e6e1ef;
+  --paper: #fefdfb;
+  --card: #ffffff;
+}
+
 @page { size: A4; margin: 14mm; }
 * { -webkit-print-color-adjust: exact; print-color-adjust: exact; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #201c2b; margin: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: var(--ink); margin: 0; }
 .page { page-break-after: always; }
 .page:last-child { page-break-after: auto; }
 
 /* ===== CHARACTER SHEET ===== */
 .cs-title {
-  text-align: center; font-size: 25px; font-weight: 800; letter-spacing: -0.3px; color: #5a3e85;
-  border-bottom: 2px solid #e6e1ef; padding-bottom: 10px; margin-bottom: 6px;
+  text-align: center; font-size: 25px; font-weight: 800; letter-spacing: -0.3px; color: var(--brand);
+  border-bottom: 2px solid var(--line); padding-bottom: 10px; margin-bottom: 6px;
 }
-.cs-subtitle { text-align: center; font-size: 12.5px; color: #6b6478; margin-bottom: 16px; }
+.cs-subtitle { text-align: center; font-size: 12.5px; color: var(--muted); margin-bottom: 16px; }
 .cs-row { display: flex; gap: 10px; margin-bottom: 10px; }
 .cs-field { flex: 1; }
-.cs-label { font-size: 9.5px; font-weight: 700; color: #6b6478; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px; }
-.cs-box { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 30px; background: #fefdfb; }
-.cs-box-tall { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 60px; background: #fefdfb; }
+.cs-label { font-size: 9.5px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 3px; }
+.cs-box { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 30px; background: var(--paper); }
+.cs-box-tall { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 60px; background: var(--paper); }
 .cs-section-title {
-  background: #5a3e85; color: white; padding: 6px 10px; border-radius: 6px;
+  background: var(--brand); color: white; padding: 6px 10px; border-radius: 6px;
   font-size: 12.5px; font-weight: 700; margin: 16px 0 8px 0;
 }
 .ability-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
-.ability-box { border: 1.5px solid #e6e1ef; border-radius: 8px; text-align: center; padding: 6px 2px; background: #f8f6fb; }
-.ability-name { font-size: 8.5px; font-weight: 700; color: #5a3e85; text-transform: uppercase; letter-spacing: 0.2px; }
+.ability-box { border: 1.5px solid var(--line); border-radius: 8px; text-align: center; padding: 6px 2px; background: #f8f6fb; }
+.ability-name { font-size: 8.5px; font-weight: 700; color: var(--brand); text-transform: uppercase; letter-spacing: 0.2px; }
 .ability-score { border: 1.5px solid #d9d3e6; border-radius: 5px; height: 26px; margin: 4px auto; width: 34px; background: white; }
 .ability-mod { font-size: 8.5px; color: #8b8494; }
-.inv-lines { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 90px; background: #fefdfb; padding: 6px; }
+.inv-lines { border: 1.5px solid #d9d3e6; border-radius: 6px; height: 90px; background: var(--paper); padding: 6px; }
 .inv-lines div { border-bottom: 1px dotted #d9d3e6; height: 16px; }
 
 /* ===== PARCHMENT PROP (Letter / Poster) — deliberately in-world, not the app UI ===== */
@@ -52,48 +66,49 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
 .letter-body { font-size: 15px; line-height: 1.9; color: #3a2a1a; }
 .letter-signoff { margin-top: 30px; font-size: 16px; font-style: italic; text-align: right; color: #4a2f52; }
 .wax-seal {
-  width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #8b5fbf, #5a3e85);
+  width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #8b5fbf, var(--brand));
   display: inline-block; text-align: center; line-height: 60px; color: #f2c14e; font-size: 22px; font-weight: bold;
   box-shadow: 0 3px 6px rgba(0,0,0,0.4);
 }
 
 /* ===== POSTER ===== */
-.poster-title { text-align: center; font-size: 34px; font-weight: 800; color: #5a3e85; margin: 10px 0 4px 0; letter-spacing: 0.5px; }
+.poster-title { text-align: center; font-size: 34px; font-weight: 800; color: var(--brand); margin: 10px 0 4px 0; letter-spacing: 0.5px; }
 .poster-sub { text-align: center; font-size: 16px; color: #6b4a2b; margin-bottom: 20px; font-style: italic; }
 .poster-body { font-size: 15px; line-height: 1.8; color: #3a2a1a; text-align: center; margin: 0 20px; }
 .poster-reward { text-align: center; margin: 24px 0; }
-.poster-reward-box { display: inline-block; border: 2px solid #5a3e85; border-radius: 10px; padding: 12px 30px; background: #fff8e7; font-size: 20px; font-weight: 700; color: #5a3e85; }
+.poster-reward-box { display: inline-block; border: 2px solid var(--brand); border-radius: 10px; padding: 12px 30px; background: #fff8e7; font-size: 20px; font-weight: 700; color: var(--brand); }
 .poster-contact { text-align: center; margin-top: 26px; font-size: 14px; color: #6b4a2b; }
 .tear-strips { display: flex; justify-content: space-around; margin-top: 30px; border-top: 2px dashed #8a6a3a; padding-top: 10px; }
 .tear-strip { writing-mode: vertical-rl; font-size: 12px; color: #6b4a2b; padding: 4px; }
 
 /* ===== INITIATIVE TRACKER ===== */
-.it-title { text-align: center; font-size: 23px; font-weight: 800; letter-spacing: -0.3px; color: #5a3e85; margin-bottom: 4px; }
-.it-subtitle { text-align: center; font-size: 12.5px; color: #6b6478; margin-bottom: 18px; }
+.it-title { text-align: center; font-size: 23px; font-weight: 800; letter-spacing: -0.3px; color: var(--brand); margin-bottom: 4px; }
+.it-subtitle { text-align: center; font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
 table.it-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-table.it-table th { background: #f1ecfa; color: #3d2a5c; padding: 9px 8px; font-size: 12px; font-weight: 700; border-bottom: 2px solid #5a3e85; text-align: left; }
-table.it-table td { border-bottom: 1px solid #e6e1ef; padding: 10px 8px; height: 34px; }
+table.it-table th { background: var(--brand-tint); color: var(--brand-dark); padding: 9px 8px; font-size: 12px; font-weight: 700; border-bottom: 2px solid var(--brand); text-align: left; }
+table.it-table td { border-bottom: 1px solid var(--line); padding: 10px 8px; height: 34px; }
 table.it-table tr:nth-child(even) td { background: #fbfaf7; }
-.it-legend { background: #fdf3e0; border: 1px solid #f0d9a8; border-left: 4px solid #e8a93b; border-radius: 8px; padding: 10px 14px; margin-top: 16px; font-size: 12px; }
+.it-legend { background: var(--gold-tint); border: 1px solid #f0d9a8; border-left: 4px solid var(--gold); border-radius: 8px; padding: 10px 14px; margin-top: 16px; font-size: 12px; }
 
-h2.section-h { color: #5a3e85; font-size: 15px; font-weight: 700; border-bottom: 2px solid #e6e1ef; padding-bottom: 6px; margin-top: 20px; }
+h2.section-h { color: var(--brand); font-size: 15px; font-weight: 700; border-bottom: 2px solid var(--line); padding-bottom: 6px; margin-top: 20px; }
 
 /* ===== NPC / ITEM CARDS: now separate printable decks ===== */
 .page-title {
-  text-align: center; font-size: 19px; font-weight: 800; letter-spacing: -0.3px; color: #5a3e85; margin: 0 0 8mm 0;
+  text-align: center; font-size: 22px; font-weight: 800; letter-spacing: -0.3px; color: var(--brand); margin: 0 0 8mm 0;
 }
 .deck-links { display: flex; flex-direction: column; gap: 16px; align-items: center; margin-top: 30px; }
 .deck-link-box {
-  border: 1.5px solid #e6e1ef; border-radius: 10px; padding: 16px 26px; text-align: center;
+  border: 1.5px solid var(--line); border-radius: 10px; padding: 16px 26px; text-align: center;
   max-width: 420px; background: #fbfaf7;
 }
-.deck-link-box p { font-size: 13px; color: #6b6478; margin: 4px 0 12px; }
+.deck-link-box p { font-size: 13px; color: var(--muted); margin: 4px 0 12px; }
 .deck-link-box a {
-  display: inline-block; background: #5a3e85; color: #fff; text-decoration: none;
+  display: inline-block; background: var(--brand); color: #fff; text-decoration: none;
   font-size: 13px; font-weight: 700; padding: 8px 18px; border-radius: 6px;
 }
+  .small{font-size:11px;color:var(--muted);}
   .back-link{text-align:center;font-size:13px;margin:0 0 10px;}
-  .back-link a{color:#5a3e85;text-decoration:none;font-weight:600;}
+  .back-link a{color:var(--brand);text-decoration:none;font-weight:600;}
   .back-link a:hover{text-decoration:underline;}
   @media print{ .back-link{display:none;} }
 </style>
@@ -236,7 +251,8 @@ h2.section-h { color: #5a3e85; font-size: 15px; font-weight: 700; border-bottom:
 </div>
 </div>
 
-<p style="text-align:center; font-size: 11px; color: #666; margin-top: 20px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <code>OGL.md</code>.</p>
+<p class="small" style="text-align:center; margin-top: 30px;">Τυπώσιμα handouts για το τραπέζι — φύλλο ήρωα, αφίσες, σημειώματα και πίνακας σειράς μάχης.</p>
+<p class="small" style="text-align:center; margin-top: 6px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <code>OGL.md</code>.</p>
 
 </body>
 </html>

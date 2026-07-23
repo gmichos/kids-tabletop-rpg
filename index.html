@@ -89,6 +89,20 @@
   .card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(32,28,43,0.12); border-color: #d9cff0; }
   .card .icon { font-size: 26px; margin-bottom: 8px; }
   .card h3 { margin: 0 0 6px; color: var(--ink); font-size: 15.5px; font-weight: 700; }
+  .card.doc { border-left: 3px solid var(--gold); }
+  .tag-doc {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 999px;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+  }
   .card p.desc { margin: 0 0 16px; font-size: 13px; color: var(--muted); flex-grow: 1; line-height: 1.55; }
   .links { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
   .links a {
@@ -141,7 +155,7 @@
   <div class="intro">
     Καλώς ήρθατε! Αυτό το πακέτο περιέχει <b>όλα όσα χρειάζεστε</b> για να τρέξετε μια πρώτη περιπέτεια ρόλων
     με παιδιά γύρω από το τραπέζι: έναν απλό οδηγό κανόνων, οδηγό για τον Game Master, μια πλήρη πρώτη
-    εκστρατεία 5 κεφαλαίων, κάρτες τεράτων &amp; ξορκιών, και τυπώσιμα handouts. Κάθε ενότητα είναι
+    εκστρατεία 5 κεφαλαίων, κάρτες τεράτων &amp; ξορκιών, και τυπώσιμα έντυπα. Κάθε ενότητα είναι
     μορφοποιημένη σε <b>.html</b>, έτοιμη για ανάγνωση στον browser ή εκτύπωση.
   </div>
 
@@ -166,17 +180,26 @@
     </div>
 
     <div class="card">
-      <div class="icon">🧙</div>
-      <h3>Έτοιμοι Χαρακτήρες</h3>
-      <p class="desc">5 έτοιμοι ήρωες με όνομα, τάξη, στατιστικά, ειδικές ικανότητες και προσωπικότητα — ιδανικό για παιδιά που θέλουν να ξεκινήσουν αμέσως χωρίς δημιουργία χαρακτήρα.</p>
+      <div class="icon">📖</div>
+      <h3>Οδηγός Τεράτων</h3>
+      <p class="desc">Πώς να διαβάσετε ένα stat block, βασικοί μηχανισμοί μάχης, και οι ειδικές ικανότητες πίσω από κάθε τέρας (Ομαδική Τακτική, Αναγέννηση, Ανάσα Φωτιάς κ.ά.).</p>
       <div class="links">
-        <a class="primary" href="content/07-characters/characters.html">Δες τους Χαρακτήρες</a>
+        <a class="primary" href="content/03-monsters/monsters.html">Άνοιγμα Οδηγού</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">✨</div>
+      <h3>Οδηγός Ξορκιών</h3>
+      <p class="desc">Ποιες τάξεις ρίχνουν ξόρκια, τι είναι τα spell slots, οι τρεις τύποι ξορκιών, και οι μηχανισμοί πίσω από 12 βασικά ξόρκια.</p>
+      <div class="links">
+        <a class="primary" href="content/04-spells/spells.html">Άνοιγμα Οδηγού</a>
       </div>
     </div>
 
     <div class="card">
       <div class="icon">🛡️</div>
-      <h3>Δημιουργία Χαρακτήρα &amp; Εξέλιξη</h3>
+      <h3>Οδηγός Δημιουργίας Χαρακτήρα</h3>
       <p class="desc">Οδηγός δημιουργίας νέου ήρωα βήμα-βήμα (φυλή, τάξη, κατανομή στατιστικών) και αναλυτικοί πίνακες εξέλιξης (level up) από το Επίπεδο 1 έως 5.</p>
       <div class="links">
         <a class="primary" href="content/08-character-creation/character-creation.html">Άνοιγμα Οδηγού</a>
@@ -198,37 +221,8 @@
     </div>
   </div>
 
-  <h2 class="section-title">Τέρατα</h2>
+  <h2 class="section-title">Κάρτες</h2>
   <div class="grid">
-    <div class="card">
-      <div class="icon">📖</div>
-      <h3>Οδηγός Τεράτων</h3>
-      <p class="desc">Πώς να διαβάσετε ένα stat block, βασικοί μηχανισμοί μάχης, και οι ειδικές ικανότητες πίσω από κάθε τέρας (Ομαδική Τακτική, Αναγέννηση, Ανάσα Φωτιάς κ.ά.).</p>
-      <div class="links">
-        <a class="primary" href="content/03-monsters/monsters.html">Άνοιγμα Οδηγού</a>
-      </div>
-    </div>
-    <div class="card">
-      <div class="icon">🐲</div>
-      <h3>Κάρτες Τεράτων</h3>
-      <p class="desc">12 τυπώσιμες κάρτες τεράτων, από τον γιγαντιαίο αρουραίο μέχρι τον νεαρό δράκο, ταξινομημένες σε 4 επίπεδα δυσκολίας.</p>
-      <div class="links">
-        <a class="primary" href="content/03-monsters/monster-cards.html">Δες τις Κάρτες</a>
-        <a href="content/03-monsters/monster-stats.csv">Πλήρη Stat Blocks (CSV)</a>
-      </div>
-    </div>
-  </div>
-
-  <h2 class="section-title">Ξόρκια</h2>
-  <div class="grid">
-    <div class="card">
-      <div class="icon">✨</div>
-      <h3>Οδηγός Ξορκιών</h3>
-      <p class="desc">Ποιες τάξεις ρίχνουν ξόρκια, τι είναι τα spell slots, οι τρεις τύποι ξορκιών, και οι μηχανισμοί πίσω από 12 βασικά ξόρκια.</p>
-      <div class="links">
-        <a class="primary" href="content/04-spells/spells.html">Άνοιγμα Οδηγού</a>
-      </div>
-    </div>
     <div class="card">
       <div class="icon">🔮</div>
       <h3>Κάρτες Ξορκιών</h3>
@@ -238,17 +232,45 @@
         <a href="content/04-spells/spell-stats.csv">Πλήρη Στοιχεία (CSV)</a>
       </div>
     </div>
+
+    <div class="card">
+      <div class="icon">🐲</div>
+      <h3>Κάρτες Τεράτων</h3>
+      <p class="desc">12 τυπώσιμες κάρτες τεράτων, από τον γιγαντιαίο αρουραίο μέχρι τον νεαρό δράκο, ταξινομημένες σε 4 επίπεδα δυσκολίας.</p>
+      <div class="links">
+        <a class="primary" href="content/03-monsters/monster-cards.html">Δες τις Κάρτες</a>
+        <a href="content/03-monsters/monster-stats.csv">Πλήρη Stat Blocks (CSV)</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎭</div>
+      <h3>Κάρτες NPC</h3>
+      <p class="desc">Εικονογραφημένες κάρτες για τους NPC της εκστρατείας — έτοιμες για εκτύπωση και χρήση στο τραπέζι.</p>
+      <div class="links">
+        <a class="primary" href="content/05-handouts/npc-cards.html">Δες τις Κάρτες</a>
+      </div>
+    </div>
+
+    <div class="card doc">
+      <span class="tag-doc">Έγγραφο, όχι κάρτες</span>
+      <div class="icon">🧙</div>
+      <h3>Έτοιμοι Χαρακτήρες</h3>
+      <p class="desc">5 έτοιμοι ήρωες με όνομα, τάξη, στατιστικά, ειδικές ικανότητες και προσωπικότητα — ιδανικό για παιδιά που θέλουν να ξεκινήσουν αμέσως χωρίς δημιουργία χαρακτήρα.</p>
+      <div class="links">
+        <a class="primary" href="content/07-characters/characters.html">Δες τους Χαρακτήρες</a>
+      </div>
+    </div>
   </div>
 
-  <h2 class="section-title">Handouts & Props</h2>
+  <h2 class="section-title">Έντυπα &amp; Αντικείμενα</h2>
   <div class="grid">
     <div class="card">
       <div class="icon">📜</div>
-      <h3>Handouts & Props</h3>
-      <p class="desc">Φύλλο ήρωα, το γράμμα του Μπάρναμπι, η αφίσα «Εξαφανίστηκαν Ζώα!», έναν πίνακα σειράς μάχης (initiative tracker), κάρτες NPC και κάρτες αντικειμένων — όλα έτοιμα για εκτύπωση.</p>
+      <h3>Έντυπα &amp; Αντικείμενα</h3>
+      <p class="desc">Φύλλο ήρωα, το γράμμα του Μπάρναμπι, η αφίσα «Εξαφανίστηκαν Ζώα!», έναν πίνακα σειράς μάχης (initiative tracker) και κάρτες αντικειμένων — όλα έτοιμα για εκτύπωση.</p>
       <div class="links">
         <a class="primary" href="content/05-handouts/handouts.html">Άνοιγμα Handouts</a>
-        <a href="content/05-handouts/npc-cards.html">Κάρτες NPC</a>
         <a href="content/05-handouts/item-cards.html">Κάρτες Αντικειμένων</a>
         <a href="content/05-handouts/items-stats.csv">Πλήρη Στοιχεία Αντικειμένων (CSV)</a>
       </div>
