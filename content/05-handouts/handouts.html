@@ -24,6 +24,42 @@ body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helv
 .page { page-break-after: always; }
 .page:last-child { page-break-after: auto; }
 
+/* ===== COVER PAGE ===== */
+.cover {
+  text-align: center;
+  padding-top: 70px;
+  page-break-after: always;
+}
+.cover h1 {
+  font-size: clamp(26px, 7vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--brand);
+  margin: 8px 0 0 0;
+}
+.cover .subtitle {
+  font-size: 17px;
+  color: var(--muted);
+  margin-top: 10px;
+  font-weight: 500;
+}
+.cover .badge {
+  display: inline-block;
+  margin-top: 36px;
+  padding: 10px 22px;
+  background: var(--brand);
+  border-radius: 999px;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  color: white;
+  font-weight: 700;
+}
+.cover .footer-note {
+  margin-top: 80px;
+  font-size: 12px;
+  color: #a39cb0;
+}
+
 /* ===== CHARACTER SHEET ===== */
 .cs-title {
   text-align: center; font-size: 25px; font-weight: 800; letter-spacing: -0.3px; color: var(--brand);
@@ -131,6 +167,14 @@ h2.section-h { color: var(--brand); font-size: 15px; font-weight: 700; border-bo
 <div class="page-wrap">
 <div class="back-link screen-only"><a href="../../index.html">&larr; Αρχική Σελίδα</a></div>
 
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <h1>ΕΝΤΥΠΑ &amp; ΑΝΤΙΚΕΙΜΕΝΑ</h1>
+  <div class="subtitle">Φύλλο Ήρωα, Ιστορικά Αντικείμενα &amp; Βοηθήματα Παιχνιδιού</div>
+  <div class="badge">Έτοιμα για Εκτύπωση</div>
+  <div class="footer-note">Φύλλο χαρακτήρα, το γράμμα του Μπάρναμπι, η αφίσα «Εξαφανίστηκαν Ζώα!»,<br>πίνακας σειράς μάχης, και σύνδεσμοι στις Κάρτες NPC &amp; Αντικειμένων.</div>
+</div>
 
 <!-- ============ PAGE 1: CHARACTER SHEET ============ -->
 <div class="page">
