@@ -40,12 +40,15 @@ public/live format; there is no Markdown shipped alongside it (see
 `llm-reference/` below). Some folders also carry a `.csv` with the
 deliverable's structured stat data (`monster-stats.csv`, `spell-stats.csv`,
 `items-stats.csv`, `npc-stats.csv`) and `02-campaign` has a `map.svg`. Shared
-decorative images live under `content/images/`. Monster and NPC cards
-(`monster-cards.html`, `npc-cards.html`) don't use per-creature photos — their
-card backs render an inline SVG icon (from the `<symbol>` set already defined
-in each file, matching the icons used on `content/07-characters/characters.html`)
-plus the creature/NPC name, so there's nothing to keep in sync when a new
-monster or NPC is added. `index.html` at the repo root links every
+decorative images live under `content/images/`. Card decks (`monster-cards.html`,
+`npc-cards.html`, `spell-cards.html`, `item-cards.html`) don't use per-item
+photos or per-item icons — every card back is the same plain gold
+`icon-emblem` SVG on a radial-gradient background (a uniform "trading card
+back," matching a real card deck), and `spell-cards.html` uses a single
+uniform 🔮 emoji for every card front instead of a per-school icon.
+`content/07-characters/characters.html` cards have no icon/emblem at all —
+just the badge text. There's nothing to keep in sync when a new monster,
+NPC, spell, or item is added. `index.html` at the repo root links every
 deliverable and must be updated when a new one is added.
 
 Every `content/NN-name/*.html` page carries a small `.back-link.screen-only`

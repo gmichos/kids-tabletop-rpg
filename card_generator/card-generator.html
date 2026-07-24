@@ -151,7 +151,7 @@
   .t-front{height:100%;padding:2.5mm;display:flex;flex-direction:column;text-align:center;}
   .t-top{display:flex;justify-content:space-between;align-items:center;}
   .t-badge{background:var(--brand);color:#fff;font-size:var(--fs-sm);padding:.5mm 1.5mm;border-radius:2mm;}
-  .t-icon{width:6mm;height:6mm;color:var(--brand-dark);}
+  .t-icon{font-size:6mm;line-height:1;}
   .t-name{margin:1mm 0 0;font-size:var(--fs-lg);color:var(--brand-dark);}
   .t-sub{font-style:italic;font-size:var(--fs-sm);color:var(--muted);margin-bottom:1mm;}
   .t-info{font-size:var(--fs-sm);text-align:left;margin-bottom:1mm;}
@@ -207,63 +207,6 @@
 <body>
 
 <svg style="display:none" aria-hidden="true">
-  <symbol id="icon-dragon" viewBox="0 0 100 100">
-    <path d="M10 70 Q30 20 50 40 Q70 20 90 70 Q70 55 50 65 Q30 55 10 70 Z" fill="currentColor"/>
-    <circle cx="50" cy="45" r="6" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-skull" viewBox="0 0 100 100">
-    <circle cx="50" cy="42" r="28" fill="currentColor"/>
-    <rect x="30" y="58" width="40" height="20" rx="5" fill="currentColor"/>
-    <circle cx="40" cy="40" r="7" fill="#f3e6cc"/>
-    <circle cx="60" cy="40" r="7" fill="#f3e6cc"/>
-    <rect x="45" y="53" width="10" height="9" fill="#f3e6cc"/>
-  </symbol>
-  <symbol id="icon-humanoid" viewBox="0 0 100 100">
-    <circle cx="50" cy="25" r="14" fill="currentColor"/>
-    <path d="M25 90 Q25 55 50 55 Q75 55 75 90 Z" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-paw" viewBox="0 0 100 100">
-    <circle cx="50" cy="62" r="20" fill="currentColor"/>
-    <circle cx="28" cy="35" r="9" fill="currentColor"/>
-    <circle cx="50" cy="25" r="9" fill="currentColor"/>
-    <circle cx="72" cy="35" r="9" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-claw" viewBox="0 0 100 100">
-    <path d="M20 20 Q35 50 15 85" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
-    <path d="M50 15 Q60 50 45 90" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
-    <path d="M80 20 Q85 50 75 85" stroke="currentColor" stroke-width="8" fill="none" stroke-linecap="round"/>
-  </symbol>
-  <symbol id="icon-sword" viewBox="0 0 100 100">
-    <rect x="46" y="10" width="8" height="55" fill="currentColor"/>
-    <polygon points="50,5 58,15 42,15" fill="currentColor"/>
-    <rect x="30" y="62" width="40" height="8" fill="currentColor"/>
-    <rect x="46" y="70" width="8" height="22" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-shield" viewBox="0 0 100 100">
-    <path d="M50 10 L85 25 L85 55 Q85 85 50 95 Q15 85 15 55 L15 25 Z" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-flask" viewBox="0 0 100 100">
-    <rect x="42" y="10" width="16" height="18" fill="currentColor"/>
-    <path d="M40 28 L30 55 Q25 90 50 90 Q75 90 70 55 L60 28 Z" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-gem" viewBox="0 0 100 100">
-    <polygon points="50,10 75,35 60,90 40,90 25,35" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-flame" viewBox="0 0 100 100">
-    <path d="M50 10 Q65 35 55 50 Q75 45 70 70 Q65 95 50 95 Q30 95 30 72 Q28 55 40 45 Q38 60 45 55 Q40 30 50 10 Z" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-book" viewBox="0 0 100 100">
-    <rect x="20" y="20" width="60" height="60" rx="4" fill="currentColor"/>
-    <rect x="47" y="20" width="6" height="60" fill="#f3e6cc"/>
-  </symbol>
-  <symbol id="icon-box" viewBox="0 0 100 100">
-    <rect x="15" y="35" width="70" height="50" fill="currentColor"/>
-    <polygon points="15,35 50,15 85,35" fill="currentColor"/>
-  </symbol>
-  <symbol id="icon-coin" viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="38" fill="currentColor"/>
-    <circle cx="50" cy="50" r="26" fill="none" stroke="#f3e6cc" stroke-width="4"/>
-  </symbol>
   <symbol id="icon-emblem" viewBox="0 0 100 100">
     <circle cx="50" cy="50" r="40" fill="none" stroke="currentColor" stroke-width="4"/>
     <polygon points="50,20 61,42 85,42 66,57 73,80 50,66 27,80 34,57 15,42 39,42" fill="currentColor"/>
@@ -917,40 +860,9 @@
     return '<div class="m-name-wrap"><div class="m-name-en">'+escapeHtml(eng)+'</div><div class="m-name-gr">('+escapeHtml(gr)+')</div>'+subHTML+'</div>';
   }
 
-  function pickMonsterIcon(text){
-    var n = normalize(text);
-    if(/δρακ|dragon/.test(n)) return 'icon-dragon';
-    if(/απεθαντ|undead|σκελετ|skeleton|ζομπι|zombie|lich|βρικολακ|vampire/.test(n)) return 'icon-skull';
-    if(/ανθρωποειδ|humanoid|ορκ|orc|κομπολντ|kobold|γκομπλιν|goblin|ληστ|bandit|γιγαντ|giant|τρολ|troll/.test(n)) return 'icon-humanoid';
-    if(/θηρι|beast|λυκ|wolf|αρουραι|rat|αετ|gryphon|αρκτ|bear/.test(n)) return 'icon-paw';
-    return 'icon-claw';
-  }
-  function pickSpellIcon(school){
-    var n = normalize(school);
-    if(/πυρ|fire|evocation|επικλησ/.test(n)) return 'icon-flame';
-    if(/προστασ|abjuration|shield/.test(n)) return 'icon-shield';
-    return 'icon-book';
-  }
-  function pickItemIcon(type){
-    var n = normalize(type);
-    if(/οπλο|weapon|σπαθ|sword|τσεκουρ|axe|τοξ|bow|μαχαιρ|dagger/.test(n)) return 'icon-sword';
-    if(/φιλτρ|potion|flask/.test(n)) return 'icon-flask';
-    if(/δαχτυλιδ|ring|κοσμημα|amulet|gem/.test(n)) return 'icon-gem';
-    if(/ασπιδα|shield|πανοπλ|armor/.test(n)) return 'icon-shield';
-    return 'icon-coin';
-  }
-  // Back-of-card symbol for trading cards: reuses the same icon already shown on that
-  // card's front, so every deck ends up with a varied set of single-color symbols
-  // instead of one repeated logo.
-  function pickBackSymbolIcon(c){
-    switch(c._category){
-      case 'spell': return pickSpellIcon(c.school);
-      case 'item': return pickItemIcon(c.type);
-      case 'npc': return 'icon-humanoid';
-      case 'skill': return 'icon-emblem';
-      default: return 'icon-gem';
-    }
-  }
+  // Every card back falls back to the same plain gold emblem (a uniform "trading card
+  // back") until the user uploads their own art — no per-item icon guessing.
+  function pickBackSymbolIcon(c){ return 'icon-emblem'; }
 
   // Shared full-width header (name + CR/XP) used identically on both the front and back of a
   // monster card, so the nameplate stays in the exact same place when the card is flipped.
@@ -1001,8 +913,7 @@
       imageContent = '<img class="m-back-img" src="'+m._customImage+'" alt="">'
         + '<button type="button" class="m-back-imgremove" data-remove-image="'+m._id+'" title="Αφαίρεση εικόνας">✕</button>';
     } else {
-      var icon = pickMonsterIcon((m.typeline||'')+' '+(m.name||''));
-      imageContent = '<svg class="m-back-icon" viewBox="0 0 100 100"><use href="#'+icon+'"></use></svg>'
+      imageContent = '<svg class="m-back-icon" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg>'
         + '<div class="m-back-hint">Κλικ για ανέβασμα εικόνας</div>';
     }
     return '<div class="m-outer"><div class="m-topbar"></div>'+buildMonsterHeader(m)
@@ -1010,7 +921,6 @@
       + '</div>';
   }
   function spellFrontInner(c){
-    var icon = pickSpellIcon(c.school);
     var infoLines = [];
     if(c.range) infoLines.push('<b>Εμβέλεια:</b> '+escapeHtml(c.range));
     var hasDC = c.saveDC && c.saveDC!=='—' && c.saveDC!=='-';
@@ -1019,7 +929,7 @@
     if(c.effect) infoLines.push('<b>Ζημιά/Effect:</b> '+escapeHtml(c.effect));
     if(c.duration) infoLines.push('<b>Διάρκεια:</b> '+escapeHtml(c.duration));
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.level||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.level||'')+'</span><span class="t-icon" role="img" aria-label="Ξόρκι">🔮</span></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +'<div class="t-sub">'+escapeHtml([c.school,c.class].filter(Boolean).join(' · '))+'</div>'
       +(infoLines.length?'<div class="t-info">'+infoLines.join('<br>')+'</div>':'')
@@ -1028,9 +938,8 @@
       +'</div>';
   }
   function itemFrontInner(c){
-    var icon = pickItemIcon(c.type);
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.rarity||'')+'</span><svg class="t-icon"><use href="#'+icon+'"></use></svg></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.rarity||'')+'</span><span class="t-icon" role="img" aria-label="Αντικείμενο">🎒</span></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +'<div class="t-sub">'+escapeHtml([c.type,c.price].filter(Boolean).join(' · '))+'</div>'
       +(c.effect?'<div class="t-info"><b>Ζημιά/Effect:</b> '+escapeHtml(c.effect)+'</div>':'')
@@ -1041,7 +950,7 @@
   }
   function skillFrontInner(c){
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.type||'')+'</span><svg class="t-icon"><use href="#icon-emblem"></use></svg></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.type||'')+'</span></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +(c.cost?'<div class="t-sub">'+escapeHtml(c.cost)+'</div>':'')
       +(c.effect?'<div class="t-info"><b>Effect:</b> '+escapeHtml(c.effect)+'</div>':'')
@@ -1051,7 +960,7 @@
   }
   function npcFrontInner(c){
     return '<div class="t-front">'
-      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.role||'NPC')+'</span><svg class="t-icon"><use href="#icon-humanoid"></use></svg></div>'
+      +'<div class="t-top"><span class="t-badge">'+escapeHtml(c.role||'NPC')+'</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div>'
       +'<h3 class="t-name">'+escapeHtml(c.name||'(Χωρίς όνομα)')+'</h3>'
       +(c.personality?'<div class="t-info">'+escapeHtml(c.personality)+'</div>':'')
       +(c.quirk?'<div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Quirk:</b> '+escapeHtml(c.quirk)+'</div>':'')
