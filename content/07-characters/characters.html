@@ -37,8 +37,6 @@
   .card-face-print{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--muted);border-radius:3mm;box-shadow:0 1px 4px rgba(32,28,43,0.08);}
   .card-face-print{color:var(--ink);}
 
-  .page-break{break-after:page;}
-
   .t-front{height:100%;padding:2.5mm;display:flex;flex-direction:column;text-align:center;}
   .t-classbar{height:2mm;margin:-2.5mm -2.5mm 1.5mm;background:var(--cls,var(--brand));}
   .t-top{display:flex;justify-content:space-between;align-items:center;}
@@ -75,8 +73,9 @@
     .page-title{display:none;}
     .page-subtitle{display:none;}
     .pick-guide{display:none;}
+    .small{display:none;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
-    .page-break{break-after:page;}
+    .cards-grid{break-after:page;page-break-after:always;}
   }
 </style>
 </head>
@@ -101,7 +100,6 @@
 <div class="card-face-print card-trading" style="font-size:14px;--cls:#a13d6b;"><div class="t-front"><div class="t-classbar"></div><div class="t-top"><span class="t-badge">Μισός-Ξωτικό &middot; Επ.1</span></div><h3 class="t-name">Ζέφυρος ο Τροβαδούρος</h3><div class="t-sub">Βάρδος — Ο πολύπλευρος που εμπνέει την ομάδα με τραγούδια</div><div class="t-statrow"><div><b>8</b><span>HP</span></div><div><b>13</b><span>AC</span></div></div><div class="t-info"><b>ΧΑΡ</b> +3&nbsp;&nbsp;<b>ΕΠΙ</b> +2&nbsp;&nbsp;<b>ΣΟΦ</b> +0</div><p class="t-desc" style="font-style:italic;">Έχει μια ιστορία έτοιμη για κάθε περίσταση — αληθινή ή όχι.</p><div class="t-tag">ΗΡΩΑΣ</div></div></div>
 
 </div>
-<div class="page-break"></div>
 <div class="cards-grid grid-trading">
 
 <div class="card-face-print card-trading" style="font-size:14px;--cls:#b6342a;"><div class="t-front"><div class="t-classbar"></div><div class="t-top"><span class="t-badge">Θάλεια Δρυάδη</span></div><div class="t-info t-highlight"><b>Δυνατό Χτύπημα</b> — d20+3 για να πετύχει, ζημιά 1d8+3</div><div class="t-info t-highlight"><b>Προστάτης</b> — 1×/μάχη, μπαίνει μπροστά από φίλο και δέχεται η ίδια το χτύπημα</div><div class="t-info"><b>Εξοπλισμός:</b> Σπαθί, ασπίδα, αλυσιδωτός θώρακας, τσάντα εξερευνητή, 5 gp</div><div class="t-section-label">Πρόοδος</div><div class="t-lvlrow"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></div><div class="t-hprow"><div class="t-hpbox"><div class="box"></div><span>HP Μέγιστο</span></div><div class="t-hpbox"><div class="box"></div><span>HP Τώρα</span></div></div><div class="t-section-label">Σημειώσεις</div><div class="t-notes"><div></div><div></div><div></div></div><div class="t-tag">ΙΚΑΝΟΤΗΤΕΣ &amp; ΠΡΟΟΔΟΣ</div></div></div>
@@ -117,7 +115,6 @@
 <div class="card-face-print card-trading" style="font-size:14px;--cls:#a13d6b;"><div class="t-front"><div class="t-classbar"></div><div class="t-top"><span class="t-badge">Ζέφυρος ο Τροβαδούρος</span></div><div class="t-info t-highlight"><b>Εμπνευστικό Τραγούδι</b> (3×/ημέρα) — δίνει σε φίλο +1d6 σε μία ζαριά της επιλογής του</div><div class="t-info t-highlight"><b>Θελκτική Ομιλία</b> — 1×/σκηνή, Πλεονέκτημα (Advantage) σε δοκιμή Πειθούς ή Εντυπωσιασμού</div><div class="t-info"><b>Εξοπλισμός:</b> Λαούτο, στιλέτο, δερμάτινη πανοπλία, σακίδιο διασκεδαστή, 5 gp</div><div class="t-section-label">Πρόοδος</div><div class="t-lvlrow"><div>1</div><div>2</div><div>3</div><div>4</div><div>5</div></div><div class="t-hprow"><div class="t-hpbox"><div class="box"></div><span>HP Μέγιστο</span></div><div class="t-hpbox"><div class="box"></div><span>HP Τώρα</span></div></div><div class="t-section-label">Σημειώσεις</div><div class="t-notes"><div></div><div></div><div></div></div><div class="t-tag">ΙΚΑΝΟΤΗΤΕΣ &amp; ΠΡΟΟΔΟΣ</div></div></div>
 
 </div>
-<div class="page-break"></div>
 
 <div class="pick-guide">
 <h2>Πώς να Διαλέξετε</h2>
@@ -140,6 +137,54 @@
 
 <p class="small" style="text-align:center; margin-top: 30px;">Έξι έτοιμοι χαρακτήρες σε κάρτες διπλής όψης (μέγεθος 63×88mm, ίδιο με τις κάρτες τεράτων/ξορκιών) — παίζεται από 1 έως 6 παίκτες. Τυπώστε, κόψτε, και κολλήστε κάθε μπροστινή όψη πλάτη-με-πλάτη με την αντίστοιχή της για να παίξετε αμέσως χωρίς δημιουργία χαρακτήρα.</p>
 <p class="small" style="text-align:center; margin-top: 6px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <a href="../../OGL.md"><code>OGL.md</code></a>.</p>
+
+<script>
+(function(){
+  // Some inner card regions (e.g. .t-desc) have their own overflow:hidden inside a
+  // flex layout, so they silently self-clip without ever growing the outer card's
+  // scrollHeight. Only elements that actually declare overflow:hidden are checked
+  // (not every descendant) to avoid false positives from things like emoji glyph
+  // metrics that harmlessly exceed their line box without clipping real content.
+  function isOverflowing(el){
+    var candidates = [el].concat(Array.prototype.slice.call(el.querySelectorAll('*')));
+    for(var i=0;i<candidates.length;i++){
+      var c = candidates[i];
+      var cs = getComputedStyle(c);
+      if((cs.overflow==='hidden'||cs.overflowY==='hidden') && c.scrollHeight > c.clientHeight+1){
+        return true;
+      }
+    }
+    return false;
+  }
+  function fitCardFaces(){
+    document.querySelectorAll('.card-face-print').forEach(function(el){
+      // Cache the original baked-in size on first run so repeated calls (load,
+      // beforeprint firing more than once, etc.) always re-fit from the same
+      // starting point instead of compounding shrinkage from a prior pass.
+      if(!el.dataset.fsBase){
+        el.dataset.fsBase = parseFloat(getComputedStyle(el).fontSize);
+      }
+      var base = parseFloat(el.dataset.fsBase);
+      var min = base*0.55;
+      var step = Math.max(0.3, base*0.035);
+      var guard = 0;
+      el.style.fontSize = base+'px';
+      while(isOverflowing(el) && base>min && guard<40){
+        base -= step;
+        el.style.fontSize = base+'px';
+        guard++;
+      }
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', fitCardFaces);
+  } else {
+    fitCardFaces();
+  }
+  window.addEventListener('load', fitCardFaces);
+  window.addEventListener('beforeprint', fitCardFaces);
+})();
+</script>
 
 </body>
 </html>

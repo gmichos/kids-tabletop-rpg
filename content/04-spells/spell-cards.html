@@ -24,7 +24,7 @@
   body{margin:0;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;background:var(--paper);color:var(--ink);}
   .page-title{text-align:center;font-size:22px;font-weight:800;letter-spacing:-0.3px;color:var(--brand);margin:14px 0 10mm;}
 
-  .print-page{display:grid;gap:6mm;align-content:start;}
+  .print-page{display:grid;gap:6mm;justify-content:center;align-content:center;}
 
   .card-trading{width:63mm;height:88mm;font-size:14px;}
 
@@ -48,7 +48,7 @@
   .t-back-emblem{width:18mm;height:18mm;color:var(--gold);}
   
   @media print{
-    .small{font-size:11px;color:var(--muted);}
+    .small{display:none;}
   .back-link{display:none;}
     body{background:#fff;color:#000;}
     .page-title{display:none;}
@@ -77,6 +77,54 @@
 
 <p class="small" style="text-align:center; margin-top: 30px;">Τυπώσιμο σύνολο καρτών ξορκιών, συνοδευτικό του Οδηγού Ξορκιών.</p>
 <p class="small" style="text-align:center; margin-top: 6px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <a href="../../OGL.md"><code>OGL.md</code></a>.</p>
+
+<script>
+(function(){
+  // Some inner card regions (e.g. .t-desc) have their own overflow:hidden inside a
+  // flex layout, so they silently self-clip without ever growing the outer card's
+  // scrollHeight. Only elements that actually declare overflow:hidden are checked
+  // (not every descendant) to avoid false positives from things like emoji glyph
+  // metrics that harmlessly exceed their line box without clipping real content.
+  function isOverflowing(el){
+    var candidates = [el].concat(Array.prototype.slice.call(el.querySelectorAll('*')));
+    for(var i=0;i<candidates.length;i++){
+      var c = candidates[i];
+      var cs = getComputedStyle(c);
+      if((cs.overflow==='hidden'||cs.overflowY==='hidden') && c.scrollHeight > c.clientHeight+1){
+        return true;
+      }
+    }
+    return false;
+  }
+  function fitCardFaces(){
+    document.querySelectorAll('.card-face-print').forEach(function(el){
+      // Cache the original baked-in size on first run so repeated calls (load,
+      // beforeprint firing more than once, etc.) always re-fit from the same
+      // starting point instead of compounding shrinkage from a prior pass.
+      if(!el.dataset.fsBase){
+        el.dataset.fsBase = parseFloat(getComputedStyle(el).fontSize);
+      }
+      var base = parseFloat(el.dataset.fsBase);
+      var min = base*0.55;
+      var step = Math.max(0.3, base*0.035);
+      var guard = 0;
+      el.style.fontSize = base+'px';
+      while(isOverflowing(el) && base>min && guard<40){
+        base -= step;
+        el.style.fontSize = base+'px';
+        guard++;
+      }
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', fitCardFaces);
+  } else {
+    fitCardFaces();
+  }
+  window.addEventListener('load', fitCardFaces);
+  window.addEventListener('beforeprint', fitCardFaces);
+})();
+</script>
 
 </body>
 </html>

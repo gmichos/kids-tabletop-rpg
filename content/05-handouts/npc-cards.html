@@ -36,8 +36,6 @@
   .card-face-print{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--muted);border-radius:3mm;box-shadow:0 1px 4px rgba(32,28,43,0.08);}
   .card-face-print{color:var(--ink);}
 
-  .page-break{break-after:page;}
-
   .t-front{height:100%;padding:2.5mm;display:flex;flex-direction:column;text-align:center;}
   .t-top{display:flex;justify-content:space-between;align-items:center;}
   .t-badge{background:var(--brand);color:#fff;font-size:var(--fs-sm);padding:.5mm 1.5mm;border-radius:2mm;}
@@ -58,8 +56,9 @@
     body{background:#fff;color:#000;}
     .back-link{display:none;}
     .page-title{display:none;}
+    .small{display:none;}
     .card-face-print{break-inside:avoid;page-break-inside:avoid;box-shadow:none;}
-    .page-break{break-after:page;}
+    .cards-grid{break-after:page;page-break-after:always;}
   }
 </style>
 </head>
@@ -75,9 +74,56 @@
 <div class="back-link screen-only"><a href="handouts.html">&larr; Πίσω στα Handouts</a></div>
 <div class="page-title">Κάρτες NPC — NPC Cards</div>
 
-<div class="cards-grid grid-trading"><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Δίνει πληροφορίες</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Γέρος Θάντος</h3><div class="t-info">Μιλάει αργά, θυμάται λεπτομέρειες αλλά χρειάζεται υπομονή· λατρεύει να αφηγείται</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Διακόπτεται συνέχεια τη δική του ιστορία και ξεχνάει πού είχε μείνει</div><div class="t-info"><b>Θέλει:</b> Παλιές ιστορίες για τα στοιχειωμένα Ερείπια των Σκελετών</div><p class="t-desc" style="font-style:italic;">"Ααα, τα Ερείπια... θυμάμαι όταν ήμουν παιδί, η γιαγιά μου έλεγε πως εκεί στοιχειώνει κάτι παλιό..."</p><div class="t-tag">NPC</div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Πιθανός σύμμαχος</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Γκρέβιν</h3><div class="t-info">Νάνος, θαρραλέος, λίγο καυχησιάρης, καλόκαρδος</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Χτυπάει το τσεκούρι του στο έδαφος όταν ενθουσιάζεται</div><div class="t-info"><b>Θέλει:</b> Δώσει χρήσιμη συμβουλή στο Δάσος ή στα Ερείπια, ή να πολεμήσει μαζί με την ομάδα σε μία μάχη</div><p class="t-desc" style="font-style:italic;">"Ε, δεν φοβάμαι τίποτα εγώ! Πάμε, δείξτε μου πού είναι το πρόβλημα!"</p><div class="t-tag">NPC</div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Δίνει την αποστολή</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Μπάρναμπι</h3><div class="t-info">Νευρικός, μιλάει γρήγορα, πολύ ευγνώμων</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Τρίβει συνέχεια τα χέρια του· ξεκινάει προτάσεις και τις ξαναλέει διαφορετικά</div><div class="t-info"><b>Θέλει:</b> Να βρεθεί το πρόβατό του, ο Κύρος, και να σταματήσουν οι εξαφανίσεις ζώων</div><div class="t-info"><b>Ανταμοιβή:</b> 20 χρυσά νομίσματα</div><p class="t-desc" style="font-style:italic;">"Σε παρακαλώ... πρέπει να βοηθήσετε! Δεν... δεν μπορώ να κοιμηθώ μέχρι να μάθω τι έγινε ο Κύρος!"</p><div class="t-tag">NPC</div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Τελικό αφεντικό</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Ο Νεαρός Δράκος</h3><div class="t-info">Υπερήφανος, προστατευτικός — δεν είναι κακός, απλά υπερασπίζεται τη φωλιά του</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Βαριά, αργή φωνή· ροχαλίζει πολύ δυνατά όταν κοιμάται</div><div class="t-info"><b>Θέλει:</b> Να τον αφήσουν ήσυχο στη φωλιά του</div><p class="t-desc" style="font-style:italic;">"Γιατί ήρθατε στη φωλιά μου... Φύγετε, ή θα σας κάψω!"</p><div class="t-tag">NPC</div></div></div></div><div class="page-break"></div><div class="cards-grid grid-trading"><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div></div><div class="page-break"></div>
-<p class="small" style="text-align:center; margin-top: 30px;">Τυπώσιμες κάρτες NPC, συνοδευτικές του φυλλαδίου Handouts.</p>
+<div class="cards-grid grid-trading"><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Δίνει πληροφορίες</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Γέρος Θάντος</h3><div class="t-info">Μιλάει αργά, θυμάται λεπτομέρειες αλλά χρειάζεται υπομονή· λατρεύει να αφηγείται</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Διακόπτεται συνέχεια τη δική του ιστορία και ξεχνάει πού είχε μείνει</div><div class="t-info"><b>Θέλει:</b> Παλιές ιστορίες για τα στοιχειωμένα Ερείπια των Σκελετών</div><p class="t-desc" style="font-style:italic;">"Ααα, τα Ερείπια... θυμάμαι όταν ήμουν παιδί, η γιαγιά μου έλεγε πως εκεί στοιχειώνει κάτι παλιό..."</p><div class="t-tag">NPC</div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Πιθανός σύμμαχος</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Γκρέβιν</h3><div class="t-info">Νάνος, θαρραλέος, λίγο καυχησιάρης, καλόκαρδος</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Χτυπάει το τσεκούρι του στο έδαφος όταν ενθουσιάζεται</div><div class="t-info"><b>Θέλει:</b> Δώσει χρήσιμη συμβουλή στο Δάσος ή στα Ερείπια, ή να πολεμήσει μαζί με την ομάδα σε μία μάχη</div><p class="t-desc" style="font-style:italic;">"Ε, δεν φοβάμαι τίποτα εγώ! Πάμε, δείξτε μου πού είναι το πρόβλημα!"</p><div class="t-tag">NPC</div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Δίνει την αποστολή</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Μπάρναμπι</h3><div class="t-info">Νευρικός, μιλάει γρήγορα, πολύ ευγνώμων</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Τρίβει συνέχεια τα χέρια του· ξεκινάει προτάσεις και τις ξαναλέει διαφορετικά</div><div class="t-info"><b>Θέλει:</b> Να βρεθεί το πρόβατό του, ο Κύρος, και να σταματήσουν οι εξαφανίσεις ζώων</div><div class="t-info"><b>Ανταμοιβή:</b> 20 χρυσά νομίσματα</div><p class="t-desc" style="font-style:italic;">"Σε παρακαλώ... πρέπει να βοηθήσετε! Δεν... δεν μπορώ να κοιμηθώ μέχρι να μάθω τι έγινε ο Κύρος!"</p><div class="t-tag">NPC</div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-front"><div class="t-top"><span class="t-badge">Τελικό αφεντικό</span><span class="t-icon" role="img" aria-label="NPC">♟️</span></div><h3 class="t-name">Ο Νεαρός Δράκος</h3><div class="t-info">Υπερήφανος, προστατευτικός — δεν είναι κακός, απλά υπερασπίζεται τη φωλιά του</div><div class="t-info" style="background:var(--brand-tint);border-radius:4px;padding:2px 4px;margin:0 -4px;"><b>Ιδιαιτερότητα (Quirk):</b> Βαριά, αργή φωνή· ροχαλίζει πολύ δυνατά όταν κοιμάται</div><div class="t-info"><b>Θέλει:</b> Να τον αφήσουν ήσυχο στη φωλιά του</div><p class="t-desc" style="font-style:italic;">"Γιατί ήρθατε στη φωλιά μου... Φύγετε, ή θα σας κάψω!"</p><div class="t-tag">NPC</div></div></div></div><div class="page-break"></div><div class="cards-grid grid-trading"><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div><div class="card-face-print card-trading" style="font-size:14px;"><div class="t-back"><div class="t-back-border"><svg class="t-back-emblem" viewBox="0 0 100 100"><use href="#icon-emblem"></use></svg></div></div></div></div><p class="small" style="text-align:center; margin-top: 30px;">Τυπώσιμες κάρτες NPC, συνοδευτικές του φυλλαδίου Handouts.</p>
 <p class="small" style="text-align:center; margin-top: 6px;">Αυτό το υλικό βασίζεται εν μέρει σε Open Game Content από το System Reference Document 5.1 (SRD 5.1), &copy; 2016 Wizards of the Coast, Inc., χρησιμοποιούμενο υπό την Open Game License v1.0a. Δεν είναι επίσημο προϊόν της Wizards of the Coast και δεν σχετίζεται, υποστηρίζεται ή εγκρίνεται από αυτήν. Πλήρες κείμενο άδειας: <a href="../../OGL.md"><code>OGL.md</code></a>.</p>
+
+<script>
+(function(){
+  // Some inner card regions (e.g. .t-desc) have their own overflow:hidden inside a
+  // flex layout, so they silently self-clip without ever growing the outer card's
+  // scrollHeight. Only elements that actually declare overflow:hidden are checked
+  // (not every descendant) to avoid false positives from things like emoji glyph
+  // metrics that harmlessly exceed their line box without clipping real content.
+  function isOverflowing(el){
+    var candidates = [el].concat(Array.prototype.slice.call(el.querySelectorAll('*')));
+    for(var i=0;i<candidates.length;i++){
+      var c = candidates[i];
+      var cs = getComputedStyle(c);
+      if((cs.overflow==='hidden'||cs.overflowY==='hidden') && c.scrollHeight > c.clientHeight+1){
+        return true;
+      }
+    }
+    return false;
+  }
+  function fitCardFaces(){
+    document.querySelectorAll('.card-face-print').forEach(function(el){
+      // Cache the original baked-in size on first run so repeated calls (load,
+      // beforeprint firing more than once, etc.) always re-fit from the same
+      // starting point instead of compounding shrinkage from a prior pass.
+      if(!el.dataset.fsBase){
+        el.dataset.fsBase = parseFloat(getComputedStyle(el).fontSize);
+      }
+      var base = parseFloat(el.dataset.fsBase);
+      var min = base*0.55;
+      var step = Math.max(0.3, base*0.035);
+      var guard = 0;
+      el.style.fontSize = base+'px';
+      while(isOverflowing(el) && base>min && guard<40){
+        base -= step;
+        el.style.fontSize = base+'px';
+        guard++;
+      }
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', fitCardFaces);
+  } else {
+    fitCardFaces();
+  }
+  window.addEventListener('load', fitCardFaces);
+  window.addEventListener('beforeprint', fitCardFaces);
+})();
+</script>
 
 </body>
 </html>
